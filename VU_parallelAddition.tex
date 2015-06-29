@@ -1,0 +1,230 @@
+\documentclass[a4paper, 11pt]{report}
+
+\usepackage{a4wide,cite}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage[IL2]{fontenc}  
+% \usepackage{amsmath,amsthm} 
+% \usepackage{amsfonts}
+\usepackage{amsmath, amsthm, amssymb, units, dsfont}
+
+\usepackage[fixlanguage]{babelbib}
+\selectbiblanguage{english}
+
+\usepackage[pdfauthor={Jan Legersk\'y},
+            pdfproducer={Jan Legersk\'y},
+            pdfcreator={pdflatex}]{hyperref}
+\hypersetup{pdftitle={Konstrukce algoritmů pro paraleln\'i s\v c\'it\'an\'i}}
+\hypersetup{pdfsubject={V\'yzkumn\'y \'ukol, Jan Legersk\'y}}
+\hypersetup{pdfkeywords={parallel addition, non-standard numeration systems}}            
+
+\usepackage[pdftex]{graphicx,color}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\slshape \rightmark} % \leftmark .. kapitola
+\fancyhead[R]{\thepage}
+% \oddsidemargin=10mm   % jednostranný tisk !!!
+
+\input{commands.tex}
+
+\newtheorem{theo}{Theorem}
+\newtheorem{pro}{Proof}
+
+
+
+\input{listing.tex}
+
+\setcounter{tocdepth}{1}
+
+%%% VYHLEDAT A OPRAVIT !!! %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vlna !!
+% taky opravit N-1 na N\!-\!1
+% zkontrolovat \min \; ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% k vyplnění ZAČÁTEK -------------------------------------------------
+\newcommand{\cvut}{ČESKÉ VYSOKÉ UČENÍ TECHNICKÉ V~PRAZE}
+\newcommand{\fjfi}{Fakulta jaderná a fyzikálně inženýrská}
+\newcommand{\km}{Katedra matematiky}
+\newcommand{\obor}{Inženýrská informatika}
+\newcommand{\zamereni}{Matematická informatika}
+
+\newcommand{\nazevcz}{Konstrukce algoritmů pro paraleln\'i s\v c\'it\'an\'i}
+\newcommand{\nazeven}{Construction of algorithms for parallel addition}
+\newcommand{\autor}{Jan Legersk\'y}
+\newcommand{\vedouci}{Ing. \v St\v ep\'an Starosta, Ph.D.}
+\newcommand{\pracovisteVed}{KM FIT, \v CVUT v~Praze}
+\newcommand{\konzultant}{---}
+
+\newcommand{\klicova}{Paraleln\'i s\v c\'it\'an\'i, nestandardn\'i numera\v cn\'i syst\'emy.}  % max. 5 klíčových slov
+\newcommand{\keyword}{Parallel addition, non-standard numeration systems.}
+\newcommand{\abstrCZ}%{\begin{minipage}{0.7\textwidth}
+{ABSTRAKT} 
+% \end{minipage}}
+\newcommand{\abstrEN}{ABSTRACT}
+%%% k vyplnění KONEC ---------------------------------------------------
+
+
+\begin{document}
+
+\pagenumbering{roman}
+\begin{titlepage}
+
+%% 1. úvodní strana
+% \thispagestyle{empty}
+% \begin{center}
+% 	{\Large \cvut \\[12pt] \fjfi\\}   % 260pt od nadpisu k "Bak. práce"
+% 	\vspace{45pt}
+% 	\includegraphics[height=100pt]{img/logoCVUT.pdf}\\  %bylo  75
+% 	\vspace{160pt}
+% 	{\Huge V\'YZKUMN\'Y \'UKOL}
+% \end{center}
+% \vfill
+% {
+% 	\Large 2015 \hfill Jan Legersk\'y
+% }
+% \newpage
+
+
+%%% 2. úvodní strana
+\thispagestyle{empty}
+\begin{center}
+	{\Large \cvut \\[10pt] \fjfi \\[10pt] \km\\}
+	\vspace{45pt} %120
+	\includegraphics[height=100pt]{img/logoCVUT.pdf}\\
+	\vspace{90pt}
+	{\Large V\'YZKUMN\'Y \'UKOL}
+	\vspace{90pt}
+	
+	{\Large\bf \nazevcz}
+	\vspace{30pt}
+	
+	{\Large\bf \nazeven}
+\end{center}
+\vfill
+{
+	\Large
+	\begin{tabular}{ll}
+	Vypracoval: & \autor\\[3pt]
+	\v Skolitel: & \vedouci\\[3pt]
+	Akademick\'y rok: & 2014/2015
+	\end{tabular}
+}
+\newpage
+
+
+%%% sem přijde ofic. zadání
+% \thispagestyle{empty}
+% \Large
+% Na toto místo přijde svázat \textbf{zadání diplomové práce}!
+% 
+% \vspace{4mm}
+% V~jednom z~výtisků musí být \textbf{originál} zadání, v~ostatních kopie.
+% \normalsize
+% \newpage
+
+
+%%% prohlášení
+\thispagestyle{empty}
+~
+\vfill
+\noindent\textbf{Čestné prohlášení}
+\vspace{0.5cm}
+
+Prohla\v suji na tomto m\'ist\v e, \v ze jsem p\v redlo\v zenou pr\'aci vypracoval samostatn\v e a \v ze jsem uvedl ve\v skerou pou\v zitou literaturu.
+\vspace{1.5cm}
+
+\noindent
+\vspace{5mm}V Praze dne ???\hfill
+	\begin{tabular}{c}
+	\\
+	\autor
+	\end{tabular}
+\newpage
+
+
+%%% poděkování
+\thispagestyle{empty}
+~
+\vfill
+\noindent\textbf{Pod\v ekov\'an\'i}
+\vspace{0.5cm}
+
+???????????????????????????????????????????????????????????????????????
+
+\begin{flushright}
+Jan Legersk\'y
+\end{flushright}
+\newpage
+
+
+%%% abstrakt atp.
+\thispagestyle{empty}
+
+\begin{tabular}{lp{0.76\textwidth}}
+  {\em N\'azev pr\'ace:} & \bf \nazevcz \\[4mm]
+  {\em Autor:} & \autor \\[4mm]
+  {\em Obor:} & \obor \\[4mm]
+  {\em Zam\v e\v ren\'i:} & \zamereni \\[4mm]
+  {\em Druh pr\'ace:} & V\'yzkumn\'y \'ukol \\[4mm]
+  {\em Vedoucí práce:} & \vedouci, \pracovisteVed \\[4mm]
+  {\em Konzultant:} & \konzultant \\[4mm]
+  {\em Abstrakt:} & \abstrCZ \\[4mm]
+  {\em Kl\'i\v cov\'a slova:} & \klicova \\[20mm]
+
+  {\em Title:} & \bf \nazeven \\[4mm]
+  {\em Author:} & \autor \\[4mm]
+  {\em Abstract:} & \abstrEN \\[4mm]
+  {\em Key words:} & \keyword
+\end{tabular}
+\newpage
+
+
+%%% obsah
+\renewcommand\contentsname{\vspace{-3cm} Obsah\vspace{-0.8cm}}
+\tableofcontents
+\thispagestyle{empty}
+
+\end{titlepage}
+\pagenumbering{arabic}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Z A Č Á T E K   P R Á C E                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+
+\chapter{Preliminaries}
+\input{preliminaries.tex}
+
+
+
+\chapter{Method for construction of~algorithms for parallel addition}
+\input{method_description.tex}
+
+
+\chapter{Implementation}
+
+\chapter{Examples}
+
+
+\chapter*{Summary}
+\addcontentsline{toc}{chapter}{Summary}
+
+
+
+\newpage
+% \bibliography{../literatura}
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     K O N E C   P R Á C E                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

@@ -1,0 +1,279 @@
+\section{Method deduction}
+The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$ is following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition can be run in parallel, thus the crucial point is the conversion of the obtained result. It can be easily done in a standard way but a parallel conversion is nontrivial. However, formulas are basically same but the choice of coefficients differs.
+
+Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representantions padded by zeros to have the same length. We set 
+  \begin{align*}
+    w&=x+y =\sum_{-m'}^{n'} x_i\beta^i + \sum_{-m'}^{n'} y_i\beta^i = \sum_{-m'}^{n'} (x_i+y_i)\beta^i \\
+    &=\sum_{-m'}^{n'} w_i\beta^i \,,
+  \end{align*}
+  where $w_j=x_j+y_j \in \A +\A$. Thus, $w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet w_{-1} w_{-2} \cdots w_{-m'}$ is a  $(\beta, \A+\A)$-representation of $w\in \fin{\A+\A}$. 
+
+We also use column notation of addition in the following, e.g.,     
+  \begin{align*}
+  x_{n'} \;x_{{n'}-1}\cdots x_1 \;x_0 &\bullet x_{-1} \;x_{-2}\, \cdots x_{-m'} \\[-3pt]
+  y_{n'} \;y_{{n'}-1}\cdots y_1 \,\;y_0 &\bullet y_{-1} \;y_{-2} \;\cdots y_{-m'} \\[-7pt]
+    \line(1,0){90} & \line(1,0){100} \\[-7pt]
+  w_{n'} w_{{n'}-1}\cdots w_1 w_0 &\bullet w_{-1} w_{-2} \cdots w_{-m'}\,.
+  \end{align*}
+  
+
+  
+  
+  
+  
+  
+  Goal -- find $(\beta,\A)$-representation of $w$, i.e. a sequence $$z_{n'} z_{n'-1}\cdots z_1 z_0 z_{-1} z_{-2} \cdots z_{-m'}$$ such that $z_j \in \A$ and
+  $$
+    z_{n'} z_{n'-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m'}=w
+  $$ 
+
+
+
+
+
+    We have $0=1\cdot \beta^j -\beta \cdot \beta^{j-1}=1 (-\!\beta) 0 \cdots 0\bullet $ 
+    
+    $\rightarrow$ We add $q_j\cdot 0$ for each $j$:
+    
+    $0=q_j\cdot \beta^j -\beta  q_j \cdot \beta^{j-1}$
+    \begin{align*}
+        w_n w_{n-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{200pt}\\[-5pt]
+                   &&&&       &       & &     &   &q_{j-2} &&\iddots\\[-3pt] 
+                   &&&&       &       & &\textcolor{red}{q_{j-1}}& -&\beta q_{j-1} \\[-3pt]
+                   &&&&         &q_j&   \textcolor{red}{-}&\textcolor{red}{\beta q_j} &&\\[-8pt]
+                   &&&  \iddots      &   -&\beta q_{j+1}&   &\ &&\\[-17pt]
+    \intertext{\line(1,0){280}}
+    \vspace{-15pt}
+    \\[-30pt]
+     z_{n+1} z_{n} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                            
+    \end{align*}
+    $\implies$
+    $$
+        \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta} \in \A\,
+    $$
+        
+%     
+%   Weight coefficient $q_j$ is chosen such that it returns the sum of the digit $w_j$  and the right carry $q_{j-1}$  back to the alphabet~$\A$.
+
+
+
+
+
+  Assume now a standard numeration system $(\beta, \A)$:
+  $$
+    \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}
+  $$ 
+  
+  Conversion runs from right to left:
+  \begin{align*}
+    w_n w_{n-1}\cdots w_{j+1}& \textcolor{red}{w_j w_{j-1} \cdots w_1 w_0}\bullet& \,,w_i &\in \A+\A\,,    \\
+    \longrightarrow z_{n+1}\; z_{n}\; z_{n-1}\;\cdots z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots \;z_1 \; z_0\bullet& \,,z_i &\in \A\,.
+  \end{align*}
+    $$
+        \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta}\,
+    $$
+   
+  
+    The weight coefficients $q_j$ and digits $z_j$ are unique in the standard numeration system 
+    
+    $$
+    \implies \textcolor{red}{z_j=z_j(w_j ,\dots , w1, w_0)}
+    $$  
+    
+    Thus, addition is linear in length of inputs.
+
+
+
+
+    {Parallel Addition}
+    Introduced by Avizienis in 1961:
+  \begin{align*}
+    \cdots w_{j+t+1}\textcolor{red}{w_{j+t} \cdots w_{j+1}}& \textcolor{red}{w_j w_{j-1} \cdots w_{j-r}}w_{j-r-1} \cdots &,\, w_i &\in \A + \A\,,    \\
+    \longrightarrow \cdots z_{j+t+1}\;z_{j+t} \; \cdots \; z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots z_{j-r}\;z_{j-r-1}\; \cdots &,\, z_i &\in \A\,.
+  \end{align*}
+  Digit conversion is a mapping $(\A+\A)^{t+r+1} \to \A$:%so called \textit{$p$-local function} with the window of the~fixed length $p=t+r+1$: 
+  $$
+    \textcolor{red}{z_j=z_j(w_{j+t} \cdots w_{j+1}w_j w_{j-1} \cdots w_{j-r})}\,.
+  $$
+  
+  Thus the parallel addition is done in constant time but the numeration system must be redundant -- a number has more than one admissible representation.
+  
+  
+  For example:
+  $$
+  \beta \in \NN, \beta \geq 3, \A=\{-a, \dots, 0, \dots a\}, b/2 <a \leq b-1\,. 
+  $$
+    
+
+
+\subsection{Non-standard numeration systems}
+
+    {Non-standard numeration systems}
+    
+    Integer alphabets:
+    \begin{itemize}
+        \item Base $\beta \in \CC, |\beta|>1$.
+        
+        \item Addition is computable in parallel if and only if $\beta$ is an~algebraic number with no conjugate of modulus 1 [Frougny, Heller, Pelantov\'a, S. ].
+        
+        \item Algorithms are known but with large alphabets.
+    \end{itemize}
+    
+    
+    Non-integer alphabets:
+    \begin{itemize}
+        \item Base $\beta \in \Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j\ : a_j \in \ZZ \right\}$, where $\omega \in \CC$ is an~algebraic integer of degree $d$.
+        
+        \item Alphabet $\A \subset \Zomega , 0\in \A$.
+        
+        \item Only few manually found algorithms. 
+    \end{itemize}
+    
+    
+    
+    How do we find systematically algorithms with minimal alphabets?  
+
+
+
+\section{Method}
+
+    {Method for construction of parallel addition algorithms}
+    Key problem -- find weight coefficients $q_j$ such that 
+    $$
+        z_j=\underbrace{w_j}_{\in \A +\A} + q_{j-1} - q_j \beta \in \A 
+    $$  
+    for any input $w$ and every $j$.
+    
+    
+    In order to do that we need to find $M \in \NN$ and $q:(\A+\A)^{M} \rightarrow \Q \subset \Zomega$ such that $q_j=q(w_j, \dots, w_{j-M+1})$.
+    
+    The mapping $q$ is called the \textit{weight function}.% $q:(\A+\A)^{M} \rightarrow \Q \subset \Zomega$. 
+    
+    
+    \vspace{20pt}
+    Our method:
+    \begin{enumerate}
+        \item Find set $\Q \subset \Zomega$ of possible weight coefficients.
+        \item Increment $M$ and for each $w_j,w_{j-1}, \dots , w_{j-M+1} \in (\A+\A)^{M}$ try to find a weight coefficient from $\Q$ to define $q$.
+    \end{enumerate}
+
+
+\subsection{Phase 1 -- Set of weight coefficients}
+
+    {Phase 1 -- searching for the set of weight coefficients}
+    We want to find set of weight coefficients $\Q \subset \Zomega$ such that
+    $$
+    \underbrace{(\A+\A)}_{w_j \in}+ \underbrace{\Q}_{q_{j-1} \in} \subset \underbrace{\A}_{z_j \in} + \underbrace{\beta \Q}_{\beta q_j \in}
+    $$
+    
+    It implies that there is $q_j \in \Q$ such that
+    $$
+    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
+    $$
+    for all $q_{j-1} \in \Q$ and $w_j \in \A+\A$.
+
+
+
+
+    We build $\Q$ iteratively:
+    
+    
+    {Phase 1}
+     $k:=0$
+     
+      Set $\Q_0:=\{0\}$
+      
+      
+      Repeat:
+      \begin{itemize}
+          \item extend $\Q_k$ to $\textcolor{red}{\Q_{k+1}}$ in a minimal possible way so that
+           $$
+              (\A+\A)+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
+           $$
+           \item $k:=k+1$
+      \end{itemize}
+      
+      until $\Q_k = \Q_{k+1}$.
+      
+      
+      \vspace{7pt}
+      $\Q:=\Q_k$
+    
+
+
+
+
+
+\subsection{Phase 2 -- Weight function}
+
+    {Phase 2 -- searching for a weight function}
+
+    We want to find a length of the window $M$ and a weight function $q:(\A+\A)^{M} \to \Q$.% have $q_j=q(w_j,w_{j-1},\dots, w_{j-M+1})$, where $q$ is a weight function:
+%     \begin{align*}
+%         \cdots\; &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &\textcolor{red}{w_{j-1}\cdots w_{j-M+1}} w_{j-M} \cdots\\[-3pt]
+%                          & &       &q_{j-1}& -&\beta q_{j-1} \\[-1pt]
+%                            &q_j&   -&\beta \textcolor{red}{q_j} &&\\[-19pt]      
+%     \intertext{\line(1,0){280}}
+%     \\[-30pt]
+%      \cdots\; &z_{j+1}& &z_j& &z_{j-1} \cdots z_{j-M+1}\; z_{j-M}\cdots                     
+%     \end{align*}
+    
+    
+    Suppose that the length of the window is $m$.
+    
+    The idea is to check all possible right carries $q_{j-1}$ and determine values $q_j$ such that 
+    $$
+    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
+    $$
+    The set of all such needed values of $q_j$ is denoted by $\Q_{[w_{j},\dots, w_{j-m+1}]}\subset \Q$
+        
+    
+    The length $M$ and weight function $q$ is found when 
+    $$
+    \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
+    $$
+    for all $w_{j},\dots, w_{j-M+1} \in (\A+\A)^M$.
+%     \begin{equation*}
+%     w_j + \underbrace{q(w_{j-1},w_{j-2},\dots, w_{j-M})}_{\in \Q_{[w_{j-1},w_{j-2},\dots, w_{j-M}]}  \subset \Q }=z_j + \beta \cdot \underbrace{q(w_j,w_{j-1},\dots, w_{j-M+1})}_{\in \Q_{[w_j,w_{j-1},\dots, w_{j-M+1}]} \subset \Q}
+%     \end{equation*}
+    
+
+
+
+    {Phase 2}
+      $m:=1$
+      
+      For each $w_j \in \A+\A$ find minimal set $\Q_{[w_j]} \subset \Q$ such that
+      $$
+      w_j + \Q \subset \A + \beta \Q_{[w_j]}
+      $$
+    
+      While $(\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in (\A+\A)^m \} > 1)$ do:
+      \begin{itemize}
+          
+          \item $m:= m +1$
+          
+          \item For each $(w_j,\dots, w_{j-m+1}) \in (\A+\A)^{m}$ find minimal set $\textcolor{red}{\Q_{[w_j,\dots, w_{j-m+1}]}} \subset \Q_{[w_j,\dots, w_{j-m+2}]}$ such that
+          $$
+          w_j + \Q_{[w_{j-1},\dots, w_{j-m+1}]} \subset \A + \beta \textcolor{red}{\Q_{[w_j,\dots, w_{j-m+1}]}}\,,
+          $$
+      \end{itemize}
+      
+      $M:= m$ 
+      
+      
+      $q(w_j,\dots, w_{j-M+1}):=$ only element of $\Q_{[w_j,\dots, w_{j-M+1}]}$
+    
+
+
+
+        Now we have parallel conversion algorithm:
+    \begin{align*}
+    z_j&=w_j + q_{j-1} - q_j \beta = \\
+       &=w_j + q(w_{j-1},w_{j-2},\dots, w_{j-M}) - \beta q(w_j,w_{j-1},\dots, w_{j-M+1}) = \\
+       &= z_j(w_{j},w_{j-1},\dots, w_{j-M})\,.
+    \end{align*}
+
+
+
+
