@@ -1,5 +1,5 @@
 \section{Method deduction}
-The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$ is following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition can be run in parallel, thus the crucial point is the conversion of the obtained result. It can be easily done in a standard way but a parallel conversion is nontrivial. However, formulas are basically same but the choice of coefficients differs.
+The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically same but the choice of coefficients differs.
 
 Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representantions padded by zeros to have the same length. We set 
   \begin{align*}
@@ -16,18 +16,17 @@ We also use column notation of addition in the following, e.g.,
   w_{n'} w_{{n'}-1}\cdots w_1 w_0 &\bullet w_{-1} w_{-2} \cdots w_{-m'}\,.
   \end{align*}
   
-
-  
-  
-  
-  
-  
-  Goal -- find $(\beta,\A)$-representation of $w$, i.e. a sequence $$z_{n'} z_{n'-1}\cdots z_1 z_0 z_{-1} z_{-2} \cdots z_{-m'}$$ such that $z_j \in \A$ and
+As we want to obtain a $(\beta,\A)$-representation of $w$, we search a sequence 
+  $$z_{n} z_{n-1}\cdots z_1 z_0 z_{-1} z_{-2} \cdots z_{-m}$$ such that $z_j \in \A$ and
   $$
-    z_{n'} z_{n'-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m'}=w
-  $$ 
-
-
+    z_{n} z_{n-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m}=(w)_{\beta,\A}\,.
+  $$
+  
+  We use suitable representation of zero to convert digits $w_i$ into the alphabet $\A$. 
+  \begin{defn}
+  For a base $\beta$, a polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \ZZ[\beta],$ such that $R(\beta)=0$, is called a \emph{rewriting rule}.
+  \end{defn}  
+  Digits are converted into a different alphabet by adding an appropriate multiple of rewriting rule which   
 
 
 
