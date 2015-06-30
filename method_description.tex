@@ -21,20 +21,26 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search a sequence
   $$
     z_{n} z_{n-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m}=(w)_{\beta,\A}\,.
   $$
+  In the next, we consider without lost of generality only $\beta$-integers since modification for representations with rational part is obvious:
+  $$
+  \beta^m \cdot z_{n} z_{n-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m} = z_{n} z_{n-1}\cdots z_1 z_0 z_{-1} z_{-2} \cdots z_{-m} \bullet
+  $$  
+  Particulary, let $(w)_{\beta, \A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet$. We search $n \in \NN$ and $z_{n}, z_{n-1},\dots, z_1, z_0 \in \A$ such that $(w)_{\beta, \A}=z_{n} z_{n-1}\cdots z_1 z_0 \bullet$.   
   
-  We use suitable representation of zero to convert digits $w_i$ into the alphabet $\A$. 
+  We use suitable representation of zero to convert digits $w_j$ into the alphabet $\A$. 
   \begin{defn}
-  For a base $\beta$, a polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \ZZ[\beta],$ such that $R(\beta)=0$, is called a \emph{rewriting rule}.
+  For a base $\beta \in \Zomega$, a polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$, is called a \emph{rewriting rule}. MA TAM BYT Z[OMEGA] NEBO Z[BETA]???
   \end{defn}  
-  Digits are converted into a different alphabet by adding an appropriate multiple of rewriting rule which   
-
-
-
-    We have $0=1\cdot \beta^j -\beta \cdot \beta^{j-1}=1 (-\!\beta) 0 \cdots 0\bullet $ 
-    
-    $\rightarrow$ We add $q_j\cdot 0$ for each $j$:
-    
-    $0=q_j\cdot \beta^j -\beta  q_j \cdot \beta^{j-1}$
+  
+  An arbitrary rewriting rule may be used for conversion, then so called \emph{core coefficient}, i.e., one of the coefficients which is greatest in modulus, is applied to convert a digit $w_j$. For our method, we use the simplest possible rewriting rule
+  $$
+    R(x)=x-\beta \in \Zomega[x]\,.
+  $$
+As $0=\beta^{j} \cdot R(\beta)=1\cdot \beta^{j+1} -\beta \cdot \beta^{j}$, we have a representation of zero 
+$$1 (-\!\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$
+for all $j \in \NN$. We multiply this representation by $q_j \in \Zomega$ which is called a \emph{weight coefficient} to obtain representation of zero 
+$$q_j (-q_j\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$ 
+This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the digit $w_j$ into the alphabet $\A$. This causes that there is a \emph{carry} $q_{j}$ on the $(j+1)$-th position from the conversion of $j$-th digit. The procedure runs from right ($j=0$) to right until all digits and carries are converted into the alphabet $\A$:
     \begin{align*}
         w_n w_{n-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{200pt}\\[-5pt]
                    &&&&       &       & &     &   &q_{j-2} &&\iddots\\[-3pt] 
@@ -44,25 +50,45 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search a sequence
     \intertext{\line(1,0){280}}
     \vspace{-15pt}
     \\[-30pt]
-     z_{n+1} z_{n} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                            
+     z_{n+s} \cdots z_{n} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                            
     \end{align*}
-    $\implies$
+    Hence, the desired formula for conversion on the $j$-th position is 
+    \begin{equation}
+        z_j=w_j + q_{j-1} - q_j \beta
+    \end{equation}
+    for $j \in \NN$ and 
     $$
-        \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta} \in \A\,
+        z_0=w_0 -q_0 \beta
+    $$ 
+    as there is no carry from the right on the 0-th position.
+    
+     The weight coefficient $q_j$ must be chosen such that the converted digit is in the alphabet $\A$,i.e., 
+    \begin{equation}
+    \label{eq:conversionFormula}
+        z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
+    \end{equation}
+    
+     Clearly, the value of $w$ is preserved:
+\begin{align*}
+    \sum_{j\geq 0} z_j \beta^j &=w_0 - \beta q_0 + \sum_{j> 0} (w_j + q_{j-1} - q_j \beta) \beta^j \\
+    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j -  \beta \sum_{j\geq 0} q_j \cdot \beta^j \\
+    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j> 0} q_{j-1} \cdot \beta^j \\
+    &=\sum_{j\geq 0} w_j \beta^j = w\,.
+\end{align*}
+
+
+
+
+
+    Notice
     $$
-        
-%     
-%   Weight coefficient $q_j$ is chosen such that it returns the sum of the digit $w_j$  and the right carry $q_{j-1}$  back to the alphabet~$\A$.
-
-
-
-
-
+        z_j \equiv w_j+q_{j+1} \mod \beta\,. 
+    $$
   Assume now a standard numeration system $(\beta, \A)$:
   $$
     \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}
   $$ 
-  
+  There is only one representative of each class $\mod \beta$. Therefore, the digit $z_j$ is uniquely defined for given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus also weight coefficient $q_j$. 
   Conversion runs from right to left:
   \begin{align*}
     w_n w_{n-1}\cdots w_{j+1}& \textcolor{red}{w_j w_{j-1} \cdots w_1 w_0}\bullet& \,,w_i &\in \A+\A\,,    \\
