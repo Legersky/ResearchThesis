@@ -62,21 +62,20 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     $$ 
     as there is no carry from the right on the 0-th position.
     
+     Clearly, the value of $w$ is preserved:
+\begin{align*}
+    \sum_{j\geq 0} z_j \beta^j &=w_0 - \beta q_0 + \sum_{j> 0} (w_j + q_{j-1} - q_j \beta) \beta^j \\
+    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j\geq 0} q_j \cdot \beta^{j+1} \\
+    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j> 0} q_{j-1} \cdot \beta^j \\
+    &=\sum_{j\geq 0} w_j \beta^j = w\,.
+\end{align*}
+
      The weight coefficient $q_j$ must be chosen such that the converted digit is in the alphabet $\A$,i.e., 
     \begin{equation}
     \label{eq:conversionFormula}
         z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
     \end{equation}
-    
-     Clearly, the value of $w$ is preserved:
-\begin{align*}
-    \sum_{j\geq 0} z_j \beta^j &=w_0 - \beta q_0 + \sum_{j> 0} (w_j + q_{j-1} - q_j \beta) \beta^j \\
-    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j -  \beta \sum_{j\geq 0} q_j \cdot \beta^j \\
-    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j> 0} q_{j-1} \cdot \beta^j \\
-    &=\sum_{j\geq 0} w_j \beta^j = w\,.
-\end{align*}
-
-
+    Choice of weight coefficients is 
 
 
 
