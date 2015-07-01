@@ -1,4 +1,4 @@
-\section{Method deduction}
+\section{Basic formula for digit set conversion}
 The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically same but the choice of coefficients differs.
 
 Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representantions padded by zeros to have the same length. We set 
@@ -70,92 +70,38 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     &=\sum_{j\geq 0} w_j \beta^j = w\,.
 \end{align*}
 
-     The weight coefficient $q_j$ must be chosen such that the converted digit is in the alphabet $\A$,i.e., 
+     The weight coefficient $q_j$ must be chosen such that the converted digit is in the alphabet~$\A$, i.e., 
     \begin{equation}
     \label{eq:conversionFormula}
         z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
     \end{equation}
-    Choice of weight coefficients is 
-
-
-
-    Notice
+    Choice of weight coefficients is the crucial part in the case of construction of parallel addition algorithms. Our method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
+    
+     On the other hand, it is trivial for standard numeration systems.  Notice that
     $$
-        z_j \equiv w_j+q_{j+1} \mod \beta\,. 
+        z_j \equiv w_j+q_{j-1} \mod \beta\,. 
     $$
-  Assume now a standard numeration system $(\beta, \A)$:
+  Assume now a standard numeration system $(\beta, \A)$, where
   $$
-    \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}
+    \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}\,.
   $$ 
-  There is only one representative of each class $\mod \beta$. Therefore, the digit $z_j$ is uniquely defined for given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus also weight coefficient $q_j$. 
-  Conversion runs from right to left:
-  \begin{align*}
-    w_n w_{n-1}\cdots w_{j+1}& \textcolor{red}{w_j w_{j-1} \cdots w_1 w_0}\bullet& \,,w_i &\in \A+\A\,,    \\
-    \longrightarrow z_{n+1}\; z_{n}\; z_{n-1}\;\cdots z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots \;z_1 \; z_0\bullet& \,,z_i &\in \A\,.
-  \end{align*}
-    $$
-        \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta}\,
-    $$
-   
-  
-    The weight coefficients $q_j$ and digits $z_j$ are unique in the standard numeration system 
-    
-    $$
-    \implies \textcolor{red}{z_j=z_j(w_j ,\dots , w1, w_0)}
-    $$  
-    
-    Thus, addition is linear in length of inputs.
-
-
-
-
-    {Parallel Addition}
-    Introduced by Avizienis in 1961:
-  \begin{align*}
-    \cdots w_{j+t+1}\textcolor{red}{w_{j+t} \cdots w_{j+1}}& \textcolor{red}{w_j w_{j-1} \cdots w_{j-r}}w_{j-r-1} \cdots &,\, w_i &\in \A + \A\,,    \\
-    \longrightarrow \cdots z_{j+t+1}\;z_{j+t} \; \cdots \; z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots z_{j-r}\;z_{j-r-1}\; \cdots &,\, z_i &\in \A\,.
-  \end{align*}
-  Digit conversion is a mapping $(\A+\A)^{t+r+1} \to \A$:%so called \textit{$p$-local function} with the window of the~fixed length $p=t+r+1$: 
+  There is only one representative of each class modulo  $\beta$. Therefore, the digit $z_j$ is uniquely determined for a given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus so is the weight coefficient $q_j$. This means that $q_j=q_j(w_j,q_{j-1})$ for all $j>0$ and  $q_0=q_0(w_0)$. Generally,
   $$
-    \textcolor{red}{z_j=z_j(w_{j+t} \cdots w_{j+1}w_j w_{j-1} \cdots w_{j-r})}\,.
+  z_j=z_j(w_j ,\dots , w_1, w_0)\,,
   $$
+  which implies that addition runs in linear time.
   
-  Thus the parallel addition is done in constant time but the numeration system must be redundant -- a number has more than one admissible representation.
+  We want to the digit set conversion from $\A+\A$ into $\A$ be computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid this dependency on all less, respectivelly more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
   
   
-  For example:
-  $$
-  \beta \in \NN, \beta \geq 3, \A=\{-a, \dots, 0, \dots a\}, b/2 <a \leq b-1\,. 
-  $$
-    
+  
+  NEJAKE LEMMA O TOM, ZE NEREDUNDANTNI SYSTEM VEDE NA LINEARNI CAS???
+  
+  
+  
 
 
-\subsection{Non-standard numeration systems}
 
-    {Non-standard numeration systems}
-    
-    Integer alphabets:
-    \begin{itemize}
-        \item Base $\beta \in \CC, |\beta|>1$.
-        
-        \item Addition is computable in parallel if and only if $\beta$ is an~algebraic number with no conjugate of modulus 1 [Frougny, Heller, Pelantov\'a, S. ].
-        
-        \item Algorithms are known but with large alphabets.
-    \end{itemize}
-    
-    
-    Non-integer alphabets:
-    \begin{itemize}
-        \item Base $\beta \in \Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j\ : a_j \in \ZZ \right\}$, where $\omega \in \CC$ is an~algebraic integer of degree $d$.
-        
-        \item Alphabet $\A \subset \Zomega , 0\in \A$.
-        
-        \item Only few manually found algorithms. 
-    \end{itemize}
-    
-    
-    
-    How do we find systematically algorithms with minimal alphabets?  
 
 
 

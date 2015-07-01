@@ -9,4 +9,51 @@
   A complex number $x$ has a finite  $(\beta, \A)$-representation if~$x=\sum_{j=-m}^n x_j \beta^j$ with coefficients $x_j$ in $\A$.
   $$
     x=x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m}
-  $$ 
+  $$
+  
+  
+ \section{Previous results}
+ 
+    {Parallel Addition}
+    Introduced by Avizienis in 1961:
+  \begin{align*}
+    \cdots w_{j+t+1}\textcolor{red}{w_{j+t} \cdots w_{j+1}}& \textcolor{red}{w_j w_{j-1} \cdots w_{j-r}}w_{j-r-1} \cdots &,\, w_i &\in \A + \A\,,    \\
+    \longrightarrow \cdots z_{j+t+1}\;z_{j+t} \; \cdots \; z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots z_{j-r}\;z_{j-r-1}\; \cdots &,\, z_i &\in \A\,.
+  \end{align*}
+  Digit conversion is a mapping $(\A+\A)^{t+r+1} \to \A$:%so called \textit{$p$-local function} with the window of the~fixed length $p=t+r+1$: 
+  $$
+    \textcolor{red}{z_j=z_j(w_{j+t} \cdots w_{j+1}w_j w_{j-1} \cdots w_{j-r})}\,.
+  $$
+  
+  Thus the parallel addition is done in constant time but the numeration system must be redundant -- a number has more than one admissible representation.
+  
+  
+  For example:
+  $$
+  \beta \in \NN, \beta \geq 3, \A=\{-a, \dots, 0, \dots a\}, b/2 <a \leq b-1\,. 
+  $$
+    
+    
+    
+        {Non-standard numeration systems}
+    
+    Integer alphabets:
+    \begin{itemize}
+        \item Base $\beta \in \CC, |\beta|>1$.
+        
+        \item Addition is computable in parallel if and only if $\beta$ is an~algebraic number with no conjugate of modulus 1 [Frougny, Heller, Pelantov\'a, S. ].
+        
+        \item Algorithms are known but with large alphabets.
+    \end{itemize}
+    
+    
+    Non-integer alphabets:
+    \begin{itemize}
+        \item Base $\beta \in \Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j\ : a_j \in \ZZ \right\}$, where $\omega \in \CC$ is an~algebraic integer of degree $d$.
+        
+        \item Alphabet $\A \subset \Zomega , 0\in \A$.
+        
+        \item Only few manually found algorithms. 
+    \end{itemize}
+    
+     
