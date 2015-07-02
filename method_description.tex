@@ -139,29 +139,67 @@ As menshioned above, the key problem is to find for every $j\geq 0$ a weight coe
 The construction of a parallel conversion algorithm by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficient set $\Q$. It serves as the starting point for the second phase in which e increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
 \subsection{Phase 1 -- Weight coefficient set}
-The goal of the first phase is to compute a weight coefficient set $\Q$.   
-    We start with $\{0\}$ meaning that we search all weight coefficients necessary for conversion for the case where there is no carry from the right. We add them to weight coeffcient set. These weight coefficient now may appear as a carry so we must check whether we have response -- weight coefficient for all combination of them and digits of input alphabet. And so on until there is no need to add more elements.
+The goal of the first phase is to compute a weight coefficient set $\Q$, i.e., to find a set $\Q \ni 0$ such that 
+$$
+    \B + \Q \subset \A + \beta \Q\,.
+$$  
+We build $\Q$ iteratively so that we extend $\Q$ in a way to cover all elements on the left-hand side with original $\Q$ by elements on the right-hand side with extended $\Q$. This procedure is repeated until the extended weight coefficient set is the same as original one. 
+
+In other words, we start with $\Q=\{0\}$ meaning that we search all weight coefficients necessary for conversion for the case where there is no carry from the right. We add them to weight coeffcient set. These weight coefficients now may appear as a carry. If there are not suitable weight coefficients  in weight coefficient set to satisfy formula (\ref{eq:conversionFormula}) for all combinations of added coefficients and digits of input alphabet, we extend $\Q$ by appropriate ones. And so on until there is no need to add more elements.
     
-    Precise semi-algorithm is following: 
-     $k:=0$
-     
-      Set $\Q_0:=\{0\}$
-      
-      
-      Repeat:
-      \begin{itemize}
-          \item extend $\Q_k$ to $\textcolor{red}{\Q_{k+1}}$ in a minimal possible way so that
-           $$
-              \B+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
-           $$
-           \item $k:=k+1$
-      \end{itemize}
-      
-      until $\Q_k = \Q_{k+1}$.
-      
-      
-      \vspace{7pt}
-      $\Q:=\Q_k$
+The precise description of the semi-algorithm in a pseudocode is following: 
+    
+\begin{algorithm}
+  \caption{Search for weight coefficient set (Phase 1)}
+    \label{alg:weightCoefSet}
+  \begin{algorithmic}[1]
+    \STATE $k:=0$ 
+    \STATE $Q_0:=\{0\}$
+    \REPEAT
+     \STATE  Extend $\Q_k$ to $\Q_{k+1}$ in a minimal possible way so that $$\B+ \Q_k \subset \A + \beta \Q_{k+1}$$
+     \vspace{-20pt}
+      \STATE  $k:=k+1$
+      \UNTIL{$\Q_k = \Q_{k+1}$}      
+      \STATE $\Q:=\Q_k$
+    \RETURN $\Q$
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+  \caption{Extending intermediate weight coefficient set}
+    \label{alg:extendWeightCoefSet}
+  \begin{algorithmic}[1]
+    \REQUIRE{\verb+candidates+, previous weight coefficient set $\Q_{k-1}$}
+    \STATE $\Q_k:=\Q_{k-1}$
+    \FORALL{\texttt{cand\_for\_x} in \texttt{candidates}}
+        \IF{no element of \texttt{cand\_for\_x} in $\Q_{k-1}$}
+            \STATE Add the smallest element (in absolute value) of  \verb+cand_for_x+ to $\Q_{k}$  
+        \ENDIF
+    \ENDFOR
+    \RETURN $\Q_k$
+  \end{algorithmic}
+\end{algorithm}
+    
+
+\begin{algorithm}
+  \caption{Search for candidates}
+    \label{alg:searchCand}
+  \begin{algorithmic}[1]
+    \REQUIRE{previous weight coefficient set $\Q_{k-1}$}
+    \STATE \verb+candidates+:=[ ]
+    \FORALL{$x \in \B + \Q_{k}$}
+      \STATE \verb+cand_for_x+:=[ ]
+      \FORALL{$a \in \A$}
+          \IF{$(x-a)$ is divisible by $\beta$ in $\Zomega$ NEBO ZBETA???}
+              \STATE Append $\frac{x-a}{\beta}$ to \verb+cand_for_x+
+            \ENDIF
+      \ENDFOR 
+      \STATE Append \verb+cand_for_x+ to \verb+candidates+
+  \ENDFOR
+  \RETURN \verb+candidates+
+  \end{algorithmic}
+\end{algorithm}    
+    
     
 
 
