@@ -40,23 +40,23 @@ As $0=\beta^{j} \cdot R(\beta)=1\cdot \beta^{j+1} -\beta \cdot \beta^{j}$, we ha
 $$1 (-\!\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$
 for all $j \in \NN$. We multiply this representation by $q_j \in \Zomega$ which is called a \emph{weight coefficient} to obtain representation of zero 
 $$q_j (-q_j\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$ 
-This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the digit $w_j$ into the alphabet $\A$. This causes that there is a \emph{carry} $q_{j}$ on the $(j+1)$-th position from the conversion of $j$-th digit. The procedure runs from right ($j=0$) to right until all digits and carries are converted into the alphabet $\A$:
-    \begin{align*}
-        w_n w_{n-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{200pt}\\[-5pt]
-                   &&&&       &       & &     &   &q_{j-2} &&\iddots\\[-3pt] 
-                   &&&&       &       & &\textcolor{red}{q_{j-1}}& -&\beta q_{j-1} \\[-3pt]
-                   &&&&         &q_j&   \textcolor{red}{-}&\textcolor{red}{\beta q_j} &&\\[-8pt]
-                   &&&  \iddots      &   -&\beta q_{j+1}&   &\ &&\\[-17pt]
-    \intertext{\line(1,0){280}}
-    \vspace{-15pt}
-    \\[-30pt]
-     z_{n+s} \cdots z_{n} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                            
-    \end{align*}
+This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the digit $w_j$ into the alphabet $\A$. It causes a \emph{carry} $q_{j}$ on the $(j+1)$-th position from the conversion of $j$-th digit. The conversion runs from right ($j=0$) to left until all digits and carries are converted into the alphabet $\A$:
+        \begin{align*}
+            \hspace{100pt}  w_n w_{n-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{100pt} \\[-5pt]
+                         &&&&       &       & &     &   &q_{j-2} &&\iddots\\[-3pt] 
+                         &&&&       &       & &\textcolor{red}{q_{j-1}}& -&\beta q_{j-1} \\[-3pt]
+                         &&&&         &q_j&   \textcolor{red}{-}&\textcolor{red}{\beta q_j} &&\\[-8pt]
+                         &&&  \iddots      &   -&\beta q_{j+1}&   &\ &&\\[-17pt]
+          \intertext{\hspace{60pt}\line(1,0){300}}
+          \vspace{-15pt}
+          \\[-30pt]
+           z_{n+s} \cdots z_{n} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                  
+        \end{align*}
     Hence, the desired formula for conversion on the $j$-th position is 
-    \begin{equation}
+    \begin{equation*}
         z_j=w_j + q_{j-1} - q_j \beta
-    \end{equation}
-    for $j \in \NN_0$ having set $q_{-1}=0$ as there is no carry from the right on the 0-th position.
+    \end{equation*}
+    for $j \in \NN_0$. We set $q_{-1}=0$ as there is no carry from the right on the 0-th position.
     
      Clearly, the value of $w$ is preserved:
 \begin{align*}
@@ -71,7 +71,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \label{eq:conversionFormula}
         z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
     \end{equation}
-    Choice of weight coefficients is the crucial part in the case of construction of parallel addition algorithms. Our method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
+    Choice of weight coefficients is the crucial part in the case of construction of parallel addition algorithms. The method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
     
      On the other hand, it is trivial for standard numeration systems.  Notice that
     $$
@@ -82,6 +82,10 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}\,.
   $$ 
   There is only one representative of each class modulo  $\beta$. Therefore, the digit $z_j$ is uniquely determined for a given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus so is the weight coefficient $q_j$. This means that $q_j=q_j(w_j,q_{j-1})$ for all $j\geq 0$. Generally,
+  $$
+  q_j=q_j(w_j,q_{j-1}(w_{j-1},q_{j-2}))=\dots =q_j(w_j ,\dots , w_1, w_0)
+  $$
+  and
   $$
   z_j=z_j(w_j ,\dots , w_1, w_0)\,,
   $$
@@ -95,6 +99,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
 
 
 \section{Method}
+\label{sec:methodDescription}
 In order to construct a parallel digit set conversion in numeration system $(\beta,\A)$ we consider more general case of conversion from an \emph{input alphabet} $\B$ such that $\A \subsetneq \B \subset \A +\A$ instead of the alphabet $\A+\A$.
 As menshioned above, the key problem is to find for every $j\geq 0$ a weight coefficient $q_j$ such that 
     $$
@@ -131,18 +136,13 @@ As menshioned above, the key problem is to find for every $j\geq 0$ a weight coe
     $$ 
     which verifies that the conversion is indeed $(M+1)$-local function with anticipation $r=0$ and memory $t=M$.
     
-The construction of a parallel conversion algorithm by so-called \emph{extending window method} consists of two phases:
-    \begin{enumerate}
-        \item Find minimal possible weight coefficient set $\Q$.
-        \item Increment expected length of window $M$ and for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$ try to find a weight coefficient from $\Q$ to define $q$.
-    \end{enumerate}
-    
-\subsection{Phase 1 -- Weight coefficient set}
+The construction of a parallel conversion algorithm by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficient set $\Q$. It serves as the starting point for the second phase in which e increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
-    We build $\Q$ iteratively:
+\subsection{Phase 1 -- Weight coefficient set}
+The goal of the first phase is to compute a weight coefficient set $\Q$.   
+    We start with $\{0\}$ meaning that we search all weight coefficients necessary for conversion for the case where there is no carry from the right. We add them to weight coeffcient set. These weight coefficient now may appear as a carry so we must check whether we have response -- weight coefficient for all combination of them and digits of input alphabet. And so on until there is no need to add more elements.
     
-    
-    {Phase 1}
+    Precise semi-algorithm is following: 
      $k:=0$
      
       Set $\Q_0:=\{0\}$
@@ -152,7 +152,7 @@ The construction of a parallel conversion algorithm by so-called \emph{extending
       \begin{itemize}
           \item extend $\Q_k$ to $\textcolor{red}{\Q_{k+1}}$ in a minimal possible way so that
            $$
-              (\A+\A)+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
+              \B+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
            $$
            \item $k:=k+1$
       \end{itemize}
