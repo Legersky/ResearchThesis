@@ -32,7 +32,7 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search a sequence
   For a base $\beta \in \Zomega$, a polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$, is called a \emph{rewriting rule}. MA TAM BYT Z[OMEGA] NEBO Z[BETA]???
   \end{defn}  
   
-  An arbitrary rewriting rule may be used for conversion, then so called \emph{core coefficient}, i.e., one of the coefficients which is greatest in modulus, is applied to convert a digit $w_j$. For our method, we use the simplest possible rewriting rule
+  An arbitrary rewriting rule may be used for conversion, then so called \emph{core coefficient}, i.e., one of the coefficients which is greatest in modulus, is applied to convert a digit $w_j$. For our purpose, we use the simplest possible rewriting rule
   $$
     R(x)=x-\beta \in \Zomega[x]\,.
   $$
@@ -56,11 +56,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \begin{equation}
         z_j=w_j + q_{j-1} - q_j \beta
     \end{equation}
-    for $j \in \NN$ and 
-    $$
-        z_0=w_0 -q_0 \beta
-    $$ 
-    as there is no carry from the right on the 0-th position.
+    for $j \in \NN_0$ having set $q_{-1}=0$ as there is no carry from the right on the 0-th position.
     
      Clearly, the value of $w$ is preserved:
 \begin{align*}
@@ -85,65 +81,63 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
   $$
     \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}\,.
   $$ 
-  There is only one representative of each class modulo  $\beta$. Therefore, the digit $z_j$ is uniquely determined for a given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus so is the weight coefficient $q_j$. This means that $q_j=q_j(w_j,q_{j-1})$ for all $j>0$ and  $q_0=q_0(w_0)$. Generally,
+  There is only one representative of each class modulo  $\beta$. Therefore, the digit $z_j$ is uniquely determined for a given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus so is the weight coefficient $q_j$. This means that $q_j=q_j(w_j,q_{j-1})$ for all $j\geq 0$. Generally,
   $$
   z_j=z_j(w_j ,\dots , w_1, w_0)\,,
   $$
   which implies that addition runs in linear time.
   
-  We want to the digit set conversion from $\A+\A$ into $\A$ be computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid this dependency on all less, respectivelly more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
+  We want to the digit set conversion from $\A+\A$ into $\A$ be computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid the dependency on all less, respectivelly more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
   
   
   
   NEJAKE LEMMA O TOM, ZE NEREDUNDANTNI SYSTEM VEDE NA LINEARNI CAS???
-  
-  
-  
-
-
-
-
 
 
 \section{Method}
-
-    {Method for construction of parallel addition algorithms}
-    Key problem -- find weight coefficients $q_j$ such that 
+In order to construct a parallel digit set conversion in numeration system $(\beta,\A)$ we consider more general case of conversion from an \emph{input alphabet} $\B$ such that $\A \subsetneq \B \subset \A +\A$ instead of the alphabet $\A+\A$.
+As menshioned above, the key problem is to find for every $j\geq 0$ a weight coefficient $q_j$ such that 
     $$
-        z_j=\underbrace{w_j}_{\in \A +\A} + q_{j-1} - q_j \beta \in \A 
+        z_j=\underbrace{w_j}_{\in \B} + q_{j-1} - q_j \beta \in \A 
     $$  
-    for any input $w$ and every $j$.
+    for any input $w\in \fin{\B}, (w)_{\beta,\B}=w_{n'}w_{n'-1}\dots w_1 w_0 \bullet$. We remark that the weight coefficient $q_{j-1}$ is determined by the input $w$. For digit set conversion to be computable in parallel we demand to digit $z_j=z_j(w_{j+r},\dots,w_{j-t})$ for a fixed anticipation $r$ and memory $t$ in $\NN_0$.
     
+    We introduce following definitions to obtain the desired digit set conversion. 
+    \begin{defn}
+        Let $\B$ be a set such that $\A \subsetneq \B \subset \A +\A$. Then any set $\Q\subset\Zomega$ containing~0 such that 
+        $$
+            \B + \Q \subset \A + \beta \Q
+        $$  
+        is called a \emph{set of weight coefficients}.
+    \end{defn}
+    We see that
+        $$
+        (\forall w_j \in \B)(\forall q_{j-1}\in\Q)(\exists q_j \in \Q )(w_j + q_{j-1} - q_j \beta \in \A )\,.
+        $$
+    Accordingly, there is a weight coefficient $q_j \in \Q$ for any carry from the right $q_{j-1}\in \Q$ and any digit $w_j$ in the input alphabet $\B$. I.e., we  satisfy basic conversion formula (\ref{eq:conversionFormula}). Notice that $q_{-1}=0$ is in $\Q$ by definition. Thus, all weight coeficients may be chosen from $\Q$ inductively.
+    \begin{defn}
+    Let $M$ be an integer and $q:\B^{M} \rightarrow \Q$ be a mapping such that 
+    $$
+    w_j+ q(w_{j-1}, \dots, w_{j-M}) - \beta q(w_j, \dots, w_{j-M+1}) \in \A
+    $$
+    for all $w_j,w_{j-1}, \dots, w_{j-M} \in \B$. Then $q$ is called a \emph{weight function} and $M$ is called a \emph{length of window}.    
+    \end{defn}
+ 
+ JE TREBA POZADOVAT q(0,...,0)=0 NEBO TO Z NECEHO PLYNE?
+
+ Having a weight function $q$, we define a function $\phi:\B^{M+1}\rightarrow \A$ by
+    $$
+        \phi(w_{j}, \dots, w_{j-M})=w_j+ \underbrace{q(w_{j-1}, \dots, w_{j-M})}_{=q_{j-1}} - \beta \underbrace{q(w_j, \dots, w_{j-M+1})}_{=q_j}=:z_j\,,
+    $$ 
+    which verifies that the conversion is indeed $(M+1)$-local function with anticipation $r=0$ and memory $t=M$.
     
-    In order to do that we need to find $M \in \NN$ and $q:(\A+\A)^{M} \rightarrow \Q \subset \Zomega$ such that $q_j=q(w_j, \dots, w_{j-M+1})$.
-    
-    The mapping $q$ is called the \textit{weight function}.% $q:(\A+\A)^{M} \rightarrow \Q \subset \Zomega$. 
-    
-    
-    \vspace{20pt}
-    Our method:
+The construction of a parallel conversion algorithm by so-called \emph{extending window method} consists of two phases:
     \begin{enumerate}
-        \item Find set $\Q \subset \Zomega$ of possible weight coefficients.
-        \item Increment $M$ and for each $w_j,w_{j-1}, \dots , w_{j-M+1} \in (\A+\A)^{M}$ try to find a weight coefficient from $\Q$ to define $q$.
+        \item Find minimal possible weight coefficient set $\Q$.
+        \item Increment expected length of window $M$ and for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$ try to find a weight coefficient from $\Q$ to define $q$.
     \end{enumerate}
-
-
-\subsection{Phase 1 -- Set of weight coefficients}
-
-    {Phase 1 -- searching for the set of weight coefficients}
-    We want to find set of weight coefficients $\Q \subset \Zomega$ such that
-    $$
-    \underbrace{(\A+\A)}_{w_j \in}+ \underbrace{\Q}_{q_{j-1} \in} \subset \underbrace{\A}_{z_j \in} + \underbrace{\beta \Q}_{\beta q_j \in}
-    $$
     
-    It implies that there is $q_j \in \Q$ such that
-    $$
-    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
-    $$
-    for all $q_{j-1} \in \Q$ and $w_j \in \A+\A$.
-
-
-
+\subsection{Phase 1 -- Weight coefficient set}
 
     We build $\Q$ iteratively:
     
