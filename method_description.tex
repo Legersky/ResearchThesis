@@ -109,7 +109,7 @@ As menshioned above, the key problem is to find for every $j\geq 0$ a weight coe
     
     We introduce following definitions to obtain the desired digit set conversion. 
     \begin{defn}
-        Let $\B$ be a set such that $\A \subsetneq \B \subset \A +\A$. Then any set $\Q\subset\Zomega$ containing~0 such that 
+        Let $\B$ be a set such that $\A \subsetneq \B \subset \A +\A$. Then any finite set $\Q\subset\Zomega$ containing~0 such that 
         $$
             \B + \Q \subset \A + \beta \Q
         $$  
@@ -199,7 +199,7 @@ An added element from each list of \verb+candidates+ is chosen as the smallest o
   \end{algorithmic}
 \end{algorithm}
     
-We may slightly improve this procedure: for example we may first extend $\Q_{k}$ by all single-element list of \verb+candidates+. These elements may be enough to cover also other elements of $\B+\Q_{k}$. It implies that the resulting $\Q$ is dependent on the way of selection from \verb+candidates+.
+We may slightly improve this procedure: for example we may first extend $\Q_{k}$ by all single-element lists of \verb+candidates+. These elements may be enough to cover also other elements of $\B+\Q_{k}$. It implies that the resulting $\Q$ is dependent on the way of selection from \verb+candidates+.
   
     
     
@@ -209,37 +209,7 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
 
 
 \subsection{Phase 2 -- Weight function}
-    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. Recall the scheme of conversion:
-    \begin{align*}
-        \cdots\; &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &\textcolor{red}{w_{j-1}\cdots w_{j-M+1}} w_{j-M} \cdots\\[-3pt]
-                         & &       &q_{j-1}& -&\beta q_{j-1} \\[-1pt]
-                           &q_j&   -&\beta \textcolor{red}{q_j} &&\\[-19pt]      
-    \intertext{\line(1,0){280}}
-    \\[-30pt]
-     \cdots\; &z_{j+1}& &z_j& &z_{j-1} \cdots z_{j-M+1}\; z_{j-M}\cdots                     
-    \end{align*}
-    We have the weight coefficient set $\Q$ from the previous section and we choose all weight coefficients to be in $\Q$. We pick weight coefficient $q_j$ according to input digit $w_j$ and carry from the right $q_{j-1}$ which is dependent on input digits $w_{j-1}\cdots w_{j-M+1} w_{j-M}$. 
-    
-    
-    Suppose that the length of the window is $m$.
-    
-    The idea is to check all possible right carries $q_{j-1}$ and determine values $q_j$ such that 
-    $$
-    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
-    $$
-    The set of all such needed values of $q_j$ is denoted by $\Q_{[w_{j},\dots, w_{j-m+1}]}\subset \Q$
-        
-    
-    
-    
-    The length $M$ and weight function $q$ is found when 
-    $$
-    \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
-    $$
-    for all $w_{j},\dots, w_{j-M+1} \in (\A+\A)^M$.
-%     \begin{equation*}
-%     w_j + \underbrace{q(w_{j-1},w_{j-2},\dots, w_{j-M})}_{\in \Q_{[w_{j-1},w_{j-2},\dots, w_{j-M}]}  \subset \Q }=z_j + \beta \cdot \underbrace{q(w_j,w_{j-1},\dots, w_{j-M+1})}_{\in \Q_{[w_j,w_{j-1},\dots, w_{j-M+1}]} \subset \Q}
-%     \end{equation*}
+    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. The idea of the estending window method is to reduce necessary weight coefficients from weight coefficient set $\Q$ obtained in the previous section up to single value by enlarging number of considered input digits. The following notation is used: 
     \begin{defn}
         Let $\Q$ be a weight coefficient set and $w_j\in \B$. Denote by $\Q_{[w_j]}$ any set such that
         $$
@@ -251,6 +221,30 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
         $$
     \end{defn}
   
+    Recall the scheme of conversion for better understanding of the definition and method:
+    \begin{align*}
+        \hspace{130pt}\cdots\; &w_{j+1}&\!\! &w_j  & \!\!  &w_{j-1}&\cdots w_{j-M+1} &w_{j-M}\cdots \hspace{130pt} \\[-3pt] 
+                         & &       &q_{j-1}& -&\beta q_{j-1} \\[-3pt]
+                           &q_j&   -&\beta q_j &&\\[-15pt]      
+    \intertext{\hspace{120pt}\line(1,0){250}} 
+          \vspace{-15pt}
+          \\[-30pt]
+     \cdots\; &z_{j+1}& &z_j& &z_{j-1}& \cdots z_{j-M+1}\; &z_{j-M}\cdots                     
+    \end{align*}     
+    The idea is to check all possible right carries $q_{j-1}\in\Q$ and determine values $q_j\in\Q$ such that 
+    $$
+    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
+    $$  
+    
+    So we obtain a set $\Q_{[w_j]}\subset\Q$ of weight coefficients which are necessary to convert digit $w_j$ with any carry $q_{j-1}\in\Q$. Assuming that we know input digit $w_{j-1}$, the set of possible carries from the right is also reduced to $\Q_{[w_{j-1}]}$. Thus we may reduce the set $\Q_{[w_j]}$ to a set $\Q_{[w_j,w_{j-1}]}\subset \Q_{[w_j]}$ which is necessary to cover elements of $w_j + \Q_{[w_{j-1}]}$. Prolonging length of window in this manner may lead to a unique weight coefficient $q_j$ for enough given input digits.  
+    
+    Accordingly, the weight function $q$ is found if there is $M\in\NN$ such that 
+    $$
+    \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
+    $$
+    for all $w_{j},\dots, w_{j-M+1} \in \B^M$.
+    
+    The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.
 \begin{algorithm}
   \caption{Search for weight function (Phase 2)}
     \label{alg:weightFunction}
@@ -280,5 +274,60 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
   \end{algorithmic}
 \end{algorithm}
     
+For construction of minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only ones covering some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}.
 
-
+\begin{algorithm}
+  \caption{Search for weight function (Phase 2)}
+    \label{alg:minimalSet}
+  \begin{algorithmic}[1]
+    \REQUIRE{Input digit $w_j$, set of carries $\Q_{[w_{j-1},\dots, w_{j-m+1}]}$, previous set of possible weight coefficients $\Q_{[w_j,\dots, w_{j-m+2}]}$}
+    \STATE \verb+list_of_coverings+:=empty list of lists
+    \FORALL{$x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$}
+        \STATE Build a list \verb+x_covered_by+ of weight coefficients $q_j \in \Q_{[w_j,\dots, w_{j-m+2}]}$ such that $x=a+ \beta q_j$ for some $a\in\A$
+        \STATE Append  to \verb+list_of_coverings+
+    \ENDFOR
+    \STATE $\Q_{[w_j,\dots, w_{j-m+1}]}$:= empty set
+%     \FORALL{\texttt{x\_covered\_by} in \texttt{list\_of\_coverings}}
+%         \IF{\#\texttt{x\_covered\_by}==1}
+%             \STATE Add the element of \verb+x_covered_by+ to $\Q_{[w_j,\dots, w_{j-m+1}]}$
+%         \ENDIF
+%     \ENDFOR
+%     \STATE Remove lists \verb+x_covered_by+ containing any element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ from \verb+list_of_coverings+
+    \WHILE{\texttt{list\_of\_coverings} is nonempty}
+        \STATE Pick any element $q$ of one of the shortest lists \verb+x_covered_by+
+        \STATE Add the element $q$ to $\Q_{[w_j,\dots, w_{j-m+1}]}$
+        \STATE Remove lists \verb+x_covered_by+ containing the element $q$ from \verb+list_of_coverings+
+    \ENDWHILE
+    \RETURN $\Q_{[w_j,\dots, w_{j-m+1}]}$
+  \end{algorithmic}
+\end{algorithm}
+  
+  
+\section{Convergence}
+Unfortunately, the extending window method is not always finite. The algorithm may lead to an infinite loop in both phases. However, the following lemmma gives a sufficient condition for convergence of the Phase 1. 
+\begin{lem}
+\label{lem:weightCoefSet}
+    Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. NEBO ZBeta???? Then, there exists a subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
+\end{lem}
+\begin{pro}
+ Denote $A:=\max\{|a|:a \in \A\}$ and $B:=\max\{|b|:b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega:|q|\leq R\}$. The set $\Q$ is nonempty because obviously $A>0$. Any element $x=b+q$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
+ $$
+    |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{\beta}{|\beta|-1}\right)=R\,.
+ $$ 
+ Hence $q'\in\Q$ and thus  $x=b+q \in \A + \beta \Q$.
+\end{pro}
+We plug in the alphabet $\A$ and input alphabet $\B$. Because of the choice of smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we know by the lemma that the weight coefficient set $\Q$ constructed in Phase~1 has elements bounded by constant $R$. 
+\begin{theo}
+    Let $\omega$ be an algebraic integer such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$. Let $\beta \in \Zomega, |\beta|>1$. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. NEBO ZBeta???? Then, there exists a finite subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$.
+\end{theo} 
+\begin{pro}
+    Directly from Lemma \ref{lem:weightCoefSet} and assumption on $\Zomega$.
+\end{pro}
+Therefore, Phase 1 succesfully ends if there can be only finitely many elements in $\Zomega$ NEBO Zbeta??? bounded by constant $R$ as intermediate weight coefficient sets $\Q_k$ have elements bounded by $R$ for all $k$. 
+We categorize an algebraic integer $\omega$ which generates $\Zomega \ni \beta$ as follows:
+\begin{itemize}
+    \item $\omega \in \ZZ$ implies $\Zomega=\ZZ$ which has required property and thus Phase~1 converges.
+    \item $\omega \in \RR\setminus\ZZ$ implies $\Zomega$ being dense in $RR$. CITACE NEBO DUKAZ??? Thus the convergence of Phase~1 is not guaranteed and we have an example for which it does not converge.
+    \item $\omega \in \CC\setminus\RR$, $\omega$ being quadratic algebraic integer implies that $\Zomega$ is not dense in $\CC$ and thus Phase~1 can ?????? converge.
+    \item $\omega \in \CC\setminus\RR$, $\omega$ being algebraic integer of degree $\geq 3$ implies $\Zomega$ is  dense in $\CC$ and therefore the convergence of Phase~1 is not guaranteed.
+\end{itemize}

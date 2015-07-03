@@ -28,11 +28,12 @@
 
 \input{commands.tex}
 
-\theoremstyle{plain}
-\newtheorem{theo}{Theorem}
-\newtheorem{pro}{Proof}
+% \theoremstyle{plain}
+\newtheorem{theo}{Theorem}[section]
+\newtheorem{lem}[theo]{Lemma}
+\newtheorem*{pro}{Proof}
 
-\theoremstyle{definition}
+% \theoremstyle{definition}
 \newtheorem{defn}{Definition}
 
 
