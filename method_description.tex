@@ -151,7 +151,7 @@ The precise description of the semi-algorithm in a pseudocode in Algorithm \ref{
 \begin{algorithm}
   \caption{Search for weight coefficient set (Phase 1)}
     \label{alg:weightCoefSet}
-  \begin{algorithmic}
+  \begin{algorithmic}[1]
     \STATE $k:=0$ 
     \STATE $Q_0:=\{0\}$
     \REPEAT
@@ -164,15 +164,19 @@ The precise description of the semi-algorithm in a pseudocode in Algorithm \ref{
   \end{algorithmic}
 \end{algorithm}
 
-To extend $\Q_{k}$ to $\Q_{k+1}$, we first find all possible candidates to cover each element of  $\B + \Q_{k}$ (Algorithm \ref{alg:searchCand}). 
+To extend $\Q_{k}$ to $\Q_{k+1}$, we first find all possible candidates to cover each element of  $\B + \Q_{k}$ (Algorithm \ref{alg:searchCand}). We can improve the performance of Algorithm \ref{alg:searchCand} by substituting the set $\B + \Q_{k}$ for $(\B + \Q_{k})\setminus (\B + \Q_{k-1})$ on the line \ref{line:replaceBySmaller} because
+$$
+\B + \Q_{k-1} \subset \A + \beta \Q_{k} \subset \A + \beta \Q_{k+1}
+$$
+for any $\Q_{k+1} \supset \Q_{k}$.
 
 \begin{algorithm}
   \caption{Search for candidates}
     \label{alg:searchCand}
-  \begin{algorithmic}
-    \REQUIRE{previous weight coefficient set $\Q_{k}$}
+  \begin{algorithmic}[1]
+    \REQUIRE{previous weight coefficient set $\Q_{k}$, alternatively pre-previous weight coefficient set $\Q_{k-1}$}
     \STATE \verb+candidates+:= empty list of lists
-    \FORALL{$x \in \B + \Q_{k}$}
+    \FORALL[Alternatively, $x \in (\B + \Q_{k})\setminus (\B + \Q_{k-1})$]{$x \in \B + \Q_{k}$} \label{line:replaceBySmaller}
       \STATE \verb+cand_for_x+:= empty list
       \FORALL{$a \in \A$}
           \IF{$(x-a)$ is divisible by $\beta$ in $\Zomega$ NEBO ZBETA???}
@@ -191,7 +195,7 @@ An added element from each list of \verb+candidates+ is chosen as the smallest o
 \begin{algorithm}
   \caption{Extending intermediate weight coefficient set}
     \label{alg:extendWeightCoefSet}
-  \begin{algorithmic}
+  \begin{algorithmic}[1]
     \REQUIRE{\verb+candidates+ from Algorithm \ref{alg:searchCand}, previous weight coefficient set $\Q_{k}$}
     \STATE $\Q_{k+1}:=\Q_{k}$
     \FORALL{\texttt{cand\_for\_x} in \texttt{candidates}}
@@ -213,16 +217,17 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
 
 
 \subsection{Phase 2 -- Weight function}
-    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. The idea of the estending window method is to reduce necessary weight coefficients from weight coefficient set $\Q$ obtained in the previous section up to single value by enlarging number of considered input digits. The following notation is used: 
+    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. The idea of the extending window method is to reduce necessary weight coefficients from weight coefficient set $\Q$ obtained in the previous section up to single value by enlarging number of considered input digits. The following notation is used: 
     \begin{defn}
         Let $\Q$ be a weight coefficient set and $w_j\in \B$. Denote by $\Q_{[w_j]}$ any set such that
         $$
             (\forall q_{j-1} \in \Q)(\exists q_j \in \Q_{[w_j]})(w_j + q_{j-1} - q_j \beta \in \A)\,.
         $$
-        Inductively, for arbitrary $m \in \NN$ and for all $(w_{j},\dots, w_{j-m+1})\in \B^{m}$ denote by $\Q_{[w_{j},\dots, w_{j-m+1}]}$ any subset of  $\Q_{[w_{j},\dots, w_{j-m+2}]}$ such that 
+        By induction with respect to $m \in \NN$, denote by $\Q_{[w_{j},\dots, w_{j-m+1}]}$ any subset of  $\Q_{[w_{j},\dots, w_{j-m+2}]}$ such that 
         $$
-           (\forall q_{j-1} \in \Q_{[w_{j-1},\dots, w_{j-m+1}]})(\exists q_j \in \Q_{[w_{j},\dots, w_{j-m+1}]})(w_j + q_{j-1} - q_j \beta \in \A)\,.
+           (\forall q_{j-1} \in \Q_{[w_{j-1},\dots, w_{j-m+1}]})(\exists q_j \in \Q_{[w_{j},\dots, w_{j-m+1}]})(w_j + q_{j-1} - q_j \beta \in \A)
         $$
+        for all $(w_{j},\dots, w_{j-m+1})\in \B^{m}$.
     \end{defn}
   
     Recall the scheme of conversion for better understanding of the definition and method:
@@ -252,11 +257,11 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
 \begin{algorithm}
   \caption{Search for weight function (Phase 2)}
     \label{alg:weightFunction}
-  \begin{algorithmic}
+  \begin{algorithmic}[1]
     \REQUIRE{weight coefficient set $\Q$}
     \STATE $m:=1$
     \FORALL{$w_j \in \B$} 
-        \STATE Find minimal set $\Q_{[w_j]} \subset \Q$ such that
+        \STATE Find set $\Q_{[w_j]} \subset \Q$ such that
           $$
           w_j + \Q \subset \A + \beta \Q_{[w_j]}
           $$
@@ -264,7 +269,7 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
     \WHILE{$\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in \B^m \} > 1$}
         \STATE $m:= m +1$
         \FORALL{$(w_j,\dots, w_{j-m+1}) \in \B^{m}$}
-            \STATE Find minimal set $\Q_{[w_j,\dots, w_{j-m+1}]} \subset \Q_{[w_j,\dots, w_{j-m+2}]}$ such that
+            \STATE Find set $\Q_{[w_j,\dots, w_{j-m+1}]} \subset \Q_{[w_j,\dots, w_{j-m+2}]}$ such that
               $$
               w_j + \Q_{[w_{j-1},\dots, w_{j-m+1}]} \subset \A + \beta \Q_{[w_j,\dots, w_{j-m+1}]}\,,
               $$
@@ -278,25 +283,22 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
   \end{algorithmic}
 \end{algorithm}
     
-For construction of minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only ones covering some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}.
-
+For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only ones covering some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}. We remark that this algorithm does not provide the trully minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ in the sense of size, but it is sufficiently small. Phase 2 can be modified by replacing Algorithm \ref{alg:minimalSet} for different one. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
 \begin{algorithm}
-  \caption{Search for minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ }
+  \caption{Search for set $\Q_{[w_j,\dots, w_{j-m+1}]}$ }
     \label{alg:minimalSet}
   \begin{algorithmic}[1]
     \REQUIRE{Input digit $w_j$, set of carries $\Q_{[w_{j-1},\dots, w_{j-m+1}]}$, previous set of possible weight coefficients $\Q_{[w_j,\dots, w_{j-m+2}]}$}
     \STATE \verb+list_of_coverings+:=empty list of lists
-    \FORALL{$x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$}
-        \STATE Build a list \verb+x_covered_by+ of weight coefficients $q_j \in \Q_{[w_j,\dots, w_{j-m+2}]}$ such that $x=a+ \beta q_j$ for some $a\in\A$
-        \STATE Append  to \verb+list_of_coverings+
+    \FORALL{$x \in w_j + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$}
+        \STATE Build a list \verb+x_covered_by+ of weight coefficients $q_j \in \Q_{[w_j,\dots, w_{j-m+2}]}$ such that 
+        $$
+        x=a+ \beta q_j \qquad\text{for some } a\in\A\,.
+        $$ 
+        \vspace{-20pt}
+        \STATE Append \verb+x_covered_by+ to \verb+list_of_coverings+
     \ENDFOR
     \STATE $\Q_{[w_j,\dots, w_{j-m+1}]}$:= empty set
-%     \FORALL{\texttt{x\_covered\_by} in \texttt{list\_of\_coverings}}
-%         \IF{\#\texttt{x\_covered\_by}=1}
-%             \STATE Add the element of \verb+x_covered_by+ to $\Q_{[w_j,\dots, w_{j-m+1}]}$
-%         \ENDIF
-%     \ENDFOR
-%     \STATE Remove lists \verb+x_covered_by+ containing any element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ from \verb+list_of_coverings+
     \WHILE{\texttt{list\_of\_coverings} is nonempty}
         \STATE Pick any element $q$ of one of the shortest lists \verb+x_covered_by+
         \STATE Add the element $q$ to $\Q_{[w_j,\dots, w_{j-m+1}]}$
@@ -306,6 +308,11 @@ For construction of minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose el
   \end{algorithmic}
 \end{algorithm}
 
+Notice that for given length of the window $M$, number of calls of Algorithm \ref{alg:minimalSet} within Algorithm \ref{alg:weightFunction} is
+$$
+\sum_{m=1}^M  \#\B^m = \#\B \sum_{m=0}^{M-1}  \#\B^m = \#\B \frac{\#\B^M-1}{\#\B-1}\,.
+$$    
+It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponentional because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
   
 \section{Convergence}
 Unfortunately, the extending window method is not always finite. The algorithm may lead to an infinite loop in both phases. 
@@ -321,7 +328,7 @@ However, the following lemmma gives a sufficient condition for convergence of th
  $$ 
  Hence $q'\in\Q$ and thus  $x=b+q \in \A + \beta \Q$.
 \end{proof}
-We plug in the alphabet $\A$ and input alphabet $\B$. Because of the choice of smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we know by the lemma that the weight coefficient set $\Q$ constructed in Phase~1 has elements bounded by constant $R$. 
+We plug in the alphabet $\A$ and input alphabet $\B$. Because of the choice of the smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we know by the lemma that the weight coefficient set $\Q$ constructed in Phase~1 has elements bounded by constant $R$. 
 \begin{theo}
     Let $\omega$ be an algebraic integer such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$. Let $\beta \in \Zomega, |\beta|>1$. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. NEBO ZBeta???? Then, there exists a finite subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$.
 \end{theo} 
@@ -399,10 +406,6 @@ $$
 Phase 2 ends when there is only one element in $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_j,\dots, w_{j-m+1}) \in \B^m$ for some fixed length of window $m$. But if $\#\Q^{m_0}_b\geq 2$, size of $\Q_{[b,\dots,b]}$ does not decrease despite of extending the length of window.
 \end{proof}
 
-
-
-  
-\section{Complexity of the extending window method}
 
 
 
