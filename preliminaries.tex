@@ -1,17 +1,41 @@
-  {Preliminaries}
-  \textit{Positional numeration system} $(\beta, \A)$ is defined by
-  \begin{itemize}
-    \item \textit{Base} $\beta \in \CC, |\beta|>1$.
-    \item Finite \textit{digit set}  $\A \subset \ZZ$ containing 0, usually called \textit{alphabet}.
-  \end{itemize} 
 
-  
-  A complex number $x$ has a finite  $(\beta, \A)$-representation if~$x=\sum_{j=-m}^n x_j \beta^j$ with coefficients $x_j$ in $\A$.
+\begin{defn}
+  Let $\beta \in \CC, |\beta|>1$ and $\A \subset \CC$ be a finite set containing 0. A pair $(\beta, \A)$ is called a \emph{positional numeration system} with \emph{base} $\beta$ and \emph{digit set} $\A$, usually called \emph{alphabet}.
+\end{defn}
+DECREASING INDICES
+
+\begin{defn}
+  We say that a complex number $x$ has a \emph{$(\beta, \A)$-representation} if~ there exist digits $x_n,x_{n-1}, x_{n-2},\dots \in\A, n\geq 0$ such that $x=\sum_{j=-\infty}^n x_j \beta^j$.
+\end{defn}
+We associate a number $x$ with representation as a bi-infinite string 
   $$
-    x=x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m}
+    (x)_{\beta,\A}=0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots\,,
   $$
+  where $0^\omega$ denotes the infinite sequence of zeros.
+
+\begin{defn}
+Let $(\beta, \A)$ be a positional numeration system. The set of all complex numbers with a finite $(\beta, \A)$-representation is defined by
+$$
+    \fin{\A}:=\left\{\sum_{j=-m}^n x_j \beta^j : n, m \in \NN, x_j \in \A \right\}\,.
+$$
+\end{defn}
+A representation of $x\in\fin{\A}$ is 
+$$
+(x)_{\beta,\A}= 0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m} 0^\omega\,.
+$$ 
+We omit starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$ in the following.
+\begin{defn}
+Let $\A$ and $\B$ be alphabets. A function $\varphi:\B^\ZZ \rightarrow \A^\ZZ$ is said to be \emph{$p$-local} if there exist $r,t\in\NN_0$ satisfying $p=r+t+1$ and a function $\phi: \B^p \rightarrow \A$ such that, for any $w=(w_j)_{j\in\ZZ}\in\B^\ZZ$ and its image $z=\varphi(w)=(z_j)_{j\in\ZZ}\in\A^\ZZ$, we have $z_j=\phi(w_{j+t},\cdots,w_{j-r})$ for every $j\in\ZZ$. The parameter $t$, resp. $r$, is called \emph{anticipation}, resp. \emph{memory}.
+\end{defn}
   
-  
+\begin{defn}
+Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $\varphi:\B^\ZZ\rightarrow \A^\ZZ$ such that
+  \begin{enumerate}
+      \item for any $w=(w_j)_{j\in\ZZ}\in\B^\ZZ$ with finitely many non-zero digits, $z=\varphi(w)=(z_j)_{j\in\ZZ}\in\A^\ZZ$ has only finite number of non-zero digits, and
+      \item $\sum_{j\in\ZZ} w_j \beta^j= \sum_{j\in\ZZ} z_j \beta^j$
+  \end{enumerate}
+  is called \emph{digit set conversion} in base $\beta$. Such a conversion $\varphi$ is said to be \emph{computable in parallel} if it is $p$-local function for some $p\in\NN$. 
+\end{defn}
  \section{Previous results}
  
     {Parallel Addition}
