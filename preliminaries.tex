@@ -76,18 +76,72 @@ $$
 $$ 
 and $\Zomega$ is isomorphic to $(\ZZ^d,+,\odot_\omega)$ by a mapping $\pi:\Zomega \rightarrow \ZZ^{d}$ defined by 
 $$
-\pi(x)=\vect{a}
+\pi(x)=\vect{x}
 $$
- for every $x=\sum_{i=0}^{d-1} a_i \omega^i \in \Zomega$. 
+ for every $x=\sum_{i=0}^{d-1} x_i \omega^i \in \Zomega$. 
 \end{lem}
 \begin{proof}
-Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $x\in \Zomega$, $x=\sum_{i=0}^n a_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-b_{d-1}\omega^{d-1}- \dots -b_1\omega-b_0$ which enables us to write
+Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $u\in \Zomega$, $x=\sum_{i=0}^n u_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0$ which enables us to write
 $$
-x=a_n\omega^n + \sum_{i=0}^{n-1} a_i \omega^i=a_n \omega^{n-d}(-b_{d-1}\omega^{d-1}- \dots -b_1\omega-b_0)+ \sum_{i=0}^{n-1} a_i \omega^i\,.
+u=u_n\omega^n + \sum_{i=0}^{n-1} u_i \omega^i=u_n \omega^{n-d}(-b_{d-1}\omega^{d-1}- \dots -b_1\omega-b_0)+ \sum_{i=0}^{n-1} u_i \omega^i\,.
 $$
 Thus $x\in \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$ by  induction with respect to $n$.
 
+Let us check now that the mapping $\pi$ is well-define. Assume on contrary that there exists $v\in \Zomega$ and $i_0\in\{0,1,\dots,d-1\}$ such that $v=\sum_{i=0}^{d-1} v_i \omega^i=\sum_{i=0}^{d-1} v'_i \omega^i$ and $v_{i_0} \neq v'_{i_0}$. Then
+$$
+    \sum_{i=0}^{d-1} (v'_i-v_i) \omega^i=0
+$$
+and $\sum_{i=0}^{d-1} (v'_i-v_i) x^i \in \ZZ[x]$ is non-zero polynomial of degree smaller than degree of minimal polynomial $p$, a contradiction.
 
+Clearly, $\pi$ is bijection. Let $u=\sum_{i=0}^{d-1} u_i \omega^i$ and $v=\sum_{i=0}^{d-1} v_i \omega^i$ be elements of $\Zomega$. Consider
+\begin{align*}
+\omega v&=\omega \sum_{i=0}^{d-1} v_i \omega^i = \sum_{i=0}^{d-2} v_i \omega^{i+1} + v_{d-1}(\underbrace{-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0}_{=\omega^d}) \\
+&= -p_0 v_{d-1} + \sum_{i=1}^{d-1} (v_{i-1}- v_{d-1} p_i) \omega^i\,.
+\end{align*}
+Hence
+\begin{align*}
+\pi(\omega v)&=\begin{pmatrix}
+              -v_{d-1}p_0 \\
+              v_0-v_{d-1}p_1 \\
+              v_1-v_{d-1}p_2 \\
+              \vdots \\
+              v_{d-2}-v_{d-1}p_{d-1}
+              \end{pmatrix}=\begin{pmatrix}
+            0 & 0 & \cdots & 0 & -p_0 \\
+            1 & 0 & \cdots & 0 & -p_1 \\
+            0 & 1 & \cdots & 0 & -p_2 \\
+            \vdots &   & \ddots & & \vdots \\
+            0 & 0 & \cdots & 1 & -p_{d-1} 
+            \end{pmatrix}\cdot\vect{v} \\
+            &=S_\omega \vect{v} =\begin{pmatrix}
+              0\\
+              1 \\
+              0 \\
+              \vdots \\
+              0
+              \end{pmatrix}\odot_\omega \vect{v}=\pi(\omega)\odot_\omega\pi(v)\,.
+\end{align*}
+By induction and the last equation we have 
+$$
+\pi(\omega^{i}v)=\pi(\omega(\omega^{i-1} v))=\pi(\omega)\odot_\omega\pi(\omega^{i-1} v)=\pi(\omega)\odot_\omega(\pi(\omega))^{i-1}\odot_\omega \pi(v)=(\pi(\omega))^{i}\odot_\omega \pi(v)\,.
+$$
+Now we multiply $v$ by $m\in\ZZ\subset\Zomega$:
+\begin{align*}
+\pi(m v)&=\pi(m \sum_{i=0}^{d-1} v_i \omega^i)=\pi(\sum_{i=0}^{d-1} m v_i \omega^i)=\vect{mv}=m \mathbb{I} \cdot \vect{v}=\begin{pmatrix}
+              m\\
+              0 \\
+              \vdots \\
+              0
+              \end{pmatrix}\odot_\omega \vect{v} \\
+        &= \pi(m)\odot_\omega\pi(v)\,.
+\end{align*}
+We conclude by using previous results and obvious aditivity of $\pi$:
+\begin{align*}
+\pi(uv)&=\pi\left(\sum_{i=0}^{d-1} u_i \omega^i v\right)=\sum_{i=0}^{d-1}\pi(\omega^i u_i  v)=\sum_{i=0}^{d-1}\pi(\omega)^i \odot_\omega\left(\pi(u_i)\odot_\omega\pi(v)\right) \\
+    &=\sum_{i=0}^{d-1}\pi(\omega^i u_i)\odot_\omega \pi(v)=\left(\pi(\sum_{i=0}^{d-1}u_i\omega^i)\right)\odot_\omega\pi(v)=\pi(u)\odot_\omega \pi(v)\,.
+\end{align*}
+
+\cite{horn}
 \end{proof}
 
 
