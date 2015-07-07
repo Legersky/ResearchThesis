@@ -36,6 +36,85 @@ Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $
   \end{enumerate}
   is called \emph{digit set conversion} in base $\beta$. Such a conversion $\varphi$ is said to be \emph{computable in parallel} if it is $p$-local function for some $p\in\NN$. 
 \end{defn}
+
+
+\begin{defn}
+Let $\alpha$ be a complex number. A set of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
+$$
+    \ZZ[\alpha] =\left\{\sum_{i=0}^n a_i \alpha^i : n\in\NN, a_i\in\ZZ \right\}\,.
+$$
+\end{defn}
+Notice that $\ZZ[\alpha]$ is a ring.
+
+
+\begin{defn}
+Let $\omega$ be an algebraic integer with a minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
+$$
+S_\omega := \begin{pmatrix}
+            0 & 0 & \cdots & 0 & -p_0 \\
+            1 & 0 & \cdots & 0 & -p_1 \\
+            0 & 1 & \cdots & 0 & -p_2 \\
+            \vdots &   & \ddots & & \vdots \\
+            0 & 0 & \cdots & 1 & -p_{d-1} 
+            \end{pmatrix} \in \ZZ^d
+$$
+is called a \emph{companion matrix} of the minimal polynomial of $\omega$.
+\end{defn}
+
+\begin{defn}
+Let $\omega$ be an algebraic integer and $d\in\NN$. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
+$$
+a \odot_\omega b := \left(\multMat{a}\right)\cdot \vect{b} \text{ for all } a=\vect{a}, b=\vect{b} \in \ZZ^d\,.
+$$ 
+\end{defn}
+
+
+\begin{lem}
+Let  $\omega$ be an algebraic integer of degree $d$. Then
+$$
+\Zomega =\left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}
+$$ 
+and $\Zomega$ is isomorphic to $(\ZZ^d,+,\odot_\omega)$ by a mapping $\pi:\Zomega \rightarrow \ZZ^{d}$ defined by 
+$$
+\pi(x)=\vect{a}
+$$
+ for every $x=\sum_{i=0}^{d-1} a_i \omega^i \in \Zomega$. 
+\end{lem}
+\begin{proof}
+Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $x\in \Zomega$, $x=\sum_{i=0}^n a_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-b_{d-1}\omega^{d-1}- \dots -b_1\omega-b_0$ which enables us to write
+$$
+x=a_n\omega^n + \sum_{i=0}^{n-1} a_i \omega^i=a_n \omega^{n-d}(-b_{d-1}\omega^{d-1}- \dots -b_1\omega-b_0)+ \sum_{i=0}^{n-1} a_i \omega^i\,.
+$$
+Thus $x\in \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$ by  induction with respect to $n$.
+
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  \section{Previous results}
  
     {Parallel Addition}
