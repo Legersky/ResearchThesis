@@ -83,13 +83,18 @@ ZOBECNENI ABECEDY DO Z[OMEGA]
         \item Alphabet $\A \subset \Zomega , 0\in \A$.
         
         \item Only few manually found algorithms. 
+        
+        
     \end{itemize}
   
 
 
-\section{Divisibility in $\Zomega$}
+\section{Isomorphism of $\Zomega$ and $\ZZ^d$}
+The goal of this section is to show connection between ring $\Zomega$ and $\ZZ^d$. This enable us to transform division in $\Zomega$ to search for an integer solution of a linear system. 
+
+First we recall notion of companion matrix which we use for defining multiplication in $\ZZ^d$.
 \begin{defn}
-Let $\omega$ be an algebraic integer of degree $d$ with a minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
+Let $\omega$ be an algebraic integer of degree $d\geq 1$ with a minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
 $$
 S := \begin{pmatrix}
             0 & 0 & \cdots & 0 & -p_0 \\
@@ -101,8 +106,7 @@ S := \begin{pmatrix}
 $$
 is called a \emph{companion matrix} of the minimal polynomial of $\omega$.
 \end{defn}
-
-Notation:
+In what follows, we denote basis vectors of $\ZZ^d$ by 
 $$
 e_0=\begin{pmatrix}
               1 \\
@@ -126,11 +130,24 @@ e_{d-1}=\begin{pmatrix}
               1
               \end{pmatrix}\,.             
 $$
+We remark that 1 in $e_i$ is on the $(i+1)$-st position for simplier later notation.
 
+\begin{defn}
+Let $\omega$ be an algebraic integer of degree $d$ with a minimal polynomial of $p$ and let $S$ be its companion matrix. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
+$$
+u \odot_\omega v := \left(\multMat{u}\right)\cdot \vect{v} \text{ for all } u=\vect{u}, v=\vect{v} \in \ZZ^d\,.
+$$ 
+and we define powers of $u \in \ZZ^d$ by
+\begin{align*}
+    u^0&=e_0, \\
+    u^{i}&= u^{i-1} \odot_\omega u \text{ for } i\in\NN\,.
+\end{align*}
+\end{defn}
 
+An important property of a companion matrix  -- being root of its own polynomial-- is necessary for proving a few properties of $\odot_\omega$.
 \begin{lem}
 \label{lem:compMatrixIsRoot}
-Let $\omega$ be an algebraic integer with a minimal polynomial of $p$ and let $S$ be its companion matrix. Then
+Let $\omega$ be an algebraic integer with a minimal polynomial $p$ and let $S$ be its companion matrix. Then
 $$
 p(S)=\OO\,.
 $$
@@ -165,18 +182,7 @@ $$
 for $k=\{0,1,\dots,d-1\}$ which implies the statement.
 \end{proof}
 
-\begin{defn}
-Let $\omega$ be an algebraic integer of degree $d$ with a minimal polynomial of $p$ and let $S$ be its companion matrix. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
-$$
-u \odot_\omega v := \left(\multMat{u}\right)\cdot \vect{v} \text{ for all } u=\vect{u}, v=\vect{v} \in \ZZ^d\,.
-$$ 
-and we define powers of $u \in \ZZ^d$ by
-\begin{align*}
-    u^0&=e_0, \\
-    u^{i}&= u^{i-1} \odot_\omega u \text{ for } i\in\NN\,.
-\end{align*}
-\end{defn}
-
+The following lemma summarises basic properties of a mapping $\odot_\omega$ -- factoring out an integer scalar, the unit element, the distributive law and a weaker form of asociativity.
 \begin{lem}
 \label{lem:multInZd}
 Let $\omega$ be an algebraic integer of degree $d$. Then following statements hold for every $u,v,w\in \ZZ^d$ and $m\in\ZZ$:
