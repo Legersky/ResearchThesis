@@ -38,19 +38,12 @@ Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $
 \end{defn}
 
 
-\begin{defn}
-Let $\alpha$ be a complex number. A set of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
-$$
-    \ZZ[\alpha] =\left\{\sum_{i=0}^n a_i \alpha^i : n\in\NN, a_i\in\ZZ \right\}\,.
-$$
-\end{defn}
-Notice that $\ZZ[\alpha]$ is a ring.
 
 
 \begin{defn}
-Let $\omega$ be an algebraic integer with a minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
+Let $\omega$ be an algebraic integer of degree $d$ with a minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
 $$
-S_\omega := \begin{pmatrix}
+S := \begin{pmatrix}
             0 & 0 & \cdots & 0 & -p_0 \\
             1 & 0 & \cdots & 0 & -p_1 \\
             0 & 1 & \cdots & 0 & -p_2 \\
@@ -61,13 +54,123 @@ $$
 is called a \emph{companion matrix} of the minimal polynomial of $\omega$.
 \end{defn}
 
-\begin{defn}
-Let $\omega$ be an algebraic integer and $d\in\NN$. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
+Notation:
 $$
-a \odot_\omega b := \left(\multMat{a}\right)\cdot \vect{b} \text{ for all } a=\vect{a}, b=\vect{b} \in \ZZ^d\,.
+e_0=\begin{pmatrix}
+              1 \\
+              0 \\
+              0 \\
+              \vdots \\
+              0
+              \end{pmatrix}, \\
+e_1=\begin{pmatrix}
+              0 \\
+              1 \\
+              0 \\
+              \vdots \\
+              0
+              \end{pmatrix}, \dots ,\\
+e_{d-1}=\begin{pmatrix}
+              0 \\        
+              \vdots \\
+              0 \\
+              0\\
+              1
+              \end{pmatrix}\,.             
+$$
+
+
+\begin{lem}
+\label{lem:compMatrixIsRoot}
+Let $\omega$ be an algebraic integer with a minimal polynomial of $p$ and let $S$ be its companion matrix. Then
+$$
+p(S)=\OO\,.
+$$
+\end{lem}
+\begin{proof}
+Following the proof in \cite{horn}, we have
+\begin{align*}
+e_0&=S^0 e_0\,, \\
+S e_0= e_1&=S^1 e_0\,, \\
+S e_1= e_2&=S^2 e_0\,, \\
+S e_2= e_3&=S^3 e_0\,, \\
+\vdots & \\
+S e_{d-2}= e_{d-1}&=S^{d-1} e_0\,, \\
+S e_{d-1} &= S^{d} e_0\,,
+\end{align*}
+where the middle column is obtained by multiplication and the right one by using the previous row. 
+Also by multiplying and substituting
+\begin{align*}
+S^{d} e_0=S e_{d-1}&= -p_0e_0-p_1e_1-\cdots-p_{d-1}e_{d-1} \\
+    &= -p_0 S^{0}e_0-p_1S^{1}e_0-\cdots-p_{d-1}S^{d-1}e_{0} \\
+    &= (-p_0 S^{0}-p_1S^{1}-\cdots-p_{d-1}S^{d-1})e_{0} \\
+    &=(S^{d}-p(S))e_0\,.
+\end{align*}
+Hence
+$$
+p(S)e_0=\mathbf{0}\,.
+$$
+Moreover,
+$$
+p(S)e_k=p(S)S^k e_0=S^k p(S) e_0=\mathbf{0}
+$$
+for $k=\{0,1,\dots,d-1\}$ which implies the statement.
+\end{proof}
+
+\begin{defn}
+Let $\omega$ be an algebraic integer of degree $d$ with a minimal polynomial of $p$ and let $S$ be its companion matrix. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
+$$
+u \odot_\omega v := \left(\multMat{u}\right)\cdot \vect{v} \text{ for all } u=\vect{u}, v=\vect{v} \in \ZZ^d\,.
 $$ 
+and we define powers of $u \in \ZZ^d$ by
+\begin{align*}
+    u^0&=e_0, \\
+    u^{i}&= u^{i-1} \odot_\omega u \text{ for } i\in\NN\,.
+\end{align*}
 \end{defn}
 
+\begin{lem}
+\label{lem:multInZd}
+Let $\omega$ be an algebraic integer of degree $d$. Then following statements hold for every $u,v\in \ZZ^d$ and $m\in\ZZ$:
+\begin{enumerate}[(i)]
+    \item $(mu)\odot_\omega v = u \odot_\omega (m v)= m (u\odot_\omega v)$,
+    \item $e_0 \odot_\omega v= v \odot_\omega e_0 =v$,
+    \item $(u \odot_\omega e_1^k)\odot_\omega v = u \odot_\omega (e_1^k\odot_\omega v)$ for $k\in\NN$.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+It is easy to see (i) as multiplication of a matrix by a scalar commutes and a scalar can be factored out of a sum. 
+
+The first equality of (ii) is trivial from definition and
+$$
+v \odot_\omega e_0=\multMat{v}\cdot e_0= \sum_{i=0}^{d-1} v_i e_i = v\,.
+$$
+For (iii), we use Lemma \ref{lem:compMatrixIsRoot} and its proof. Assume $k=1$:
+\begin{align*}
+(u \odot_\omega e_1)\odot_\omega v &= \left(\multMat{u} \cdot e_1\right) \odot_\omega v = \left(\multMat{u} \cdot S e_0\right) \odot_\omega v \\
+    &=\left(\sum_{i=0}^{d-2}u_i e_{i+1} + u_{d-1} S^d e_{0} \right)\odot_\omega v= \left(\sum_{i=1}^{d-1}u_{i-1} e_{i} - u_{d-1} \sum_{i=0}^{d-1} p_i e_{i} \right)\odot_\omega v \\
+    &=\left(\sum_{i=1}^{d-1}u_{i-1}S^i - u_{d-1} \sum_{i=0}^{d-1}p_i S^i \right)\cdot v \\
+    &=\left(\sum_{i=1}^{d-1}u_{i-1}S^i  + u_{d-1}S^d\right)\cdot v =\sum_{i=0}^{d-1}u_{i}S^i\cdot S\cdot v \\
+    &=u \odot_\omega (S\cdot v)=u \odot_\omega (e_1\odot_\omega v)\,.
+\end{align*}
+Now we proceed by induction:
+\begin{align*}
+\left(u \odot_\omega e_1^k\right)\odot_\omega v &=\left(u \odot_\omega (e_1^{k-1}\odot_\omega e_1) \right)\odot_\omega v = \left((u \odot_\omega e_1^{k-1})\odot_\omega e_1 \right)\odot_\omega v \\
+    &= (u \odot_\omega e_1^{k-1})\odot_\omega \left(e_1 \odot_\omega v \right)= u \odot_\omega \left( e_1^{k-1}\odot_\omega (e_1 \odot_\omega v )\right)\\
+    &= u \odot_\omega \left(( e_1^{k-1}\odot_\omega e_1 )\odot_\omega v \right) = u \odot_\omega \left(e_1^k\odot_\omega v\right)\,.
+\end{align*}
+\end{proof}
+
+
+
+
+\begin{defn}
+Let $\alpha$ be a complex number. A set of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
+$$
+    \ZZ[\alpha] =\left\{\sum_{i=0}^n a_i \alpha^i : n\in\NN, a_i\in\ZZ \right\}\,.
+$$
+\end{defn}
+Notice that $\ZZ[\alpha]$ is a ring.
 
 \begin{lem}
 Let  $\omega$ be an algebraic integer of degree $d$. Then
@@ -76,9 +179,9 @@ $$
 $$ 
 and $\Zomega$ is isomorphic to $(\ZZ^d,+,\odot_\omega)$ by a mapping $\pi:\Zomega \rightarrow \ZZ^{d}$ defined by 
 $$
-\pi(x)=\vect{x}
+\pi(u)=\vect{u}
 $$
- for every $x=\sum_{i=0}^{d-1} x_i \omega^i \in \Zomega$. 
+ for every $u=\sum_{i=0}^{d-1} u_i \omega^i \in \Zomega$. 
 \end{lem}
 \begin{proof}
 Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $u\in \Zomega$, $x=\sum_{i=0}^n u_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0$ which enables us to write
@@ -100,31 +203,41 @@ Clearly, $\pi$ is bijection. Let $u=\sum_{i=0}^{d-1} u_i \omega^i$ and $v=\sum_{
 \end{align*}
 Hence
 \begin{align*}
-\pi(\omega v)&=\begin{pmatrix}
-              -v_{d-1}p_0 \\
-              v_0-v_{d-1}p_1 \\
-              v_1-v_{d-1}p_2 \\
-              \vdots \\
-              v_{d-2}-v_{d-1}p_{d-1}
-              \end{pmatrix}=\begin{pmatrix}
-            0 & 0 & \cdots & 0 & -p_0 \\
-            1 & 0 & \cdots & 0 & -p_1 \\
-            0 & 1 & \cdots & 0 & -p_2 \\
-            \vdots &   & \ddots & & \vdots \\
-            0 & 0 & \cdots & 1 & -p_{d-1} 
-            \end{pmatrix}\cdot\vect{v} \\
-            &=S_\omega \vect{v} =\begin{pmatrix}
-              0\\
-              1 \\
-              0 \\
-              \vdots \\
-              0
-              \end{pmatrix}\odot_\omega \vect{v}=\pi(\omega)\odot_\omega\pi(v)\,.
+\pi(\omega v)&= -p_0 v_{d-1} e_0 + \sum_{i=1}^{d-1} (v_{i-1}- v_{d-1} p_i) e_i = S \cdot \pi(v) \\
+    &=e_1\odot_\omega \pi(v)=\pi(\omega)\odot_\omega\pi(v)\,.
 \end{align*}
-By induction and the last equation we have 
+% \begin{align*}
+% \pi(\omega v)&=\begin{pmatrix}
+%               -v_{d-1}p_0 \\
+%               v_0-v_{d-1}p_1 \\
+%               v_1-v_{d-1}p_2 \\
+%               \vdots \\
+%               v_{d-2}-v_{d-1}p_{d-1}
+%               \end{pmatrix}=\begin{pmatrix}
+%             0 & 0 & \cdots & 0 & -p_0 \\
+%             1 & 0 & \cdots & 0 & -p_1 \\
+%             0 & 1 & \cdots & 0 & -p_2 \\
+%             \vdots &   & \ddots & & \vdots \\
+%             0 & 0 & \cdots & 1 & -p_{d-1} 
+%             \end{pmatrix}\cdot\vect{v} \\
+%             &=S \vect{v} =\begin{pmatrix}
+%               0\\
+%               1 \\
+%               0 \\
+%               \vdots \\
+%               0
+%               \end{pmatrix}\odot_\omega \vect{v}=\pi(\omega)\odot_\omega\pi(v)\,.
+% \end{align*}
+Suppose for induction with respect to $i$ that
 $$
-\pi(\omega^{i}v)=\pi(\omega(\omega^{i-1} v))=\pi(\omega)\odot_\omega\pi(\omega^{i-1} v)=\pi(\omega)\odot_\omega(\pi(\omega))^{i-1}\odot_\omega \pi(v)=(\pi(\omega))^{i}\odot_\omega \pi(v)\,.
+\pi(\omega^{i-1} v)=(\pi(\omega))^{i-1}\odot_\omega \pi(v)\,.
+$$ 
+Then
 $$
+\pi(\omega^{i}v)=\pi(\omega(\omega^{i-1} v))=\pi(\omega)\odot_\omega\pi(\omega^{i-1} v)=\pi(\omega)\odot_\omega\left((\pi(\omega))^{i-1}\odot_\omega \pi(v)\right)=(\pi(\omega))^{i}\odot_\omega \pi(v)\,,
+$$
+where we use (iii) in Lemma \ref{lem:multInZd} for the last equality.
+
 Now we multiply $v$ by $m\in\ZZ\subset\Zomega$:
 \begin{align*}
 \pi(m v)&=\pi(m \sum_{i=0}^{d-1} v_i \omega^i)=\pi(\sum_{i=0}^{d-1} m v_i \omega^i)=\vect{mv}=m \mathbb{I} \cdot \vect{v}=\begin{pmatrix}
@@ -141,7 +254,7 @@ We conclude by using previous results and obvious aditivity of $\pi$:
     &=\sum_{i=0}^{d-1}\pi(\omega^i u_i)\odot_\omega \pi(v)=\left(\pi(\sum_{i=0}^{d-1}u_i\omega^i)\right)\odot_\omega\pi(v)=\pi(u)\odot_\omega \pi(v)\,.
 \end{align*}
 
-\cite{horn}
+
 \end{proof}
 
 
