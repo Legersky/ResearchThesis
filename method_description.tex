@@ -1,3 +1,6 @@
+ PRO VSECHNY DEFINICE A VETY NENI-LI UVEDENO JINAK
+     Let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that a base $\beta \in \Zomega$ and an alphabet $\A$ is a finite subset of $\Zomega$. 
+
 The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically same but the choice of coefficients differs.
 
 Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representantions padded by zeros to have the same length. We set 
@@ -313,98 +316,6 @@ $$
 \sum_{m=1}^M  \#\B^m = \#\B \sum_{m=0}^{M-1}  \#\B^m = \#\B \frac{\#\B^M-1}{\#\B-1}\,.
 $$    
 It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponentional because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
-  
-\section{Convergence}
-Unfortunately, the extending window method is not always finite. The algorithm may lead to an infinite loop in both phases. 
-However, the following lemmma gives a sufficient condition for convergence of the Phase 1. 
-\begin{lem}
-\label{lem:weightCoefSet}
-    Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. NEBO ZBeta???? Then, there exists a subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
-\end{lem}
-\begin{proof}
- Denote $A:=\max\{|a|:a \in \A\}$ and $B:=\max\{|b|:b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega:|q|\leq R\}$. The set $\Q$ is nonempty because obviously $A>0$. Any element $x=b+q$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
- $$
-    |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{\beta}{|\beta|-1}\right)=R\,.
- $$ 
- Hence $q'\in\Q$ and thus  $x=b+q \in \A + \beta \Q$.
-\end{proof}
-We plug in the alphabet $\A$ and input alphabet $\B$. Because of the choice of the smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we know by the lemma that the weight coefficient set $\Q$ constructed in Phase~1 has elements bounded by constant $R$. 
-\begin{theo}
-    Let $\omega$ be an algebraic integer such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$. Let $\beta \in \Zomega, |\beta|>1$. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. NEBO ZBeta???? Then, there exists a finite subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$.
-\end{theo} 
-\begin{proof}
-    Directly from Lemma \ref{lem:weightCoefSet} and assumption on $\Zomega$.
-\end{proof}
-Therefore, Phase 1 succesfully ends if there can be only finitely many elements in $\Zomega$ NEBO Zbeta??? bounded by constant $R$ as intermediate weight coefficient sets $\Q_k$ have elements bounded by $R$ for all $k$. 
-We categorize an algebraic integer $\omega$ which generates $\Zomega \ni \beta$ as follows:
-\begin{itemize}
-    \item $\omega \in \ZZ$ implies $\Zomega=\ZZ$ which has required property and thus Phase~1 converges.
-    \item $\omega \in \RR\setminus\ZZ$ implies $\Zomega$ being dense in $\RR$. CITACE NEBO DUKAZ??? Thus the convergence of Phase~1 is not guaranteed and we have an example for which it does not converge.
-    \item $\omega \in \CC\setminus\RR$, $\omega$ being quadratic algebraic integer implies that $\Zomega$ is not dense in $\CC$ and thus Phase~1 can converge. CO NEJAKY DUKAZ NEBO LEPSI ZDUVODNENI?????? NOT DENSE PORAD JESTE NEZNAMENA, ZE JICH NEMUZE BYT NEKONECNE...
-    \item $\omega \in \CC\setminus\RR$, $\omega$ being algebraic integer of degree $\geq 3$ implies $\Zomega$ is  dense in $\CC$ and therefore the convergence of Phase~1 is not guaranteed.
-\end{itemize}
-
-We focus on Phase~2 now. For shorter notation, set 
-$$
-\Q^m_b:=\Q_{[\underbrace{b,\dots,b}_m]}
-$$ for $m \in \NN$ and $b\in\B$.
-
-Obviously, finitness of Phase~2 implies that there exists a length of window $M$ such that the set $\Q^M_b$ contains only one element for all $b\in\B$. 
-
-\begin{algorithm}
-  \caption{Check input $bb\dots b$}
-    \label{alg:oneletterSets}
-  \begin{algorithmic}[1]
-    \REQUIRE{Weight coefficient set $\Q$, digit $b\in\B$}
-    \STATE $m:=1$
-    \STATE Find minimal set $\Q^1_b \subset \Q$ such that
-      $$
-      b + \Q \subset \A + \beta \Q^1_b\,.
-      $$
-      \vspace{-20pt}
-    \WHILE{$\#\Q^m_b > 1$}
-        \STATE $m:= m +1$
-        \STATE By Algorithm \ref{alg:minimalSet}, find minimal set $\Q^m_b \subset \Q^{m-1}_b$ such that
-          $$
-          b + \Q^{m-1}_b \subset \A + \beta \Q^m_b\,.
-          $$  
-          \vspace{-20pt}
-        \IF{$\#\Q^m_b=\#\Q^{m-1}_b$}
-            \RETURN Phase 2 does not converge for input $bb\dots b$.
-        \ENDIF
-    \ENDWHILE  
-    \RETURN Weight coefficient for input $bb\dots b$ is the only element of $\Q^m_b$.
-  \end{algorithmic}
-\end{algorithm}
-
-For arbitrary $m$, sets $\Q^m_b$  can be easily constructed separately for each $b\in\B$. Using Lemma \ref{lem:stoppingCondition}, Algorithm \ref{alg:oneletterSets} checks whether Phase~2 stops processing input digits $bb\dots b$. Thus,  non-finitness of Phase~2 can be revealed by running it for each input digit $b\in\B$.
-\begin{lem}
-\label{lem:stoppingCondition}
-Let $m_0 \in \NN$ be a length of window and $b\in\B$ be a letter of an input alphabet such that sets $\Q^{m_0}_b$ and $\Q^{{m_0}-1}_b$ produced by Algorithm \ref{alg:minimalSet} within Phase~2 have the same size. Then
-$$
-    \#\Q^m_b = \#\Q^{m_0}_b \qquad \forall m\geq m_0-1\,.
-$$ 
-Particulary, if $\#\Q^{m_0}_b\geq 2$, Phase~2 does not converge.
-\end{lem}
-\begin{proof}
-It is enough to prove the base case of an induction as the inductive step is analogic. The set $\Q^{m_0+1}_b$ is find by Algorithm \ref{alg:minimalSet} such that 
-$$
-b + \Q^{m_0}_b \subset \A + \beta \Q^{m_0+1}_b\,
-$$
-and set $\Q^{m_0}_b$ was found by the same algorithm such that
-$$
-b + \Q^{m_0-1}_b \subset \A + \beta \Q^{m_0}_b\,.
-$$
-As $\Q^{m_0}_b \subset \Q^{{m_0}-1}_b$, the assumption of the same size implies
-$$
-    \Q^{m_0}_b = \Q^{{m_0}-1}_b\,.
-$$
-It means that Algorithm \ref{alg:minimalSet} runs with the same input and hence
-$$
-\Q^{m_0+1}_b=\Q^{m_0}_b\,.
-$$
-Phase 2 ends when there is only one element in $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_j,\dots, w_{j-m+1}) \in \B^m$ for some fixed length of window $m$. But if $\#\Q^{m_0}_b\geq 2$, size of $\Q_{[b,\dots,b]}$ does not decrease despite of extending the length of window.
-\end{proof}
 
 
 
