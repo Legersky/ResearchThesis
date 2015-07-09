@@ -1,9 +1,11 @@
-The constructor of \emph{AlgorithmForParallelAddition}:
+Constructor of \emph{AlgorithmForParallelAddition}:
+
 \begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='', printLog=True, printLogLatex=False, verbose=0}
-Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial $p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet} and \fun{setBase}{base} are called. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
+Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial $p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{A} and \fun{setBase}{base} are called. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
 \end{method}
 
-Setters are following:
+Setters and getters:
+
 \begin{method}{setAlphabet}{A}
 Check if \var{A} is subset of $\Zomega$. Set alphabet $\A$:=\var{A}
 \end{method}
@@ -16,49 +18,41 @@ If \var{B} is empty, $\A+\A$ is used. Set the input alphabet $\B$:=\var{B}. Chec
 Set $\beta$:=\var{base}.
 \end{method}
 
-Getters are following:
 \begin{method}{getRingGenerator}{}
 Return ring generator $\omega$.
 \end{method}
-
 
 \begin{method}{getBase}{}
 Return the base $\beta$.
 \end{method}
 
-
 \begin{method}{getBaseCC}{}
 Return the base $\beta$ as a complex number.
 \end{method}
-
 
 \begin{method}{getAlphabet}{}
 Return the alphabet $\A$.
 \end{method}
 
-
 \begin{method}{getInputAlphabet}{}
 Return the input alphabet $\B$.
 \end{method}
-
 
 \begin{method}{getMinPolynomial}{}
 Return the minimal polynomial $p$ of ring generator $\omega$.
 \end{method}
 
-
 \begin{method}{getMinPolynomialOfBase}{}
 Return the minimal polynomial $p$ of base $\beta$.
 \end{method}
 
-
 \begin{method}{getWeightCoefSet}{}
-Return weight coefficients set $\Q$. If it is not computed, return \var{None}.
+Return the weight coefficients set $\Q$. If it is not computed, return \var{None}.
 \end{method}
 
 
 \begin{method}{getWeightFunction}{}
-Return weight function $q$. If it is not computed, return \var{None}.
+Return the weight function $q$. If it is not computed, return \var{None}.
 \end{method}
 
 
@@ -68,41 +62,39 @@ Return the name of the numeration system.
 
 
 \begin{method}{getDictOfSetting}{}
-Return dictionary attributes of numeration system.
+Return the dictionary of the attributes of the numeration system.
 \end{method}
 
 
 -----------------------------EXTENDING WINDOW METHOD------------------------------------------------------------------------
 
-\begin{method}{\_findWeightCoefSet}{ max\_iterations, method}
-
+\begin{method}{\_findWeightCoefSet}{ max\_iterations, method\_number}
+Create an instance of \emph{WeightCoefficientsSetSearch(method\_number)} and call its method \fun{findWeightCoefficientsSet}{max\_iterations} to obtain a weight coefficients set $\Q$.
 \end{method}
-
 
 \begin{method}{addWeightCoefSetIncrement}{ increment}
-
+Save \var{increment} from extending intermediate weight coefficients set $\Q_{k}$ to $\Q_{k+1}$.
 \end{method}
 
-
-\begin{method}{\_findWeightFunction}{ max\_input\_length,method}
-
+\begin{method}{\_findWeightFunction}{ max\_input\_length,method\_number}
+Create an instance of \emph{WeightFunctionSearch(method\_number)} and call its methods \fun{check\_one\_letter\_inputs}{max\_input\_length} and \fun{findWeightFunction}{max\_input\_length} to obtain a weight function $q$.
 \end{method}
 
 
 \begin{method}{findWeightFunction}{ max\_iterations, max\_input\_length, method\_weightCoefSet=2, method\_weightFunSearch=4}
-
+Return the weight function $q$ obtaind by calling \fun{\_findWeightCoefSet}{max\_iterations,method\_weightCoefSet} and \fun{\_findWeightFunction}{max\_input\_length, method\_weightFunSearch}.
 \end{method}
 
 
 -----------------------------PARALLEL ADDITION AND CONVERSION---------------------------------------------------------------
 
 \begin{method}{addParallel}{a,b}
-
+Sum up numbers represented by lists of digits \var{a} and \var{b} digitwise and convert the result by \fun{parallelConversion}{}. 
 \end{method}
 
 
 \begin{method}{parallelConversion}{\_w}
-
+Return $(\beta,\A)$-representation of number represented by list \var{\_w} of digits in input alphabet $\B$. It is computed locally according to the equation \ref{eq:conversionFormula} and using weight function $q$.
 \end{method}
 
 
@@ -219,17 +211,7 @@ Return dictionary attributes of numeration system.
 \end{method}
 
 
-\begin{method}{polygon\_shifted}{    def polygon\_shifted(points,shift=0, enlargement=1.2, color='green'}
-
-\end{method}
-
-
 \begin{method}{plotPhase1}{legend\_xshift=8,}
-
-\end{method}
-
-
-\begin{method}{polygon\_shifted}{    def polygon\_shifted(points,shift=0, enlargement=1, color='green'}
 
 \end{method}
 
@@ -240,11 +222,6 @@ Return dictionary attributes of numeration system.
 
 
 \begin{method}{plotPhase2}{ digits,}
-
-\end{method}
-
-
-\begin{method}{polygon\_shifted2}{    def polygon\_shifted2(points,shift=0, enlargement=1, color='green'}
 
 \end{method}
 

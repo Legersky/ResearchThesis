@@ -30,8 +30,8 @@
 \let\endchangemargin=\endlist 
 
 \newenvironment{method}[2]{
-\rule{0pt}{0pt} \newline
-\textbf{#1}(\textit{#2})
+% \rule{0pt}{0pt} \newline
+\noindent \textbf{#1(}\textit{#2}\textbf{)}
 \vspace{-5pt}
 \begin{changemargin}{3em}{0em}}
 {\end{changemargin}}
