@@ -75,6 +75,13 @@ DODELAT
   LOWER BOUND VELIKOSTI ABECEDY
   
 ZOBECNENI ABECEDY DO Z[OMEGA]   
+\begin{defn}
+Let $\alpha$ be a complex number. A set of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
+$$
+    \ZZ[\alpha] =\left\{\sum_{i=0}^n a_i \alpha^i : n\in\NN, a_i\in\ZZ \right\}\,.
+$$
+\end{defn}
+Notice that $\ZZ[\alpha]$ is a ring.    
     
     Non-integer alphabets:
     \begin{itemize}
@@ -89,7 +96,7 @@ ZOBECNENI ABECEDY DO Z[OMEGA]
   
 
 
-\section{Isomorphism of $\Zomega$ and $\ZZ^d$}
+\section{Isomorphism of $\Zomega$ and $\ZZ^{d}$}
 The goal of this section is to show connection between ring $\Zomega$ and $\ZZ^d$. This enable us to transform division in $\Zomega$ to search for an integer solution of a linear system. 
 
 First we recall notion of companion matrix which we use for defining multiplication in $\ZZ^d$.
@@ -130,10 +137,10 @@ e_{d-1}=\begin{pmatrix}
               1
               \end{pmatrix}\,.             
 $$
-We remark that 1 in $e_i$ is on the $(i+1)$-st position for simplier later notation.
+We remark that 1 in $e_i$ is in the $(i+1)$-st row because the index corresponds to the power of a companion matrix in the following definition. 
 
 \begin{defn}
-Let $\omega$ be an algebraic integer of degree $d$ with a minimal polynomial of $p$ and let $S$ be its companion matrix. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
+Let $\omega$ be an algebraic integer of degree $d\geq 1$ with a minimal polynomial of $p$ and let $S$ be its companion matrix. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
 $$
 u \odot_\omega v := \left(\multMat{u}\right)\cdot \vect{v} \text{ for all } u=\vect{u}, v=\vect{v} \in \ZZ^d\,.
 $$ 
@@ -144,7 +151,7 @@ and we define powers of $u \in \ZZ^d$ by
 \end{align*}
 \end{defn}
 
-An important property of a companion matrix  -- being root of its own polynomial-- is necessary for proving a few properties of $\odot_\omega$.
+We will see later that $\ZZ^d$ equipped with elementwise addition and multiplication $\odot_\omega$ builds a commutative ring. It will follow from the isomorhpism with $\Zomega$. Let us first recall an important property of a companion matrix  -- it is a root of its own polynomial.
 \begin{lem}
 \label{lem:compMatrixIsRoot}
 Let $\omega$ be an algebraic integer with a minimal polynomial $p$ and let $S$ be its companion matrix. Then
@@ -220,15 +227,9 @@ The statement (iv) follows easily from distributivity of matrix multiplication w
 
 
 
-\begin{defn}
-Let $\alpha$ be a complex number. A set of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
-$$
-    \ZZ[\alpha] =\left\{\sum_{i=0}^n a_i \alpha^i : n\in\NN, a_i\in\ZZ \right\}\,.
-$$
-\end{defn}
-Notice that $\ZZ[\alpha]$ is a ring.
+Now we can prove that there is a correspondence between elements of $\Zomega$ and $\ZZ^d$.
 
-\begin{lem}
+\begin{theo}
 Let  $\omega$ be an algebraic integer of degree $d$. Then
 $$
 \Zomega =\left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}
@@ -238,7 +239,7 @@ $$
 \pi(u)=\vect{u}
 $$
  for every $u=\sum_{i=0}^{d-1} u_i \omega^i \in \Zomega$. 
-\end{lem}
+\end{theo}
 \begin{proof}
 Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $u\in \Zomega$, $x=\sum_{i=0}^n u_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0$ which enables us to write
 $$
@@ -313,7 +314,9 @@ As  $\pi$ is obviously aditive, we conclude:
     &=\sum_{i=0}^{d-1}\pi(\omega^i u_i)\odot_\omega \pi(v)=\pi\left(\sum_{i=0}^{d-1}u_i\omega^i\right)\odot_\omega\pi(v)=\pi(u)\odot_\omega \pi(v)\,.
 \end{align*}
 \end{proof}
+Due to this theorem we may work with integer vectors instead of elements of $\Zomega$ and multiplication in $\Zomega$ is replaced by multiplying by an appropriate matrix. We also obtained associativity and commutativity of $\odot_\omega$ as $\Zomega$ is an associative and commutative ring.
 
+The last theorem of this section is a practical tool for divisibility in $\Zomega$. To check whether an element of $\Zomega$ is divisible by another element, we look for an integer solution of a linear system. Moreover, this solution provides a result of the division in the positive case. 
 \begin{theo}
 Let $\omega$ be an algebraic integer of degree $d$ and let $S$ be a companion matrix of its minimal polynomial. Let $\beta=\sum_{i=0}^{d-1} b_i \omega^i$ be a nonzero element of $\Zomega$. Then for every $u\in\Zomega$
 $$
@@ -338,6 +341,7 @@ u\in\beta\Zomega &\iff (\exists v \in \Zomega)(u=\beta v)\\
     &\iff  (\exists v \in \Zomega)(\pi(u)=\pi(\beta)\odot_\omega\pi(v)=S_\beta \cdot \pi(v))\\
     &\iff \pi(v)=S_\beta^{-1} \cdot \pi(u) \in \ZZ^d\,.
 \end{align*} 
+Clearly, if $u$ is divisible by $\beta$, then $v=u/\beta= \pi^{-1}(S_\beta^{-1} \cdot \pi(u))\in\Zomega$.
 \end{proof}
 
 

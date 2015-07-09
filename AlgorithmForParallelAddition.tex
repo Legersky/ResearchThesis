@@ -1,0 +1,307 @@
+-----------------------------CONSTRUCTOR------------------------------------------------------------------------------------
+
+\begin{method}{\_\_init\_\_}{ minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='', printLog=True, printLogLatex=False, verbose=0}
+
+\end{method}
+
+
+\begin{method}{latexZomega}{}
+
+\end{method}
+
+
+\begin{method}{\_\_repr\_\_}{}
+
+\end{method}
+
+
+\begin{method}{addLog}{\_log, latex=False}
+
+\end{method}
+
+
+-----------------------------SETTERS AND GETTERS----------------------------------------------------------------------------
+
+\begin{method}{setAlphabet}{A}
+
+\end{method}
+
+
+\begin{method}{setInputAlphabet}{B}
+
+\end{method}
+
+
+\begin{method}{setVerbose}{verb}
+
+\end{method}
+
+
+\begin{method}{setBase}{ base}
+
+\end{method}
+
+
+\begin{method}{getMinPolynomial}{}
+
+\end{method}
+
+
+\begin{method}{getMinPolynomialOfBase}{}
+
+\end{method}
+
+
+\begin{method}{getRingGenerator}{}
+
+\end{method}
+
+
+\begin{method}{getBase}{}
+
+\end{method}
+
+
+\begin{method}{getBaseCC}{}
+
+\end{method}
+
+
+\begin{method}{getAlphabet}{}
+
+\end{method}
+
+
+\begin{method}{getInputAlphabet}{}
+
+\end{method}
+
+
+\begin{method}{getName}{}
+
+\end{method}
+
+
+\begin{method}{getWeightCoefSet}{}
+
+\end{method}
+
+
+\begin{method}{getWeightFunction}{}
+
+\end{method}
+
+
+\begin{method}{getDictOfSetting}{}
+
+\end{method}
+
+
+-----------------------------EXTENDING WINDOW METHOD------------------------------------------------------------------------
+
+\begin{method}{addWeightCoefSetIncrement}{ increment}
+
+\end{method}
+
+
+\begin{method}{\_findWeightCoefSet}{ max\_iterations, method}
+
+\end{method}
+
+
+\begin{method}{\_findWeightFunction}{ max\_input\_length,method}
+
+\end{method}
+
+
+\begin{method}{findWeightFunction}{ max\_iterations, max\_input\_length, method\_weightCoefSet=2, method\_weightFunSearch=4}
+
+\end{method}
+
+
+-----------------------------PARALLEL ADDITION AND CONVERSION---------------------------------------------------------------
+
+\begin{method}{addParallel}{a,b}
+
+\end{method}
+
+
+\begin{method}{parallelConversion\_old}{w}
+
+\end{method}
+
+
+\begin{method}{parallelConversion}{\_w}
+
+\end{method}
+
+
+\begin{method}{parallelConversion\_using\_localConversion}{w}
+
+\end{method}
+
+
+\begin{method}{localConversion}{w}
+
+\end{method}
+
+
+-----------------------------SANITY CHECK-----------------------------------------------------------------------------------
+
+\begin{method}{sanityCheck\_addition}{ num\_digits}
+
+\end{method}
+
+
+\begin{method}{sanityCheck\_conversion}{ num\_digits}
+
+\end{method}
+
+
+-----------------------------RING CONVERSIONS, AUXILIARY RING FUNCTIONS-----------------------------------------------------
+
+\begin{method}{sumOfSets}{A,B}
+
+\end{method}
+
+
+\begin{method}{ring2NumberField}{ num\_from\_ring}
+
+\end{method}
+
+
+\begin{method}{list2BaseRing}{ \_digits}
+
+\end{method}
+
+
+\begin{method}{list2Ring}{ \_digits}
+
+\end{method}
+
+
+\begin{method}{ring2CC}{ num\_from\_ring}
+
+\end{method}
+
+
+\begin{method}{getCoordinates}{ num}
+
+\end{method}
+
+
+-----------------------------PLOT FUNCTIONS---------------------------------------------------------------------------------
+
+\begin{method}{plot}{ nums\_from\_ring, labeled=True, color='red', size=20, fontsize=10}
+
+\end{method}
+
+
+\begin{method}{plotAlphabet}{}
+
+\end{method}
+
+
+\begin{method}{plotWeightCoefSet}{estimation=False}
+
+\end{method}
+
+
+\begin{method}{plotLattice}{}
+
+\end{method}
+
+
+\begin{method}{polygon\_shifted}{    def polygon\_shifted(points,shift=0, enlargement=1.2, color='green'}
+
+\end{method}
+
+
+\begin{method}{plotPhase1}{legend\_xshift=8,}
+
+\end{method}
+
+
+\begin{method}{polygon\_shifted}{    def polygon\_shifted(points,shift=0, enlargement=1, color='green'}
+
+\end{method}
+
+
+\begin{method}{legend}{    def legend(k,covered, new, alphabet}
+
+\end{method}
+
+
+\begin{method}{plotPhase2}{ digits,}
+
+\end{method}
+
+
+\begin{method}{polygon\_shifted2}{    def polygon\_shifted2(points,shift=0, enlargement=1, color='green'}
+
+\end{method}
+
+
+-----------------------------PRINT FUNCTIONS--------------------------------------------------------------------------------
+
+\begin{method}{printWeightFunction}{}
+
+\end{method}
+
+
+\begin{method}{printWeightFunctionInfo}{}
+
+\end{method}
+
+
+\begin{method}{printWeightCoefSet}{}
+
+\end{method}
+
+
+\begin{method}{printLatexInfo}{}
+
+\end{method}
+
+
+-----------------------------SAVE FUNCTIONS---------------------------------------------------------------------------------
+
+\begin{method}{saveInfoToTexFile}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveLog}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveUnsolvedInputsToCsv}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveLocalConversionToCsvFile}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveWeightFunctionToTexFile}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveWeightFunctionToCsvFile}{ filename}
+
+\end{method}
+
+
+\begin{method}{inputSettingToSageFile}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveImages}{images, folder,name, img\_size=10}
+
+\end{method}
+
