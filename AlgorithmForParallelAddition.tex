@@ -1,110 +1,85 @@
------------------------------CONSTRUCTOR------------------------------------------------------------------------------------
-
-\begin{method}{\_\_init\_\_}{ minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='', printLog=True, printLogLatex=False, verbose=0}
-
+The constructor of \emph{AlgorithmForParallelAddition}:
+\begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='', printLog=True, printLogLatex=False, verbose=0}
+Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial $p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet} and \fun{setBase}{base} are called. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
 \end{method}
 
-
-\begin{method}{latexZomega}{}
-
-\end{method}
-
-
-\begin{method}{\_\_repr\_\_}{}
-
-\end{method}
-
-
-\begin{method}{addLog}{\_log, latex=False}
-
-\end{method}
-
-
------------------------------SETTERS AND GETTERS----------------------------------------------------------------------------
-
+Setters are following:
 \begin{method}{setAlphabet}{A}
-
+Check if \var{A} is subset of $\Zomega$. Set alphabet $\A$:=\var{A}
 \end{method}
-
 
 \begin{method}{setInputAlphabet}{B}
-
+If \var{B} is empty, $\A+\A$ is used. Set the input alphabet $\B$:=\var{B}. Check if $\A\subsetneq\B\subset\A+\A$. 
 \end{method}
 
-
-\begin{method}{setVerbose}{verb}
-
+\begin{method}{setBase}{base}
+Set $\beta$:=\var{base}.
 \end{method}
 
-
-\begin{method}{setBase}{ base}
-
-\end{method}
-
-
-\begin{method}{getMinPolynomial}{}
-
-\end{method}
-
-
-\begin{method}{getMinPolynomialOfBase}{}
-
-\end{method}
-
-
+Getters are following:
 \begin{method}{getRingGenerator}{}
-
+Return ring generator $\omega$.
 \end{method}
 
 
 \begin{method}{getBase}{}
-
+Return the base $\beta$.
 \end{method}
 
 
 \begin{method}{getBaseCC}{}
-
+Return the base $\beta$ as a complex number.
 \end{method}
 
 
 \begin{method}{getAlphabet}{}
-
+Return the alphabet $\A$.
 \end{method}
 
 
 \begin{method}{getInputAlphabet}{}
-
+Return the input alphabet $\B$.
 \end{method}
 
 
-\begin{method}{getName}{}
+\begin{method}{getMinPolynomial}{}
+Return the minimal polynomial $p$ of ring generator $\omega$.
+\end{method}
 
+
+\begin{method}{getMinPolynomialOfBase}{}
+Return the minimal polynomial $p$ of base $\beta$.
 \end{method}
 
 
 \begin{method}{getWeightCoefSet}{}
-
+Return weight coefficients set $\Q$. If it is not computed, return \var{None}.
 \end{method}
 
 
 \begin{method}{getWeightFunction}{}
+Return weight function $q$. If it is not computed, return \var{None}.
+\end{method}
 
+
+\begin{method}{getName}{}
+Return the name of the numeration system.
 \end{method}
 
 
 \begin{method}{getDictOfSetting}{}
-
+Return dictionary attributes of numeration system.
 \end{method}
 
 
 -----------------------------EXTENDING WINDOW METHOD------------------------------------------------------------------------
 
-\begin{method}{addWeightCoefSetIncrement}{ increment}
+\begin{method}{\_findWeightCoefSet}{ max\_iterations, method}
 
 \end{method}
 
 
-\begin{method}{\_findWeightCoefSet}{ max\_iterations, method}
+\begin{method}{addWeightCoefSetIncrement}{ increment}
 
 \end{method}
 
@@ -126,22 +101,17 @@
 \end{method}
 
 
-\begin{method}{parallelConversion\_old}{w}
-
-\end{method}
-
-
 \begin{method}{parallelConversion}{\_w}
 
 \end{method}
 
 
-\begin{method}{parallelConversion\_using\_localConversion}{w}
+\begin{method}{localConversion}{w}
 
 \end{method}
 
 
-\begin{method}{localConversion}{w}
+\begin{method}{parallelConversion\_using\_localConversion}{w}
 
 \end{method}
 
@@ -160,22 +130,17 @@
 
 -----------------------------RING CONVERSIONS, AUXILIARY RING FUNCTIONS-----------------------------------------------------
 
-\begin{method}{sumOfSets}{A,B}
-
-\end{method}
-
-
-\begin{method}{ring2NumberField}{ num\_from\_ring}
-
-\end{method}
-
-
 \begin{method}{list2BaseRing}{ \_digits}
 
 \end{method}
 
 
 \begin{method}{list2Ring}{ \_digits}
+
+\end{method}
+
+
+\begin{method}{ring2NumberField}{ num\_from\_ring}
 
 \end{method}
 
@@ -190,6 +155,11 @@
 \end{method}
 
 
+\begin{method}{sumOfSets}{A,B}
+
+\end{method}
+
+
 \begin{method}{\_computeInverseBaseCompanionMatrix}{}
 
 \end{method}
@@ -198,6 +168,34 @@
 \begin{method}{divideByBase}{divided\_number}
 
 \end{method}
+
+
+-----------------------------PRINT FUNCTIONS--------------------------------------------------------------------------------
+
+\begin{method}{addLog}{\_log, latex=False}
+
+\end{method}
+
+
+\begin{method}{printWeightFunction}{}
+
+\end{method}
+
+
+\begin{method}{printWeightFunctionInfo}{}
+
+\end{method}
+
+
+\begin{method}{printWeightCoefSet}{}
+
+\end{method}
+
+
+\begin{method}{printLatexInfo}{}
+
+\end{method}
+
 
 -----------------------------PLOT FUNCTIONS---------------------------------------------------------------------------------
 
@@ -251,46 +249,14 @@
 \end{method}
 
 
------------------------------PRINT FUNCTIONS--------------------------------------------------------------------------------
-
-\begin{method}{printWeightFunction}{}
-
-\end{method}
-
-
-\begin{method}{printWeightFunctionInfo}{}
-
-\end{method}
-
-
-\begin{method}{printWeightCoefSet}{}
-
-\end{method}
-
-
-\begin{method}{printLatexInfo}{}
-
-\end{method}
-
-
 -----------------------------SAVE FUNCTIONS---------------------------------------------------------------------------------
 
-\begin{method}{saveInfoToTexFile}{ filename}
+\begin{method}{saveInfoToTexFile}{ filename, header=True}
 
 \end{method}
 
 
 \begin{method}{saveLog}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveUnsolvedInputsToCsv}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveLocalConversionToCsvFile}{ filename}
 
 \end{method}
 
@@ -305,6 +271,16 @@
 \end{method}
 
 
+\begin{method}{saveLocalConversionToCsvFile}{ filename}
+
+\end{method}
+
+
+\begin{method}{saveUnsolvedInputsToCsv}{ filename}
+
+\end{method}
+
+
 \begin{method}{inputSettingToSageFile}{ filename}
 
 \end{method}
@@ -313,4 +289,3 @@
 \begin{method}{saveImages}{images, folder,name, img\_size=10}
 
 \end{method}
-

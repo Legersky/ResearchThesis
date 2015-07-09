@@ -23,9 +23,21 @@
             {#1}_{d-1} 
             \end{pmatrix}}
 
-\newenvironment{method}[2]{\rule{0mm}{0mm} \newline\textbf{#1}(\textit{#2}) \newline}{}
+% \newenvironment{method}[2]{\rule{0mm}{0mm} \newline\textbf{#1}(\textit{#2}) \newline}{}
 
 
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\newenvironment{method}[2]{
+\rule{0pt}{0pt} \newline
+\textbf{#1}(\textit{#2})
+\vspace{-5pt}
+\begin{changemargin}{3em}{0em}}
+{\end{changemargin}}
+
+\newcommand{\var}[1]{\textit{#1}}
+\newcommand{\fun}[2]{\textbf{#1}(\var{#2})}
 
 
 \usepackage{mathtools, mathdots}
