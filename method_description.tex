@@ -138,21 +138,21 @@ As menshioned above, the key problem is to find for every $j\geq 0$ a weight coe
     $$ 
     which verifies that the conversion is indeed $(M+1)$-local function with anticipation $r=0$ and memory $t=M$.
     
-The construction of a parallel conversion algorithm by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficient set $\Q$. It serves as the starting point for the second phase in which e increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
+The construction of a parallel conversion algorithm by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which e increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
-\subsection{Phase 1 -- Weight coefficient set}
-The goal of the first phase is to compute a weight coefficient set $\Q$, i.e., to find a set $\Q \ni 0$ such that 
+\subsection{Phase 1 -- Weight coefficients set}
+The goal of the first phase is to compute a weight coefficients set $\Q$, i.e., to find a set $\Q \ni 0$ such that 
 $$
     \B + \Q \subset \A + \beta \Q\,.
 $$  
-We build $\Q$ iteratively so that we extend $\Q$ in a way to cover all elements on the left-hand side with original $\Q$ by elements on the right-hand side with extended $\Q$. This procedure is repeated until the extended weight coefficient set is the same as original one. 
+We build $\Q$ iteratively so that we extend $\Q$ in a way to cover all elements on the left-hand side with original $\Q$ by elements on the right-hand side with extended $\Q$. This procedure is repeated until the extended weight coefficients set is the same as original one. 
 
-In other words, we start with $\Q=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to weight coeffcient set $\Q$. These weight coefficients now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in weight coefficient set $\Q$ to cover all sums of added coefficients and digits of input alphabet $\B$, we extend $\Q$ by appropriate ones. And so on until there is no need to add more elements. Here we mean by expression ``a weight coefficient $q$ covers an element $x$'' that there is $a \in \A$ such that $x=a + \beta q$.
+In other words, we start with $\Q=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to weight coeffcient set $\Q$. These weight coefficients now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in weight coefficients set $\Q$ to cover all sums of added coefficients and digits of input alphabet $\B$, we extend $\Q$ by appropriate ones. And so on until there is no need to add more elements. Here we mean by expression ``a weight coefficient $q$ covers an element $x$'' that there is $a \in \A$ such that $x=a + \beta q$.
     
 The precise description of the semi-algorithm in a pseudocode in Algorithm \ref{alg:weightCoefSet}.  
     
 \begin{algorithm}
-  \caption{Search for weight coefficient set (Phase 1)}
+  \caption{Search for weight coefficients set (Phase 1)}
     \label{alg:weightCoefSet}
   \begin{algorithmic}[1]
     \STATE $k:=0$ 
@@ -177,7 +177,7 @@ for any $\Q_{k+1} \supset \Q_{k}$.
   \caption{Search for candidates}
     \label{alg:searchCand}
   \begin{algorithmic}[1]
-    \REQUIRE{previous weight coefficient set $\Q_{k}$, alternatively pre-previous weight coefficient set $\Q_{k-1}$}
+    \REQUIRE{previous weight coefficients set $\Q_{k}$, alternatively pre-previous weight coefficients set $\Q_{k-1}$}
     \STATE \verb+candidates+:= empty list of lists
     \FORALL[Alternatively, $x \in (\B + \Q_{k})\setminus (\B + \Q_{k-1})$]{$x \in \B + \Q_{k}$} \label{line:replaceBySmaller}
       \STATE \verb+cand_for_x+:= empty list
@@ -196,10 +196,10 @@ for any $\Q_{k+1} \supset \Q_{k}$.
 An added element from each list of \verb+candidates+ is chosen as the smallest one unless there is already an covering element contained in $\Q_{k}$ (Algorithm \ref{alg:extendWeightCoefSet}).  
 
 \begin{algorithm}
-  \caption{Extending intermediate weight coefficient set}
+  \caption{Extending intermediate weight coefficients set}
     \label{alg:extendWeightCoefSet}
   \begin{algorithmic}[1]
-    \REQUIRE{\verb+candidates+ from Algorithm \ref{alg:searchCand}, previous weight coefficient set $\Q_{k}$}
+    \REQUIRE{\verb+candidates+ from Algorithm \ref{alg:searchCand}, previous weight coefficients set $\Q_{k}$}
     \STATE $\Q_{k+1}:=\Q_{k}$
     \FORALL{\texttt{cand\_for\_x} in \texttt{candidates}}
         \IF{no element of \texttt{cand\_for\_x} in $\Q_{k-1}$}
@@ -220,9 +220,9 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
 
 
 \subsection{Phase 2 -- Weight function}
-    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. The idea of the extending window method is to reduce necessary weight coefficients from weight coefficient set $\Q$ obtained in the previous section up to single value by enlarging number of considered input digits. The following notation is used: 
+    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. The idea of the extending window method is to reduce necessary weight coefficients from weight coefficients set $\Q$ obtained in the previous section up to single value by enlarging number of considered input digits. The following notation is used: 
     \begin{defn}
-        Let $\Q$ be a weight coefficient set and $w_j\in \B$. Denote by $\Q_{[w_j]}$ any set such that
+        Let $\Q$ be a weight coefficients set and $w_j\in \B$. Denote by $\Q_{[w_j]}$ any set such that
         $$
             (\forall q_{j-1} \in \Q)(\exists q_j \in \Q_{[w_j]})(w_j + q_{j-1} - q_j \beta \in \A)\,.
         $$
@@ -261,7 +261,7 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
   \caption{Search for weight function (Phase 2)}
     \label{alg:weightFunction}
   \begin{algorithmic}[1]
-    \REQUIRE{weight coefficient set $\Q$}
+    \REQUIRE{weight coefficients set $\Q$}
     \STATE $m:=1$
     \FORALL{$w_j \in \B$} 
         \STATE Find set $\Q_{[w_j]} \subset \Q$ such that

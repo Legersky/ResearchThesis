@@ -1,15 +1,25 @@
+The designed method requires the arithmetics in $\Zomega$. Therefore, we have chosen Python-based programming language Sage for the implementation of method as it contains many ready-to-use mathematical structure. Specifically, we use the provided class \emph{PolynomialQuotientRing} to represent elements of $\Zomega$ and  \emph{NumberField} for obtaining numerical complex value of them. Using Sage is very convenient as it also offers easily usable datastructures or tools for plotting. Thus the code is more readible and we may focus on the algorithmic part of problem. On the other hand, Sage is considerably slower than for C++ or other low-level languages. Nevertheless, it is sufficient for our purpose.
+
+The implementation is object-oriented. It consists of four classes. Class \emph{AlgorithmForParallelAddition} contains structures for computations in $\Zomega$ and links neccessary instances and functions to construct algorithm for parallel addition by the extending window method for an algebraic integer $\omega$ given by its minimal polynomial and approximate complex value, a base $\beta\in\Zomega$, an alphabet $\A\subset\Zomega$ and an input alphabet $\B$. Phase 1 of the extending window method is implemented in class \emph{WeightCoefficientsSetSearch} and Phase 2 in \emph{WeightFunctionSearch}. Class \emph{WeightFunction} holds the weight function $q$ computed in Phase 2.
+
+Our implementation includes two interfaces -- command line version and graphic user interface using interact in SageMath Cloud.   
+
+
+
 \section{Class AlgorithmForParallelAddition}
 
 \input{AlgorithmForParallelAddition.tex}
 
 
-\section{WeightCoefficientsSetSearch}
+\section{Class WeightCoefficientsSetSearch}
 \input{WeightCoefficientsSetSearch.tex}
 
 
-\section{WeightFunctionSearch}
+\section{Class WeightFunctionSearch}
+\input{WeightFunctionSearch.tex}
 
 
-
-\section{WeightFunction}
+\section{Class WeightFunction}
 \input{WeightFunction.tex}
+
+\section{User interfaces}
