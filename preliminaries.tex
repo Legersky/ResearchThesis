@@ -3,15 +3,15 @@ Firstly, we give a general definition of numeration system.
 \begin{defn}
   Let $\beta \in \CC, |\beta|>1$ and $\A \subset \CC$ be a finite set containing 0. A pair $(\beta, \A)$ is called a \emph{positional numeration system} with \emph{base} $\beta$ and \emph{digit set} $\A$, usually called \emph{alphabet}.
 \end{defn}
-Well-studied are so-called standard numeration systems with an integer base $\beta$ and an alphabet $\A$ being set of countiguous integers. We restrict ourselves to base $\beta$ being an algebraic integer and possibly non-integer alphabet $\A$. 
+So-called standard numeration systems have an integer base $\beta$ and an alphabet $\A$ which is a set of countiguous integers. We restrict ourselves to base $\beta$ which is an algebraic integer and possibly non-integer alphabet $\A$. 
 \begin{defn}
 Let $(\beta, \A)$ be a positional numeration system.  We say that a complex number $x$ has a \emph{$(\beta, \A)$-representation} if~ there exist digits $x_n,x_{n-1}, x_{n-2},\dots \in\A, n\geq 0$ such that $x=\sum_{j=-\infty}^n x_j \beta^j$.
 \end{defn}
-We associate a number $x$ with representation as a bi-infinite string 
+We associate a number $x$ with its  $(\beta, \A)$-representation as a bi-infinite string 
   $$
     (x)_{\beta,\A}=0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots\,,
   $$
-  where $0^\omega$ denotes the infinite sequence of zeros. Notice that indices are decreasing from left to right as it is ussual to write the most significant digits first. 
+  where $0^\omega$ denotes the infinite sequence of zeros. Notice that indices are decreasing from left to right as it is ussual to write the most significant digits first. We write briefly a \emph{representation} instead of a $(\beta, \A)$-representation, if the base $\beta$ and the alphabet $\A$ follow from context. 
 
 \begin{defn}
 Let $(\beta, \A)$ be a positional numeration system. The set of all complex numbers with a finite $(\beta, \A)$-representation is defined by
@@ -19,11 +19,12 @@ $$
     \fin{\A}:=\left\{\sum_{j=-m}^n x_j \beta^j : n, m \in \NN, x_j \in \A \right\}\,.
 $$
 \end{defn}
+   
 A representation of $x\in\fin{\A}$ is 
 $$
 (x)_{\beta,\A}= 0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m} 0^\omega\,.
 $$ 
-We omit starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$ in the following. We remark that existence of an algorithm (standard or parallel) producing a finite $(\beta,\A)$-representation of $x+y$ where $x,y\in\fin{\A}$ implies that the set $\fin{\A}$ is closed under addition, i.e.,
+In what follows, we omit the starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$. We remark that existence of an algorithm (standard or parallel) producing a finite $(\beta,\A)$-representation of $x+y$ where $x,y\in\fin{\A}$ implies that the set $\fin{\A}$ is closed under addition, i.e.,
 $$
 \fin{\A} + \fin{\A} \subset \fin{\A}\,.
 $$ 
@@ -32,15 +33,15 @@ Designing algorithm for parallel addition requires some redundancy in numeration
 \begin{defn}
 A numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations.
 \end{defn}
-Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, for example comparisons are problematic.  
+Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, thera are some disadvantages. For example, comparison is problematic.  
 
 
 \section{Parallel addition}
-A local function which is also often called sliding block code is used to mathematically formalize parallelism. 
+A local function, which is also often called sliding block code, is used to mathematically formalize parallelism. 
 \begin{defn}
-Let $\A$ and $\B$ be alphabets. A function $\varphi:\B^\ZZ \rightarrow \A^\ZZ$ is said to be \emph{$p$-local} if there exist $r,t\in\NN_0$ satisfying $p=r+t+1$ and a function $\phi: \B^p \rightarrow \A$ such that, for any $w=(w_j)_{j\in\ZZ}\in\B^\ZZ$ and its image $z=\varphi(w)=(z_j)_{j\in\ZZ}\in\A^\ZZ$, we have $z_j=\phi(w_{j+t},\cdots,w_{j-r})$ for every $j\in\ZZ$. The parameter $t$, resp. $r$, is called \emph{anticipation}, resp. \emph{memory}.
+Let $\A$ and $\B$ be alphabets. A function $\varphi:\B^\ZZ \rightarrow \A^\ZZ$ is said to be \emph{$p$-local} if there exist $r,t\in\NN$ satisfying $p=r+t+1$ and a function $\phi: \B^p \rightarrow \A$ such that, for any $w=(w_j)_{j\in\ZZ}\in\B^\ZZ$ and its image $z=\varphi(w)=(z_j)_{j\in\ZZ}\in\A^\ZZ$, we have $z_j=\phi(w_{j+t},\cdots,w_{j-r})$ for every $j\in\ZZ$. The parameter $t$, resp. $r$, is called \emph{anticipation}, resp. \emph{memory}.
 \end{defn}
-This means that each digit of the image $\varphi(w)$ is computed from $p$ digits of $w$ in a sliding window. Suppose that there is a processor on the each position with access to $t$ input digits on the left and $r$ input digits on the right. Then computation of $\varphi(w)$, where $w$ finite sequence, can be done in constant time independent on the length of $w$.   
+This means that each digit of the image $\varphi(w)$ is computed from $p$ digits of $w$ in a sliding window. Suppose that there is a processor on  each position with access to $t$ input digits on the left and $r$ input digits on the right. Then computation of $\varphi(w)$, where $w$ finite sequence, can be done in constant time independent on the length of $w$.   
   
 \begin{defn}
 Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $\varphi:\B^\ZZ\rightarrow \A^\ZZ$ such that
@@ -50,7 +51,7 @@ Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $
   \end{enumerate}
   is called \emph{digit set conversion} in base $\beta$ from $\B$ to $\A$. Such a conversion $\varphi$ is said to be \emph{computable in parallel} if it is $p$-local function for some $p\in\NN$. 
 \end{defn}
-In fact, addition on $\fin{\A}$ can be performed in parallel if there is digit set conversion from $\A+\A$ to $\A$ computable in  parallel as we easily output digitwise sum of two $\beta,\A)$-representations in parallel.   
+In fact, addition on $\fin{\A}$ can be performed in parallel if there is digit set conversion from $\A+\A$ to $\A$ computable in  parallel as we can easily output digitwise sum of two $(\beta,\A)$-representations in parallel.   
 
 Now we recall known algorithms for parallel addition in different numeration systems. 
 DODELAT 
@@ -76,12 +77,12 @@ DODELAT
   
 ZOBECNENI ABECEDY DO Z[OMEGA]   
 \begin{defn}
-Let $\alpha$ be a complex number. A set of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
+Let $\omega$ be a complex number. The set of values of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
 $$
-    \ZZ[\alpha] =\left\{\sum_{i=0}^n a_i \alpha^i : n\in\NN, a_i\in\ZZ \right\}\,.
+    \ZZ[\omega] =\left\{\sum_{i=0}^n a_i \omega^i : n\in\NN, a_i\in\ZZ \right\} \subset \QQ(\omega)\,.
 $$
 \end{defn}
-Notice that $\ZZ[\alpha]$ is a ring.    
+For our purpose, the multiplicative group of a ring is associative   and with an indentity. Notice that $\ZZ[\omega]$ is a commutative ring.     
     
     Non-integer alphabets:
     \begin{itemize}
@@ -97,11 +98,11 @@ Notice that $\ZZ[\alpha]$ is a ring.
 
 
 \section{Isomorphism of $\Zomega$ and $\ZZ^{d}$}
-The goal of this section is to show connection between ring $\Zomega$ and $\ZZ^d$. This enable us to transform division in $\Zomega$ to search for an integer solution of a linear system. 
+The goal of this section is to show a connection between the ring $\Zomega$ and the set $\ZZ^d$. %It enables us to transform division in $\Zomega$ to search for an integer solution of a linear system. 
 
-First we recall notion of companion matrix which we use for defining multiplication in $\ZZ^d$.
+First we recall notion of companion matrix which we use to define multiplication in $\ZZ^d$.
 \begin{defn}
-Let $\omega$ be an algebraic integer of degree $d\geq 1$ with a minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
+Let $\omega$ be an algebraic integer of degree $d\geq 1$ with the monic minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
 $$
 S := \begin{pmatrix}
             0 & 0 & \cdots & 0 & -p_0 \\
@@ -109,11 +110,11 @@ S := \begin{pmatrix}
             0 & 1 & \cdots & 0 & -p_2 \\
             \vdots &   & \ddots & & \vdots \\
             0 & 0 & \cdots & 1 & -p_{d-1} 
-            \end{pmatrix} \in \ZZ^d
+            \end{pmatrix} \in \ZZ^{d\times d}
 $$
-is called a \emph{companion matrix} of the minimal polynomial of $\omega$.
+is called \emph{companion matrix} of the minimal polynomial of $\omega$.
 \end{defn}
-In what follows, we denote basis vectors of $\ZZ^d$ by 
+In what follows, the standard basis vectors of $\ZZ^d$  are denoted by 
 $$
 e_0=\begin{pmatrix}
               1 \\
@@ -137,12 +138,12 @@ e_{d-1}=\begin{pmatrix}
               1
               \end{pmatrix}\,.             
 $$
-We remark that 1 in $e_i$ is in the $(i+1)$-st row because the index corresponds to the power of a companion matrix in the following definition. 
+% We remark that 1 in $e_i$ is in the $(i+1)$-st row because the index corresponds to the power of a companion matrix in the following definition. 
 
 \begin{defn}
-Let $\omega$ be an algebraic integer of degree $d\geq 1$ with a minimal polynomial of $p$ and let $S$ be its companion matrix. We define a mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
+Let $\omega$ be an algebraic integer of degree $d\geq 1$, let $p$ be its minimal polynomial and let $S$ be its companion matrix. We define the mapping $\odot_\omega: \ZZ^d \times \ZZ^d \rightarrow \ZZ^d$ by 
 $$
-u \odot_\omega v := \left(\multMat{u}\right)\cdot \vect{v} \text{ for all } u=\vect{u}, v=\vect{v} \in \ZZ^d\,.
+u \odot_\omega v := \left(\multMat{u}\right)\cdot \vect{v} \quad \text{ for all } u=\vect{u}, v=\vect{v} \in \ZZ^d\,.
 $$ 
 and we define powers of $u \in \ZZ^d$ by
 \begin{align*}
@@ -151,12 +152,14 @@ and we define powers of $u \in \ZZ^d$ by
 \end{align*}
 \end{defn}
 
-We will see later that $\ZZ^d$ equipped with elementwise addition and multiplication $\odot_\omega$ builds a commutative ring. It will follow from the isomorhpism with $\Zomega$. Let us first recall an important property of a companion matrix  -- it is a root of its own polynomial.
+We will see later that $\ZZ^d$ equipped with elementwise addition and multiplication $\odot_\omega$ builds a commutative ring. 
+% It will follow from the isomorhpism with $\Zomega$. 
+Let us first recall an important property of a companion matrix  -- it is a root of its defining polynomial.
 \begin{lem}
 \label{lem:compMatrixIsRoot}
 Let $\omega$ be an algebraic integer with a minimal polynomial $p$ and let $S$ be its companion matrix. Then
 $$
-p(S)=\OO\,.
+p(S)=0\,.
 $$
 \end{lem}
 \begin{proof}
@@ -180,19 +183,19 @@ S^{d} e_0=S e_{d-1}&= -p_0e_0-p_1e_1-\cdots-p_{d-1}e_{d-1} \\
 \end{align*}
 Hence
 $$
-p(S)e_0=\mathbf{0}\,.
+p(S)e_0=0\,.
 $$
 Moreover,
 $$
-p(S)e_k=p(S)S^k e_0=S^k p(S) e_0=\mathbf{0}
+p(S)e_k=p(S)S^k e_0=S^k p(S) e_0=0
 $$
 for $k=\{0,1,\dots,d-1\}$ which implies the statement.
 \end{proof}
 
-The following lemma summarises basic properties of a mapping $\odot_\omega$ -- factoring out an integer scalar, the unit element, the distributive law and a weaker form of asociativity.
+The following lemma summarises basic properties of the mapping $\odot_\omega$ -- factoring out an integer scalar, the identity element, the distributive law and a weaker form of asociativity.
 \begin{lem}
 \label{lem:multInZd}
-Let $\omega$ be an algebraic integer of degree $d$. Then following statements hold for every $u,v,w\in \ZZ^d$ and $m\in\ZZ$:
+Let $\omega$ be an algebraic integer of degree $d$. The following statements hold for every $u,v,w\in \ZZ^d$ and $m\in\ZZ$:
 \begin{enumerate}[(i)]
     \item $(mu)\odot_\omega v = u \odot_\omega (m v)= m (u\odot_\omega v)$,
     \item $e_0 \odot_\omega v= v \odot_\omega e_0 =v$,
@@ -203,7 +206,7 @@ Let $\omega$ be an algebraic integer of degree $d$. Then following statements ho
 \begin{proof}
 It is easy to see (i) as multiplication of a matrix by a scalar commutes and a scalar can be factored out of a sum. 
 
-The first equality of (ii) is trivial from definition and
+The first equality of (ii) follows from definition and
 $$
 v \odot_\omega e_0=\multMat{v}\cdot e_0= \sum_{i=0}^{d-1} v_i e_i = v\,.
 $$
@@ -230,28 +233,29 @@ The statement (iv) follows easily from distributivity of matrix multiplication w
 Now we can prove that there is a correspondence between elements of $\Zomega$ and $\ZZ^d$.
 
 \begin{theo}
-Let  $\omega$ be an algebraic integer of degree $d$. Then
+Let  $\omega$ be an algebraic integer of degree $d$. Then 
 $$
-\Zomega =\left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}
+\Zomega =\left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\},
 $$ 
-and $\Zomega$ is isomorphic to $(\ZZ^d,+,\odot_\omega)$ by a mapping $\pi:\Zomega \rightarrow \ZZ^{d}$ defined by 
+$(\ZZ^d,+,\odot_\omega)$ is a commutative ring and the mapping $\pi:\Zomega \rightarrow \ZZ^{d}$ defined by 
 $$
-\pi(u)=\vect{u}
+\pi(u)=\vect{u} \quad \text{ for every } u=\sum_{i=0}^{d-1} u_i \omega^i \in \Zomega
 $$
- for every $u=\sum_{i=0}^{d-1} u_i \omega^i \in \Zomega$. 
+is a ring isomorphism.
+  
 \end{theo}
 \begin{proof}
 Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $u\in \Zomega$, $x=\sum_{i=0}^n u_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0$ which enables us to write
 $$
-u=u_n\omega^n + \sum_{i=0}^{n-1} u_i \omega^i=u_n \omega^{n-d}(-b_{d-1}\omega^{d-1}- \dots -b_1\omega-b_0)+ \sum_{i=0}^{n-1} u_i \omega^i\,.
+u=u_n\omega^n + \sum_{i=0}^{n-1} u_i \omega^i=u_n \omega^{n-d}(-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0)+ \sum_{i=0}^{n-1} u_i \omega^i\,.
 $$
 Thus $x\in \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$ by  induction with respect to $n$.
 
-Let us check now that the mapping $\pi$ is well-define. Assume on contrary that there exists $v\in \Zomega$ and $i_0\in\{0,1,\dots,d-1\}$ such that $v=\sum_{i=0}^{d-1} v_i \omega^i=\sum_{i=0}^{d-1} v'_i \omega^i$ and $v_{i_0} \neq v'_{i_0}$. Then
+Let us check now that the mapping $\pi$ is well-defined. Assume on contrary that there exists $v\in \Zomega$ and $i_0\in\{0,1,\dots,d-1\}$ such that $v=\sum_{i=0}^{d-1} v_i \omega^i=\sum_{i=0}^{d-1} v'_i \omega^i$ and $v_{i_0} \neq v'_{i_0}$. Then
 $$
     \sum_{i=0}^{d-1} (v'_i-v_i) \omega^i=0
 $$
-and $\sum_{i=0}^{d-1} (v'_i-v_i) x^i \in \ZZ[x]$ is non-zero polynomial of degree smaller than degree of minimal polynomial $p$, a contradiction.
+and $\sum_{i=0}^{d-1} (v'_i-v_i) x^i \in \ZZ[x]$ is non-zero polynomial of degree smaller than the degree $d$ of minimal polynomial $p$, a contradiction.
 
 Clearly, $\pi$ is bijection. Let $u=\sum_{i=0}^{d-1} u_i \omega^i$ and $v=\sum_{i=0}^{d-1} v_i \omega^i$ be elements of $\Zomega$. Consider
 \begin{align*}
@@ -293,7 +297,7 @@ Then
 $$
 \pi(\omega^{i}v)=\pi(\omega(\omega^{i-1} v))=\pi(\omega)\odot_\omega\pi(\omega^{i-1} v)=\pi(\omega)\odot_\omega\left((\pi(\omega))^{i-1}\odot_\omega \pi(v)\right)=(\pi(\omega))^{i}\odot_\omega \pi(v)\,,
 $$
-where we use (iii) in Lemma \ref{lem:multInZd} for the last equality.
+where we use (iii) of Lemma \ref{lem:multInZd} for the last equality.
 
 Now we multiply $v$ by $m\in\ZZ\subset\Zomega$:
 \begin{align*}
@@ -308,7 +312,7 @@ Now we multiply $v$ by $m\in\ZZ\subset\Zomega$:
 %               \end{pmatrix}\odot_\omega \vect{v} \\
 %         &= \pi(m)\odot_\omega\pi(v)\,.
 % \end{align*}
-As  $\pi$ is obviously aditive, we conclude:
+As  $\pi$ is obviously additive, we conclude:
 \begin{align*}
 \pi(uv)&=\pi\left(\sum_{i=0}^{d-1} u_i \omega^i v\right)=\sum_{i=0}^{d-1}\pi(\omega^i u_i  v)=\sum_{i=0}^{d-1}\pi(\omega)^i \odot_\omega\left(\pi(u_i)\odot_\omega\pi(v)\right) \\
     &=\sum_{i=0}^{d-1}\pi(\omega^i u_i)\odot_\omega \pi(v)=\pi\left(\sum_{i=0}^{d-1}u_i\omega^i\right)\odot_\omega\pi(v)=\pi(u)\odot_\omega \pi(v)\,.
@@ -318,7 +322,8 @@ Due to this theorem we may work with integer vectors instead of elements of $\Zo
 
 The last theorem of this section is a practical tool for divisibility in $\Zomega$. To check whether an element of $\Zomega$ is divisible by another element, we look for an integer solution of a linear system. Moreover, this solution provides a result of the division in the positive case. 
 \begin{theo}
-Let $\omega$ be an algebraic integer of degree $d$ and let $S$ be a companion matrix of its minimal polynomial. Let $\beta=\sum_{i=0}^{d-1} b_i \omega^i$ be a nonzero element of $\Zomega$. Then for every $u\in\Zomega$
+\label{thm:divisibility}
+Let $\omega$ be an algebraic integer of degree $d$ and let $S$ be the companion matrix of its minimal polynomial. Let $\beta=\sum_{i=0}^{d-1} b_i \omega^i$ be a nonzero element of $\Zomega$. Then for every $u\in\Zomega$
 $$
 u\in\beta\Zomega \iff S_\beta^{-1}\cdot \pi(u) \in \ZZ^d\,,
 $$
