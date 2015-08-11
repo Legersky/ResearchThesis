@@ -1,10 +1,10 @@
------------------------------CONSTRUCTOR, SETTERS-------------------------------------------------------------------
+Phase 2 of the extending window method from Section \ref{subsec:phase2} is implemented in this class. The weight function $q$ is returned by method \fun{findWeightFunction}{}. The constructor of the class is
 
 \begin{method}{\_\_init\_\_}{ algForParallelAdd, weightCoefSet, method}
-
+The ring generator $\omega$, base $\beta$, alphabet $\A$ and input alphabet $\B$ are initialiazed by values obtained from \var{algForParallelAdd}. Set weight coefficients set $\Q$ to \var{weightCoefSet}. The parameter \var{method} characterizes the way of the choice of possible weight coefficients set for given input from the previous one.
 \end{method}
 
------------------------------SEARCH FOR WEIGHT FUNCTION-------------------------------------------------------------------
+The following methods are used for search for weight function $q$:
 
 \begin{method}{\_find\_weightCoef\_for\_comb\_B}{ combinations, max\_len}
 
