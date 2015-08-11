@@ -30,14 +30,15 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search for a seque
   Particulary, let $(w)_{\beta, \A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet$. We search $n \in \NN$ and $z_{n}, z_{n-1},\dots, z_1, z_0 \in \A$ such that $(w)_{\beta, \A}=z_{n} z_{n-1}\cdots z_1 z_0 \bullet$.   
   
   We use suitable representation of zero to convert digits $w_j$ into the alphabet $\A$. 
-  \begin{defn}
-  For a base $\beta \in \Zomega$, a polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$, is called a \emph{rewriting rule}.
-  \end{defn}  
-  
-  An arbitrary rewriting rule may be used for digit set conversion, then so called \emph{core coefficient}, i.e., one of the coefficients which is greatest in modulus, is applied to convert a digit $w_j$. For our purpose, we use the simplest possible rewriting rule
+  For our purpose, we use the simplest possible representation deduced from the polynomial
   $$
     R(x)=x-\beta \in \Zomega[x]\,.
   $$
+
+We remark that any polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$ gives us possible representation of zero. The polynomial $R$ is called a \emph{rewriting rule}. 
+
+Within a digit set conversion with an arbitrary rewriting rule $R$, one of the coefficients of $R$ which is greatest in modulus (so called \emph{core coefficient}) is used for the conversion of a digit $w_j$. But using of an arbitrary rewriting rule $R$ is out of scope of this thesis, so we focus on the simplest possible rewriting rule $x-\beta$.
+  
 As $0=\beta^{j} \cdot R(\beta)=1\cdot \beta^{j+1} -\beta \cdot \beta^{j}$, we have a representation of zero 
 $$1 (-\!\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$
 for all $j \in \NN$. We multiply this representation by $q_j \in \Zomega$ which is called a \emph{weight coefficient} to obtain representation of zero 
@@ -75,15 +76,20 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \end{equation} 
     The choice of weight coefficients is the crucial part in order to construct addition algorithms which are computable in parallel. The method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
     
-     On the other hand, determining weight coefficients is trivial for standard numeration systems.  Notice that
-    $$
-        z_j \equiv w_j+q_{j-1} \mod \beta\,. 
-    $$
-  Assume now a standard numeration system $(\beta, \A)$, where
+    
+     On the other hand, the following example shows that determining weight coefficients is trivial for standard numeration systems.
+     
+     \begin{exmp}
+        Assume now a standard numeration system $(\beta, \A)$, where
   $$
     \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}\,.
   $$ 
-  There is only one representative of each class modulo  $\beta$. Therefore, the digit $z_j$ is uniquely determined for a given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus so is the weight coefficient $q_j$. This means that $q_j=q_j(w_j,q_{j-1})$ for all $j\geq 0$. Generally,
+       Notice that
+    $$
+        z_j \equiv w_j+q_{j-1} \mod \beta\,. 
+    $$
+  
+  There is only one representative of each class modulo  $\beta$ in the standard numeration system $(\beta, \A)$. Therefore, the digit $z_j$ is uniquely determined for a given digit $w_j \in \A+\A$ and carry $q_{j-1}$ and thus so is the weight coefficient $q_j$. This means that $q_j=q_j(w_j,q_{j-1})$ for all $j\geq 0$. Generally,
   $$
   q_j=q_j(w_j,q_{j-1}(w_{j-1},q_{j-2}))=\dots =q_j(w_j ,\dots , w_1, w_0)
   $$
@@ -92,8 +98,10 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
   z_j=z_j(w_j ,\dots , w_1, w_0)\,,
   $$
   which implies that addition runs in linear time.
+     
+     \end{exmp}
   
-  We want to the digit set conversion from $\A+\A$ into $\A$ be computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid the dependency on all less, respectivelly more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
+  We require that the digit set conversion from $\A+\A$ into $\A$ is computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid the dependency on all less, respectivelly more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
   
 
 \section{Extending window method}
@@ -134,7 +142,7 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     $$ 
     which verifies that the digit set conversion $\phi$ is indeed $(M+1)$-local function with anticipation $r=0$ and memory $t=M$.
     
-The construction of a digit set conversion algorithm which is computable in parallel by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which e increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
+The construction of a digit set conversion algorithm which is computable in parallel by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
 \subsection{Phase 1 -- Weight coefficients set}
 The goal of the first phase is to compute a weight coefficients set $\Q$, i.e., to find a set $\Q \ni 0$ such that 

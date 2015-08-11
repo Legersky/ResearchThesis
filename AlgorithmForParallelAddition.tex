@@ -14,57 +14,6 @@ Check if \var{A} is subset of $\Zomega$. Set alphabet $\A$:=\var{A}
 If \var{B} is empty, $\A+\A$ is used. Set the input alphabet $\B$:=\var{B}. Check if $\A\subsetneq\B\subset\A+\A$. 
 \end{method}
 
-\begin{method}{setBase}{base}
-Set $\beta$:=\var{base}.
-\end{method}
-
-\begin{method}{getRingGenerator}{}
-Return ring generator $\omega$.
-\end{method}
-
-\begin{method}{getBase}{}
-Return the base $\beta$.
-\end{method}
-
-\begin{method}{getBaseCC}{}
-Return the base $\beta$ as a complex number.
-\end{method}
-
-\begin{method}{getAlphabet}{}
-Return the alphabet $\A$.
-\end{method}
-
-\begin{method}{getInputAlphabet}{}
-Return the input alphabet $\B$.
-\end{method}
-
-\begin{method}{getMinPolynomial}{}
-Return the minimal polynomial $p$ of ring generator $\omega$.
-\end{method}
-
-\begin{method}{getMinPolynomialOfBase}{}
-Return the minimal polynomial $p$ of base $\beta$.
-\end{method}
-
-\begin{method}{getWeightCoefSet}{}
-Return the weight coefficients set $\Q$. If it is not computed, return \var{None}.
-\end{method}
-
-
-\begin{method}{getWeightFunction}{}
-Return the weight function $q$. If it is not computed, return \var{None}.
-\end{method}
-
-
-\begin{method}{getName}{}
-Return the name of the numeration system.
-\end{method}
-
-
-\begin{method}{getDictOfSetting}{}
-Return the dictionary of the attributes of the numeration system.
-\end{method}
-
 
 -----------------------------EXTENDING WINDOW METHOD------------------------------------------------------------------------
 
@@ -103,17 +52,7 @@ Return $(\beta,\A)$-representation of number represented by list \var{\_w} of di
 \end{method}
 
 
-\begin{method}{parallelConversion\_using\_localConversion}{w}
-
-\end{method}
-
-
 -----------------------------SANITY CHECK-----------------------------------------------------------------------------------
-
-\begin{method}{sanityCheck\_addition}{ num\_digits}
-
-\end{method}
-
 
 \begin{method}{sanityCheck\_conversion}{ num\_digits}
 
@@ -121,36 +60,6 @@ Return $(\beta,\A)$-representation of number represented by list \var{\_w} of di
 
 
 -----------------------------RING CONVERSIONS, AUXILIARY RING FUNCTIONS-----------------------------------------------------
-
-\begin{method}{list2BaseRing}{ \_digits}
-
-\end{method}
-
-
-\begin{method}{list2Ring}{ \_digits}
-
-\end{method}
-
-
-\begin{method}{ring2NumberField}{ num\_from\_ring}
-
-\end{method}
-
-
-\begin{method}{ring2CC}{ num\_from\_ring}
-
-\end{method}
-
-
-\begin{method}{getCoordinates}{ num}
-
-\end{method}
-
-
-\begin{method}{sumOfSets}{A,B}
-
-\end{method}
-
 
 \begin{method}{\_computeInverseBaseCompanionMatrix}{}
 
@@ -161,108 +70,3 @@ Return $(\beta,\A)$-representation of number represented by list \var{\_w} of di
 
 \end{method}
 
-
------------------------------PRINT FUNCTIONS--------------------------------------------------------------------------------
-
-\begin{method}{addLog}{\_log, latex=False}
-
-\end{method}
-
-
-\begin{method}{printWeightFunction}{}
-
-\end{method}
-
-
-\begin{method}{printWeightFunctionInfo}{}
-
-\end{method}
-
-
-\begin{method}{printWeightCoefSet}{}
-
-\end{method}
-
-
-\begin{method}{printLatexInfo}{}
-
-\end{method}
-
-
------------------------------PLOT FUNCTIONS---------------------------------------------------------------------------------
-
-\begin{method}{plot}{ nums\_from\_ring, labeled=True, color='red', size=20, fontsize=10}
-
-\end{method}
-
-
-\begin{method}{plotAlphabet}{}
-
-\end{method}
-
-
-\begin{method}{plotWeightCoefSet}{estimation=False}
-
-\end{method}
-
-
-\begin{method}{plotLattice}{}
-
-\end{method}
-
-
-\begin{method}{plotPhase1}{legend\_xshift=8,}
-
-\end{method}
-
-
-\begin{method}{legend}{    def legend(k,covered, new, alphabet}
-
-\end{method}
-
-
-\begin{method}{plotPhase2}{ digits,}
-
-\end{method}
-
-
------------------------------SAVE FUNCTIONS---------------------------------------------------------------------------------
-
-\begin{method}{saveInfoToTexFile}{ filename, header=True}
-
-\end{method}
-
-
-\begin{method}{saveLog}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveWeightFunctionToTexFile}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveWeightFunctionToCsvFile}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveLocalConversionToCsvFile}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveUnsolvedInputsToCsv}{ filename}
-
-\end{method}
-
-
-\begin{method}{inputSettingToSageFile}{ filename}
-
-\end{method}
-
-
-\begin{method}{saveImages}{images, folder,name, img\_size=10}
-
-\end{method}
