@@ -64,18 +64,18 @@ Obviously, finitness of Phase~2 implies that there exists a length of window $M$
 For arbitrary $m$, sets $\Qb{m}$  can be easily constructed separately for each $b\in\B$. Using Lemma \ref{lem:stoppingCondition}, Algorithm \ref{alg:oneletterSets} checks whether Phase~2 stops processing input digits $bb\dots b$. Thus,  non-finitness of Phase~2 can be revealed by running it for each input digit $b\in\B$.
 \begin{lem}
 \label{lem:stoppingCondition}
-Let $m_0 \in \NN$ be a length of window and $b\in\B$ be a letter of an input alphabet such that sets $\Qb{m_0}$ and $\Qb{m_0-1}$ produced by Algorithm \ref{alg:minimalSet} within Phase~2 have the same size. Then
+Let $m_0 \in \NN$ and $b\in\B$ be such that sets $\Qb{m_0}$ and $\Qb{m_0-1}$ produced by Algorithm \ref{alg:minimalSet} within Phase~2 have the same size. Then
 $$
     \#\Qb{m} = \#\Qb{m_0} \qquad \forall m\geq m_0-1\,.
 $$ 
 Particulary, if $\#\Qb{m_0}\geq 2$, Phase~2 does not converge.
 \end{lem}
 \begin{proof}
-It is enough to prove the base case of an induction as the inductive step is analogic. The set $\Qb{m_0+1}$ is find by Algorithm \ref{alg:minimalSet} such that 
+It is enough to prove the base case of induction as the inductive step is analogous. The set $\Qb{m_0+1}$ is found by Algorithm \ref{alg:minimalSet} such that 
 $$
 b + \Qb{m_0} \subset \A + \beta \Qb{m_0+1}\,
 $$
-and set $\Qb{m_0}$ was found by the same algorithm such that
+and set $\Qb{m_0}$ is found by the same algorithm such that
 $$
 b + \Qb{m_0-1} \subset \A + \beta \Qb{m_0}\,.
 $$
