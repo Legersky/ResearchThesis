@@ -145,6 +145,7 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
 The construction of a digit set conversion algorithm which is computable in parallel by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
 \subsection{Phase 1 -- Weight coefficients set}
+\label{subsec:phase1}
 The goal of the first phase is to compute a weight coefficients set $\Q$, i.e., to find a set $\Q \ni 0$ such that 
 $$
     \B + \Q \subset \A + \beta \Q\,.

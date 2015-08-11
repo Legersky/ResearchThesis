@@ -1,23 +1,25 @@
-----------------------------CONSTRUCTOR-------------------------------------------------------------------
+Class \emph{WeightCoefficientsSetSearch} implements Phase 1 of the extending window method described in Section \ref{subsec:phase1}. The method \fun{findWeightCoefficientsSet}{} returns the weight coefficients set $\Q$.
+
+The constructor of the class is 
 
 \begin{method}{\_\_init\_\_}{ algForParallelAdd, method}
-
+Initialize the ring generator $\omega$, base $\beta$, alphabet $\A$ and input alphabet $\B$ by values obtained from \var{algForParallelAdd}. The parameter \var{method} characterize the way of the choice from the possible candidates for the weight coefficients set.  
 \end{method}
 
------------------------------SEARCH FOR WEIGHT COEFFICIENT SET-------------------------------------------------------------------
+Methods implementing Phase 1 are following:
 
 \begin{method}{\_findCandidates}{C}
-
+Following Algorithm \ref{alg:searchCand}, return the list of lists \var{candidates} such that each element in \var{C} is covered by any value of the appropriate list in \var{candidates}.  
 \end{method}
 
 
-\begin{method}{\_chooseQk\_FromCandidates}{cand\_for\_all}
+\begin{method}{\_chooseQk\_FromCandidates}{candidates}
 
 \end{method}
 
 
 \begin{method}{\_getQk}{C}
-
+Links together methods \fun{\_findCandidates}{C} and \fun{\_chooseQk\_FromCandidates}{} to return itermediate weight coefficients set $\Q_k$.
 \end{method}
 
 

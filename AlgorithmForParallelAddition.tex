@@ -1,41 +1,39 @@
-Constructor:
+This class constructs neccessary structures for computation in $\Zomega$. It is \emph{PolynomialQuotientRing} obtained as a \emph{PolynomialRing} over integers factored by polynomial $p$. This is used for representation of elements of $\Zomega$ and arithmetics. We remark that it is independent on the choice of root of the  minimal polynomial $p$. But as we need also comparisons of numbers in $\Zomega$ in modulus, we specify $\omega$ by its approximate complex value and we form a factor ring of rational polynomials by using class \emph{NumberField}. This enables us to get absolute values of elements of $\Zomega$ which can be then compared.
 
-\begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='', printLog=True, printLogLatex=False, verbose=0}
-Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial $p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{A} and \fun{setBase}{base} are called. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
+Method \textbf{findWeightFunction()} links together both phases of the extending window method to find the weight function $q$. That is used in the methods for addition and digit set conversion to process them as local functions. There are also verification methods.
+
+Moreover, many methods for printing, plotting and saving outputs are implemented.
+
+The constructor of class \emph{AlgorithmForParallelAddition} is 
+
+\begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='',\\
+ printLog=True, printLogLatex=False, verbose=0}
+Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial~$p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{A} and \fun{setBase}{base} are called. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
 \end{method}
 
-Setters and getters:
-
-\begin{method}{setAlphabet}{A}
-Check if \var{A} is subset of $\Zomega$. Set alphabet $\A$:=\var{A}
-\end{method}
-
-\begin{method}{setInputAlphabet}{B}
-If \var{B} is empty, $\A+\A$ is used. Set the input alphabet $\B$:=\var{B}. Check if $\A\subsetneq\B\subset\A+\A$. 
-\end{method}
-
-
------------------------------EXTENDING WINDOW METHOD------------------------------------------------------------------------
+Methods for the construction of an addition algorithm which is computable in parallel by the designed extending window method are following:
 
 \begin{method}{\_findWeightCoefSet}{ max\_iterations, method\_number}
 Create an instance of \emph{WeightCoefficientsSetSearch(method\_number)} and call its method \fun{findWeightCoefficientsSet}{max\_iterations} to obtain a weight coefficients set $\Q$.
 \end{method}
 
-\begin{method}{addWeightCoefSetIncrement}{ increment}
-Save \var{increment} from extending intermediate weight coefficients set $\Q_{k}$ to $\Q_{k+1}$.
-\end{method}
-
 \begin{method}{\_findWeightFunction}{ max\_input\_length,method\_number}
-Create an instance of \emph{WeightFunctionSearch(method\_number)} and call its methods \fun{check\_one\_letter\_inputs}{max\_input\_length} and \fun{findWeightFunction}{max\_input\_length} to obtain a weight function $q$.
+Create an instance of \emph{WeightFunctionSearch(method\_number)} and call its methods \fun{check\_one\_letter\_inputs}{max\_input\_length} and \\ \fun{findWeightFunction}{max\_input\_length} to obtain a weight function $q$.
 \end{method}
 
 
-\begin{method}{findWeightFunction}{ max\_iterations, max\_input\_length, method\_weightCoefSet=2, method\_weightFunSearch=4}
-Return the weight function $q$ obtaind by calling \fun{\_findWeightCoefSet}{max\_iterations,method\_weightCoefSet} and \fun{\_findWeightFunction}{max\_input\_length, method\_weightFunSearch}.
+\begin{method}{findWeightFunction}{ max\_iterations, max\_input\_length, method\_weightCoefSet=2,\\ method\_weightFunSearch=4}
+Return the weight function $q$ obtaind by calling \fun{\_findWeightCoefSet}{max\_iterations, method\_weightCoefSet} and \fun{\_findWeightFunction}{max\_input\_length,\\ method\_weightFunSearch}.
+\end{method}
+
+The important function for the searching for possible weight coefficients is
+
+\begin{method}{divideByBase}{divided\_number}
+Using Theorem \ref{thm:divisibility}, check if \var{divided\_number} is divisible by base $\beta$. If it is so, return the result of division, else return \var{None}.
 \end{method}
 
 
------------------------------PARALLEL ADDITION AND CONVERSION---------------------------------------------------------------
+Methods for the addition and the digit set conversion computable in parallel are following:
 
 \begin{method}{addParallel}{a,b}
 Sum up numbers represented by lists of digits \var{a} and \var{b} digitwise and convert the result by \fun{parallelConversion}{}. 
@@ -48,25 +46,14 @@ Return $(\beta,\A)$-representation of number represented by list \var{\_w} of di
 
 
 \begin{method}{localConversion}{w}
-
+Return converted digit according to equation \ref{eq:conversionFormula} for list of input digits \var{w}.
 \end{method}
 
 
------------------------------SANITY CHECK-----------------------------------------------------------------------------------
-
+The correcteness of the implementation of the extending window for a given numeration system can be verified by
+ 
 \begin{method}{sanityCheck\_conversion}{ num\_digits}
-
+Check whether the values of all possible numbers of the length \var{num\_digits} with digits in the input alphabet $\B$ are the same as their $(\beta, \A)$-representation obtained by \fun{parallelConversion}{}.   
 \end{method}
 
-
------------------------------RING CONVERSIONS, AUXILIARY RING FUNCTIONS-----------------------------------------------------
-
-\begin{method}{\_computeInverseBaseCompanionMatrix}{}
-
-\end{method}
-
-
-\begin{method}{divideByBase}{divided\_number}
-
-\end{method}
 
