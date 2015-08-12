@@ -1,26 +1,26 @@
 Phase 2 of the extending window method from Section \ref{subsec:phase2} is implemented in this class. The weight function $q$ is returned by method \fun{findWeightFunction}{}. The constructor of the class is
 
 \begin{method}{\_\_init\_\_}{ algForParallelAdd, weightCoefSet, method}
-The ring generator $\omega$, base $\beta$, alphabet $\A$ and input alphabet $\B$ are initialiazed by values obtained from \var{algForParallelAdd}. Set weight coefficients set $\Q$ to \var{weightCoefSet}. The parameter \var{method} characterizes the way of the choice of possible weight coefficients set for given input from the previous one.
+The ring generator $\omega$, base $\beta$, alphabet $\A$ and input alphabet $\B$ are initialiazed by the values obtained from \var{algForParallelAdd}. The weight coefficients set $\Q$ is set to \var{weightCoefSet}. The parameter \var{method} characterizes the way of the choice of possible weight coefficients set for given input from the previous one. The attribute \var{\_Qw\_w} is set to an empty dictionary. It serves for saving possible weight coefficients for possible tuples of input digits.
 \end{method}
 
 The following methods are used for search for weight function $q$:
 
-\begin{method}{\_find\_weightCoef\_for\_comb\_B}{ combinations, max\_len}
-
+\begin{method}{\_find\_weightCoef\_for\_comb\_B}{combinations}
+Take all unsolved inputs $w_j,\dots, w_{j-m+1} \in \B^m$ in \var{combinations}, extend them by all letters $w_{j-m}\in\B$ and find possible weight coefficients set $\Q_{[w_j,\dots, w_{j-m}]}$ by the method \fun{\_findQw}{$(w_j,\dots, w_{j-m})$}. If there is only one element in $\Q_{[w_j,\dots, w_{j-m}]}$, it is saved as a solved input of weight function $q$. Otherwise, the input combination $w_j,\dots, w_{j-m}$ is saved as an unsolved input which requires extending of window. The unsolved combinations are returned.  
 \end{method}
 
 
 \begin{method}{\_findQw}{w\_tuple}
-
+Return the set $\Q_{[\text{w\_tuple}]}$ obtained by Algorithm \ref{alg:minimalSet}. The set of possible carries for \var{w\_tuple} without the first digit and the previous set of possible weight coefficients, which are neccessary for computation, are taken from the attribute \var{\_Qw\_w} of the class.
 \end{method}
 
 
-\begin{method}{findWeightFunction}{ max\_input\_length}
-
+\begin{method}{findWeightFunction}{max\_input\_length}
+Return weight function $q$ unless the length of window exceeds \var{max\_input\_length}. Then an exception is raised. It implements Algorithm \ref{alg:weightFunction} by repetetive calling of the method \fun{\_find\_weightCoef\_for\_comb\_B}{} which extends length of window. This is done until all possible combinations of input digits are solved for some lenght of window $m$, i.e. $\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in \B^m \} = 1$.
 \end{method}
 
 
-\begin{method}{check\_one\_letter\_inputs}{ max\_input\_length}
-
+\begin{method}{check\_one\_letter\_inputs}{max\_input\_length}
+The method checks by Algorithm \ref{alg:oneletterSets} if there is a unique weight coefficient for inputs $({b,b,\dots,b})\in\B^m$ for some length of window $m$. Using Lemma \ref{lem:stoppingCondition}, an exception is raised in the case of an infinite loop. Otherwise the list of inputs $(b,b,\dots,b)$ which have the largest length of the window is returned.
 \end{method}
