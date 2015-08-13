@@ -1,5 +1,6 @@
- PRO VSECHNY DEFINICE A VETY NENI-LI UVEDENO JINAK
-     Let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that a base $\beta \in \Zomega$ and an alphabet $\A$ is a finite subset of $\Zomega$. 
+We recall the general concept of addition at the beginning of this chapter and then we describe the so-called \emph{extending window method} which is due to M. Svobodov\'a \cite{milena}. 
+
+From now on, let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that a base $\beta \in \Zomega$ and an alphabet $\A \ni 0$ is a finite subset of $\Zomega$. 
 
 The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the digit set conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically same but the choice of coefficients differs.
 
@@ -142,7 +143,7 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     $$ 
     which verifies that the digit set conversion $\phi$ is indeed $(M+1)$-local function with anticipation $r=0$ and memory $t=M$.
     
-The construction of a digit set conversion algorithm which is computable in parallel by so-called \emph{extending window method} consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
+The construction of a digit set conversion algorithm which is computable in parallel by the extending window method consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
 \subsection{Phase 1 -- Weight coefficients set}
 \label{subsec:phase1}
