@@ -38,13 +38,13 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search for a seque
 
 We remark that any polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$ gives us possible representation of zero. The polynomial $R$ is called a \emph{rewriting rule}. 
 
-Within a digit set conversion with an arbitrary rewriting rule $R$, one of the coefficients of $R$ which is greatest in modulus (so called \emph{core coefficient}) is used for the conversion of a digit $w_j$. But using of an arbitrary rewriting rule $R$ is out of scope of this thesis, so we focus on the simplest possible rewriting rule $x-\beta$.
+Within a digit set conversion with an arbitrary rewriting rule $R$, one of the coefficients of $R$ which is greatest in modulus (so-called \emph{core coefficient}) is used for the conversion of a digit $w_j$. But using of an arbitrary rewriting rule $R$ is out of scope of this thesis, so we focus on the simplest possible rewriting rule $R(x)=x-\beta$.
   
 As $0=\beta^{j} \cdot R(\beta)=1\cdot \beta^{j+1} -\beta \cdot \beta^{j}$, we have a representation of zero 
 $$1 (-\!\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$
 for all $j \in \NN$. We multiply this representation by $q_j \in \Zomega$ which is called a \emph{weight coefficient} to obtain representation of zero 
 $$q_j (-q_j\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$ 
-This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the digit $w_j$ into the alphabet $\A$. It causes a \emph{carry} $q_{j}$ on the $(j+1)$-th position from the conversion of $j$-th digit. The digit set conversion runs from the right ($j=0$) to the left until all digits and carries are converted into the alphabet $\A$:
+This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the digit $w_j$ into the alphabet $\A$. The conversion of $j$-th digit causes a \emph{carry} $q_{j}$ on the $(j+1)$-th position. The digit set conversion runs from the right ($j=0$) to the left until all digits and carries are converted into the alphabet $\A$:
         \begin{align}
         \label{eq:conversionScheme}
             \hspace{100pt}  w_n w_{n-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{100pt} \notag\\[-5pt]
@@ -63,12 +63,13 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     for $j \in \NN_0$. We set $q_{-1}=0$ as there is no carry from the right on the 0-th position.
     
      Clearly, the value of $w$ is preserved:
-\begin{align*}
-    \sum_{j\geq 0} z_j \beta^j &=w_0 - \beta q_0 + \sum_{j> 0} (w_j + q_{j-1} - q_j \beta) \beta^j \\
-    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j\geq 0} q_j \cdot \beta^{j+1} \\
-    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j> 0} q_{j-1} \cdot \beta^j \\
-    &=\sum_{j\geq 0} w_j \beta^j = w\,.
-\end{align*}
+\begin{align}
+\label{eq:valuePreserving}
+    \sum_{j\geq 0} z_j \beta^j &=w_0 - \beta q_0 + \sum_{j> 0} (w_j + q_{j-1} - q_j \beta) \beta^j \notag\\
+    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j\geq 0} q_j \cdot \beta^{j+1}  \\
+    &=\sum_{j\geq 0} w_j \beta^j + \sum_{j>0} q_{j-1} \beta^j - \sum_{j> 0} q_{j-1} \cdot \beta^j \notag\\
+    &=\sum_{j\geq 0} w_j \beta^j = w\,. \notag
+\end{align}
 
      The weight coefficient $q_j$ must be chosen so that the converted digit is in the alphabet~$\A$, i.e., 
     \begin{equation}
@@ -132,18 +133,18 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     $$
     w_j+ q(w_{j-1}, \dots, w_{j-M}) - \beta q(w_j, \dots, w_{j-M+1}) \in \A
     $$
-    for all $w_j,w_{j-1}, \dots, w_{j-M} \in \B$. Then $q$ is called a \emph{weight function} and $M$ is called a \emph{length of window}.    
+    for all $w_j,w_{j-1}, \dots, w_{j-M} \in \B$ and $q(0,0,\dots,0)=0$. Then $q$ is called a \emph{weight function} and $M$ is called a \emph{length of window}.    
     \end{defn}
- 
- JE TREBA POZADOVAT q(0,...,0)=0 NEBO TO Z NECEHO PLYNE?
 
  Having a weight function $q$, we define a function $\phi:\B^{M+1}\rightarrow \A$ by
     $$
         \phi(w_{j}, \dots, w_{j-M})=w_j+ \underbrace{q(w_{j-1}, \dots, w_{j-M})}_{=q_{j-1}} - \beta \underbrace{q(w_j, \dots, w_{j-M+1})}_{=q_j}=:z_j\,,
     $$ 
-    which verifies that the digit set conversion $\phi$ is indeed $(M+1)$-local function with anticipation $r=0$ and memory $t=M$.
-    
+    which verifies that the mapping $\phi$ is indeed the $(M+1)$-local digit set conversion with anticipation $r=0$ and memory $t=M$. The requirement of zero output of the weight function $q$ for the input of $M$ zeros guarantees that $\phi(0,0,\dots,0)=0$. Thus the first condition of Definition \ref{def:digitSetConversion} is satisfied. The second one follows from the equation \ref{eq:valuePreserving}. 
+    TADY TO MUSI BYT NEJAK SIKOVNEJI SHRNUTE A POPSANE
 The construction of a digit set conversion algorithm which is computable in parallel by the extending window method consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
+
+We remark that the convergence of both phases is discussed separately in Chapter \ref{chap:convergence}.
 
 \subsection{Phase 1 -- Weight coefficients set}
 \label{subsec:phase1}
@@ -151,7 +152,11 @@ The goal of the first phase is to compute a weight coefficients set $\Q$, i.e., 
 $$
     \B + \Q \subset \A + \beta \Q\,.
 $$  
-We build $\Q$ iteratively so that we extend $\Q$ in a way to cover all elements on the left side with original $\Q$ by elements on the right side with extended $\Q$. This procedure is repeated until the extended weight coefficients set is the same as original one. 
+We build the sequence $\Q_0, \Q_1, \Q_2,\dots$ iteratively so that we extend $\Q_k$ to $\Q_{k+1}$ in a way to cover all elements on the left side with the set $\Q_k$ by elements on the right side with the extended set $\Q_{k+1}$, i.e.
+$$
+\B+ \Q_k \subset \A + \beta \Q_{k+1}\,.
+$$
+This procedure is repeated until the extended weight coefficients set $\Q_{k+1}$ is the same as the original set $\Q_{k}$. 
 
 In other words, we start with $\Q=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to weight coeffcient set $\Q$. These weight coefficients now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in weight coefficients set $\Q$ to cover all sums of added coefficients and digits of input alphabet $\B$, we extend $\Q$ by the suitable coefficients. And so on until there is no need to add more elements. Here we mean by expression ``a weight coefficient $q$ covers an element $x$'' that there is $a \in \A$ such that $x=a + \beta q$.
     

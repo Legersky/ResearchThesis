@@ -44,6 +44,7 @@ Let $\A$ and $\B$ be alphabets. A function $\varphi:\B^\ZZ \rightarrow \A^\ZZ$ i
 This means that each digit of the image $\varphi(w)$ is computed from $p$ digits of $w$ in a sliding window. Suppose that there is a processor on  each position with access to $t$ input digits on the left and $r$ input digits on the right. Then computation of $\varphi(w)$, where $w$ finite sequence, can be done in constant time independent on the length of $w$.   
   
 \begin{defn}
+\label{def:digitSetConversion}
 Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $\varphi:\B^\ZZ\rightarrow \A^\ZZ$ such that
   \begin{enumerate}
       \item for any $w=(w_j)_{j\in\ZZ}\in\B^\ZZ$ with finitely many non-zero digits, $z=\varphi(w)=(z_j)_{j\in\ZZ}\in\A^\ZZ$ has only finite number of non-zero digits, and
