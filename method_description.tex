@@ -243,7 +243,8 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
 
 \subsection{Phase 2 -- Weight function}
 \label{subsec:phase2}
-    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. The idea of the extending window method is to reduce necessary weight coefficients from weight coefficients set $\Q$ obtained in the previous section up to single value by enlarging number of considered input digits. The following notation is used: 
+    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. We start with the weight coefficients set $\Q$ obtained in Phase 1. The idea is to reduce necessary weight coefficients for the conversion of a given digit up to single value. This is done by enlarging number of considered input digits (extending the length of window) -- there are less possible carries from the right if we know which digits on the right are converted. 
+     
     We introduce the following notation. 
         Let $\Q$ be a weight coefficients set and $w_j\in \B$. Denote by $\Q_{[w_j]}$ any set such that
         $$
@@ -340,7 +341,7 @@ $$
 $$    
 It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponentional because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
 
-
+We my reduce the number of the combinations of the input digits so that if for some $(w_j,\dots, w_{j-m+1})\in\B^m, m<M$ is  $\#\Q_{[w_j,\dots, w_{j-m+1}]}=1$, we do not extend the window for these digits but we set ouput of $q(w_j,\dots, w_{j-m+1}, w_{j-m}, \dots w_{j-M+1})$ to the single element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_{j-m}, \dots w_{j-M+1})\in \B^{M-m}$. 
 
 
 
