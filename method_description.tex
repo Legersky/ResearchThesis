@@ -117,6 +117,7 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     
     We introduce following definitions. 
     \begin{defn}
+    \label{def:weightCoefficientsSet}
         Let $\B$ be a set such that $\A \subsetneq \B \subset \A +\A$. Then any finite set $\Q\subset\Zomega$ containing~0 such that 
         $$
             \B + \Q \subset \A + \beta \Q
@@ -141,7 +142,9 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
         \phi(w_{j}, \dots, w_{j-M})=w_j+ \underbrace{q(w_{j-1}, \dots, w_{j-M})}_{=q_{j-1}} - \beta \underbrace{q(w_j, \dots, w_{j-M+1})}_{=q_j}=:z_j\,,
     $$ 
     which verifies that the mapping $\phi$ is indeed the $(M+1)$-local digit set conversion with anticipation $r=0$ and memory $t=M$. The requirement of zero output of the weight function $q$ for the input of $M$ zeros guarantees that $\phi(0,0,\dots,0)=0$. Thus the first condition of Definition \ref{def:digitSetConversion} is satisfied. The second one follows from the equation \ref{eq:valuePreserving}. 
+    
     TADY TO MUSI BYT NEJAK SIKOVNEJI SHRNUTE A POPSANE
+
 The construction of a digit set conversion algorithm which is computable in parallel by the extending window method consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
 
 We remark that the convergence of both phases is discussed separately in Chapter \ref{chap:convergence}.
@@ -158,9 +161,9 @@ $$
 $$
 This procedure is repeated until the extended weight coefficients set $\Q_{k+1}$ is the same as the original set $\Q_{k}$. 
 
-In other words, we start with $\Q=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to weight coeffcient set $\Q$. These weight coefficients now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in weight coefficients set $\Q$ to cover all sums of added coefficients and digits of input alphabet $\B$, we extend $\Q$ by the suitable coefficients. And so on until there is no need to add more elements. Here we mean by expression ``a weight coefficient $q$ covers an element $x$'' that there is $a \in \A$ such that $x=a + \beta q$.
+In other words, we start with $\Q_0=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to weight coefficient set $\Q_0$ to obtain the set $\Q_1$. Assume now that we have the set $\Q_k$ for some $k\geq 1$. The weight coefficients in $\Q_k$ now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in weight coefficients set $\Q_k$ to cover all sums of added coefficients and digits of input alphabet $\B$, we extend $\Q_k$ to $\Q_{k+1}$ by the suitable coefficients. And so on until there is no need to add more elements, i.e. the extended set $\Q_{k+1}$ equals $\Q_k$. Then the weight coefficients set $\Q:=\Q_{k+1}$ satisfies Definition \ref{def:weightCoefficientsSet}. We remark that the expression ``a weight coefficient $q$ covers an element $x$'' means that there is $a \in \A$ such that $x=a + \beta q$.
     
-The precise description of the semi-algorithm in a pseudocode in Algorithm \ref{alg:weightCoefSet}.  
+The precise description of the semi-algorithm in a pseudocode is in Algorithm \ref{alg:weightCoefSet}.  Section \ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. whether it happens that  $\Q_{k+1}=\Q_k$ for some  $k$.
     
 \begin{algorithm}
   \caption{Search for weight coefficients set (Phase 1)}
@@ -178,11 +181,27 @@ The precise description of the semi-algorithm in a pseudocode in Algorithm \ref{
   \end{algorithmic}
 \end{algorithm}
 
-To extend $\Q_{k}$ to $\Q_{k+1}$, we first find all possible candidates to cover each element of  $\B + \Q_{k}$ (Algorithm \ref{alg:searchCand}). We can improve the performance of Algorithm \ref{alg:searchCand} by substituting the set $\B + \Q_{k}$ by $(\B + \Q_{k})\setminus (\B + \Q_{k-1})$ on the line \ref{line:replaceBySmaller} because
-$$
-\B + \Q_{k-1} \subset \A + \beta \Q_{k} \subset \A + \beta \Q_{k+1}
-$$
-for any $\Q_{k+1} \supset \Q_{k}$.
+Possibly, there are more candidating weight coefficients which cover some element of the set $\B+ \Q_k$. Let us suppose that we have the list which contains the lists of these candidates for each element of the set $\B+ \Q_k$. This list of lists is saved in the variable \verb+candidates+ in Algorithm \ref{alg:extendWeightCoefSet}. Now, for each element, we check the list of candidates which cover this element and if there is none of them contained in the set $\Q_k$, the smallest (in absolute value) weight coefficient from the list of candidates is added to the set $\Q_k$. The extension $\Q_{k+1}$ of the set $\Q_k$ is obtained in this manner.   
+
+We may slightly improve this procedure: for example we may first extend $\Q_{k}$ by all single-element lists of \verb+candidates+. These elements may be enough to cover also other elements of $\B+\Q_{k}$. It implies that the resulting $\Q$ is dependent on the way of selection from \verb+candidates+.
+
+\begin{algorithm}
+  \caption{Extending intermediate weight coefficients set}
+    \label{alg:extendWeightCoefSet}
+  \begin{algorithmic}[1]
+    \REQUIRE{\verb+candidates+ from Algorithm \ref{alg:searchCand}, previous weight coefficients set $\Q_{k}$}
+    \STATE $\Q_{k+1}:=\Q_{k}$
+    \FORALL{\texttt{cand\_for\_x} in \texttt{candidates}}
+        \IF{no element of \texttt{cand\_for\_x} in $\Q_{k}$}
+            \STATE Add the smallest element (in absolute value) of  \verb+cand_for_x+ to $\Q_{k+1}$  
+        \ENDIF
+    \ENDFOR
+    \RETURN $\Q_{k+1}$
+  \end{algorithmic}
+\end{algorithm}
+
+Algorithm \ref{alg:searchCand} describes the search for the list of lists of candidates. For each element $x\in \B + \Q_{k}$ we build the list of candidates (in the variable \verb+cand_for_x+) so that we test the divisibility of $x-a$ by the base $\beta$ for all letters $a\in\A$. In the positive case, the result of division is appended to \verb+cand_for_x+ as the candidating weight coefficient. We remark that Theorem \ref{thm:divisibility} is used to check the divisibility.
+
 
 \begin{algorithm}
   \caption{Search for candidates}
@@ -203,25 +222,17 @@ for any $\Q_{k+1} \supset \Q_{k}$.
   \end{algorithmic}
 \end{algorithm}  
 
+We can improve the performance of Algorithm \ref{alg:searchCand} by substituting the set $\B + \Q_{k}$ by $(\B + \Q_{k})\setminus (\B + \Q_{k-1})$ on the line \ref{line:replaceBySmaller} because
+$$
+\B + \Q_{k-1} \subset \A + \beta \Q_{k} \subset \A + \beta \Q_{k+1}
+$$
+for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the elements of $\B + \Q_{k-1}$ are covered by some weight coefficient on $\Q_k$ in Algorithm \ref{alg:extendWeightCoefSet}.
 
-An added element from each list of \verb+candidates+ is chosen as the smallest one unless there is already a covering element contained in $\Q_{k}$ (Algorithm \ref{alg:extendWeightCoefSet}).  
+% An added element from each list of \verb+candidates+ is chosen as the smallest one unless there is already a covering element contained in $\Q_{k}$ (Algorithm \ref{alg:extendWeightCoefSet}).  
 
-\begin{algorithm}
-  \caption{Extending intermediate weight coefficients set}
-    \label{alg:extendWeightCoefSet}
-  \begin{algorithmic}[1]
-    \REQUIRE{\verb+candidates+ from Algorithm \ref{alg:searchCand}, previous weight coefficients set $\Q_{k}$}
-    \STATE $\Q_{k+1}:=\Q_{k}$
-    \FORALL{\texttt{cand\_for\_x} in \texttt{candidates}}
-        \IF{no element of \texttt{cand\_for\_x} in $\Q_{k}$}
-            \STATE Add the smallest element (in absolute value) of  \verb+cand_for_x+ to $\Q_{k+1}$  
-        \ENDIF
-    \ENDFOR
-    \RETURN $\Q_{k+1}$
-  \end{algorithmic}
-\end{algorithm}
+
     
-We may slightly improve this procedure: for example we may first extend $\Q_{k}$ by all single-element lists of \verb+candidates+. These elements may be enough to cover also other elements of $\B+\Q_{k}$. It implies that the resulting $\Q$ is dependent on the way of selection from \verb+candidates+.
+
   
     
     
