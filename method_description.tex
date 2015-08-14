@@ -280,7 +280,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     $$
     for all $w_{j},\dots, w_{j-M+1} \in \B^M$. Unfortunately, we do not know whether this happens. But  we may reveal the nonconvergence of Phase 2 for some cases by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}. 
     
-    The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.
+    
 \begin{algorithm}
   \caption{Search for weight function (Phase 2)}
     \label{alg:weightFunction}
@@ -310,7 +310,9 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
   \end{algorithmic}
 \end{algorithm}
     
-For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only possible to cover some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}. We remark that this algorithm does not provide the trully minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ in the sense of size, but it minimizes the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ enough. Phase 2 can be modified by replacing Algorithm \ref{alg:minimalSet} for different one. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
+The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}. For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only possible to cover some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}. 
+
+We remark that this algorithm does not provide the trully minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ in the sense of size, but it minimizes the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ enough. Phase 2 can be modified by replacing Algorithm \ref{alg:minimalSet} for different one. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
 \begin{algorithm}
   \caption{Search for set $\Q_{[w_j,\dots, w_{j-m+1}]}$ }
     \label{alg:minimalSet}
