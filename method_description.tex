@@ -278,7 +278,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     $$
     \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
     $$
-    for all $w_{j},\dots, w_{j-M+1} \in \B^M$.
+    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. Unfortunately, we do not know whether this happens. But  we may reveal the nonconvergence of Phase 2 for some cases by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}. 
     
     The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.
 \begin{algorithm}
@@ -341,7 +341,7 @@ $$
 $$    
 It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponentional because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
 
-We my reduce the number of the combinations of the input digits so that if for some $(w_j,\dots, w_{j-m+1})\in\B^m, m<M$ is  $\#\Q_{[w_j,\dots, w_{j-m+1}]}=1$, we do not extend the window for these digits but we set ouput of $q(w_j,\dots, w_{j-m+1}, w_{j-m}, \dots w_{j-M+1})$ to the single element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_{j-m}, \dots w_{j-M+1})\in \B^{M-m}$. 
+We my reduce the number of the combinations of the input digits so that if for some $(w_j,\dots, w_{j-m+1})\in\B^m, m<M$ is  $\#\Q_{[w_j,\dots, w_{j-m+1}]}=1$, we do not extend the window for these digits but we set the ouput of $q(w_j,\dots, w_{j-m+1}, w_{j-m}, \dots w_{j-M+1})$ to the single element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_{j-m}, \dots w_{j-M+1})\in \B^{M-m}$. 
 
 
 
