@@ -3,27 +3,54 @@ However, Theorem \ref{thm:suffCondPhase1} gives a sufficient condition for conve
 
 \section{Convergence of Phase 1}
 \label{sec:convergencePhase1}
-\begin{lem}
-\label{lem:weightCoefSet}
-    Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then, there exists a subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
-\end{lem}
+\begin{theo}
+\label{thm:suffCondPhase1}
+    Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then, there exists a set $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
+    
+    Moreover, if $\omega$ is such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$, the set $\Q$ is finite. 
+\end{theo}
 \begin{proof}
  Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $\beta1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
  $$
-    |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{\beta}{|\beta|-1}\right)=R\,.
+    |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{|\beta|}{|\beta|-1}\right)=R\,.
  $$ 
- Hence $q'\in\Q$ and thus  $x=b+q \in \A + \beta \Q$.
+ Hence $q'\in\Q$ and thus  $x=b+q \in \A + \beta \Q$. 
+ 
+ Obviously, the set $\Q$ is finite if there are only finitely many elements of $\Zomega$ bounded by the constant $R$.
 \end{proof}
-We plug in the alphabet $\A$ and input alphabet $\B$. Because of the choice of the smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we know by the lemma that the weight coefficient set $\Q$ constructed in Phase~1 has elements bounded by the constant $R$. 
-\begin{theo}
-\label{thm:suffCondPhase1}
-    Let $\omega$ be an algebraic integer such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$. Let $\beta \in \Zomega, |\beta|>1$. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. There exists a finite subset $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$.
-\end{theo} 
+We plug in the alphabet $\A$ and input alphabet $\B$. Because of adding of the smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we see from the proof of Theorem \ref{thm:suffCondPhase1} that the weight coefficient set~$\Q$ constructed in Phase~1 has elements bounded by the constant $R$. 
+
+Therefore, the intermediate weight coefficient sets $\Q_k$ in Algorithm \ref{alg:weightCoefSet} have elements bounded by $R$ for all $k\in\NN$. Hence, Phase 1 succesfully ends if there are only finitely many elements in $\Zomega$ bounded by the constant $R$. 
+
+
+The following two lemmas characterizes the algebraic integer $\omega$ according to number of elements of $\Zomega$ in a complex circle centered around 0. 
+\begin{lem}
+Let $\omega\in\RR$ be an algebraic integer and $R$ be a positive constant. There are only finitely many elements in the set $\left\{x \in\Zomega \colon |x|<R \right\}$ if and only iff $\omega \in \ZZ$. 
+\end{lem}
 \begin{proof}
-    Directly from Lemma \ref{lem:weightCoefSet} and assumption on $\Zomega$.
+If $\omega \in \ZZ$, then $\Zomega = \ZZ$. Trivially, there are only finitely many integers bounded by any constant $R$.
+
+Suppose now that $\omega \notin \ZZ$ and we show that 
+$$
+(\forall R>0) (\exists_\infty x\in \Zomega)(|x|<R)\,.
+$$ 
+
+The degree of $\omega$ is at least two as the only algebraic integers of degree one are integers, i.e. $\omega \in \RR \setminus \QQ$. 
+Set $x:= \omega- \lfloor \omega \rfloor$. We see that $0<x<1$ as $\omega \notin \ZZ$ and $x \in \Zomega$ as $\omega \in \Zomega$, $\lfloor \omega \rfloor \in  \ZZ\subset\Zomega$ and $\Zomega$ is a ring. 
+Hence, the sequence $(x^n)_{n\in \NN}$ is strictly decreasing and its limit is 0 which implies the claim.
 \end{proof}
-Therefore, Phase 1 succesfully ends if there can be only finitely many elements in $\Zomega$ NEBO Zbeta??? bounded by constant $R$ as intermediate weight coefficient sets $\Q_k$ have elements bounded by $R$ for all $k$. 
+
+
+\begin{lem}
+Let $\omega\in \CC\setminus\RR$ be an algebraic integer and $R$ be a positive constant. There are only finitely many elements in the set $\left\{x \in\Zomega \colon |x|<R\right\}$ if and only iff the degree $d$ of $\omega$ is two.  
+\end{lem}
+\begin{proof}
+
+\end{proof}
+
+
 We categorize an algebraic integer $\omega$ which generates $\Zomega \ni \beta$ as follows:
+PREDELAT
 \begin{itemize}
     \item $\omega \in \ZZ$ implies $\Zomega=\ZZ$ which has the required property and thus Phase~1 converges.
     \item $\omega \in \RR\setminus\ZZ$ implies $\Zomega$ being dense in $\RR$. CITACE NEBO DUKAZ??? Thus the convergence of Phase~1 is not guaranteed and we have an example for which it does not converge.
