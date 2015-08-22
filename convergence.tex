@@ -55,7 +55,7 @@ z_i:=k_i \cdot z_{i-1}-\omega^2\,
 $$
 where $k_i\in\ZZ$ is such that 
 $$
-|k_i \cdot\Im z_{i-1}-\Im \omega^2|\leq \frac{\Im z_{i-1}}{2}\,.
+|k_i \cdot\Im z_{i-1}-\Im \omega^2|\leq \frac{|\Im z_{i-1}|}{2}\,.
 $$
 The existence of such number $k_i$ follows from the fact that $l\cdot \Im z_{i-1}\leq \Im \omega^2 \leq(l+1)\Im z_{i-1} $ for some $l\in\ZZ$. We choose $k_i$ from $\{l,l+1\}$ accordingly.
 
@@ -63,7 +63,10 @@ We prove by induction that $z_i \in \Zomega$ and $|\Im z_i|\leq |\Im \omega|/2^i
 $$
 |\Im z_{i+1}|= |k_{i+1} \cdot \Im z_{i}- \Im\omega^2|\leq \frac{1}{2}|\Im z_i|\leq \frac{|\Im \omega|}{2^{i+1}}\,. 
 $$
-Now we take $i_0\in\NN$ such that $|\Im \omega|/2^{i_0}\leq 1/2$.  
+Now we take $i_0\in\NN$ such that $|\Im \omega|/2^{i_0}< 1/2$. Let $k\in\ZZ$ be such that $|\Re z_{i_0} -k|\leq 1/2$. Set $x:= z_{i_0}-k$. Then
+$$
+|x|\leq |\Re x| +|\Im x| \leq  |\Re z_{i_0} -k| + |\Im z_{i_0}| \leq \frac{1}{2} + \frac{|\Im \omega|}{2^{i_0}} < \frac{1}{2} +\frac{1}{2}=1\,.
+$$  
 \end{proof}
 
 
