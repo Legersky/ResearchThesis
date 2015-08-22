@@ -11,10 +11,15 @@
 \usepackage[fixlanguage]{babelbib}
 \selectbiblanguage{english}
 
+
+\usepackage{silence}
+\WarningFilter{hyperref}{Token not allowed}
 \usepackage[pdfauthor={Jan Legersk\'y},
             pdfproducer={Jan Legersk\'y},
-            pdfcreator={pdflatex}]{hyperref}
-\hypersetup{pdftitle={Konstrukce algoritmů pro paraleln\'i s\v c\'it\'an\'i}}
+            pdfcreator={pdflatex},
+            pdfencoding=unicode]{hyperref}
+\usepackage{bookmark}
+\hypersetup{pdftitle={Konstrukce algoritmu pro paraleln\'i sc\'it\'an\'i}}
 \hypersetup{pdfsubject={V\'yzkumn\'y \'ukol, Jan Legersk\'y}}
 \hypersetup{pdfkeywords={parallel addition, non-standard numeration systems}}            
 
@@ -25,6 +30,8 @@
 \fancyhead[L]{\slshape \nouppercase{\rightmark}} % \leftmark .. kapitola
 \fancyhead[R]{\thepage}
 % \oddsidemargin=10mm   % jednostranný tisk !!!
+\setlength{\headheight}{14pt} 
+
 
 \input{commands.tex}
 
@@ -55,7 +62,7 @@
 \newcommand{\obor}{Inženýrská informatika}
 \newcommand{\zamereni}{Matematická informatika}
 
-\newcommand{\nazevcz}{Konstrukce algoritmů pro paraleln\'i s\v c\'it\'an\'i}
+\newcommand{\nazevcz}{Konstrukce algoritm\r u pro paraleln\'i s\v c\'it\'an\'i}
 \newcommand{\nazeven}{Construction of algorithms for parallel addition}
 \newcommand{\autor}{Jan Legersk\'y}
 \newcommand{\vedouci}{Ing. \v St\v ep\'an Starosta, Ph.D.}
@@ -198,6 +205,8 @@ Jan Legersk\'y
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Z A Č Á T E K   P R Á C E                                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{symbols.tex}
+\addcontentsline{toc}{chapter}{List of symbols}
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
@@ -218,7 +227,7 @@ Jan Legersk\'y
 
 \chapter{Convergence}
 \label{chap:convergence}
-\textcolor{red}{UVOD KAPITOLY I K SEKCIM, ZAVISLOST NA HUSTYCH MNOZINACH}
+\textcolor{red}{UVOD KAPITOLY I K SEKCIM, ODKAZ NA PRIKLAD NEKONVERGENCE}
 \input{convergence.tex}
 
 \chapter{Design and implementation}

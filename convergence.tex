@@ -10,7 +10,7 @@ However, Theorem \ref{thm:suffCondPhase1} gives a sufficient condition for conve
     Moreover, if $\omega$ is such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$, the set $\Q$ is finite. 
 \end{theo}
 \begin{proof}
- Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $\beta1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
+ Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $|\beta|>1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
  $$
     |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{|\beta|}{|\beta|-1}\right)=R\,.
  $$ 
@@ -25,6 +25,7 @@ Therefore, the intermediate weight coefficient sets $\Q_k$ in Algorithm \ref{alg
 
 The following two lemmas characterizes the algebraic integer $\omega$ according to the number of elements of $\Zomega$ in a complex circle centered around 0. 
 \begin{lem}
+\label{lem:numElemRR}
 Let $\omega\in\RR$ be an algebraic integer and $R$ be a positive constant. There are only finitely many elements in the set $\left\{x \in\Zomega \colon |x|<R \right\}$ if and only if $\omega \in \ZZ$. 
 \end{lem}
 \begin{proof}
@@ -42,6 +43,7 @@ Hence, the sequence $(x^n)_{n\in \NN}$ is strictly decreasing and its limit is 0
 
 
 \begin{lem}
+\label{lem:numElemCC}
 Let $\omega\in \CC\setminus\RR$ be an algebraic integer and $R$ be a positive constant. There are only finitely many elements in the set $\left\{x \in\Zomega \colon |x|<R\right\}$ if and only if the degree of $\omega$ is two.  
 \end{lem}
 \begin{proof}
@@ -97,13 +99,13 @@ For both cases, the sequence $(x^n)_{n\in\NN}$ has the limit 0 and $0\neq x^n\in
 \end{proof}
 
 
-We categorize an algebraic integer $\omega$ which generates $\Zomega \ni \beta$ as follows:
-PREDELAT
+Using Theorem \ref{thm:suffCondPhase1} and Lemma \ref{lem:numElemRR} and \ref{lem:numElemCC}, we categorize an algebraic integer $\omega$ which generates $\Zomega \ni \beta$ as follows:
+
 \begin{itemize}
-    \item $\omega \in \ZZ$ implies $\Zomega=\ZZ$ which has the required property and thus Phase~1 converges.
-    \item $\omega \in \RR\setminus\ZZ$ implies $\Zomega$ being dense in $\RR$. CITACE NEBO DUKAZ??? Thus the convergence of Phase~1 is not guaranteed and we have an example for which it does not converge.
-    \item $\omega \in \CC\setminus\RR$, $\omega$ being quadratic algebraic integer implies that $\Zomega$ is not dense in $\CC$ and thus Phase~1 can converge. CO NEJAKY DUKAZ NEBO LEPSI ZDUVODNENI?????? NOT DENSE PORAD JESTE NEZNAMENA, ZE JICH NEMUZE BYT NEKONECNE...
-    \item $\omega \in \CC\setminus\RR$, $\omega$ being algebraic integer of degree $\geq 3$ implies $\Zomega$ is  dense in $\CC$ and therefore the convergence of Phase~1 is not guaranteed.
+    \item $\omega \in \ZZ \implies$ Phase~1 converges.
+    \item $\omega \in \RR\setminus\ZZ$ -- the sufficient condition does not hold and we we have an example for which Phase 1 does not converge (see Section \ref{sec:example_nonoconvergence_phase1}).
+    \item $\omega \in \CC\setminus\RR$, $\omega$ being quadratic algebraic integer $\implies$ Phase~1 converges.
+    \item $\omega \in \CC\setminus\RR$, $\omega$ being algebraic integer of degree $\geq 3$ -- the sufficient condition does not hold  and therefore the convergence of Phase~1 is not guaranteed.
 \end{itemize}
 
 \section{Convergence of Phase 2}
