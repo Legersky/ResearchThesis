@@ -122,8 +122,8 @@ $$
 \Qb{m}:=\Q_{[\underbrace{\scriptstyle b,\dots,b}_m]}
 $$ for $m \in \NN$ and $b\in\B$.
 
-Obviously, finitness of Phase~2 implies that there exists a length of window $M$ such that the set $\Qb{m}$ contains only one element for all $b\in\B$. 
-The following theorem is used for the construction of algorithm which checks this necessary condition. 
+Obviously, finiteness of Phase~2 implies that there exists a length of window $M$ such that the set $\Qb{m}$ contains only one element for all $b\in\B$. 
+The following theorem is used for the construction of Algorithm \ref{alg:oneletterSets} which checks this necessary condition. 
 
 \begin{theo}
 \label{thm:stoppingCondition}
@@ -155,7 +155,18 @@ The inductive step of the proof for $m+1$ is analogous to the base case.
 Phase 2 ends when there is only one element in $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_j,\dots, w_{j-m+1}) \in \B^m$ for some fixed length of window $m$. But if $\#\Qb{m_0}\geq 2$, size of $\Q_{[b,\dots,b]}$ does not decrease despite of extending the length of window.
 \end{proof}
 
+ Now we describe Algorithm \ref{alg:oneletterSets} which checks whether Phase~2 stops when it processes input digits $bb\dots b$.
+For arbitrary $m$, sets $\Qb{m}$  can be easily constructed separately for each $b\in\B$. We build the set $\Qb{m}$ for input digits $bb\dots b$ in the same way as in Phase 2. This means that we first search for $\Qb{}$ such that 
+$$
+b + \Q \subset \A + \beta \Qb{}\,.
+$$
+Until the set $\Qb{m}$ contains only one element, we increment the lenght of the window $m$ and, using Algorithm \ref{alg:minimalSet}, we build the subset $\Qb{m+1}$ of the set $\Qb{m}$ such that
+$$
+b + \Qb{m} \subset \A + \beta \Qb{m+1}\,.
+$$
+In addition, we check whether the set $\Qb{m+1}$ is strictly smaller than the set $\Qb{m}$. If not, we know by Theorem \ref{thm:stoppingCondition} that Phase 2 does not converge because of the input digits $bb\dots b$.
 
+Thus, running of Algorithm \ref{alg:oneletterSets} for each input digit $b\in\B$ can reveal non-finiteness of Phase~2.
 
 \begin{algorithm}
   \caption{Check input $bb\dots b$}
@@ -183,4 +194,4 @@ Phase 2 ends when there is only one element in $\Q_{[w_j,\dots, w_{j-m+1}]}$ for
   \end{algorithmic}
 \end{algorithm}
 
-For arbitrary $m$, sets $\Qb{m}$  can be easily constructed separately for each $b\in\B$. Using Theorem \ref{thm:stoppingCondition}, Algorithm \ref{alg:oneletterSets} checks whether Phase~2 stops processing input digits $bb\dots b$. Thus,  non-finiteness of Phase~2 can be revealed by running it for each input digit $b\in\B$.
+
