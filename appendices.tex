@@ -1,8 +1,44 @@
 \section{\texorpdfstring{Construction of weight coefficients set $\Q$}{Construction of weight coefficients set Q}}
-\foreach \n in {1,...,16} {%
-        \includegraphics[width=0.4\textwidth]{img/eisenstein/phase1_image_\n.png} \hfill
-        \vfill
+\label{app:phase1}   
+
+\foreach \n in {1,...,13} {%
+\begin{SCfigure}[][htbp]
+    \centering
+    \caption{Construction of the~weight coefficients set $\Q$ for Eisenstein numeration system}
+    \label{img:phase1img\n}
+    \includegraphics[height=0.3\textheight]{img/eisenstein/phase1_image_\n.png}
+\end{SCfigure}
     }
+
+\newpage
+\section{\texorpdfstring{Construction of set $\Q_{[\omega,1,2]}$}{Construction of set Q[omega,1,2] for Eisenstein numeration system}}
+\label{app:phase2}    
+\foreach \n in {1,...,7} {%
+\begin{SCfigure}[][htbp]
+    \centering
+    \caption{Construction of the set $\Q_{[\omega,1,2]}$ for Eisenstein numeration system}
+    \label{img:phase2img\n}
+    \includegraphics[height=0.3\textheight]{img/eisenstein/phase2_image_\n.png}
+\end{SCfigure}
+    }
+    
+    
+% \begin{figure}[!htbp]
+%   \centering
+%   \begin{minipage}[b]{0.45\textwidth}
+%     \FPeval{\numberImg}{clip(2*\n-1)}
+%     \includegraphics[height=0.3\textheight]{img/eisenstein/phase1_image_\numberImg.png}
+%     \caption{ }
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[b]{0.45\textwidth}
+%     \FPeval{\numberImg}{clip(2*\n)}
+%     \includegraphics[height=0.3\textheight]{img/eisenstein/phase1_image_\numberImg.png}
+%     \caption{ }
+%   \end{minipage}
+% \end{figure}
+%         \vfill
+
 
 \newpage
 \section{Sample of input file for shell}
