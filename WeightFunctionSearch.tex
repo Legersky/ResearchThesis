@@ -22,5 +22,5 @@ Return weight function $q$ unless the length of window exceeds \var{max\_input\_
 
 
 \begin{method}{check\_one\_letter\_inputs}{max\_input\_length}
-The method checks by Algorithm \ref{alg:oneletterSets} if there is a unique weight coefficient for inputs $({b,b,\dots,b})\in\B^m$ for some length of window $m$. Using Lemma \ref{lem:stoppingCondition}, an exception is raised in the case of an infinite loop. Otherwise the list of inputs $(b,b,\dots,b)$ which have the largest length of the window is returned.
+The method checks by Algorithm \ref{alg:oneletterSets} if there is a unique weight coefficient for inputs $({b,b,\dots,b})\in\B^m$ for some length of window $m$. Using Theorem \ref{thm:suffCondPhase1}, an exception is raised in the case of an infinite loop. Otherwise the list of inputs $(b,b,\dots,b)$ which have the largest length of the window is returned.
 \end{method}

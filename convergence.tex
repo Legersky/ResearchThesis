@@ -1,8 +1,11 @@
 Unfortunately, the extending window method does not always converge. The algorithm may lead to an infinite loop in both phases. 
-However, Theorem \ref{thm:suffCondPhase1} gives a sufficient condition for convergence of the Phase 1. 
+In this chapter, we introduce a sufficient condition for convergence of Phase 1 in Theorem \ref{thm:suffCondPhase1} and we categorize the algebraic number $\omega$ according to this condition. Theorem \ref{thm:stoppingCondition} enables us to construct an algorithm which checks the necessary condition for convergence of Phase 2.
+
+% However,  and Theorem \ref{thm:stoppingCondition} enables us to construct Algorithm \ref{alg:oneletterSets} which checks the necessary condition for convergence of Phase 2.  
 
 \section{Convergence of Phase 1}
 \label{sec:convergencePhase1}
+The following theorem gives the condition on $\omega$ which is sufficient for convergence of the Phase 1.
 \begin{theo}
 \label{thm:suffCondPhase1}
     Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then, there exists a set $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
@@ -82,7 +85,11 @@ Obviously, $z_0=z_0 \prod_{j=1}^0 k_j - 0\cdot w$. Assume now that it holds for 
 $$
 z_{i+1}=k_{i+1} \cdot z_{i}-w= k_{i+1}\left(z_0 \cdot \prod_{j=1}^i k_j- l_i\cdot w\right) -w=z_0 \cdot \prod_{j=1}^{i+1} k_j - (\underbrace{k_{i+1}\cdot l_i +1}_{=:l_{i+1}})w\,.
 $$
-Thus, $z_i\in\Zomega$. Moreover, $z_i\notin \ZZ$ as $\ZZ\ni z_i=z_0 \cdot \prod_{j=1}^i k_j- l_i\cdot w$ contradicts that the degree of $\omega$ is at least three.
+Thus, $z_i\in\Zomega$. Moreover, $z_i\notin \ZZ$. Assume in contrary that 
+$$
+z_0 \cdot \prod_{j=1}^i \underbrace{k_j}_{\neq0}- l_i\cdot w = z_i\in \ZZ\,.
+$$
+Since $z_0,w\in\{\omega, \omega^2\}, z_0\neq w$, we have the integer polynomial of degree two with zero $\omega$. It contradicts that the degree of $\omega$ is at least three.
 % Then $z_{i+1}\in\Zomega$ as $z_{i+1}=k_{i+1} \cdot z_{i}-w$ which is an integer combination of numbers from $\Zomega$. Also,
 
 
@@ -93,7 +100,7 @@ $$
 $$
 We know that $\Im z_{i_0} \neq 0$ and thus $0<|x|<1$.
 
-Consider now the case that we cannot produce $z_{i_1+1}$ in the sequence $(z_i)_{i\in\NN}$ as there is $z_{i_1}$ such that $\Im z_{i_1} = 0$. In the same manner as before, we may prove that $z_{i_1} \notin \ZZ$, i.e. $z_{i_1} \in \RR\setminus \ZZ$. Set $x:= \Re z_{i_1}- \lfloor \Re z_{i_1} \rfloor$. Obviously, $0<|x|<1$.
+Consider now the case that we cannot produce $z_{i_1+1}$  in the sequence $(z_i)_{i\in\NN}$ as there is ${i_1}$ such that $\Im z_{i_1} = 0$, i.e. $z_{i_1}\in\RR$. In the same manner as before, we may prove that  $z_{i_1} \in \Zomega\setminus \ZZ$. Set $x:= z_{i_1}- \lfloor z_{i_1} \rfloor$. Obviously, $0<|x|<1$ and $x\in\Zomega$.
 
 For both cases, the sequence $(x^n)_{n\in\NN}$ has the limit 0 and $0\neq x^n\in\Zomega$ for all $n\in\NN$. Thus there are infinitely many elements of $\Zomega$ bounded by any positive constant $R$. 
 \end{proof}
@@ -110,12 +117,45 @@ Using Theorem \ref{thm:suffCondPhase1} and Lemma \ref{lem:numElemRR} and \ref{le
 
 \section{Convergence of Phase 2}
 \label{sec:convergencePhase2}
-We focus on Phase~2 now. For shorter notation, set 
+For shorter notation, set 
 $$
 \Qb{m}:=\Q_{[\underbrace{\scriptstyle b,\dots,b}_m]}
 $$ for $m \in \NN$ and $b\in\B$.
 
 Obviously, finitness of Phase~2 implies that there exists a length of window $M$ such that the set $\Qb{m}$ contains only one element for all $b\in\B$. 
+The following theorem is used for the construction of algorithm which checks this necessary condition. 
+
+\begin{theo}
+\label{thm:stoppingCondition}
+Let $m_0 \in \NN$ and $b\in\B$ be such that sets $\Qb{m_0}$ and $\Qb{m_0-1}$ produced by Algorithm \ref{alg:minimalSet} within Phase~2 have the same size. Then
+$$
+    \#\Qb{m} = \#\Qb{m_0} \qquad \forall m\geq m_0-1\,.
+$$ 
+Particularly, if $\#\Qb{m_0}\geq 2$, Phase~2 does not converge.
+\end{theo}
+\begin{proof}
+We prove the base case of induction with respect to $m$. For $m=m_0+1$, the set $\Qb{m_0+1}$ is found by Algorithm \ref{alg:minimalSet} such that 
+$$
+b + \Qb{m_0} \subset \A + \beta \Qb{m_0+1}\,
+$$
+and set $\Qb{m_0}$ is found by the same algorithm such that
+$$
+b + \Qb{m_0-1} \subset \A + \beta \Qb{m_0}\,.
+$$
+As $\Qb{m_0} \subset \Qb{m_0-1}$, the assumption of the same size implies
+$$
+    \Qb{m_0} = \Qb{m_0-1}\,.
+$$
+It means that Algorithm \ref{alg:minimalSet} runs with the same input and hence
+$$
+\Qb{m_0+1}=\Qb{m_0}\,.
+$$
+The inductive step of the proof for $m+1$ is analogous to the base case.
+
+Phase 2 ends when there is only one element in $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_j,\dots, w_{j-m+1}) \in \B^m$ for some fixed length of window $m$. But if $\#\Qb{m_0}\geq 2$, size of $\Q_{[b,\dots,b]}$ does not decrease despite of extending the length of window.
+\end{proof}
+
+
 
 \begin{algorithm}
   \caption{Check input $bb\dots b$}
@@ -143,31 +183,4 @@ Obviously, finitness of Phase~2 implies that there exists a length of window $M$
   \end{algorithmic}
 \end{algorithm}
 
-For arbitrary $m$, sets $\Qb{m}$  can be easily constructed separately for each $b\in\B$. Using Lemma \ref{lem:stoppingCondition}, Algorithm \ref{alg:oneletterSets} checks whether Phase~2 stops processing input digits $bb\dots b$. Thus,  non-finitness of Phase~2 can be revealed by running it for each input digit $b\in\B$.
-\begin{lem}
-\label{lem:stoppingCondition}
-Let $m_0 \in \NN$ and $b\in\B$ be such that sets $\Qb{m_0}$ and $\Qb{m_0-1}$ produced by Algorithm \ref{alg:minimalSet} within Phase~2 have the same size. Then
-$$
-    \#\Qb{m} = \#\Qb{m_0} \qquad \forall m\geq m_0-1\,.
-$$ 
-Particulary, if $\#\Qb{m_0}\geq 2$, Phase~2 does not converge.
-\end{lem}
-\begin{proof}
-It is enough to prove the base case of induction as the inductive step is analogous. The set $\Qb{m_0+1}$ is found by Algorithm \ref{alg:minimalSet} such that 
-$$
-b + \Qb{m_0} \subset \A + \beta \Qb{m_0+1}\,
-$$
-and set $\Qb{m_0}$ is found by the same algorithm such that
-$$
-b + \Qb{m_0-1} \subset \A + \beta \Qb{m_0}\,.
-$$
-As $\Qb{m_0} \subset \Qb{m_0-1}$, the assumption of the same size implies
-$$
-    \Qb{m_0} = \Qb{m_0-1}\,.
-$$
-It means that Algorithm \ref{alg:minimalSet} runs with the same input and hence
-$$
-\Qb{m_0+1}=\Qb{m_0}\,.
-$$
-Phase 2 ends when there is only one element in $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_j,\dots, w_{j-m+1}) \in \B^m$ for some fixed length of window $m$. But if $\#\Qb{m_0}\geq 2$, size of $\Q_{[b,\dots,b]}$ does not decrease despite of extending the length of window.
-\end{proof}
+For arbitrary $m$, sets $\Qb{m}$  can be easily constructed separately for each $b\in\B$. Using Theorem \ref{thm:stoppingCondition}, Algorithm \ref{alg:oneletterSets} checks whether Phase~2 stops processing input digits $bb\dots b$. Thus,  non-finiteness of Phase~2 can be revealed by running it for each input digit $b\in\B$.
