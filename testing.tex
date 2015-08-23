@@ -4,10 +4,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Eisenstein base $\beta = -1 + \omega$ with $\omega = \exp{\frac{2 \pi \imath}{3}} = -\frac{1}{2} + \frac{\imath \sqrt{3}}{2}$}
-KAZDEMU NEJAKY TAKOVYTO VYSTUP:
+\section{Eisenstein numeration system }
+base $\beta = -1 + \omega$ with $\omega = \exp{\frac{2 \pi \imath}{3}} = -\frac{1}{2} + \frac{\imath \sqrt{3}}{2}$
 
-Numeration System: eisenstein 
+
+\subsection{ Eisenstein\_1-block\_complex }
+
+\label{subsec: Eisenstein1-blockcomplex }
+
+The parameters of the numeration system are following:
 
 Minimal polynomial of $\omega$: $ t^{2} + t + 1 $
 
@@ -17,26 +22,22 @@ Minimal polynomial of base: $ x^{2} + 3x + 3 $
 
 Alphabet $\mathcal{A} =\left\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\right\}$
 
-Input alphabet $\mathcal{B} =\mathcal{A}+ \mathcal{A}$
+Input alphabet $\mathcal{B} =\mathcal{A}+ \mathcal{A}$ 
 
-Phase 1 was succesfull. 
-
-Weight Coefficient Set:
-\begin{equation*}
- \mathcal{Q}=\left\{0, 1, 2, -\omega, 2\omega, 2\omega + 1, 2\omega + 2, \omega - 1, \omega, \omega + 1, \omega + 2, -\omega - 1, -\omega - 2, -2\omega, -\omega + 1, -1, -2\omega - 2, -2\omega - 1, -2\right\}
-\end{equation*}
+\rule{0mm}{0mm}\newline
 
 
-Number of elements in the weight coefficient set $\mathcal{Q}$ is: $ 19 $
+Extending window method:
 
-Weight function Info:
+Phase 1 was succesfull.
+The number of elements in the weight coefficient set $\mathcal{Q}$ is $ 19 $.
 
-Phase 2 was succesfull. 
+There is a unique weight coefficient for inputs $b,b,\dots,b$ for all $b\in\mathcal{B}$.
 
-Maximal input length: $ 3 $
+Phase 2 was succesfull.
+The lenght of window $m$ of the weight function $q$ is 3. \checkmark
+%Eisenstein_1-block_complex& \checkmark & \checkmark & \checkmark \\
 
-
-Number of inputs: $ 6085 $
 
 
 \subsection{Penney base $\beta = -1 + \imath$ with $\imath = \exp{\frac{2 \pi \imath}{4}}$}
@@ -50,3 +51,30 @@ Number of inputs: $ 6085 $
 
 \subsection{Base $\beta = -2 + \imath$}
 
+\section{Integer bases}
+\subsection{ base\_4 }
+
+\label{subsec: base4 }
+
+The parameters of the numeration system are following:
+
+Minimal polynomial of $\omega$: $ t - 1 $
+
+Base $\beta= 4 $
+
+Minimal polynomial of base: $ x - 4 $
+
+Alphabet $\mathcal{A} =\left\{0, 1, -1, 2, -2\right\}$
+
+Input alphabet $\mathcal{B} =\mathcal{A}+ \mathcal{A}$
+
+Extending window method:
+
+Phase 1 was succesfull.
+The number of elements in the weight coefficient set $\mathcal{Q}$ is $3$.
+
+There is a unique weight coefficient for inputs $b,b,\dots,b$ for all $b\in\mathcal{B}$.
+
+Phase 2 was succesfull.
+The lenght of window $m$ of the weight function $q$ is 2.
+%base\_4& \checkmark & \checkmark & \checkmark \\
