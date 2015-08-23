@@ -16,7 +16,7 @@ We associate a number $x$ with its  $(\beta, \A)$-representation as a bi-infinit
 \begin{defn}
 Let $(\beta, \A)$ be a positional numeration system. The set of all complex numbers with a finite $(\beta, \A)$-representation is defined by
 $$
-    \fin{\A}:=\left\{\sum_{j=-m}^n x_j \beta^j : n, m \in \NN, x_j \in \A \right\}\,.
+    \fin{\A}:=\left\{\sum_{j=-m}^n x_j \beta^j\colon n, m \in \NN, x_j \in \A \right\}\,.
 $$
 \end{defn}
    
@@ -80,14 +80,14 @@ ZOBECNENI ABECEDY DO Z[OMEGA]
 \begin{defn}
 Let $\omega$ be a complex number. The set of values of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
 $$
-    \ZZ[\omega] =\left\{\sum_{i=0}^n a_i \omega^i : n\in\NN, a_i\in\ZZ \right\} \subset \QQ(\omega)\,.
+    \ZZ[\omega] =\left\{\sum_{i=0}^n a_i \omega^i\colon n\in\NN, a_i\in\ZZ \right\} \subset \QQ(\omega)\,.
 $$
 \end{defn}
 For our purpose, the multiplicative group of a ring is associative   and with an indentity. Notice that $\ZZ[\omega]$ is a commutative ring.     
     
     Non-integer alphabets:
     \begin{itemize}
-        \item Base $\beta \in \Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j\ : a_j \in \ZZ \right\}$, where $\omega \in \CC$ is an~algebraic integer of degree $d$.
+        \item Base $\beta \in \Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j \colon a_j \in \ZZ \right\}$, where $\omega \in \CC$ is an~algebraic integer of degree $d$.
         
         \item Alphabet $\A \subset \Zomega , 0\in \A$.
         
@@ -193,7 +193,7 @@ $$
 for $k=\{0,1,\dots,d-1\}$ which implies the statement.
 \end{proof}
 
-The following lemma summarises basic properties of the mapping $\odot_\omega$ -- factoring out an integer scalar, the identity element, the distributive law and a weaker form of asociativity.
+The following lemma summarises basic properties of the mapping $\odot_\omega$ -- multiplication by an integer scalar, the identity element, the distributive law and a weaker form of asociativity.
 \begin{lem}
 \label{lem:multInZd}
 Let $\omega$ be an algebraic integer of degree $d$. The following statements hold for every $u,v,w\in \ZZ^d$ and $m\in\ZZ$:
@@ -236,7 +236,7 @@ Now we can prove that there is a correspondence between elements of $\Zomega$ an
 \begin{theo}
 Let  $\omega$ be an algebraic integer of degree $d$. Then 
 $$
-\Zomega =\left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\},
+\Zomega =\left\{\sum_{i=0}^{d-1} a_i \omega^i \colon a_i\in\ZZ \right\},
 $$ 
 $(\ZZ^d,+,\odot_\omega)$ is a commutative ring and the mapping $\pi:\Zomega \rightarrow \ZZ^{d}$ defined by 
 $$
@@ -246,11 +246,15 @@ is a ring isomorphism.
   
 \end{theo}
 \begin{proof}
-Obviously, $\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$. Assume $u\in \Zomega$, $x=\sum_{i=0}^n u_i \omega^i$ for some $n\geq d$.  By $p(\omega)=0$, we have an equation $\omega^d =-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0$ which enables us to write
-$$
-u=u_n\omega^n + \sum_{i=0}^{n-1} u_i \omega^i=u_n \omega^{n-d}(-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0)+ \sum_{i=0}^{n-1} u_i \omega^i\,.
-$$
-Thus $x\in \left\{\sum_{i=0}^{d-1} a_i \omega^i : a_i\in\ZZ \right\}$ by  induction with respect to $n$.
+Obviously, $\left\{\sum_{i=0}^{n} a_i \omega^i\colon n\in\NN, a_i\in\ZZ \right\}=\Zomega \supset \left\{\sum_{i=0}^{d-1} a_i \omega^i\colon a_i\in\ZZ \right\}$. We prove the opposite direction by the induction with respect to $n$. Assume $u\in \Zomega$, $u=\sum_{i=0}^n u_i \omega^i$ for some $n\in\NN$. We see that $u\in \left\{\sum_{i=0}^{d-1} a_i \omega^i\colon a_i\in\ZZ \right\}$ for all $n< d$. 
+
+Suppose now that the claim holds for $n-1$ and consider $n\geq d$. Let $p(x)=x^d +p_{d-1}x^{d-1}+ \dots p_1 x+p_0$ be the minimal polynomial of $\omega$.  By $p(\omega)=0$, we have an equation $\omega^d =-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0$ which enables us to write
+\begin{align*}
+u&=u_n\omega^n + \sum_{i=0}^{n-1} u_i \omega^i=u_n \omega^{n-d}(\underbrace{-p_{d-1}\omega^{d-1}- \dots -p_1\omega-p_0}_{\omega^d})+ \sum_{i=0}^{n-1} u_i \omega^i\\
+    &=\sum_{i=0}^{n-d-1} u_i \omega^i+ \sum_{i=n-d}^{n-1} (u_i-u_n \cdot p_{i-n+d}) \omega^i=\sum_{i=0}^{n-1} u'_i \omega^i\,.
+\end{align*}
+
+Thus $u\in \left\{\sum_{i=0}^{d-1} a_i \omega^i \colon a_i\in\ZZ \right\}$ by the induction assumption.
 
 Let us check now that the mapping $\pi$ is well-defined. Assume on contrary that there exists $v\in \Zomega$ and $i_0\in\{0,1,\dots,d-1\}$ such that $v=\sum_{i=0}^{d-1} v_i \omega^i=\sum_{i=0}^{d-1} v'_i \omega^i$ and $v_{i_0} \neq v'_{i_0}$. Then
 $$
