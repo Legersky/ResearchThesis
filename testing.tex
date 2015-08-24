@@ -1,11 +1,14 @@
-We have tested several bases with different alphabets. Table \ref{tbl:results} summarizes the tested numeration systems which are described in the sections below. The first column of the table shows whether Phase 1 was successful (\checkmark) or not (\xmark) for the given numeration system. The second column is the control of the necessary condition for the convergence of Phase 2, i.e. if there is output of the weight function $q$ for input digits $b,b,\dots,b$ for all $b\in\B$. The results of Phase 2 are in the last column. 
-\begin{tabular}{l |c c c}
-\label{tbl:results}
-    Name & Phase 1 & Necessary condition & Phase 2 \\ \hline
-    Eisenstein\_1-block\_complex & \checkmark & \checkmark & \checkmark \\
-    Eisenstein\_1-block\_integer & \checkmark & \xmark & --
-\end{tabular}
-
+We have tested several bases with different alphabets. Table \ref{tbl:results} summarizes the tested numeration systems which are described in the sections below. The first column of the table shows whether Phase 1 was successful (\checkmark) or not (\xmark) for the given numeration system. The second column is the control of the necessary condition for the convergence of Phase 2, i.e. if there is output of the weight function $q$ for input digits $b,b,\dots,b$ for all $b\in\B$. The results of Phase 2 are in the last column.
+\begin{table}
+\centering
+  \begin{tabular}{l |c c c}
+      Name & Phase 1 & Necessary condition & Phase 2 \\ \hline
+      Eisenstein\_1-block\_complex & \checkmark & \checkmark & \checkmark \\
+      Eisenstein\_1-block\_integer & \checkmark & \xmark & --
+  \end{tabular}
+  \caption{Results of extending window method.}
+  \label{tbl:results}
+\end{table} 
 \section{Eisenstein numeration system}
 
 \input{testedExamples/Eisenstein_1-block_complex.tex}
