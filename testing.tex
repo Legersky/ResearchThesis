@@ -2,7 +2,7 @@ We have tested several bases with different alphabets. The alphabets are chosen 
 
  Table \ref{tbl:results} summarizes the tested numeration systems which are described in the sections below. The first column of the table shows whether Phase 1 was successful (\checkmark) or not (\xmark) for the given numeration system. The second column is the control of the necessary condition for the convergence of Phase 2, i.e. if there is the output of the weight function $q$ for input digits $b,b,\dots,b$ for all $b\in\B$. The results of Phase 2 are in the last column. Notice, that the next step of the extending window method is not processed without the previous one (--).
 
-
+The complete results including log files and images can be found on the attached CD  or \url{https://github.com/Legersky/ParallelAddition}.
 
 \begin{table}[!htb]
 \centering
@@ -35,23 +35,30 @@ Penney base $\beta = -1 + \omega$ where $\omega=\imath$. The minimal polynomial 
 % \input{testedExamples/Penney_1-block_complex.tex}
 % \input{testedExamples/Penney_1-block_complex_small.tex}
 % \input{testedExamples/Penney_1-block_integer.tex}
+
 For 2-block parallel addition, we shift from base $\beta$ to $\beta^2=-2-2\beta=-2\omega$ which has the minimal polynomial $x^{2} + 4$. We have tested the shifted alphabet $\{0,\pm 1\}+\beta \{0,\pm 1\}$.
+
 % \input{testedExamples/Penney_2-block_integer.tex}
 
 \section{\texorpdfstring{Base $\beta = 1 + \imath$}{Base beta = 1 + i}}
-% \input{testedExamples/Quadratic+1-2+2-block_complex.tex}
-% \input{testedExamples/Quadratic+1-2+2-block_small_complex.tex}
-% \input{testedExamples/Quadratic+1-2+2-block_integer.tex}
+The following numeration systems have the base $\beta =1 + \imath$ with the minimal polynomial $x^2-2x+2$. We have tested the complex and integer alphabet.
+
+\input{testedExamples/Quadratic+1-2+2_1-block_complex.tex}
+\input{testedExamples/Quadratic+1-2+2_1-block_integer.tex}
+ 
+
+\section{Base $\beta = -2 + \imath$}
+The base  $\beta = -2 + \imath$ has the minimal polynomial $x^2+4*x +5$.
+\input{testedExamples/Quadratic_1+4+5_1-block_complex.tex}
 % 
+\section{Base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{11}}{2}$}
+The base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{11}}{2}$ has the minimal polynomial  $x^2+3*x +5$.
+\input{testedExamples/Quadratic+1+3+5_1-block_complex.tex}
+
 % \section{Base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{11}}{2}$}
-% \input{testedExamples/Quadratic+1+3+5_1-block_complex.tex}
-% 
-% \section{Base $\beta = -2 + \imath$}
-% \input{testedExamples/Quadratic_1+4+5_1-block_complex.tex}
-% 
-% \section{Integer bases}
-% \input{testedExamples/base_2.tex}
-% \input{testedExamples/base_4.tex}
-% 
-\section{\texorpdfstring{Base $\beta = 1 + \imath$}{Base beta = 1 + i}}
 % \input{testedExamples/Quadratic+1-5+3_1-block_integer.tex}
+
+\section{Integer bases}
+We have also tested integer bases 2, resp. 4 with the alphabets $\{0,\pm 1\}$, resp. $\{0,\pm 1, \pm 2\}$.
+\input{testedExamples/base_2.tex}
+\input{testedExamples/base_4.tex}
