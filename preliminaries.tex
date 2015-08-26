@@ -33,7 +33,7 @@ Designing algorithm for parallel addition requires some redundancy in numeration
 \begin{defn}
 A numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations.
 \end{defn}
-Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, thera are some disadvantages. For example, comparison is problematic.  
+Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, there are some disadvantages. For example, comparison is problematic.  
 
 
 \section{Parallel addition}
@@ -57,6 +57,7 @@ In fact, addition on $\fin{\A}$ can be performed in parallel if there is digit s
 
 We recall few results about parallel addition in a numeration system with an integer alphabet. Ch. Frougny, E. Pelantov\'a and M. Svobodov\'a proved in \cite{parAddNS} following sufficient condition for existence of the existence of algorithm for parallel addition.
   \begin{theo}
+  \label{thm:suffConjugates}
   Let $\beta\in\CC$ be an algebraic number such that $|\beta|>1$ and all its conjugates in modulus differs from 1. There exists an alphabet $\A$ of contiguous integers containing 0 such that addition on $\fin{\A}$ can be performed in parallel.
   \end{theo}
   The proof of the theorem provides the algorithm for the alphabet of the form $\{-a,-a+1, \dots,0,\dots,a-1,a\}$. But in general, $a$ is not minimal.
@@ -68,6 +69,7 @@ The same authors showed in \cite{kBlock} that the condition on the conjugates of
   
 The question of minimality of the alphabet is studied in \cite{minAlph}. The following lower bound for the size of the alphabet is provided:
   \begin{theo}
+  \label{thm:lowerBoundAlphabet}
   Let $\beta\in\CC, |\beta|>1,$  be an algebraic integer with the minimal polynomial $p$. Let $\A\subset\ZZ$ be an alphabet of contiguous integers containing 0 and 1. If addition on $\fin{\A}$ is computable in parallel, then $\#\A \geq |p(1)|$. Moreover, if $\beta$ is a positive real number, $\beta>1$, then $\#\A \geq  |p(1)|+2$.
   \end{theo}
   
