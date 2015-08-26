@@ -1,9 +1,34 @@
-Algorithms for parallel addition have been studied to improve performance of computer power units as well as for the theoretical reasons. Addition is the important part of algorithms for multiplication and division. Thus the linear time of the standard addition algorithms is a serious drawback. A parallel algorithm to compute the sum of $x=x_n x_{n-1}\cdots x_1 x_0 \bullet$ and $y=y_n y_{n-1}\cdots y_1 y_0 \bullet$ determines the $j$-th digit of the sum just from the knowledge of fixed number of digits around $x_j$ and $y_j$. Thus it avoids a carry propagation and all output digits can be determined at the same time. In contrary, the carry propagation in the standard algorithms requires to compute digits one by one.
+Algorithms for parallel addition have been studied to improve performance of computer power units as well as for the theoretical reasons. Addition is the important part of algorithms for multiplication and division. Thus the linear time of the standard addition algorithms is a serious drawback. A parallel algorithm to compute the sum of $x=x_n x_{n-1}\cdots x_1 x_0 \bullet$ and $y=y_n y_{n-1}\cdots y_1 y_0 \bullet$ determines the $j$-th digit of the sum just from the knowledge of fixed number of digits around $x_j$ and $y_j$. Thus it avoids a carry propagation and all output digits can be determined at the same time. In contrast, the carry propagation in the standard algorithms requires to compute digits one by one.
 
-The parallel addition algorithm for an integer base $\beta\geq3$ was introduced by A. Avizienis in \cite{avizienis} in 1961. The algorithm works on the alphabet $\{-a, \dots, 0, \dots a\}$ where $a\in\NN$ is such that $\beta/2 <a \leq \beta-1$. Later, C. Y. Chow and J. E. Robertson \cite{chow} found an algorithm for the base 2 and the alphabet $\{-1,0,1\}$ in 1978.   
+The parallel addition algorithm for an integer base $\beta\geq3$ was introduced by A. Avizienis in \cite{avizienis} in 1961. The algorithm works on the alphabet $\{-a, \dots, 0, \dots a\}$ where $a\in\NN$ is such that $\beta/2 <a \leq \beta-1$. Later, C. Y. Chow and J. E. Robertson presented an algorithm for the base 2 and the alphabet $\{-1,0,1\}$ in \cite{chow}.   
 
 So called non-standard numeration systems, where the base $\beta$ is not a positive integer, have been extensively studied. The reason of this interest is for instance the precise arithmetic in $\QQ(\beta)$. Also, complex bases allow to represent any complex number without separating the real and imaginary part. The example of such system is Penny numeration system with the base $\imath -1$ and the alphabet $\{0,1\}$.
 
 Some redundancy of the numeration is required in order to construct a parallel addition algorithm. It means that numbers may have more than one represenation. P. Kornerup studied the necessary amount of redundancy in \cite{kornerup}. 
 
- The parallel addition algorithms for several bases (negative integer, complex numbers $-1+\imath, 2\imath$ and $\sqrt{2}\imath$, quadratic Pisot unit and the non-integer rational base) are given in \cite{minAlph}     
+Ch. Frougny, E. Pelantov\'a and M. Svobodov\'a provides parallel algorithms for all bases $\beta$ such that $|\beta|>1$ and no conjugate of $\beta$ equals 1 in modulus, see \cite{parAddNS}. Nevertheless, the integer alphabet is not minimal in general.
+ The parallel addition algorithms for several bases (negative integer, complex numbers $-1+\imath, 2\imath$ and $\sqrt{2}\imath$, quadratic Pisot unit and the non-integer rational base) with minimal integer alphabet are given in \cite{minAlph}.
+ 
+% \rule{0cm}{0cm}
+
+We focus on the construction of parallel addition algorithm for a given base $\beta, |\beta|>1$ being an algebraic integer and alphabet $\A$ containing 0. The alphabet $\A$ may be non-integer. 
+
+First, we recall the definitions and few previous results in Chapter \ref{chap:preliminaries}. An important tool used for the implementation is included. 
+
+The general concept of the construction of parallel addition algorithms is introduced in Chapter \ref{chap:methodDescription}. We develop so called extending window method for the construction of parallel addition algorithm for a given base $\beta$ and alphabet $\A$. The method consists of two phases. We discuss the convergence of both of them in Chapter \ref{chap:convergence}.
+
+We have implemented the designed method in SageMath. The implemented classes and provided user interfaces are described in Chapter \ref{chap:implementation}. The summary of all tested examples can be found in Chapter \ref{chap:testing}. See Appendices for images of the iterations of the extending window method for Eisenstein numeration system.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
