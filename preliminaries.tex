@@ -66,12 +66,13 @@ The same authors showed in \cite{kBlock} that the condition on the conjugates of
   Let the base $\beta\in\CC, |\beta|>1,$ be an algebraic number with a conjugate $\beta'$ such that $|\beta'|=1$. Let $\A\subset\ZZ$ be an alphabet of contiguous integers containing 0. Then addition on $\fin{\A}$ cannot be computable in parallel.
   \end{theo}
   
-The question of minimality of the alphabet is studied in \cite{minAlph}. The following lower bound for the size of the alphabet is proved.
+The question of minimality of the alphabet is studied in \cite{minAlph}. The following lower bound for the size of the alphabet is provided:
   \begin{theo}
   Let $\beta\in\CC, |\beta|>1,$  be an algebraic integer with the minimal polynomial $p$. Let $\A\subset\ZZ$ be an alphabet of contiguous integers containing 0 and 1. If addition on $\fin{\A}$ is computable in parallel, then $\#\A \geq |p(1)|$. Moreover, if $\beta$ is a positive real number, $\beta>1$, then $\#\A \geq  |p(1)|+2$.
   \end{theo}
   
-ZOBECNENI ABECEDY DO Z[OMEGA]   
+
+In this thesis, we work in the more general concept as we consider also non-integer alphabets. First, we recall the following definition.
 \begin{defn}
 Let $\omega$ be a complex number. The set of values of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
 $$
@@ -80,16 +81,9 @@ $$
 \end{defn}
  Notice that $\ZZ[\omega]$ is a commutative ring (for our purpose, a ring is associative under multiplication and there is a multiplicative indentity).     
     
-    Non-integer alphabets:
-    \begin{itemize}
-        \item Base $\beta \in \Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j \colon a_j \in \ZZ \right\}$, where $\omega \in \CC$ is an~algebraic integer of degree $d$.
-        
-        \item Alphabet $\A \subset \Zomega , 0\in \A$.
-        
-        \item Only few manually found algorithms. 
-        
-        
-    \end{itemize}
+For our numeration system, we choose an algebraic integer $\omega$ which generates the set $\Zomega$. Then we pick the base $\beta\in\Zomega$ such that $|\beta|>1$. We remark that $\beta$ is also algebraic integer as all elements of $\Zomega$ are algebraic integers. Finally, the alphabet $\A$ is a finite subset of $\Zomega$ containing 0.
+
+There are few manually found parallel addition algorithms for such numeration system. We introduce the method for construction of the parallel addition algorithm for a given numeration system $(\beta,\A)$ in Chapter \ref{chap:methodDescription}. 
   
 
 
