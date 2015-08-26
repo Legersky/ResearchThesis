@@ -54,27 +54,22 @@ Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $
 \end{defn}
 In fact, addition on $\fin{\A}$ can be performed in parallel if there is digit set conversion from $\A+\A$ to $\A$ computable in  parallel as we can easily output digitwise sum of two $(\beta,\A)$-representations in parallel.   
 
-Now we recall known algorithms for parallel addition in different numeration systems. 
-DODELAT 
-    {Parallel Addition}
-    Introduced by Avizienis in 1961:
+
+We recall few results about parallel addition in a numeration system with an integer alphabet. Ch. Frougny, E. Pelantov\'a and M. Svobodov\'a proved in \cite{parAddNS} following sufficient condition for existence of the existence of algorithm for parallel addition.
+  \begin{theo}
+  Let $\beta\in\CC$ be an algebraic number such that $|\beta|>1$ and all its conjugates in modulus differs from 1. There exists an alphabet $\A$ of contiguous integers containing 0 such that addition on $\fin{\A}$ can be performed in parallel.
+  \end{theo}
+  The proof of the theorem provides the algorithm for the alphabet of the form $\{-a,-a+1, \dots,0,\dots,a-1,a\}$. But in general, $a$ is not minimal.
+    
+The same authors showed in \cite{kBlock} that the condition on the conjugates of the base $\beta$ is also necessary:
+  \begin{theo}
+  Let the base $\beta\in\CC, |\beta|>1,$ be an algebraic number with a conjugate $\beta'$ such that $|\beta'|=1$. Let $\A\subset\ZZ$ be an alphabet of contiguous integers containing 0. Then addition on $\fin{\A}$ cannot be computable in parallel.
+  \end{theo}
   
-  ROBERTSON
-  For example:
-  $$
-  \beta \in \NN, \beta \geq 3, \A=\{-a, \dots, 0, \dots a\}, b/2 <a \leq b-1\,. 
-  $$  
-  MILENINY A EDITINY ALGORITMY -$>$ VETA S VELKOU INTEGEROVOU ABECEDOU
-  
-    Integer alphabets:
-    \begin{itemize}
-        \item Base $\beta \in \CC, |\beta|>1$.
-        
-        \item Addition is computable in parallel if and only if $\beta$ is an~algebraic number with no conjugate of modulus 1 [Frougny, Heller, Pelantov\'a, S. ].
-        
-        \item Algorithms are known but with large alphabets.
-    \end{itemize}  
-  LOWER BOUND VELIKOSTI ABECEDY
+The question of minimality of the alphabet is studied in \cite{minAlph}. The following lower bound for the size of the alphabet is proved.
+  \begin{theo}
+  Let $\beta\in\CC, |\beta|>1,$  be an algebraic integer with the minimal polynomial $p$. Let $\A\subset\ZZ$ be an alphabet of contiguous integers containing 0 and 1. If addition on $\fin{\A}$ is computable in parallel, then $\#\A \geq |p(1)|$. Moreover, if $\beta$ is a positive real number, $\beta>1$, then $\#\A \geq  |p(1)|+2$.
+  \end{theo}
   
 ZOBECNENI ABECEDY DO Z[OMEGA]   
 \begin{defn}
@@ -83,7 +78,7 @@ $$
     \ZZ[\omega] =\left\{\sum_{i=0}^n a_i \omega^i\colon n\in\NN, a_i\in\ZZ \right\} \subset \QQ(\omega)\,.
 $$
 \end{defn}
-For our purpose, a ring is associative under multiplication and there is a multiplicative indentity. Notice that $\ZZ[\omega]$ is a commutative ring.     
+ Notice that $\ZZ[\omega]$ is a commutative ring (for our purpose, a ring is associative under multiplication and there is a multiplicative indentity).     
     
     Non-integer alphabets:
     \begin{itemize}
