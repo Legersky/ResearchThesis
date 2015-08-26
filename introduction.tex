@@ -2,4 +2,8 @@ Algorithms for parallel addition have been studied to improve performance of com
 
 The parallel addition algorithm for an integer base $\beta\geq3$ was introduced by A. Avizienis in \cite{avizienis} in 1961. The algorithm works on the alphabet $\{-a, \dots, 0, \dots a\}$ where $a\in\NN$ is such that $\beta/2 <a \leq \beta-1$. Later, C. Y. Chow and J. E. Robertson \cite{chow} found an algorithm for the base 2 and the alphabet $\{-1,0,1\}$ in 1978.   
 
-So called non-standard numeration systems, where the base $\beta$ is not a positive integer, have been extensively studied. The parallel addition algorithms for several bases (negative integer, complex numbers $-1+\imath, 2\imath$ and $\sqrt{2}\imath$, quadratic Pisot unit and the non-integer rational base) are given in \cite{minAlph}     
+So called non-standard numeration systems, where the base $\beta$ is not a positive integer, have been extensively studied. The reason of this interest is for instance the precise arithmetic in $\QQ(\beta)$. Also, complex bases allow to represent any complex number without separating the real and imaginary part. The example of such system is Penny numeration system with the base $\imath -1$ and the alphabet $\{0,1\}$.
+
+Some redundancy of the numeration is required in order to construct a parallel addition algorithm. It means that numbers may have more than one represenation. P. Kornerup studied the necessary amount of redundancy in \cite{kornerup}. 
+
+ The parallel addition algorithms for several bases (negative integer, complex numbers $-1+\imath, 2\imath$ and $\sqrt{2}\imath$, quadratic Pisot unit and the non-integer rational base) are given in \cite{minAlph}     
