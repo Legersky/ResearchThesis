@@ -1,3 +1,5 @@
+In this chapter, we recall few definitions and results connected to numeration systems and parallelism. We define set $\Zomega$ and we prove its isomorphism to $\ZZ^d$. This property we use in Theorem \ref{thm:divisibility} which is an important tool for divisibility in $\Zomega$.
+
 \section{Numeration systems}
 Firstly, we give a general definition of numeration system.
 \begin{defn}
@@ -29,10 +31,7 @@ $$
 \fin{\A} + \fin{\A} \subset \fin{\A}\,.
 $$ 
 
-Designing algorithm for parallel addition requires some redundancy in numeration system. 
-\begin{defn}
-A numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations.
-\end{defn}
+Designing algorithm for parallel addition requires some redundancy in numeration system. According to \cite{redundant}, a numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations. For instance, the number 1 has the $(2,\{-1,0,1\})$-representations $1\bullet$ and $1(-1)\bullet$.
 Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, there are some disadvantages. For example, comparison is problematic.  
 
 

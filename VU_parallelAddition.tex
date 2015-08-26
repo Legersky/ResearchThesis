@@ -37,12 +37,12 @@
 \input{commands.tex}
 
 
-\newtheorem{theo}{Theorem}
+\newtheorem{theo}{Theorem}[chapter]
 \newtheorem{lem}[theo]{Lemma}
 
 \theoremstyle{definition}
-\newtheorem{defn}{Definition}
-\newtheorem{exmp}{Example}
+\newtheorem{defn}{Definition}[chapter]
+\newtheorem{exmp}{Example}[chapter]
 
 
 
@@ -215,7 +215,6 @@ Jan Legersk\'y
 
 \chapter{Preliminaries}
 \label{chap:preliminaries}
-\textcolor{red}{CHYBI UVOD}
 \input{preliminaries.tex}
 
 \chapter{Design of extending window method}
@@ -241,11 +240,10 @@ Jan Legersk\'y
 
 \chapter*{Summary}
 \addcontentsline{toc}{chapter}{Summary}
-\textcolor{red}{DOPSAT PODLE OSTATNIHO}
+\input{summary.tex}
 
 
-\newpage
-\textcolor{red}{DODELAT CITACE}
+% \newpage
 \bibliography{literatura}
 \addcontentsline{toc}{chapter}{References}
 \bibliographystyle{plain}

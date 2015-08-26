@@ -33,7 +33,7 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search for a seque
   We use suitable representation of zero to convert digits $w_j$ into the alphabet $\A$. 
   For our purpose, we use the simplest possible representation deduced from the polynomial
   $$
-    R(x)=x-\beta \in \Zomega[x]\,.
+    x-\beta \in \Zomega[x]\,.
   $$
 
 We remark that any polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$ gives us possible representation of zero. The polynomial $R$ is called a \emph{rewriting rule}. 
@@ -76,7 +76,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \label{eq:conversionFormula}
         z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
     \end{equation} 
-    The choice of weight coefficients is the crucial part in order to construct addition algorithms which are computable in parallel. The method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
+    The choice of weight coefficients is the crucial part in order to construct addition algorithms which are computable in parallel. The extending window method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
     
     
      On the other hand, the following example shows that determining weight coefficients is trivial for standard numeration systems.
@@ -143,9 +143,9 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     $$ 
     which verifies that the mapping $\phi$ is indeed the $(M+1)$-local digit set conversion with anticipation $r=0$ and memory $t=M$. The requirement of zero output of the weight function $q$ for the input of $M$ zeros guarantees that $\phi(0,0,\dots,0)=0$. Thus the first condition of Definition \ref{def:digitSetConversion} is satisfied. The second one follows from the equation \ref{eq:valuePreserving}. 
     
-    TADY TO MUSI BYT NEJAK SIKOVNEJI SHRNUTE A POPSANE
+Let us summarize the construction of digit set conversion by rewriting rule $x-\beta$. We need to find weight coefficients for all possible combinations of digits of the input alphabet $\B$. Their multiples of the rewriting rules are digitwise added to the input sequence. In fact, it means that the equation  (\ref{eq:conversionFormula}) is applied on the each position. If the digit set conversion is computable in parallel, the weight coefficients are determined as the outputs of the weight function $q$ with some fixed length of window $M$.  
 
-The construction of a digit set conversion algorithm which is computable in parallel by the extending window method consists of two phases. In the first one, we find a minimal possible weight coefficients set $\Q$. It serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$.
+We search for the weight function $q$ for a given base $\beta$ and input alphabet $\B$ by the extending window method. It consists of two phases. First, we find a minimal possible weight coefficients set $\Q$. We know that is possible to convert the input sequence by choosing the weight coefficients from this set $\Q$. The set $\Q$ serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$. Then, the local conversion is determined -- we use the weight function outputs as weight coefficients in the formula(\ref{eq:conversionFormula}).    
 
 We remark that the convergence of both phases is discussed separately in Chapter \ref{chap:convergence}.
 
@@ -163,7 +163,7 @@ This procedure is repeated until the extended weight coefficients set $\Q_{k+1}$
 
 In other words, we start with $\Q_0=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to weight coefficient set $\Q_0$ to obtain the set $\Q_1$. Assume now that we have the set $\Q_k$ for some $k\geq 1$. The weight coefficients in $\Q_k$ now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in weight coefficients set $\Q_k$ to cover all sums of added coefficients and digits of input alphabet $\B$, we extend $\Q_k$ to $\Q_{k+1}$ by the suitable coefficients. And so on until there is no need to add more elements, i.e. the extended set $\Q_{k+1}$ equals $\Q_k$. Then the weight coefficients set $\Q:=\Q_{k+1}$ satisfies Definition \ref{def:weightCoefficientsSet}. We remark that the expression ``a weight coefficient $q$ covers an element $x$'' means that there is $a \in \A$ such that $x=a + \beta q$.
     
-The precise description of the semi-algorithm in a pseudocode is in Algorithm \ref{alg:weightCoefSet}. For better understanding, see Figures \ref{img:phase1img1}--\ref{img:phase1img13} in Appendix \ref{app:phase1} which illustrate the construction of the weight coefficients set $\Q$ for Eisenstein numeration system with a complex alphabet (its description is in Section \ref{sec:eisenstein}). 
+The precise description of the semi-algorithm in a pseudocode is in Algorithm \ref{alg:weightCoefSet}. For better understanding, see Figures \ref{img:phase1img1}--\ref{img:phase1img13} in Appendix \ref{app:phase1} which illustrate the construction of the weight coefficients set $\Q$ for Eisenstein numeration system with a complex alphabet (see Example \ref{ex:Eisenstein1-blockcomplex} for its description). 
 
 Section \ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. whether it happens that  $\Q_{k+1}=\Q_k$ for some  $k$.
     

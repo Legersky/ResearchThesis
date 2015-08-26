@@ -17,7 +17,7 @@ Return the set $\Q_{[\text{w\_tuple}]}$ obtained by Algorithm \ref{alg:minimalSe
 
 
 \begin{method}{findWeightFunction}{max\_input\_length}
-Return weight function $q$ unless the length of window exceeds \var{max\_input\_length}. Then an exception is raised. It implements Algorithm \ref{alg:weightFunction} by repetetive calling of the method \fun{\_find\_weightCoef\_for\_comb\_B}{} which extends length of window. This is done until all possible combinations of input digits are solved for some lenght of window $m$, i.e. $\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in \B^m \} = 1$.
+Return weight function $q$ unless the length of window exceeds \var{max\_input\_length}. Then an exception is raised. It implements Algorithm \ref{alg:weightFunction} by repetetive calling of the method \fun{\_find\_weightCoef\_for\_comb\_B}{} which extends length of window. This is done until all possible combinations of input digits are solved for some length of window $m$, i.e. $\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in \B^m \} = 1$.
 \end{method}
 
 

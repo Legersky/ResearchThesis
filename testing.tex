@@ -1,8 +1,8 @@
-We have tested several bases with different alphabets. The bases are chosen such they have no conjugates of modulo 1 according to Theorem \ref{thm:suffConjugates}. The sizes of the integer alphabets are given by the lower bound from Theorem \ref{thm:lowerBoundAlphabet}. Since this theorem assumes only an integer alphabet, we have tested also noninteger alphabets of smaller size. The input alphabet $\B$ is always $\A+ \A$.  
+We have tested several bases with different alphabets. The bases are chosen such they have no conjugates of modulo 1 according to Theorem \ref{thm:suffConjugates}. The sizes of the integer alphabets are given by the lower bound from Theorem \ref{thm:lowerBoundAlphabet}. Since this theorem assumes only an integer alphabet, we have tested also non-integer alphabets of smaller size. The input alphabet $\B$ is always $\A+ \A$.  
 
  Table \ref{tbl:results} summarizes the tested numeration systems which are described in the sections below. The first column of the table says if the sufficient condition given by Theorem \ref{thm:suffCondPhase1} is satisfied. The second one shows whether Phase 1 was successful (\checkmark) or not (\xmark) for the given numeration system. By not successful we mean that the weight coefficients set of a reasonable size was not found. The third column is the control of the necessary condition for the convergence of Phase 2 by Algorithm \ref{alg:oneletterSets}, i.e. if there is the output of the weight function $q$ for input digits $b,b,\dots,b$ for all $b\in\B$. The results of Phase 2 are in the last column. Notice, that the next step of the extending window method is not processed without the previous one~(--).
 
-We see that Phase 1 was successful in all cases when the sufficient condition holds, as we expected. Moreover, we have examples when it converges without the sufficient condition. We remark that the absolute values of all conjugates of the base are greater than 1 in the examples \ref{subsec:Quadratic+1-5+51-blockreal} and \ref{subsec:Cubic+1+1-5+5complex}, whereas there is a conjugate whose modulus is smaller than 1 in \ref{subsec:Quadratic+1-5+31-blockinteger} and \ref{subsec:Cubic+1+1-1+1complex}.
+We see that Phase 1 was successful in all cases when the sufficient condition holds, as we expected. Moreover, we have examples when it converges without the sufficient condition. We remark that the absolute values of all conjugates of the base are greater than 1 in Examples \ref{ex:Quadratic+1-5+51-blockreal} and \ref{ex:Cubic+1+1-5+5complex}, whereas there is a conjugate whose modulus is smaller than 1 in Examples \ref{ex:Quadratic+1-5+31-blockinteger} and \ref{ex:Cubic+1+1-1+1complex}.
 
 Notice that there is no example when necessary condition for convergence of Phase 2 holds, but Phase 2 does not stop. The possible reasoning of non-convergence of Phase 2 for the quadratic bases with integer alphabet is that the coefficients of the rewriting rule $x-\beta$ are not integers.  
 
@@ -11,39 +11,40 @@ The complete results including log files and images can be found on the attached
 \begin{table}[!htb]
 \centering
   \begin{tabular}{l r|c c c c}
-      Name &  Subsec. & Suff. c. & Phase 1 & Necess. c. & Phase 2 \\ \hline
-      Eisenstein\_1-block\_complex& \ref{subsec:Eisenstein1-blockcomplex} & yes  & \checkmark & \checkmark & \checkmark \\
-      Eisenstein\_1-block\_small\_complex & \ref{subsec:Eisenstein1-blocksmallcomplex} & yes  & \checkmark & \xmark & --\\
-      Eisenstein\_1-block\_integer & \ref{subsec:Eisenstein1-blockinteger} & yes  & \checkmark & \xmark & --\\
-      Eisenstein\_2-block & \ref{subsec:Eisenstein2-block} & yes  & \checkmark & \xmark & --\\
-      Eisenstein\_2-block\_4elements & \ref{subsec:Eisenstein2-block4elements} & yes  & \checkmark & \xmark & --\\ \hline
-      Penney\_1-block\_complex & \ref{subsec:Penney1-blockcomplex} & yes & \checkmark & \checkmark & \checkmark \\
-      Penney\_1-block\_complex\_small &  \ref{subsec:Penney1-blockcomplexsmall} & yes  & \checkmark & \xmark & --\\
-      Penney\_1-block\_integer &  \ref{subsec:Penney1-blockinteger} & yes  & \checkmark & \xmark & --\\
-      Penney\_2-block\_integer &  \ref{subsec:Penney2-blockinteger} & yes  & \checkmark & \checkmark & \checkmark \\ \hline
-      Quadratic+1-2+2-1\_1-block\_complex & \ref{subsec:Quadratic+1-2+2-1blockcomplex} & yes  &\checkmark & \checkmark & \checkmark \\
-      Quadratic+1-2+2-1\_1-block\_integer & \ref{subsec:Quadratic+1-2+2-1blockinteger} & yes  & \checkmark & \xmark & --\\ \hline
-      Quadratic+1+4+5\_1-block\_complex & \ref{subsec:Quadratic+1+4+51-blockcomplex} & yes  & \checkmark & \checkmark & \checkmark \\ \hline
-      Quadratic+1+3+5\_1-block\_complex & \ref{subsec:Quadratic+1+3+51-blockcomplex} & yes  & \checkmark & \xmark & --\\ \hline
-      Quadratic+1-5+3\_1-block\_integer  &\ref{subsec:Quadratic+1-5+31-blockinteger} & no  & \xmark & -- & --\\ \hline
-      Quadratic+1-5+5\_1-block\_real  &\ref{subsec:Quadratic+1-5+51-blockreal} & no  & \checkmark & \xmark & --\\ \hline
-      base\_2 & \ref{subsec:base2} & yes  & \checkmark & \checkmark & \checkmark \\
-      base\_4 & \ref{subsec:base4} & yes  & \checkmark & \checkmark & \checkmark \\ \hline
-      Cubic+1+1-5+5\_complex & \ref{subsec:Cubic+1+1-5+5complex} & no & \checkmark & \xmark & --\\
-      Cubic+1+1-1+1\_complex & \ref{subsec:Cubic+1+1-1+1complex} & no & \xmark & -- & --\\
+      Name &  Ex. & Suff. c. & Phase 1 & Necess. c. & Phase 2 \\ \hline
+      Eisenstein\_1-block\_complex& \ref{ex:Eisenstein1-blockcomplex} & yes  & \checkmark & \checkmark & \checkmark \\
+      Eisenstein\_1-block\_small\_complex & \ref{ex:Eisenstein1-blocksmallcomplex} & yes  & \checkmark & \xmark & --\\
+      Eisenstein\_1-block\_integer & \ref{ex:Eisenstein1-blockinteger} & yes  & \checkmark & \xmark & --\\
+      Eisenstein\_2-block & \ref{ex:Eisenstein2-block} & yes  & \checkmark & \xmark & --\\
+      Eisenstein\_2-block\_4elements & \ref{ex:Eisenstein2-block4elements} & yes  & \checkmark & \xmark & --\\ \hline
+      Penney\_1-block\_complex & \ref{ex:Penney1-blockcomplex} & yes & \checkmark & \checkmark & \checkmark \\
+      Penney\_1-block\_complex\_small &  \ref{ex:Penney1-blockcomplexsmall} & yes  & \checkmark & \xmark & --\\
+      Penney\_1-block\_integer &  \ref{ex:Penney1-blockinteger} & yes  & \checkmark & \xmark & --\\
+      Penney\_2-block\_integer &  \ref{ex:Penney2-blockinteger} & yes  & \checkmark & \checkmark & \checkmark \\ \hline
+      Quadratic+1-2+2-1\_1-block\_complex & \ref{ex:Quadratic+1-2+21-blockcomplex} & yes  &\checkmark & \checkmark & \checkmark \\
+      Quadratic+1-2+2-1\_1-block\_integer & \ref{ex:Quadratic+1-2+21-blockinteger} & yes  & \checkmark & \xmark & --\\ \hline
+      Quadratic+1+4+5\_1-block\_complex & \ref{ex:Quadratic+1+4+51-blockcomplex} & yes  & \checkmark & \checkmark & \checkmark \\ \hline
+      Quadratic+1+3+5\_1-block\_complex & \ref{ex:Quadratic+1+3+51-blockcomplex} & yes  & \checkmark & \xmark & --\\ \hline
+      Quadratic+1-5+3\_1-block\_integer  &\ref{ex:Quadratic+1-5+31-blockinteger} & no  & \xmark & -- & --\\ \hline
+      Quadratic+1-5+5\_1-block\_real  &\ref{ex:Quadratic+1-5+51-blockreal} & no  & \checkmark & \xmark & --\\ \hline
+      base\_2 & \ref{ex:base2} & yes  & \checkmark & \checkmark & \checkmark \\
+      base\_4 & \ref{ex:base4} & yes  & \checkmark & \checkmark & \checkmark \\ \hline
+      Cubic+1+1-5+5\_complex & \ref{ex:Cubic+1+1-5+5complex} & no & \checkmark & \xmark & --\\
+      Cubic+1+1-1+1\_complex & \ref{ex:Cubic+1+1-1+1complex} & no & \xmark & -- & --\\
   \end{tabular}
   \caption{Results of extending window method.}
   \label{tbl:results}
 \end{table} 
 
+\newpage
 \section{\texorpdfstring{Eisenstein base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{3}}{2}$}{Eisenstein base beta = -3/2 + i sqrt(3)/2}}
 Eisenstein base $\beta$ equals $\omega - 1$ with $\omega =-\frac{1}{2} + \frac{\imath \sqrt{3}}{2}$. The minimal polynomial of the generator $\omega$ is $x^2 + x+1$ and the minimal polynomial of the base $\beta$ is $x^2 + 3x+3$. Thus, the lower bound for the size of the integer alphabet given by Theorem \ref{thm:lowerBoundAlphabet} is 7. We have tested the complex, smaller complex and integer alphabet.
- 
+  
 \input{testedExamples/Eisenstein_1-block_complex.tex}
 \input{testedExamples/Eisenstein_1-block_small_complex.tex}
 \input{testedExamples/Eisenstein_1-block_integer.tex}
 
-We may also study so called 2-block parallel addition. Roughly speaking, we consider two digits after each other in a $(\beta,\A)$-representation as one digit of the $(\beta^2,\A+\beta\A)$-representation of the same number. So we shift from base $\beta$ to $\beta^2=-3-3\beta=-3\omega$ which has the minimal polynomial $x^2-3x+9$. We have tested the shifted alphabets $\{0,\pm 1\}+\beta \{0,\pm 1\}$ and $\{0,1, \omega, \omega +1\}+\beta \{0,1, \omega, \omega +1\}$.
+We may also study so-called 2-block parallel addition. Roughly speaking, we consider two digits after each other in a $(\beta,\A)$-representation as one digit of the $(\beta^2,\A+\beta\A)$-representation of the same number. So we shift from base $\beta$ to $\beta^2=-3-3\beta=-3\omega$ which has the minimal polynomial $x^2-3x+9$. We have tested the shifted alphabets $\{0,\pm 1\}+\beta \{0,\pm 1\}$ and $\{0,1, \omega, \omega +1\}+\beta \{0,1, \omega, \omega +1\}$.
   
 \input{testedExamples/Eisenstein_2-block.tex}
 \input{testedExamples/Eisenstein_2-block_4elements.tex}
