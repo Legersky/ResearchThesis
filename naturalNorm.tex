@@ -1,0 +1,63 @@
+\documentclass{article}    
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+ 
+\usepackage{amsmath, amsthm,amssymb}
+\newtheorem{theo}{Theorem}
+\newtheorem{lem}[theo]{Lemma}
+
+
+%new command !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\newcommand{\norm}[2]{\left\lVert#1\right\rVert_{#2}}
+
+\input{commands.tex}
+
+\begin{document}
+where $\rho(M)$ is the spectral radius of the matrix $M$.
+
+\begin{lem}
+\label{lem:vectNorm}
+nova norma pomoci matice
+\end{lem}
+
+
+\begin{theo}
+Let $M\in\CC^{n\times n}$ be a diagonalizable matrix. There exists a natural norm $\norm{\cdot}{M}$ such that 
+$$
+\rho(M)=\norm{M}{M}\,.
+$$
+\end{theo}
+\begin{proof}
+First, we prove that $\norm{M}{}\geq\rho(M)$ for every natural matrix norm. For all $\lambda\in\sigma(M)$ with eigenvector $u$ such that $\norm{u}{}=1$, we have
+$$
+\norm{M}{}=\max_{\norm{x}{}=1} \norm{Mx}{}\geq \norm{Mu}{}=\norm{\lambda u}{}=|\lambda|\cdot\norm{u}{}=|\lambda|\,.
+$$
+Now, we construct the natural matrix norm $\norm{\cdot}{M}$ such that $\norm{M}{M}\leq\rho(M)$. Since $M$ is diagonalizable, there exist nonsingular matrix $P\in\CC^{n\times n}$ and diagonal matrix $C\in\CC^{n\times n}$ with the eigevalues of $M$ on the diagonal such that 
+$$
+PMP^{-1}=C\,.
+$$ 
+
+Using Lemma \ref{lem:vectNorm} and Euclidean norm $\norm{\cdot}{2}$, we define the vector norm $\norm{\cdot}{M}$ by 
+\begin{equation}
+\norm{x}{M}:=\norm{Px}{2}
+\end{equation}
+for all $x\in\CC^n$. The natural matrix norm $\norm{\cdot}{M}$ is induced by the vector norm $\norm{\cdot}{M}$, i.e.,
+$$
+\norm{M}{M}=\max_{\norm{y}{M}=1} \norm{My}{M}\,.
+$$
+Let $y$ be a  vector such that $\norm{y}{M}=1$ and set $z=Py$. Notice that 
+$$
+\sqrt{z^*z}=\norm{z}{2}=\norm{Py}{2}=\norm{y}{M}=1\,.
+$$
+Consider
+\begin{align*}
+\norm{My}{M}&=\norm{PMy}{2}=\norm{PMy}{2}=\norm{CPy}{2}=\norm{Cz}{2}=\sqrt{z^*C^*Cz}\\
+    &\leq \sqrt{\max_{\lambda\in\sigma(M)}|\lambda|^2 z^*z}=\max_{\lambda\in\sigma(M)}|\lambda|=\rho(M)\,\,.
+\end{align*}
+which implies the statement.
+\end{proof}
+
+
+
+\end {document}
