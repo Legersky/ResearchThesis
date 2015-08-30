@@ -70,13 +70,13 @@
 \newcommand\figurehascaptionOne[1]{\pgfkeys{/phase1captions array, #1}}
 \newcommand\getcaptionOne[1]{\pgfkeysvalueof{/phase1captions array/#1}}
 
-% \pgfkeys{
-%  /phase1captions array/.is family, /phase1captions array,
-%  .unknown/.style = {\pgfkeyscurrentname/.initial = #1},
-% }
-% 
-% \newcommand\figurehascaption[1]{\pgfkeys{/phase1captions array, #1}}
-% \newcommand\getcaption[1]{\pgfkeysvalueof{/phase1captions array/#1}}
+\pgfkeys{
+ /phase2captions array/.is family, /phase2captions array,
+ .unknown/.style = {\pgfkeyscurrentname/.initial = #1},
+}
+
+\newcommand\figurehascaptionTwo[1]{\pgfkeys{/phase2captions array, #1}}
+\newcommand\getcaptionTwo[1]{\pgfkeysvalueof{/phase2captions array/#1}}
 
 
 \hyphenation{coef-fi-cient}
