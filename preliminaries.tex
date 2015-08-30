@@ -1,4 +1,4 @@
-In this chapter, we recall few definitions and results connected to numeration systems and parallelism. We define set $\Zomega$ and we prove its isomorphism to $\ZZ^d$. This property we use in Theorem \ref{thm:divisibility} which is an important tool for divisibility in $\Zomega$.
+In this chapter, we recall few definitions and results connected to numeration systems and parallelism. We define the set $\Zomega$ and we prove that it is isomorphic to $\ZZ^d$. This property is used in Theorem \ref{thm:divisibility} which is an important tool for divisibility in $\Zomega$.
 
 \section{Numeration systems}
 Firstly, we give a general definition of numeration system.
@@ -9,11 +9,7 @@ So-called standard numeration systems have an integer base $\beta$ and an alphab
 \begin{defn}
 Let $(\beta, \A)$ be a positional numeration system.  We say that a complex number $x$ has a \emph{$(\beta, \A)$-representation} if~ there exist digits $x_n,x_{n-1}, x_{n-2},\dots \in\A, n\geq 0$ such that $x=\sum_{j=-\infty}^n x_j \beta^j$.
 \end{defn}
-We associate a number $x$ with its  $(\beta, \A)$-representation as a bi-infinite string 
-  $$
-    (x)_{\beta,\A}=0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots\,,
-  $$
-  where $0^\omega$ denotes the infinite sequence of zeros. Notice that indices are decreasing from left to right as it is ussual to write the most significant digits first. We write briefly a \emph{representation} instead of a $(\beta, \A)$-representation, if the base $\beta$ and the alphabet $\A$ follow from context. 
+ We write briefly a \emph{representation} instead of a $(\beta, \A)$-representation if the base $\beta$ and the alphabet $\A$ follow from context. 
 
 \begin{defn}
 Let $(\beta, \A)$ be a positional numeration system. The set of all complex numbers with a finite $(\beta, \A)$-representation is defined by
@@ -22,16 +18,16 @@ $$
 $$
 \end{defn}
    
-A representation of $x\in\fin{\A}$ is 
+For  $x\in\fin{\A}$, we write 
 $$
-(x)_{\beta,\A}= 0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m} 0^\omega\,.
+(x)_{\beta,\A}= 0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m} 0^\omega\,,
 $$ 
-In what follows, we omit the starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$. We remark that existence of an algorithm (standard or parallel) producing a finite $(\beta,\A)$-representation of $x+y$ where $x,y\in\fin{\A}$ implies that the set $\fin{\A}$ is closed under addition, i.e.,
+where $0^\omega$ denotes the infinite sequence of zeros. Notice that indices are decreasing from left to right as it is ussual to write the most significant digits first. In what follows, we omit the starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$. We remark that existence of an algorithm (standard or parallel) producing a finite $(\beta,\A)$-representation of $x+y$ where $x,y\in\fin{\A}$ implies that the set $\fin{\A}$ is closed under addition, i.e.,
 $$
 \fin{\A} + \fin{\A} \subset \fin{\A}\,.
 $$ 
 
-Designing algorithm for parallel addition requires some redundancy in numeration system. According to \cite{redundant}, a numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations. For instance, the number 1 has the $(2,\{-1,0,1\})$-representations $1\bullet$ and $1(-1)\bullet$.
+Designing an algorithm for parallel addition requires some redundancy in numeration system. According to \cite{redundant}, a numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations. For instance, the number 1 has the $(2,\{-1,0,1\})$-representations $1\bullet$ and $1(-1)\bullet$.
 Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, there are some disadvantages. For example, comparison is problematic.  
 
 

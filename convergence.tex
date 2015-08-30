@@ -1,19 +1,19 @@
 Unfortunately, the extending window method does not always converge. The algorithm may lead to an infinite loop in both phases. 
-In this chapter, we introduce a sufficient condition for convergence of Phase 1 in Theorem \ref{thm:suffCondPhase1} and we categorize the algebraic number $\omega$ according to this condition. Theorem \ref{thm:stoppingCondition} enables us to construct an algorithm which checks the necessary condition for convergence of Phase 2.
+In this chapter, we introduce a sufficient condition for convergence of Phase 1 in Theorem \ref{thm:suffCondPhase1} and we categorize the algebraic numbers $\omega$ according to this condition. Theorem \ref{thm:stoppingCondition} enables us to construct an algorithm which checks a necessary condition for convergence of Phase 2.
 
 % However,  and Theorem \ref{thm:stoppingCondition} enables us to construct Algorithm \ref{alg:oneletterSets} which checks the necessary condition for convergence of Phase 2.  
 
 \section{Convergence of Phase 1}
 \label{sec:convergencePhase1}
-The following theorem gives the condition on $\omega$ which is sufficient for convergence of the Phase 1.
+The following theorem gives a condition on $\omega$ which is sufficient for convergence of the Phase 1.
 \begin{theo}
 \label{thm:suffCondPhase1}
-    Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then, there exists a set $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
+    Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then there exists a set $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
     
     Moreover, if $\omega$ is such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$, the set $\Q$ is finite. 
 \end{theo}
 \begin{proof}
- Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $|\beta|>1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
+ Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $|\beta|>1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$  and $q'\in\Zomega$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
  $$
     |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{|\beta|}{|\beta|-1}\right)=R\,.
  $$ 
@@ -21,9 +21,9 @@ The following theorem gives the condition on $\omega$ which is sufficient for co
  
  Obviously, the set $\Q$ is finite if there are only finitely many elements of $\Zomega$ bounded by the constant $R$.
 \end{proof}
-We plug in the alphabet $\A$ and input alphabet $\B$. Because of adding of the smallest elements in Algorithm \ref{alg:extendWeightCoefSet}, we see from the proof of Theorem \ref{thm:suffCondPhase1} that the weight coefficient set~$\Q$ constructed in Phase~1 has elements bounded by the constant $R$. 
+We plug in the alphabet $\A$ and input alphabet $\B$. We see from the proof that the candidates obtained by Algorithm \ref{alg:searchCand} for an intermediate weight coefficients set $\Q_k$ with elements bounded by the constant $R$ are also by the constant $R$. 
 
-Therefore, the intermediate weight coefficient sets $\Q_k$ in Algorithm \ref{alg:weightCoefSet} have elements bounded by $R$ for all $k\in\NN$. Hence, Phase 1 succesfully ends if there are only finitely many elements in $\Zomega$ bounded by the constant $R$. 
+Since we start with $\Q_0=\{0\}$ which is bounded by any posotive constant, all intermediate weight coefficient sets $\Q_k$ in Algorithm \ref{alg:weightCoefSet} have elements bounded by $R$ for all $k\in\NN$. Hence, Phase 1 succesfully ends if there are only finitely many elements in $\Zomega$ bounded by the constant $R$. 
 
 
 The following two lemmas characterizes the algebraic integer $\omega$ according to the number of elements of $\Zomega$ in a complex circle centered around 0. 
