@@ -52,12 +52,31 @@
 \usepackage{enumerate}
 \usepackage{pgffor}
 
+
 \renewcommand\Re{\operatorname{Re}}
 \renewcommand\Im{\operatorname{Im}}
 
 \usepackage{pifont}
 \renewcommand\checkmark{\ding{51}}
 \newcommand\xmark{\ding{55}}
+
+
+\usepackage{pgfkeys}
+\pgfkeys{
+ /phase1captions array/.is family, /phase1captions array,
+ .unknown/.style = {\pgfkeyscurrentname/.initial = #1},
+}
+
+\newcommand\figurehascaptionOne[1]{\pgfkeys{/phase1captions array, #1}}
+\newcommand\getcaptionOne[1]{\pgfkeysvalueof{/phase1captions array/#1}}
+
+% \pgfkeys{
+%  /phase1captions array/.is family, /phase1captions array,
+%  .unknown/.style = {\pgfkeyscurrentname/.initial = #1},
+% }
+% 
+% \newcommand\figurehascaption[1]{\pgfkeys{/phase1captions array, #1}}
+% \newcommand\getcaption[1]{\pgfkeysvalueof{/phase1captions array/#1}}
 
 
 \hyphenation{coef-fi-cient}
