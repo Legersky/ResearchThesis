@@ -1,4 +1,4 @@
-In this chapter, we recall few definitions and results connected to numeration systems and parallelism. We define the set $\Zomega$ and we prove that it is isomorphic to $\ZZ^d$. This property is used in Theorem \ref{thm:divisibility} which is an important tool for divisibility in $\Zomega$.
+In this chapter, we recall few definitions and results connected to numeration systems and parallelism. We define the set $\Zomega$ for an algebraic integer $\omega$ and we prove that $\Zomega$ is isomorphic to $\ZZ^d$. This property is used in Theorem \ref{thm:divisibility} which is an important tool for divisibility in $\Zomega$. Division in $\Zomega$ is necessary for the extending window method described in Chapter \ref{chap:methodDescription}.
 
 \section{Numeration systems}
 Firstly, we give a general definition of numeration system.
@@ -22,12 +22,12 @@ For  $x\in\fin{\A}$, we write
 $$
 (x)_{\beta,\A}= 0^\omega x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m} 0^\omega\,,
 $$ 
-where $0^\omega$ denotes the infinite sequence of zeros. Notice that indices are decreasing from left to right as it is ussual to write the most significant digits first. In what follows, we omit the starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$. We remark that existence of an algorithm (standard or parallel) producing a finite $(\beta,\A)$-representation of $x+y$ where $x,y\in\fin{\A}$ implies that the set $\fin{\A}$ is closed under addition, i.e.,
+where $0^\omega$ denotes right, respectively left-infinite sequence of zeros. Notice that indices are decreasing from left to right as it is usual to write the most significant digits first. In what follows, we omit the starting and ending $0^\omega$ when we work with numbers in $\fin{\A}$. We remark that existence of an algorithm (standard or parallel) producing a finite $(\beta,\A)$-representation of $x+y$ where $x,y\in\fin{\A}$ implies that the set $\fin{\A}$ is closed under addition, i.e.,
 $$
 \fin{\A} + \fin{\A} \subset \fin{\A}\,.
 $$ 
 
-Designing an algorithm for parallel addition requires some redundancy in numeration system. According to \cite{redundant}, a numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations. For instance, the number 1 has the $(2,\{-1,0,1\})$-representations $1\bullet$ and $1(-1)\bullet$.
+Designing an algorithm for parallel addition requires some redundancy in numeration system. According to \cite{redundant}, a numeration system $(\beta,\A)$ is called \emph{redundant} if there exists $x \in \fin{\A}$ which has two different $(\beta,\A)$-representations. For instance, the number 1 has $(2,\{-1,0,1\})$-representations $1\bullet$ and $1(-1)\bullet$.
 Redundant numeration system can enable us to avoid carry propagation in addition. On the other hand, there are some disadvantages. For example, comparison is problematic.  
 
 
@@ -50,10 +50,10 @@ Let $\beta$ be a base and $\A$ and $\B$ two alphabets containing 0. A function $
 In fact, addition on $\fin{\A}$ can be performed in parallel if there is digit set conversion from $\A+\A$ to $\A$ computable in  parallel as we can easily output digitwise sum of two $(\beta,\A)$-representations in parallel.   
 
 
-We recall few results about parallel addition in a numeration system with an integer alphabet. Ch. Frougny, E. Pelantov\'a and M. Svobodov\'a proved in \cite{parAddNS} following sufficient condition for existence of the existence of algorithm for parallel addition.
+We recall few results about parallel addition in a numeration system with an integer alphabet. C. Frougny, E. Pelantov\'a and M. Svobodov\'a proved in \cite{parAddNS} the following sufficient condition of existence of an algorithm for parallel addition.
   \begin{theo}
   \label{thm:suffConjugates}
-  Let $\beta\in\CC$ be an algebraic number such that $|\beta|>1$ and all its conjugates in modulus differs from 1. There exists an alphabet $\A$ of contiguous integers containing 0 such that addition on $\fin{\A}$ can be performed in parallel.
+  Let $\beta\in\CC$ be an algebraic number such that $|\beta|>1$ and all its conjugates in modulus differ from 1. There exists an alphabet $\A$ of contiguous integers containing 0 such that addition on $\fin{\A}$ can be performed in parallel.
   \end{theo}
   The proof of the theorem provides the algorithm for the alphabet of the form $\{-a,-a+1, \dots,0,\dots,a-1,a\}$. But in general, $a$ is not minimal.
     
@@ -69,27 +69,27 @@ The question of minimality of the alphabet is studied in \cite{minAlph}. The fol
   \end{theo}
   
 
-In this thesis, we work in the more general concept as we consider also non-integer alphabets. First, we recall the following definition.
+In this thesis, we work in a more general concept as we consider also non-integer alphabets. First, we recall the following definition.
 \begin{defn}
 Let $\omega$ be a complex number. The set of values of all polynomials with integer coefficients evaluated in $\omega$ is denoted by
 $$
     \ZZ[\omega] =\left\{\sum_{i=0}^n a_i \omega^i\colon n\in\NN, a_i\in\ZZ \right\} \subset \QQ(\omega)\,.
 $$
 \end{defn}
- Notice that $\ZZ[\omega]$ is a commutative ring (for our purpose, a ring is associative under multiplication and there is a multiplicative indentity).     
+ Notice that $\ZZ[\omega]$ is a commutative ring (for our purposes, a ring is associative under multiplication and there is a multiplicative indentity).     
     
-From now on, let $\omega$ be an algebraic integer  which generates the set $\Zomega$ and let the base $\beta\in\Zomega$ be such that $|\beta|>1$. We remark that $\beta$ is also the algebraic integer as all elements of $\Zomega$ are algebraic integers. Finally, the alphabet $\A$ is a finite subset of $\Zomega$ containing 0.
+From now on, let $\omega$ be an algebraic integer  which generates the set $\Zomega$ and let the base $\beta\in\Zomega$ be such that $|\beta|>1$. We remark that $\beta$ is also an algebraic integer as all elements of $\Zomega$ are algebraic integers. Finally, let the alphabet $\A$ be a finite subset of $\Zomega$ such that $0\in\A$.
 
 Few parallel addition algorithms for such numeration system with a non-integer alphabet were found ad hoc. We introduce the method for construction of the parallel addition algorithm for a given numeration system $(\beta,\A)$ in Chapter \ref{chap:methodDescription}. 
   
 
 
 \section{\texorpdfstring{Isomorphism of $\Zomega$ and $\ZZ^{d}$}{Isomorphism of Z[omega] and Zd}}
-The goal of this section is to show a connection between the ring $\Zomega$ and the set $\ZZ^d$. %It enables us to transform division in $\Zomega$ to search for an integer solution of a linear system. 
+The goal of this section is to show a connection between the ring $\Zomega$ and the set $\ZZ^d$. Using Theorem \ref{thm:divisibility}, division in $\Zomega$ can be replaced by searching for an integer solution of a linear system. This is used for the implementation of the extending window method.
 
-First we recall notion of companion matrix which we use to define multiplication in $\ZZ^d$.
+First we recall the notion of companion matrix which we use to define multiplication in $\ZZ^d$. By a minimal polynomial of an algebraic integer, we always mean the monic minimal polynomial.  
 \begin{defn}
-Let $\omega$ be an algebraic integer of degree $d\geq 1$ with the monic minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. A matrix 
+Let $\omega$ be an algebraic integer of degree $d\geq 1$ with the  minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. The matrix 
 $$
 S := \begin{pmatrix}
             0 & 0 & \cdots & 0 & -p_0 \\
