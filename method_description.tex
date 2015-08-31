@@ -138,9 +138,10 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     \end{defn}
 
  Having a weight function $q$, we define a function $\phi:\B^{M+1}\rightarrow \A$ by
-    $$
+    \begin{equation}
+    \label{eq:localConversion}
         \phi(w_{j}, \dots, w_{j-M})=w_j+ \underbrace{q(w_{j-1}, \dots, w_{j-M})}_{=q_{j-1}} - \beta \underbrace{q(w_j, \dots, w_{j-M+1})}_{=q_j}=:z_j\,,
-    $$ 
+    \end{equation} 
     which verifies that the mapping $\phi$ is indeed the $(M+1)$-local digit set conversion with anticipation $r=0$ and memory $t=M$. The requirement of zero output of the weight function $q$ for the input of $M$ zeros guarantees that $\phi(0,0,\dots,0)=0$. Thus the first condition of Definition \ref{def:digitSetConversion} is satisfied. The second one follows from the equation \ref{eq:valuePreserving}. 
     
 Let us summarize the construction of digit set conversion by rewriting rule $x-\beta$. We need to find weight coefficients for all possible combinations of digits of the input alphabet $\B$. Their multiples of the rewriting rules are digitwise added to the input sequence. In fact, it means that the equation  (\ref{eq:conversionFormula}) is applied on the each position. If the digit set conversion is computable in parallel, the weight coefficients are determined as the outputs of the weight function $q$ with some fixed length of window $M$.  

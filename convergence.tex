@@ -1,5 +1,5 @@
 Unfortunately, the extending window method does not always converge. The algorithm may lead to an infinite loop in both phases. 
-In this chapter, we introduce a sufficient condition for convergence of Phase 1 in Theorem \ref{thm:suffCondPhase1} and we categorize the algebraic numbers $\omega$ according to this condition. Theorem \ref{thm:stoppingCondition} enables us to construct an algorithm which checks a necessary condition for convergence of Phase 2.
+In this chapter, we introduce a sufficient condition for convergence of Phase 1 in Theorem \ref{thm:suffCondPhase1} and we categorize the algebraic numbers $\omega$ according to this condition. Theorem \ref{thm:stoppingCondition} enables us to construct an algorithm which checks a necessary condition for convergence of Phase 2. At the end, we recall conditions on the alphabet $\A$. 
 
 % However,  and Theorem \ref{thm:stoppingCondition} enables us to construct Algorithm \ref{alg:oneletterSets} which checks the necessary condition for convergence of Phase 2.  
 
@@ -198,7 +198,19 @@ Thus, running of Algorithm \ref{alg:oneletterSets} for each input digit $b\in\B$
 \end{algorithm}
 
 
-
+\section{Alphabet}
+We see from Algorithm \ref{alg:searchCand} that there have to be all representatives modulo $\beta$ to ensure that we always find candidates. Is can be seen also from the proof of Theorem \ref{thm:suffCondPhase1}. Moreover, existence of a parallel digit set conversion implies the following condition on the alphabet $\A$.   
 \begin{theo}
-Let...
+Let $\omega$ be an algebraic integer. Let the base $\beta\in\Zomega$ be such that $|\beta|>1$ and the alphabet $\A\subset\Zomega$ be such that $0\in\A$. If there exists the $p$-local digit set conversion $\phi$ from  $\A+\A$ to $\A$, the number $\phi(w,\dots,w)-w$ belongs to the set $(\beta-1)\Zomega$ for any $w\in\A+\A$. 
 \end{theo}
+The proof can be found in \cite{minAlph}. Nevertheless, it is easy to prove for the digit set conversion which is constructed by the rewriting rule $x-\beta$. Take formula \ref{eq:localConversion} with the input $w,\dots,w$:
+$$
+    \phi(w, \dots, w)=w+ \underbrace{q(w, \dots, w)}_{=:q'} - \beta q(w, \dots, w)\,.
+$$
+Hence
+$$
+\phi(w, \dots, w)-w=-q'(\beta-1)\,
+$$
+for $q'\in\Zomega$.
+
+Thus, the representatives mod $\beta-1$ of all elements of the input alphabet $\B\subset\A+\A$ must be contained in the alphabet $\A$. 
