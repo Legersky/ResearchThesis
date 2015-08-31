@@ -341,21 +341,23 @@ For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elemen
 \end{algorithm}
 
 
-We remark that the result of Algorithm \ref{alg:minimalSet} is influenced by the way which we pick an element on the line \ref{line:pickElement}. It can be done deterministically or non-deterministically. We use the following deterministic choice -- suppose that we want to choose from the elements $x_1=\sum_{i=0}^{d-1}x_{1,i}\omega^i, x_2=\sum_{i=0}^{d-1}x_{2,i}\omega^i, \dots,x_n=\sum_{i=0}^{d-1}x_{n,i}\omega^i\in\Zomega$, where $d$ is the degree of $\omega$. Let $a_0,\dots,a_{d-1}\in\ZZ$ be such that 
+Notice that the result of Algorithm \ref{alg:minimalSet} is influenced by the way how an element on the line \ref{line:pickElement} is picked. It can be done deterministically or non-deterministically. We use the following deterministic choice -- suppose that we want to choose from the elements $x_1=\sum_{i=0}^{d-1}x_{1,i}\omega^i, x_2=\sum_{i=0}^{d-1}x_{2,i}\omega^i, \dots,x_n=\sum_{i=0}^{d-1}x_{n,i}\omega^i\in\Zomega$, where $d$ is the degree of $\omega$. Let $a_0,\dots,a_{d-1}\in\ZZ$ be such that 
 $$
 \sum_{i=0}^{d-1}a_i\omega^i=\sum_{j=1}^n x_j\,.
 $$ 
-Set $c:=\sum_{i=0}^{d-1}c_i\omega^i \in\Zomega$ with $c_i=[\frac{a_i}{n}]$ where $[\cdot]$ denotes rounding to nearest integer. Let the index set $I_0\subset\{1,\dots,n}$ be such that 
+Set $c:=\sum_{i=0}^{d-1}c_i\omega^i \in\Zomega$ with $c_i=[\frac{a_i}{n}]$ where $[\cdot]$ denotes rounding to nearest integer. Let the index set $I_0\subset\{1,\dots,n\}$ be such that 
 $$
 |x_{j,0}-c_0|=\min\{|x_{k,0}-c_0|\colon k\in{1,\dots,n}\}
 $$
 for all $j\in I_0$. For all $i\in\{1,\dots,d-1\}$, let the index set $I_i$ be such that
 $$
-|x_{j,i}-c_i|=\min\{|x_{k,0}-c_i|\colon k\in I_{i-1}\}
+|x_{j,i}-c_i|=\min\{|x_{k,i}-c_i|\colon k\in I_{i-1}\}
 $$
-for all $j\in I_i$. If there is only one element in the index set $I_{d-1}=\{j_0\}$, choose element $x_{j_0}$. Otherwise choose $j_0\in I_{d-1}$ such that $x_{j_0,0}$ is the smallest, respectively $x_{j_0,1}$ is the smallest etc. In oher words, we take the elements which are ``closest'' to the rounded center of gravity $c$ of the values $x_1,\dots,x_n$ where ``closest''  is measured by absolute value of the first coordinate of $\pi(x_j)-pi(c)$. In case of equality, according to second coordinate etc. 
+for all $j\in I_i$. If there is only one element in the index set $I_{d-1}=\{j_0\}$, choose element $x_{j_0}$. Otherwise choose $j_0\in I_{d-1}$ such that $x_{j_0,0}$ is the smallest from $x_{j,0}$ where $j\in I_{d-1}$. If there are more such elements, choose from them according to value $x_{j,1}$ etc. 
 
-There is space to improve Phase 2 by replacing Algorithm \ref{alg:pickElement} with a different one. Generally, we can modify Algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
+In other words, we take the elements which are ``closest'' to the rounded center of gravity $c$ of the values $x_1,\dots,x_n$ where ``closest''  is measured by absolute value of the first coordinate of $\pi(x_j)-\pi(c)$. In case of equality, according to the second coordinate etc. If there are more than one such element, we choose the element $x_{j_0}$ with the smallest first, resp. second, etc. coordinate of $\pi(x_{j_0})$.  
+
+There is space to improve Phase 2 by a modification of Algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
 
 Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm \ref{alg:minimalSet} for some numeration systems by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}.
 
