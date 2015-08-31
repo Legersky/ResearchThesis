@@ -1,8 +1,6 @@
 Unfortunately, the extending window method does not always converge. The algorithm may lead to an infinite loop in both phases. 
 In this chapter, we introduce a sufficient condition for convergence of Phase 1 in Theorem \ref{thm:suffCondPhase1} and we categorize the algebraic numbers $\omega$ according to this condition. Theorem \ref{thm:stoppingCondition} enables us to construct an algorithm which checks a necessary condition for convergence of Phase 2. At the end, we recall conditions on the alphabet $\A$. 
 
-% However,  and Theorem \ref{thm:stoppingCondition} enables us to construct Algorithm \ref{alg:oneletterSets} which checks the necessary condition for convergence of Phase 2.  
-
 \section{Convergence of Phase 1}
 \label{sec:convergencePhase1}
 The following theorem gives a condition on $\omega$ which is sufficient for convergence of the Phase 1.
@@ -110,9 +108,9 @@ Using Theorem \ref{thm:suffCondPhase1} and Lemma \ref{lem:numElemRR} and \ref{le
 
 \begin{itemize}
     \item $\omega \in \ZZ \implies$ Phase~1 converges.
-    \item $\omega \in \RR\setminus\ZZ$ -- the sufficient condition does not hold and there is  Example \ref{ex:Quadratic+1-5+31-blockinteger} for which Phase 1 does not converge.  Example \ref{ex:Quadratic+1-5+51-blockreal} proves that the condition is not necessary.
+    \item $\omega \in \RR\setminus\ZZ \implies$ the sufficient condition of Theorem \ref{thm:suffCondPhase1} does not hold and there is  Example \ref{ex:Quadratic+1-5+31-blockinteger} for which Phase 1 does not converge.  Example \ref{ex:Quadratic+1-5+51-blockreal} proves that the condition is not necessary.
     \item $\omega \in \CC\setminus\RR$, $\omega$ being quadratic algebraic integer $\implies$ Phase~1 converges.
-    \item $\omega \in \CC\setminus\RR$, $\omega$ being algebraic integer of degree $\geq 3$ -- the sufficient condition does not hold and there is  Example \ref{ex:Cubic+1+1-1+1complex} for which Phase 1 does not converge. Example \ref{ex:Cubic+1+1-5+5complex} proves that the condition is not necessary.
+    \item $\omega \in \CC\setminus\RR$, $\omega$ being algebraic integer of degree $\geq 3 \implies$ the sufficient condition  of Theorem \ref{thm:suffCondPhase1} does not hold and there is  Example \ref{ex:Cubic+1+1-1+1complex} for which Phase 1 does not converge. Example \ref{ex:Cubic+1+1-5+5complex} proves that the condition is not necessary.
 \end{itemize}
 We see that if the sufficient condition does not hold, convergence and non-convergence are both possible.
 
