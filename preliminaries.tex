@@ -87,7 +87,7 @@ Few parallel addition algorithms for such numeration system with a non-integer a
 \section{\texorpdfstring{Isomorphism of $\Zomega$ and $\ZZ^{d}$}{Isomorphism of Z[omega] and Zd}}
 The goal of this section is to show a connection between the ring $\Zomega$ and the set $\ZZ^d$. Using Theorem \ref{thm:divisibility}, division in $\Zomega$ can be replaced by searching for an integer solution of a linear system. This is used for the implementation of the extending window method.
 
-First we recall the notion of companion matrix which we use to define multiplication in $\ZZ^d$. By a minimal polynomial of an algebraic integer, we always mean the monic minimal polynomial.  
+First we recall the notion of companion matrix which we use to define multiplication in $\ZZ^d$. By minimal polynomial of an algebraic integer, we always mean the monic minimal polynomial.  
 \begin{defn}
 Let $\omega$ be an algebraic integer of degree $d\geq 1$ with the  minimal polynomial $p(x)=x^d +p_{d-1}x^{d-1}+ \cdots + p_1 x+p_0 \in \ZZ[x]$. The matrix 
 $$
@@ -179,7 +179,7 @@ $$
 for $k=\{0,1,\dots,d-1\}$ which implies the statement.
 \end{proof}
 
-The following lemma summarises basic properties of the mapping $\odot_\omega$ -- multiplication by an integer scalar, the identity element, the distributive law and a weaker form of asociativity.
+The following lemma summarizes basic properties of the mapping $\odot_\omega$ -- multiplication by an integer scalar, the identity element, the distributive law and a weaker form of asociativity.
 \begin{lem}
 \label{lem:multInZd}
 Let $\omega$ be an algebraic integer of degree $d$. The following statements hold for every $u,v,w\in \ZZ^d$ and $m\in\ZZ$:
@@ -187,7 +187,7 @@ Let $\omega$ be an algebraic integer of degree $d$. The following statements hol
     \item $(mu)\odot_\omega v = u \odot_\omega (m v)= m (u\odot_\omega v)$,
     \item $e_0 \odot_\omega v= v \odot_\omega e_0 =v$,
     \item $(u \odot_\omega e_1^k)\odot_\omega v = u \odot_\omega (e_1^k\odot_\omega v)$ for $k\in\NN$,
-    \item $(u+v)\odot_\omega w =u\odot_\omega w + v\odot_\omega w$ and $u \odot_\omega (v+w)= u \odot_\omega v +u\odot_\omega w$.
+    \item $(u+v)\odot_\omega w =u\odot_\omega w + v\odot_\omega w$ \ and \ $u \odot_\omega (v+w)= u \odot_\omega v +u\odot_\omega w$.
 \end{enumerate}
 \end{lem}
 \begin{proof}
@@ -299,7 +299,7 @@ and
 $$
 g\odot_\omega h=\pi(vw)=\pi(wv)=h\odot_\omega g\,.
 $$
-Thus, $(\ZZ^d,+,\odot_\omega)$ is the commutative ring.
+Thus, $(\ZZ^d,+,\odot_\omega)$ is a commutative ring.
 \end{proof}
 
 Due to this theorem we may work with integer vectors instead of elements of $\Zomega$ and multiplication in $\Zomega$ is replaced by multiplying by an appropriate matrix. 
@@ -322,7 +322,7 @@ Since $\beta\neq 0$, we have
 $$
 0=\pi^{-1}(y)=\sum_{i=0}^{d-1} y_i \omega^i\,,
 $$
-which contradict that degree of $\omega$ is $d$.
+which contradict that the degree of $\omega$ is $d$.
 
 Now
 \begin{align*}
