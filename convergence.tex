@@ -67,7 +67,7 @@ where $k_{i+1}\in\ZZ$ is such that
 $$
 |\Im z_{i+1}|=|k_{i+1} \cdot\Im z_{i}-\Im w|\leq \frac{|\Im z_{i}|}{2}\,.
 $$
-We can find such number $k_{i+1}$ under assumption that $\Im z_{i} \neq 0$.
+First, suppose that $\Im z_{i} \neq 0$ for all $i\in\NN$. Therefore, we can build the whole sequence $(z_i)_{i\in\NN}$.
 
 We prove by induction that $|\Im z_i|\leq |\Im z_0|/2^i$. Clearly, it holds for $i=0$. Assume now that it holds for $i$. Then 
 $$
@@ -83,7 +83,7 @@ for some $l_i\in\ZZ$.
 
 Obviously, $z_0=z_0 \prod_{j=1}^0 k_j - 0\cdot w$. Assume now that it holds for $i$ and consider
 $$
-z_{i+1}=k_{i+1} \cdot z_{i}-w= k_{i+1}\left(z_0 \cdot \prod_{j=1}^i k_j- l_i\cdot w\right) -w=z_0 \cdot \prod_{j=1}^{i+1} k_j - (\underbrace{k_{i+1}\cdot l_i +1}_{=:l_{i+1}})w\,.
+z_{i+1}=k_{i+1} \cdot z_{i}-w= k_{i+1}\left(z_0 \cdot \prod_{j=1}^i k_j- l_i\cdot w\right) -w=z_0 \cdot \prod_{j=1}^{i+1} k_j - (\underbrace{k_{i+1}\cdot l_i +1}_{=:l_{i+1}\in\ZZ})w\,.
 $$
 Thus, $z_i\in\Zomega$. Moreover, $z_i\notin \ZZ$. Assume in contrary that 
 $$
@@ -94,13 +94,13 @@ Since $z_0,w\in\{\omega, \omega^2\}, z_0\neq w$, we have the integer polynomial 
 
 
 
-Now we take $i_0\in\NN$ such that $|\Im z_0|/2^{i_0}< 1/2$. Let $k\in\ZZ$ be such that $|\Re z_{i_0} -k|\leq 1/2$. Set $x:= z_{i_0}-k$. Then
+Suppose $i_0\in\NN$ such that $|\Im z_0|/2^{i_0}< 1/2$. Let $k\in\ZZ$ be such that $|\Re z_{i_0} -k|\leq 1/2$. Set $x:= z_{i_0}-k$. Then
 $$
 |x|\leq |\Re x| +|\Im x| \leq  |\Re z_{i_0} -k| + |\Im z_{i_0}| \leq \frac{1}{2} + \frac{|\Im z_0|}{2^{i_0}} < \frac{1}{2} +\frac{1}{2}=1\,.
 $$
 We know that $\Im z_{i_0} \neq 0$ and thus $0<|x|<1$.
 
-Consider now the case that we cannot produce $z_{i_1+1}$  in the sequence $(z_i)_{i\in\NN}$ as there is ${i_1}$ such that $\Im z_{i_1} = 0$, i.e. $z_{i_1}\in\RR$. In the same manner as before, we may prove that  $z_{i_1} \in \Zomega\setminus \ZZ$. Set $x:= z_{i_1}- \lfloor z_{i_1} \rfloor$. Obviously, $0<|x|<1$ and $x\in\Zomega$.
+Consider now the case that there is ${i_1}$ such that $\Im z_{i_1} = 0$, i.e. $z_{i_1}\in\RR$. Thus, we cannot produce $z_{i_1+1}$  in the sequence $(z_i)_{i\in\NN}$. In the same manner as before, we may prove that  $z_{i_1} \in \Zomega\setminus \ZZ$. Set $x:= z_{i_1}- \lfloor z_{i_1} \rfloor$. Obviously, $0<|x|<1$ and $x\in\Zomega$.
 
 For both cases, the sequence $(x^n)_{n\in\NN}$ has the limit 0 and $0\neq x^n\in\Zomega$ for all $n\in\NN$. Thus there are infinitely many elements of $\Zomega$ bounded by any positive constant $R$. 
 \end{proof}
@@ -199,7 +199,8 @@ Thus, running of Algorithm \ref{alg:oneletterSets} for each input digit $b\in\B$
 
 
 \section{Alphabet}
-We see from Algorithm \ref{alg:searchCand} that there have to be all representatives modulo $\beta$ to ensure that we always find candidates. Is can be seen also from the proof of Theorem \ref{thm:suffCondPhase1}. Moreover, existence of a parallel digit set conversion implies the following condition on the alphabet $\A$.   
+\label{sec:alphabet}
+We see from Algorithm \ref{alg:searchCand} that there have to be all representatives modulo $\beta$ to ensure that we always find candidates. It can be seen also from the proof of Theorem \ref{thm:suffCondPhase1}. Moreover, existence of a parallel digit set conversion implies the following condition on the alphabet $\A$.   
 \begin{theo}
 Let $\omega$ be an algebraic integer. Let the base $\beta\in\Zomega$ be such that $|\beta|>1$ and the alphabet $\A\subset\Zomega$ be such that $0\in\A$. If there exists the $p$-local digit set conversion $\phi$ from  $\A+\A$ to $\A$, the number $\phi(w,\dots,w)-w$ belongs to the set $(\beta-1)\Zomega$ for any $w\in\A+\A$. 
 \end{theo}

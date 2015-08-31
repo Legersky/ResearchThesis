@@ -6,9 +6,9 @@ Moreover, many methods for printing, plotting and saving outputs are implemented
 
 The constructor of class \emph{AlgorithmForParallelAddition} is 
 
-\begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet='',\\
+\begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet=' ',\\
  printLog=True, printLogLatex=False, verbose=0}
-Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial~$p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{A} and \fun{setBase}{base} are called. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
+Take \var{minPol\_str} which is symbolic expression in the variable $x$ of minimal polynomial~$p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$. The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{inputAlphabet} and \fun{setBase}{base} are called. The alphabet is checked according to Section \ref{sec:alphabet}. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
 \end{method}
 
 Methods for the construction of an addition algorithm which is computable in parallel by the designed extending window method are following:
