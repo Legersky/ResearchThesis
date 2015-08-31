@@ -281,8 +281,9 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     $$
     \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
     $$
-    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. Unfortunately, we do not know whether this happens. But  we may reveal the nonconvergence of Phase 2 for some cases by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}. 
-    
+    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.  
+ 
+ Figures \ref{img:phase2img1}--\ref{img:phase2img7} in Appendix \ref{app:phase2} illustrate the construction of the set $\Q_{[\omega,1,2]}$ for Eisenstein numeration system with a complex alphabet.   
     
 \begin{algorithm}
   \caption{Search for weight function (Phase 2)}
@@ -313,11 +314,22 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
   \end{algorithmic}
 \end{algorithm}
     
-The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}. For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only possible to cover some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}. 
+For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only possible to cover some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}. 
 
-We remark that this algorithm does not provide the trully minimal set $\Q_{[w_j,\dots, w_{j-m+1}]}$ in the sense of size, but it minimizes the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ enough. Phase 2 can be modified by replacing Algorithm \ref{alg:minimalSet} for different one. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
+We remark that the result of Algorithm \ref{alg:minimalSet} is influenced by the way which we pick an element on the line \ref{line:pickElement}. It can be done deterministically or non-deterministically. We use the deterministic choice given by Algorithm \ref{alg:pickElement}. DOPSAT JAK VYBIRAME
+\begin{algorithm}
+  \caption{Pick element}
+    \label{alg:pickElement}
+  \begin{algorithmic}[1]
+    \REQUIRE{}
+ 
+  \end{algorithmic}
+\end{algorithm}
 
-Figures \ref{img:phase2img1}--\ref{img:phase2img7} in Appendix \ref{app:phase2} illustrate the construction of the set $\Q_{[\omega,1,2]}$ for Eisenstein numeration system with a complex alphabet.
+There is space to improve Phase 2 by replacing Algorithm \ref{alg:pickElement} for different one. Also, we can modify the whole algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
+
+Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm \ref{alg:minimalSet} for some numeration systems by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}.
+
 \begin{algorithm}
   \caption{Search for set $\Q_{[w_j,\dots, w_{j-m+1}]}$ }
     \label{alg:minimalSet}
@@ -334,13 +346,15 @@ Figures \ref{img:phase2img1}--\ref{img:phase2img7} in Appendix \ref{app:phase2} 
     \ENDFOR
     \STATE $\Q_{[w_j,\dots, w_{j-m+1}]}$:= empty set
     \WHILE{\texttt{list\_of\_coverings} is nonempty}
-        \STATE Pick any element $q$ of one of the shortest lists of \verb+list_of_coverings+
+        \STATE Pick any element $q$ of one of the shortest lists of \verb+list_of_coverings+ \label{line:pickElement}
         \STATE Add the element $q$ to $\Q_{[w_j,\dots, w_{j-m+1}]}$
         \STATE Remove lists of \verb+list_of_coverings+ containing the element $q$ from \verb+list_of_coverings+
     \ENDWHILE
     \RETURN $\Q_{[w_j,\dots, w_{j-m+1}]}$
   \end{algorithmic}
 \end{algorithm}
+
+
 
 Notice that for given length of the window $M$, number of calls of Algorithm \ref{alg:minimalSet} within Algorithm \ref{alg:weightFunction} is
 $$
