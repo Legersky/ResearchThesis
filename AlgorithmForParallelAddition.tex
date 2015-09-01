@@ -8,7 +8,7 @@ The constructor of class \emph{AlgorithmForParallelAddition} is
 
 \begin{method}{\_\_init\_\_}{minPol\_str, embd, alphabet, base, name='NumerationSystem', inputAlphabet=' ',\\
  printLog=True, printLogLatex=False, verbose=0}
-Take \var{minPol\_str} which is a string of symbolic expression in the variable $x$ of an irreducible polynomial~$p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$ (see more in documentation of \emph{NumberField} in SageMath \cite{sage}). The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{inputAlphabet} and \fun{setBase}{base} are called. It is verified that there are all representatives mod $\beta$ in the alphabet and that all elements of the input alphabet have their representatives mod $\beta-1$ in the alphabet, see Section \ref{sec:alphabet}. Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
+Take \var{minPol\_str} which is a string of symbolic expression in the variable $x$ of an irreducible polynomial~$p$. The closest root of  \var{minPol\_str} to \var{embd} is used as the ring generator $\omega$ (see more in documentation of \emph{NumberField} in SageMath \cite{sage}). The structures for $\Zomega$ are constructed as described above. Setters \fun{setAlphabet}{alphabet}, \fun{setInputAlphabet}{inputAlphabet} and \fun{setBase}{base} are called.  Messages saved to logfile during existence of an instance are printed (using \LaTeX) on standard output depending on \var{printLog} and \var{printLogLatex}. The level of messages for a development is set by \var{verbose}. 
 \end{method}
 
 Methods for the construction of an addition algorithm which is computable in parallel by the designed extending window method are the following:
@@ -22,8 +22,9 @@ Create an instance of \emph{WeightFunctionSearch(method\_number)} and call its m
 \end{method}
 
 
-\begin{method}{findWeightFunction}{ max\_iterations, max\_input\_length, method\_weightCoefSet=2,\\ method\_weightFunSearch=4}
-Return the weight function $q$ obtained by calling \fun{\_findWeightCoefSet}{max\_iterations, method\_weightCoefSet} and \fun{\_findWeightFunction}{max\_input\_length,\\ method\_weightFunSearch}.
+\begin{method}{findWeightFunction}{ max\_iterations, max\_input\_length, method\_weightCoefSet=None,\\ method\_weightFunSearch=None}
+It is verified that there are all representatives mod $\beta$ in the alphabet and that all elements of the input alphabet have their representatives mod $\beta-1$ in the alphabet, see Section \ref{sec:alphabet}.
+Return the weight function $q$ obtained by calling \fun{\_findWeightCoefSet\\}{max\_iterations, method\_weightCoefSet} and \fun{\_findWeightFunction}{max\_input\_length, method\_weightFunSearch}.
 \end{method}
 
 The important function for the searching for possible weight coefficients is
