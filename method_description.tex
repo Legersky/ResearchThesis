@@ -5,7 +5,7 @@ From now on, let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numerati
 \section{General concept}
 The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is the following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the digit set conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically the same but the choice of coefficients differs.
 
-Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representantions padded by zeros to have the same length. We set 
+Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representations padded by zeros to have the same length. We set 
   \begin{align*}
     w&=x+y =\sum_{-m'}^{n'} x_i\beta^i + \sum_{-m'}^{n'} y_i\beta^i = \sum_{-m'}^{n'} (x_i+y_i)\beta^i \\
     &=\sum_{-m'}^{n'} w_i\beta^i \,,
@@ -29,7 +29,7 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search for a seque
   $$
   \beta^m \cdot z_{n} z_{n-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m} = z_{n} z_{n-1}\cdots z_1 z_0 z_{-1} z_{-2} \cdots z_{-m} \bullet
   $$  
-  Particulary, let $(w)_{\beta, \A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet$. We search for $n \in \NN$ and $z_{n}, z_{n-1},\dots, z_1, z_0 \in \A$ such that $(w)_{\beta, \A}=z_{n} z_{n-1}\cdots z_1 z_0 \bullet$.   
+  Particularly, let $(w)_{\beta, \A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet$. We search for $n \in \NN$ and $z_{n}, z_{n-1},\dots, z_1, z_0 \in \A$ such that $(w)_{\beta, \A}=z_{n} z_{n-1}\cdots z_1 z_0 \bullet$.   
   
   We use a suitable representation of zero to convert digits $w_j$ into the alphabet $\A$. 
   For our purpose, we use the simplest possible representation deduced from the polynomial
@@ -77,7 +77,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \label{eq:conversionFormula}
         z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
     \end{equation} 
-    The choice of weight coefficients is the crucial part in order to construct addition algorithms which are computable in parallel. The extending window method determining weight coefficients for a given input is decribed in Section~\ref{sec:methodDescription}.
+    The choice of weight coefficients is the crucial part in order to construct addition algorithms which are computable in parallel. The extending window method determining weight coefficients for a given input is described in Section~\ref{sec:methodDescription}.
     
     
      On the other hand, the following example shows that determining weight coefficients is trivial for standard numeration systems.
@@ -104,7 +104,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
      
      \end{exmp}
   
-  We require that the digit set conversion from $\A+\A$ into $\A$ is computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid the dependency on all less, respectivelly more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
+  We require that the digit set conversion from $\A+\A$ into $\A$ is computable in parallel, i.e., there exist constants $r,t \in \NN_0$ such that for all $j\geq 0$ is $z_j=z_j(w_{j+r},\dots,w_{j-t})$. To avoid the dependency on all less, respectively more, significant digits, we need variety in the choice of weight coefficient $q_j$. This implies that the used numeration system must be redundant.
   
 
 \section{Extending window method}
@@ -129,7 +129,7 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
         $$
         (\forall w_j \in \B)(\forall q_{j-1}\in\Q)(\exists q_j \in \Q )(w_j + q_{j-1} - q_j \beta \in \A )\,.
         $$
-    In other words, there is a weight coefficient $q_j \in \Q$ for any carry from the right $q_{j-1}\in \Q$ and any digit $w_j$ in the input alphabet $\B$. I.e., we  satisfy the basic digit set conversion formula \eqref{eq:conversionFormula}. Notice that $q_{-1}=0$ is in $\Q$ by definition. Thus, all weight coeficients may be chosen from $\Q$.
+    In other words, there is a weight coefficient $q_j \in \Q$ for any carry from the right $q_{j-1}\in \Q$ and any digit $w_j$ in the input alphabet $\B$. I.e., we  satisfy the basic digit set conversion formula \eqref{eq:conversionFormula}. Notice that $q_{-1}=0$ is in $\Q$ by definition. Thus, all weight coefficients may be chosen from $\Q$.
     \begin{defn}
     Let $M$ be an integer and $q:\B^{M} \rightarrow \Q$ be a mapping such that 
     $$
@@ -163,7 +163,7 @@ $$
 $$
 This procedure is repeated until the extended weight coefficients set $\Q_{k+1}$ is the same as the original set $\Q_{k}$. 
 
-In other words, we start with $\Q_0=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to the weight coefficients set $\Q_0$ to obtain the set $\Q_1$. Assume now that we have the set $\Q_k$ for some $k\geq 1$. The weight coefficients in $\Q_k$ now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in the weight coefficients set $\Q_k$ to cover all sums of added coefficients and digits of the input alphabet $\B$, we extend $\Q_k$ to $\Q_{k+1}$ by the suitable coefficients using Algorithmm \ref{alg:extendWeightCoefSet}. And so on until there is no need to add more elements, i.e. the extended set $\Q_{k+1}$ equals $\Q_k$. Then the weight coefficients set $\Q:=\Q_{k+1}$ satisfies Definition \ref{def:weightCoefficientsSet}. We remark that the expression ``a weight coefficient $q$ covers an element $x$'' means that there is $a \in \A$ such that $x=a + \beta q$.
+In other words, we start with $\Q_0=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to the weight coefficients set $\Q_0$ to obtain the set $\Q_1$. Assume now that we have the set $\Q_k$ for some $k\geq 1$. The weight coefficients in $\Q_k$ now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in the weight coefficients set $\Q_k$ to cover all sums of added coefficients and digits of the input alphabet $\B$, we extend $\Q_k$ to $\Q_{k+1}$ by the suitable coefficients using Algorithm \ref{alg:extendWeightCoefSet}. And so on until there is no need to add more elements, i.e. the extended set $\Q_{k+1}$ equals $\Q_k$. Then the weight coefficients set $\Q:=\Q_{k+1}$ satisfies Definition \ref{def:weightCoefficientsSet}. We remark that the expression ``a weight coefficient $q$ covers an element $x$'' means that there is $a \in \A$ such that $x=a + \beta q$.
     
 The precise description of the semi-algorithm in a pseudocode is in Algorithm \ref{alg:weightCoefSet}. For better understanding, see Figures \ref{img:phase1img1}--\ref{img:phase1img13} in Appendix \ref{app:phase1} which illustrate the construction of the weight coefficients set $\Q$ for Eisenstein numeration system with a complex alphabet (see Example \ref{ex:Eisenstein1-blockcomplex} for its description). 
 
@@ -282,7 +282,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     $$
     \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
     $$
-    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. The precise desription of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.  
+    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. The precise description of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.  
  Figures \ref{img:phase2img1}--\ref{img:phase2img7} in Appendix \ref{app:phase2} illustrate the construction of the set $\Q_{[\omega,1,2]}$ for Eisenstein numeration system with a complex alphabet.   
     
 \begin{algorithm}
@@ -360,7 +360,7 @@ In other words, we take the elements which are ``closest'' to the rounded center
 
 There is space to improve Phase 2 by a modification of Algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce the size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
 
-Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm \ref{alg:minimalSet} for some numeration systems by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}.
+Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm \ref{alg:minimalSet} for some numeration systems by Algorithm \ref{alg:oneletterSets}, which is described in Section \ref{sec:convergencePhase2}.
 
 
 
@@ -368,7 +368,7 @@ Notice that for given length of the window $M$, number of calls of Algorithm \re
 $$
 \sum_{m=1}^M  \#\B^m = \#\B \sum_{m=0}^{M-1}  \#\B^m = \#\B \frac{\#\B^M-1}{\#\B-1}\,.
 $$    
-It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponentional because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
+It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponential because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
 
 We may reduce the number of the combinations of the input digits so that if for some $(w_j,\dots, w_{j-m+1})\in\B^m, m<M$ we have   $\#\Q_{[w_j,\dots, w_{j-m+1}]}=1$, we do not extend the window for these digits but we set the ouput of $q(w_j,\dots, w_{j-m+1}, w_{j-m}, \dots w_{j-M+1})$ to the single element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_{j-m}, \dots w_{j-M+1})\in \B^{M-m}$. 
 

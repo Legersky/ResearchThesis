@@ -5,7 +5,7 @@ Firstly, we give a general definition of numeration system.
 \begin{defn}
   Let $\beta \in \CC, |\beta|>1$ and $\A \subset \CC$ be a finite set containing 0. A pair $(\beta, \A)$ is called a \emph{positional numeration system} with \emph{base} $\beta$ and \emph{digit set} $\A$, usually called \emph{alphabet}.
 \end{defn}
-So-called standard numeration systems have an integer base $\beta$ and an alphabet $\A$ which is a set of countiguous integers. We restrict ourselves to base $\beta$ which is an algebraic integer and possibly non-integer alphabet $\A$. 
+So-called standard numeration systems have an integer base $\beta$ and an alphabet $\A$ which is a set of contiguous integers. We restrict ourselves to base $\beta$ which is an algebraic integer and possibly non-integer alphabet $\A$. 
 \begin{defn}
 Let $(\beta, \A)$ be a positional numeration system.  We say that a complex number $x$ has a \emph{$(\beta, \A)$-representation} if~ there exist digits $x_n,x_{n-1}, x_{n-2},\dots \in\A, n\geq 0$ such that $x=\sum_{j=-\infty}^n x_j \beta^j$.
 \end{defn}
@@ -76,7 +76,7 @@ $$
     \ZZ[\omega] =\left\{\sum_{i=0}^n a_i \omega^i\colon n\in\NN, a_i\in\ZZ \right\} \subset \QQ(\omega)\,.
 $$
 \end{defn}
- Notice that $\ZZ[\omega]$ is a commutative ring (for our purposes, a ring is associative under multiplication and there is a multiplicative indentity).     
+ Notice that $\ZZ[\omega]$ is a commutative ring (for our purposes, a ring is associative under multiplication and there is a multiplicative identity).     
     
 From now on, let $\omega$ be an algebraic integer  which generates the set $\Zomega$ and let the base $\beta\in\Zomega$ be such that $|\beta|>1$. We remark that $\beta$ is also an algebraic integer as all elements of $\Zomega$ are algebraic integers. Finally, let the alphabet $\A$ be a finite subset of $\Zomega$ such that $0\in\A$.
 
@@ -140,7 +140,7 @@ and we define powers of $u \in \ZZ^d$ by
 \end{defn}
 
 We will see later that $\ZZ^d$ equipped with elementwise addition and multiplication $\odot_\omega$ builds a commutative ring. 
-% It will follow from the isomorhpism with $\Zomega$. 
+% It will follow from the isomorphism with $\Zomega$. 
 Let us first recall an important property of a companion matrix  -- it is a root of its defining polynomial.
 \begin{lem}
 \label{lem:compMatrixIsRoot}
@@ -179,7 +179,7 @@ $$
 for $k=\{0,1,\dots,d-1\}$ which implies the statement.
 \end{proof}
 
-The following lemma summarizes basic properties of the mapping $\odot_\omega$ -- multiplication by an integer scalar, the identity element, the distributive law and a weaker form of asociativity.
+The following lemma summarizes basic properties of the mapping $\odot_\omega$ -- multiplication by an integer scalar, the identity element, the distributive law and a weaker form of associativity.
 \begin{lem}
 \label{lem:multInZd}
 Let $\omega$ be an algebraic integer of degree $d$. The following statements hold for every $u,v,w\in \ZZ^d$ and $m\in\ZZ$:

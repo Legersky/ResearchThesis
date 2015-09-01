@@ -1,4 +1,4 @@
-This class constructs neccessary structures for computation in $\Zomega$. It is \emph{PolynomialQuotientRing} obtained as a \emph{PolynomialRing} over integers factored by polynomial $p$. This is used for representation of elements of $\Zomega$ and arithmetics. We remark that it is independent on the choice of root of the  minimal polynomial $p$. But as we need also comparisons of numbers in $\Zomega$ in modulus, we specify $\omega$ by its approximate complex value and we form a factor ring of rational polynomials by using class \emph{NumberField}. This enables us to get absolute values of elements of $\Zomega$ which can be then compared.
+This class constructs necessary structures for computation in $\Zomega$. It is \emph{PolynomialQuotientRing} obtained as a \emph{PolynomialRing} over integers factored by polynomial $p$. This is used for representation of elements of $\Zomega$ and arithmetic. We remark that it is independent on the choice of root of the  minimal polynomial $p$. But as we need also comparisons of numbers in $\Zomega$ in modulus, we specify $\omega$ by its approximate complex value and we form a factor ring of rational polynomials by using class \emph{NumberField}. This enables us to get absolute values of elements of $\Zomega$ which can be then compared.
 
 Method \textbf{findWeightFunction()} links together both phases of the extending window method to find the weight function $q$. That is used in the methods for addition and digit set conversion to process them as local functions. There are also verification methods.
 
@@ -50,10 +50,9 @@ Return converted digit according to equation \eqref{eq:conversionFormula} for li
 \end{method}
 
 
-The correcteness of the implementation of the extending window for a given numeration system can be verified by
+The correctness of the implementation of the extending window for a given numeration system can be verified by
  
 \begin{method}{sanityCheck\_conversion}{ num\_digits}
 Check whether the values of all possible numbers of the length \var{num\_digits} with digits in the input alphabet $\B$ are the same as their $(\beta, \A)$-representation obtained by \fun{parallelConversion}{}.   
 \end{method}
-
 
