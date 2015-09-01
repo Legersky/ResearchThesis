@@ -2,7 +2,6 @@ We recall the general concept of addition at the beginning of this chapter and t
 
 From now on, let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that a base $\beta \in \Zomega$ and an alphabet $\A \ni 0$ is a finite subset of $\Zomega$. 
 
-\section{General concept}
 The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is the following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the digit set conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically the same but the choice of coefficients differs.
 
 Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representations padded by zeros to have the same length. We set 
@@ -151,7 +150,7 @@ We search for the weight function $q$ for a given base $\beta$ and input alphabe
 
 Note that the convergence of both phases is discussed separately in Chapter \ref{chap:convergence}.
 
-\subsection{Phase 1 -- Weight coefficients set}
+\section{Phase 1 -- Weight coefficients set}
 \label{subsec:phase1}
 The goal of the first phase is to compute a weight coefficients set $\Q$, i.e., to find a set $\Q \ni 0$ such that 
 $$
@@ -245,7 +244,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
 
 
 
-\subsection{Phase 2 -- Weight function}
+\section{Phase 2 -- Weight function}
 \label{subsec:phase2}
     We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. We start with the weight coefficients set $\Q$ obtained in Phase 1. The idea is to reduce necessary weight coefficients for the conversion of a given digit up to single value. This is done by enlarging the number of considered input digits (extending the length of window) -- there are less possible carries from the right if we know which digits on the right are converted. 
      
