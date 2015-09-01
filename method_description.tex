@@ -2,7 +2,7 @@ We recall the general concept of addition at the beginning of this chapter and t
 
 From now on, let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that a base $\beta \in \Zomega$ and an alphabet $\A \ni 0$ is a finite subset of $\Zomega$. 
 
-The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is the following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the digit set conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are the basically same but the choice of coefficients differs.
+The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is the following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the digit set conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically the same but the choice of coefficients differs.
 
 Now we go step by step more precisely. Let $x=\sum_{-m'}^{n'} x_i\beta^i,y=\sum_{-m'}^{n'} y_i\beta^i \in \fin{\A}$ with $(\beta,\A)$-representantions padded by zeros to have the same length. We set 
   \begin{align*}
@@ -184,7 +184,7 @@ Section \ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. w
   \end{algorithmic}
 \end{algorithm}
 
-Possibly, there are more possible weight coefficients which cover some element of the set $\B+ \Q_k$. Let us suppose that we have the list which contains the lists of these candidates for each element of the set $\B+ \Q_k$. This list of lists is saved in the variable \verb+candidates+ in Algorithm \ref{alg:extendWeightCoefSet}. Now, for each element, we check the list of candidates which cover this element and if there is none of them contained in the set $\Q_k$, the smallest (in absolute value) weight coefficient from the list of candidates is added to the set $\Q_k$. If there are more elements with the same absolute value, we deterministically choose one of them. The extension $\Q_{k+1}$ of the set $\Q_k$ is obtained in this manner.   
+There may be more possible weight coefficients which cover some element of the set $\B+ \Q_k$. Let us suppose that we have the list which contains the lists of these candidates for each element of the set $\B+ \Q_k$. This list of lists is saved in the variable \verb+candidates+ in Algorithm \ref{alg:extendWeightCoefSet}. Now, for each element, we check the list of candidates which cover this element and if there is none of them contained in the set $\Q_k$, the smallest (in absolute value) weight coefficient from the list of candidates is added to the set $\Q_k$. If there are more elements with the same absolute value, we deterministically choose one of them. The extension $\Q_{k+1}$ of the set $\Q_k$ is obtained in this manner.   
 
 We may slightly improve this procedure: for example we may first extend $\Q_{k}$ by all single-element lists of \verb+candidates+. These elements may be enough to cover also other elements of $\B+\Q_{k}$. It implies that the resulting $\Q$ is dependent on the way of selection from \verb+candidates+.
 
@@ -341,11 +341,11 @@ For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elemen
 \end{algorithm}
 
 
-Notice that the result of Algorithm \ref{alg:minimalSet} is influenced by the way how an element on the line \ref{line:pickElement} is picked. It can be done deterministically or non-deterministically. We use the following deterministic choice -- suppose that we want to choose from the elements $x_1=\sum_{i=0}^{d-1}x_{1,i}\omega^i, x_2=\sum_{i=0}^{d-1}x_{2,i}\omega^i, \dots,x_n=\sum_{i=0}^{d-1}x_{n,i}\omega^i\in\Zomega$, where $d$ is the degree of $\omega$. Let $a_0,\dots,a_{d-1}\in\ZZ$ be such that 
+Notice that the result of Algorithm \ref{alg:minimalSet} is influenced by the way how we pick an element on line \ref{line:pickElement}. It can be done deterministically or non-deterministically. We use the following deterministic choice -- suppose that we want to choose from the elements $x_1=\sum_{i=0}^{d-1}x_{1,i}\omega^i, x_2=\sum_{i=0}^{d-1}x_{2,i}\omega^i, \dots,x_n=\sum_{i=0}^{d-1}x_{n,i}\omega^i\in\Zomega$, where $d$ is the degree of $\omega$. Let $a_0,\dots,a_{d-1}\in\ZZ$ be such that 
 $$
 \sum_{i=0}^{d-1}a_i\omega^i=\sum_{j=1}^n x_j\,.
 $$ 
-Set $c:=\sum_{i=0}^{d-1}c_i\omega^i \in\Zomega$ with $c_i=[\frac{a_i}{n}]$ where $[\cdot]$ denotes rounding to nearest integer. Let the index set $I_0\subset\{1,\dots,n\}$ be such that 
+Set $c:=\sum_{i=0}^{d-1}c_i\omega^i \in\Zomega$ with $c_i=[\frac{a_i}{n}]$ where $[\cdot]$ denotes rounding to the nearest integer. Let the index set $I_0\subset\{1,\dots,n\}$ be such that 
 $$
 |x_{j,0}-c_0|=\min\{|x_{k,0}-c_0|\colon k\in{1,\dots,n}\}
 $$
@@ -353,11 +353,11 @@ for all $j\in I_0$. For all $i\in\{1,\dots,d-1\}$, let the index set $I_i$ be su
 $$
 |x_{j,i}-c_i|=\min\{|x_{k,i}-c_i|\colon k\in I_{i-1}\}
 $$
-for all $j\in I_i$. If there is only one element in the index set $I_{d-1}=\{j_0\}$, choose element $x_{j_0}$. Otherwise choose $j_0\in I_{d-1}$ such that $x_{j_0,0}$ is the smallest from $x_{j,0}$ where $j\in I_{d-1}$. If there are more such elements, choose from them according to value $x_{j,1}$ etc. 
+for all $j\in I_i$. If there is only one element in the index set $I_{d-1}=\{j_0\}$, choose the element $x_{j_0}$. Otherwise choose $j_0\in I_{d-1}$ such that $x_{j_0,0}$ is the smallest from $x_{j,0}$ where $j\in I_{d-1}$. If there are more such elements, then choose from them according to the value $x_{j,1}$ etc. 
 
-In other words, we take the elements which are ``closest'' to the rounded center of gravity $c$ of the values $x_1,\dots,x_n$ where ``closest''  is measured by absolute value of the first coordinate of $\pi(x_j)-\pi(c)$. In case of equality, according to the second coordinate etc. If there are more than one such element, we choose the element $x_{j_0}$ with the smallest first, resp. second, etc. coordinate of $\pi(x_{j_0})$.  
+In other words, we take the elements which are ``closest'' to the rounded center of gravity $c$ of the values $x_1,\dots,x_n$ where ``closest'' is measured by absolute value of the first coordinate of $\pi(x_j)-\pi(c)$. In case of equality, according to the second coordinate etc. If there is more than one such element, we choose the element $x_{j_0}$ with the smallest first, resp. second, etc. coordinate of $\pi(x_{j_0})$.  
 
-There is space to improve Phase 2 by a modification of Algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
+There is space to improve Phase 2 by a modification of Algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce the size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
 
 Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm \ref{alg:minimalSet} for some numeration systems by Algorithm \ref{alg:oneletterSets}, which is decribed in Section \ref{sec:convergencePhase2}.
 
