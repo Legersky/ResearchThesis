@@ -3,13 +3,15 @@ In this chapter, we introduce a sufficient condition for convergence of Phase 1 
 
 \section{Convergence of Phase 1}
 \label{sec:convergencePhase1}
-The following theorem gives a condition on $\omega$ which is sufficient for convergence of the Phase 1.
-\begin{theo}
-\label{thm:suffCondPhase1}
+The following lemma is necessary for the proof of Theorem \ref{thm:suffCondPhase1} which gives a sufficient condition of convergence of Phase 1.
+\begin{lem}
+\label{lem:suffCondPhase1}
     Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then there exists a set $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
     
     Moreover, if $\omega$ is such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$, the set $\Q$ is finite. 
-\end{theo}
+
+\end{lem}
+
 \begin{proof}
  Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $|\beta|>1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$  and $q'\in\Zomega$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
  $$
@@ -19,9 +21,21 @@ The following theorem gives a condition on $\omega$ which is sufficient for conv
  
  Obviously, the set $\Q$ is finite if there are only finitely many elements of $\Zomega$ bounded by the constant $R$.
 \end{proof}
-We plug in the alphabet $\A$ and input alphabet $\B$. We see from the last proof that the candidates obtained by Algorithm \ref{alg:searchCand} for an intermediate weight coefficients set $\Q_k$ with elements bounded by the constant $R$ are also bounded by the constant $R$. 
 
-Since we start with $\Q_0=\{0\}$ which is bounded by any positive constant, all intermediate weight coefficient sets $\Q_k$ in Algorithm \ref{alg:weightCoefSet} have elements bounded by $R$ for all $k\in\NN$. Hence, Phase 1 succesfully ends if there are only finitely many elements in $\Zomega$ bounded by the constant $R$. 
+\begin{theo}
+\label{thm:suffCondPhase1}
+Let $\omega$ be an algebraic integer. Let the alphabet $\A\subset\Zomega$ be such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Let $\B\subset\Zomega$ be the input alphabet. 
+
+If $\omega$ is such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$, Phase 1 of the extending window method converges.
+\end{theo}
+\begin{proof}
+We have the constant $R$ and finite set $\Q$ from Lemma \ref{lem:suffCondPhase1} for the alphabet $\A$ and input alphabet $\B$. We prove by induction that  all intermediate weight coefficient sets $\Q_k$ in Algorithm \ref{alg:weightCoefSet} are subsets of the finite set $\Q$. 
+
+We start with $\Q_0=\{0\}$ which is bounded by any positive constant. Suppose that the intermediate weight coefficients set $\Q_k$ has elements bounded by the constant $R$. We see from the previous  proof that the candidates obtained by Algorithm \ref{alg:searchCand} for the set $\Q_k$ are also bounded by $R$. Thus, the next intermediate weight coefficients set $\Q_{k+1}$ has elements bounded by the constant $R$, i.e., $\Q_{k+1}\subset\Q$. 
+
+Since $\#\Q$ is finite and $\Q_0\subset\Q_1\subset\Q_2\subset\cdots$,  Phase 1 successfully ends. 
+\end{proof}
+
 
 
 The following two lemmas characterize algebraic integers $\omega$ according to the number of elements of $\Zomega$ in a complex circle centered around 0. The first lemma deals with real numbers and the second with non-real.
@@ -115,7 +129,6 @@ Using Theorem \ref{thm:suffCondPhase1} and Lemma \ref{lem:numElemRR} and \ref{le
 We see that if the sufficient condition does not hold, convergence and non-convergence are both possible.
 
 
-\newpage
 \section{Convergence of Phase 2}
 \label{sec:convergencePhase2}
 For shorter notation, set 
@@ -198,7 +211,12 @@ Thus, running of Algorithm \ref{alg:oneletterSets} for each input digit $b\in\B$
 
 \section{Alphabet}
 \label{sec:alphabet}
-We see from Algorithm \ref{alg:searchCand} that there have to be all representatives modulo $\beta$ to ensure that we always find all needed candidates. It can be seen also from the proof of Theorem \ref{thm:suffCondPhase1}. Moreover, existence of a parallel digit set conversion implies the following condition on the alphabet $\A$.   
+We see from Algorithm \ref{alg:searchCand} that there have to be all representatives modulo $\beta$ to ensure that we always find all needed candidates. It can be seen also from the proof of Theorem \ref{thm:suffCondPhase1}. 
+
+We divide the elements of the alphabet $\A$ into the congruence classes mod $\beta$. The number of congruence classes mod $\beta$ is given by $|\text{det} S_\beta|$ where $S_\beta$ is the companion matrix of the minimal polynomial of $\beta$, see for instance the paper of A. Kov\'acs \cite{kovacs}. Therefore, it can be checked whether some congruence class is missing.
+
+
+The existence of a parallel digit set conversion implies also the following condition on the alphabet $\A$.   
 \begin{theo}
 Let $\omega$ be an algebraic integer. Let the base $\beta\in\Zomega$ be such that $|\beta|>1$ and the alphabet $\A\subset\Zomega$ be such that $0\in\A$. If there exists a $p$-local digit set conversion $\phi$ from  $\A+\A$ to $\A$, the number $\phi(w,\dots,w)-w$ belongs to the set $(\beta-1)\Zomega$ for any $w\in\A+\A$. 
 \end{theo}
@@ -213,3 +231,6 @@ $$
 for $q'\in\Zomega$.
 
 Thus, the representatives mod $\beta-1$ of all elements of the input alphabet $\B\subset\A+\A$ must be contained in the alphabet $\A$. 
+
+To verify this for $b\in\B$, we iterate through the alphabet $\A$ and search for $a\in\A$ such that $b-a$ is divisible by $\beta-1$.
+
