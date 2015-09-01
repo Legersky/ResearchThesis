@@ -1,7 +1,10 @@
 import re
 import os
+from os.path import isfile, join
 
-for path in os.listdir('./'):
+onlyfiles = [ f for f in os.listdir('./') if isfile(join('./',f)) ]
+
+for path in onlyfiles:
     f = open(path,'r')
     s=' '
     while s:
