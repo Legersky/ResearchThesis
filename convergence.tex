@@ -6,14 +6,14 @@ In this chapter, we introduce a sufficient condition for convergence of Phase 1 
 The following lemma is necessary for the proof of Theorem \ref{thm:suffCondPhase1} which gives a sufficient condition of convergence of Phase 1.
 \begin{lem}
 \label{lem:suffCondPhase1}
-    Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then there exists a set $\Q\subset\Zomega$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by constant $R\in \RR^+$ in modulus.
+    Let $\omega$ be an algebraic integer. Let $\A$ and $\B$ be finite subsets of $\Zomega$ such that $\A$ contains at least one representative of each congruence class modulo $\beta$ in $\Zomega$. Then there exists a set $\Q\subset\Zomega$ and constant $R\in \RR^+$ such that $ \B + \Q \subset \A + \beta \Q$ and all elements of $\Q$ are limited by the constant $R$ in modulus.
     
     Moreover, if $\omega$ is such that any complex circle centered at 0 contains only finitely  many elements of $\Zomega$, the set $\Q$ is finite. 
 
 \end{lem}
 
 \begin{proof}
- Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $|\beta|>1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$  and $q'\in\Zomega$ due to existence of representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
+ Denote $A:=\max\{|a|\colon a \in \A\}$ and $B:=\max\{|b|\colon b\in\B\}$. Consequently, set $R:=\frac{A+B}{|\beta|-1}$ and $\Q:=\{q\in\Zomega\colon |q|\leq R\}$. Since $A>0$ and $|\beta|>1$, the set $\Q$ is not empty. Any element $x=b+q \in \Zomega$ with $b\in\B$ and $q\in\Q$ can be written as $x=a+\beta q'$ for some $a\in\A$  and $q'\in\Zomega$ due to existence of a representative of each congruence class in $\A$. We prove that $|q'|\leq R$:
  $$
     |q'|=\frac{|b+q-a|}{|\beta|}\leq \frac{B+R+A}{|\beta|} \leq \frac{1}{|\beta|}\left(A+B+\frac{A+B}{|\beta|-1}\right)  =\frac{A+B}{|\beta|}\left(\frac{|\beta|}{|\beta|-1}\right)=R\,.
  $$ 
@@ -79,7 +79,7 @@ where $k_{i+1}\in\ZZ$ is such that
 $$
 |\Im z_{i+1}|=|k_{i+1} \cdot\Im z_{i}-\Im w|\leq \frac{|\Im z_{i}|}{2}\,.
 $$
-First, suppose that $\Im z_{i} \neq 0$ for all $i\in\NN$. Therefore, we can build the whole sequence $(z_i)_{i\in\NN}$.
+First, suppose that $\Im z_{i} \neq 0$ for all $i\in\NN$. Therefore, we can build the whole sequence~$(z_i)_{i\in\NN}$.
 
 We prove by induction that $|\Im z_i|\leq |\Im z_0|/2^i$. Clearly, it holds for $i=0$. Assume now that it holds for $i$. Then 
 $$
@@ -174,7 +174,7 @@ For arbitrary $m$, sets $\Qb{m}$  can be easily constructed separately for each 
 $$
 b + \Q \subset \A + \beta \Qb{}\,.
 $$
-Until the set $\Qb{m}$ contains only one element, we increment the length of the window $m$ and, using Algorithm \ref{alg:minimalSet}, we build the subset $\Qb{m+1}$ of the set $\Qb{m}$ such that
+Until the set $\Qb{m}$ contains only one element, we increment the length of  window $m$ and, using Algorithm \ref{alg:minimalSet}, we build the subset $\Qb{m+1}$ of the set $\Qb{m}$ such that
 $$
 b + \Qb{m} \subset \A + \beta \Qb{m+1}\,.
 $$
@@ -218,15 +218,15 @@ We divide the elements of the alphabet $\A$ into the congruence classes mod $\be
 
 The existence of a parallel digit set conversion implies also the following condition on the alphabet $\A$.   
 \begin{theo}
-Let $\omega$ be an algebraic integer. Let the base $\beta\in\Zomega$ be such that $|\beta|>1$ and the alphabet $\A\subset\Zomega$ be such that $0\in\A$. If there exists a $p$-local digit set conversion $\phi$ from  $\A+\A$ to $\A$, the number $\phi(w,\dots,w)-w$ belongs to the set $(\beta-1)\Zomega$ for any $w\in\A+\A$. 
+Let $\omega$ be an algebraic integer. Let the base $\beta\in\Zomega$ be such that $|\beta|>1$ and the alphabet $\A\subset\Zomega$ be such that $0\in\A$. If there exists a $p$-local digit set conversion defined by the function $\phi\colon (\A+\A)^p\rightarrow \A$, the number $\phi(b,\dots,b)-b$ belongs to the set $(\beta-1)\Zomega$ for any $b\in\A+\A$. 
 \end{theo}
-The proof can be found in \cite{minAlph}. Nevertheless, it is easy to prove for the digit set conversion which is constructed by the rewriting rule $x-\beta$. Take formula \ref{eq:localConversion} with the input $w,\dots,w$:
+The proof can be found in \cite{minAlph}. Nevertheless, it is easy to prove for the digit set conversion which is constructed by the rewriting rule $x-\beta$. Take the formula \eqref{eq:localConversion} with the input $b,\dots,b$:
 $$
-    \phi(w, \dots, w)=w+ \underbrace{q(w, \dots, w)}_{=:q'} - \beta q(w, \dots, w)\,.
+    \phi(b, \dots, b)=b+ \underbrace{q(b, \dots, b)}_{=:q'} - \beta q(b, \dots, b)\,.
 $$
 Hence
 $$
-\phi(w, \dots, w)-w=-q'(\beta-1)\,
+\phi(b, \dots, b)-b=-q'(\beta-1)\,
 $$
 for $q'\in\Zomega$.
 

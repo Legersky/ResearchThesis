@@ -1,4 +1,4 @@
-This class constructs necessary structures for computation in $\Zomega$. It is \emph{PolynomialQuotientRing} obtained as a \emph{PolynomialRing} over integers factored by polynomial $p$. This is used for representation of elements of $\Zomega$ and arithmetic. We remark that it is independent on the choice of root of the  minimal polynomial $p$. But as we need also comparisons of numbers in $\Zomega$ in modulus, we specify $\omega$ by its approximate complex value and we form a factor ring of rational polynomials by using class \emph{NumberField}. This enables us to get absolute values of elements of $\Zomega$ which can be then compared.
+This class constructs necessary structures for computation in $\Zomega$. It is \emph{PolynomialQuotientRing} obtained as a \emph{PolynomialRing} over integers factored by polynomial $p$. This is used for representation of elements of $\Zomega$ and arithmetic. We remark that it is independent on the choice of root of the  minimal polynomial $p$. But as we need also comparisons of numbers in~$\Zomega$ in modulus, we specify $\omega$ by its approximate complex value and we form a factor ring of rational polynomials by using class \emph{NumberField}. This enables us to get absolute values of elements of $\Zomega$ which can be then compared.
 
 Method \textbf{findWeightFunction()} links together both phases of the extending window method to find the weight function $q$. That is used in the methods for addition and digit set conversion to process them as local functions. There are also verification methods.
 
@@ -37,17 +37,17 @@ Using Theorem \ref{thm:divisibility}, check if \var{divided\_number} is divisibl
 Methods for the addition and the digit set conversion computable in parallel are following:
 
 \begin{method}{addParallel}{a,b}
-Sum up numbers represented by lists of digits \var{a} and \var{b} digitwise and convert the result by \fun{parallelConversion}{}. 
+Sum up numbers represented by the lists of digits \var{a} and \var{b} digitwise and convert the result by \fun{parallelConversion}{}. 
 \end{method}
 
 
 \begin{method}{parallelConversion}{\_w}
-Return $(\beta,\A)$-representation of number represented by list \var{\_w} of digits in input alphabet $\B$. It is computed locally according to the equation \eqref{eq:conversionFormula} and using weight function $q$.
+Return $(\beta,\A)$-representation of the number represented by the list \var{\_w} of digits in the input alphabet $\B$. According to the equation \eqref{eq:conversionFormula}, it is computed locally by using the weight function $q$.
 \end{method}
 
 
 \begin{method}{localConversion}{w}
-Return converted digit according to equation \eqref{eq:conversionFormula} for list of input digits \var{w}.
+Return converted digit according to the equation \eqref{eq:conversionFormula} for the list of input digits \var{w}.
 \end{method}
 
 

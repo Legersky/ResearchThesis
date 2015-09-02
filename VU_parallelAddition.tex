@@ -131,9 +131,6 @@
 % \vspace{4mm}
 % V~jednom z~výtisků musí být \textbf{originál} zadání, v~ostatních kopie.
 % \normalsize
-\rule{0cm}{0cm}
-\thispagestyle{empty}
-\newpage
 
 
 %%% prohlášení
@@ -191,9 +188,6 @@ Jan Legersk\'y
 \end{tabular}
 \newpage
 
-\rule{0cm}{0cm}
-\thispagestyle{empty}
-\newpage
 
 %%% obsah
 \renewcommand\contentsname{\vspace{-3cm} Contents \vspace{-0.8cm}}
@@ -208,7 +202,6 @@ Jan Legersk\'y
 %     Z A Č Á T E K   P R Á C E                                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{symbols.tex}
-\addcontentsline{toc}{chapter}{List of symbols}
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
@@ -254,7 +247,7 @@ Jan Legersk\'y
 \pagenumbering{Roman}
 \addcontentsline{toc}{chapter}{Appendices}
 \renewcommand{\thesection}{\Alph{section}}
-\input{appendices.tex}
+% \input{appendices.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

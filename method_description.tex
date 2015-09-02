@@ -1,6 +1,6 @@
-We recall the general concept of addition at the beginning of this chapter and then we describe the so-called \emph{extending window method} which is due to M. Svobodov\'a \cite{milena}. 
+We recall the general concept of addition at the beginning of this chapter and then we describe a so-called \emph{extending window method} which is due to M. Svobodov\'a \cite{milena}. 
 
-From now on, let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that a base $\beta \in \Zomega$ and an alphabet $\A \ni 0$ is a finite subset of $\Zomega$. 
+From now on, let $\omega$ be an algebraic integer and $(\beta,\A)$ be a numeration system such that the base $\beta \in \Zomega$ and the alphabet $\A \ni 0$ is a finite subset of $\Zomega$. 
 
 The general concept of addition (standard or parallel) in any numeration system $(\beta,\A)$, such that $\fin{\A}$ is closed under addition, is the following: we add numbers digitwise and then we convert the result into the alphabet $\A$. Obviously, digitwise addition is computable in parallel, thus the crucial point is the digit set conversion of the obtained result. It can be easily done in a standard way but a parallel digit set conversion is nontrivial. However, formulas are basically the same but the choice of coefficients differs.
 
@@ -28,7 +28,7 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search for a seque
   $$
   \beta^m \cdot z_{n} z_{n-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m} = z_{n} z_{n-1}\cdots z_1 z_0 z_{-1} z_{-2} \cdots z_{-m} \bullet
   $$  
-  Particularly, let $(w)_{\beta, \A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet$. We search for $n \in \NN$ and $z_{n}, z_{n-1},\dots, z_1, z_0 \in \A$ such that $(w)_{\beta, \A}=z_{n} z_{n-1}\cdots z_1 z_0 \bullet$.   
+  Particularly, let $(w)_{\beta, \A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 \bullet$. We search for a number $n \in \NN$ and \mbox{$z_{n}, z_{n-1},\dots, z_1, z_0 \in\A$} such that $(w)_{\beta, \A}=z_{n} z_{n-1}\cdots z_1 z_0 \bullet$.   
   
   We use a suitable representation of zero to convert digits $w_j$ into the alphabet $\A$. 
   For our purpose, we use the simplest possible representation deduced from the polynomial
@@ -36,13 +36,13 @@ As we want to obtain a $(\beta,\A)$-representation of $w$, we search for a seque
     x-\beta \in \left(\Zomega\right)[x]\,.
   $$
 
-We remark that any polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$ gives us possible representation of zero. The polynomial $R$ is called a \emph{rewriting rule}. 
+We remark that any polynomial $R(x)=r_s x^s+r_{s-1}x^{s-1}+ \dots + r_1 x+r_0$ with coefficients $r_i \in \Zomega,$ such that $R(\beta)=0$ gives us a possible representation of zero. The polynomial $R$ is called a \emph{rewriting rule}. 
 
 Within a digit set conversion with an arbitrary rewriting rule $R$, one of the coefficients of $R$ which is greatest in modulus (so-called \emph{core coefficient}) is used for the conversion of a digit $w_j$. But using of an arbitrary rewriting rule $R$ is out of scope of this thesis, so we focus on the simplest possible rewriting rule $R(x)=x-\beta$.
   
 As $0=\beta^{j} \cdot R(\beta)=1\cdot \beta^{j+1} -\beta \cdot \beta^{j}$, we have a representation of zero 
 $$1 (-\!\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$
-for all $j \in \NN$. We multiply this representation by $q_j \in \Zomega$ which is called a \emph{weight coefficient} to obtain another  representation of zero 
+for all $j \in \NN$. We multiply this representation by $q_j \in \Zomega$, which is called a \emph{weight coefficient}, to obtain another  representation of zero 
 $$q_j (-q_j\beta) \underbrace{0 \cdots 0}_{j}\bullet = (0)_\beta\,. $$ 
 This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the digit $w_j$ into the alphabet $\A$. The conversion of $j$-th digit causes a \emph{carry} $q_{j}$ on the $(j+1)$-th position. The digit set conversion runs from the right ($j=0$) to the left until all digits and carries are converted into the alphabet $\A$:
         \begin{align}
@@ -60,7 +60,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \begin{equation*}
         z_j=w_j + q_{j-1} - q_j \beta
     \end{equation*}
-    for $j \in \NN_0$. We set $q_{-1}=0$ as there is no carry from the right on the 0-th position.
+    for $j \in \NN$. We set $q_{-1}=0$ as there is no carry from the right on the 0-th position.
     
      Clearly, the value of $w$ is preserved:
 \begin{align}
@@ -76,7 +76,7 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
     \label{eq:conversionFormula}
         z_j=w_j + q_{j-1} - q_j \beta \in \A\,.
     \end{equation} 
-    The choice of weight coefficients is the crucial part in order to construct addition algorithms which are computable in parallel. The extending window method determining weight coefficients for a given input is described in Section~\ref{sec:methodDescription}.
+    The choice of weight coefficients is a crucial part of construction of addition algorithms which are computable in parallel. The extending window method determining weight coefficients for a given input is described in Section~\ref{sec:methodDescription}.
     
     
      On the other hand, the following example shows that determining weight coefficients is trivial for standard numeration systems.
@@ -108,12 +108,12 @@ This is digitwise added to $w_{n} w_{n-1}\cdots w_1 w_0 \bullet$ to convert the 
 
 \section{Extending window method}
 \label{sec:methodDescription}
-In order to construct a digit set conversion in numeration system $(\beta,\A)$ which is computable in parallel, we consider more general case of digit set conversion from an \emph{input alphabet} $\B$ such that $\A \subsetneq \B \subset \A +\A$ instead of the alphabet $\A+\A$.
+In order to construct a digit set conversion in numeration system $(\beta,\A)$ which is computable in parallel, we consider a more general case of digit set conversion from an \emph{input alphabet} $\B$ such that $\A \subsetneq \B \subset \A +\A$ instead of the alphabet $\A+\A$.
 As mentioned above, the key problem is to find for every $j\geq 0$ a weight coefficient $q_j$ such that 
     $$
         z_j=\underbrace{w_j}_{\in \B} + q_{j-1} - q_j \beta \in \A 
     $$  
-    for any input $w_{n'}w_{n'-1}\dots w_1 w_0 \bullet=(w)_{\beta,\B}, w\in \fin{\B}$. We remark that the weight coefficient $q_{j-1}$ is determined by the input $w$. For a digit set conversion to be computable in parallel the digit $z_j$ is required to satisfy $z_j=z_j(w_{j+r},\dots,w_{j-t})$ for a fixed anticipation $r$ and memory $t$ in $\NN_0$.
+    for any input $w_{n'}w_{n'-1}\dots w_1 w_0 \bullet=(w)_{\beta,\B}, w\in \fin{\B}$. We remark that the weight coefficient $q_{j-1}$ is determined by the input $w$. For a digit set conversion to be computable in parallel the digit $z_j$ is required to satisfy $z_j=z_j(w_{j+r},\dots,w_{j-t})$ for a fixed anticipation $r$ and memory $t$ in $\NN$.
     
     We introduce following definitions. 
     \begin{defn}
@@ -128,13 +128,13 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
         $$
         (\forall w_j \in \B)(\forall q_{j-1}\in\Q)(\exists q_j \in \Q )(w_j + q_{j-1} - q_j \beta \in \A )\,.
         $$
-    In other words, there is a weight coefficient $q_j \in \Q$ for any carry from the right $q_{j-1}\in \Q$ and any digit $w_j$ in the input alphabet $\B$. I.e., we  satisfy the basic digit set conversion formula \eqref{eq:conversionFormula}. Notice that $q_{-1}=0$ is in $\Q$ by definition. Thus, all weight coefficients may be chosen from $\Q$.
+    In other words, there is a weight coefficient $q_j \in \Q$ for a carry from the right $q_{j-1}\in \Q$ and  digit $w_j$ in the input alphabet $\B$. I.e., we  satisfy the basic digit set conversion formula~\eqref{eq:conversionFormula}. Notice that $q_{-1}=0$ is in $\Q$ by the definition. Thus, all weight coefficients may be chosen from $\Q$.
     \begin{defn}
     Let $M$ be an integer and $q:\B^{M} \rightarrow \Q$ be a mapping such that 
     $$
     w_j+ q(w_{j-1}, \dots, w_{j-M}) - \beta q(w_j, \dots, w_{j-M+1}) \in \A
     $$
-    for all $w_j,w_{j-1}, \dots, w_{j-M} \in \B$ and $q(0,0,\dots,0)=0$. Then $q$ is called a \emph{weight function} and $M$ is called a \emph{length of window}.    
+    for all $w_j,w_{j-1}, \dots, w_{j-M} \in \B$, and $q(0,0,\dots,0)=0$. Then $q$ is called a \emph{weight function} and $M$ is called a \emph{length of window}.    
     \end{defn}
 
  Having a weight function $q$, we define a function $\phi:\B^{M+1}\rightarrow \A$ by
@@ -142,13 +142,13 @@ As mentioned above, the key problem is to find for every $j\geq 0$ a weight coef
     \label{eq:localConversion}
         \phi(w_{j}, \dots, w_{j-M})=w_j+ \underbrace{q(w_{j-1}, \dots, w_{j-M})}_{=q_{j-1}} - \beta \underbrace{q(w_j, \dots, w_{j-M+1})}_{=q_j}=:z_j\,,
     \end{equation} 
-    which verifies that the mapping $\phi$ is indeed the $(M+1)$-local digit set conversion with anticipation $r=0$ and memory $t=M$. The requirement of zero output of the weight function $q$ for the input of $M$ zeros guarantees that $\phi(0,0,\dots,0)=0$. Thus the first condition of Definition \ref{def:digitSetConversion} is satisfied. The second one follows from the equation \eqref{eq:valuePreserving}. 
+    which verifies that the digit set conversion is indeed a $(M+1)$-local function with anticipation $r=0$ and memory $t=M$. The requirement of zero output of the weight function $q$ for the input of $M$ zeros guarantees that $\phi(0,0,\dots,0)=0$. Thus the first condition of Definition~\ref{def:digitSetConversion} is satisfied. The second one follows from the equation \eqref{eq:valuePreserving}. 
     
-Let us summarize the construction of digit set conversion by the rewriting rule $x-\beta$. We need to find weight coefficients for all possible combinations of digits of the input alphabet $\B$. Their multiples of the rewriting rules are digitwise added to the input sequence. In fact, it means that the equation  \eqref{eq:conversionFormula} is applied on each position. If the digit set conversion is computable in parallel, the weight coefficients are determined as the outputs of the weight function $q$ with some fixed length of window $M$.  
+Let us summarize the construction of the digit set conversion by the rewriting rule \mbox{$x-\beta$}. We need to find weight coefficients for all possible combinations of digits of the input alphabet~$\B$. Their multiples of the rewriting rules are digitwise added to the input sequence. In fact, it means that the equation  \eqref{eq:conversionFormula} is applied on each position. If the digit set conversion is computable in parallel, the weight coefficients are determined as the outputs of the weight function $q$ with some fixed length of window $M$.  
 
-We search for the weight function $q$ for a given base $\beta$ and input alphabet $\B$ by the extending window method. It consists of two phases. First, we find a minimal possible weight coefficients set $\Q$. We know that is possible to convert the input sequence by choosing the weight coefficients from this set $\Q$. The set $\Q$ serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$. Then, the local conversion is determined -- we use the weight function outputs as weight coefficients in the formula \eqref{eq:conversionFormula}.    
+We search for the weight function $q$ for a given base $\beta$ and input alphabet $\B$ by the extending window method. It consists of two phases. First, we find a minimal possible weight coefficients set $\Q$. We know that it is possible to convert an input sequence by choosing the weight coefficients from the set $\Q$. The set $\Q$ serves as the starting point for the second phase in which we increment the expected length of the window $M$ until the weight function $q$ is uniquely defined for each $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in \B^{M}$. Then, the local conversion is determined -- we use the weight function outputs as weight coefficients in the formula \eqref{eq:conversionFormula}.    
 
-Note that the convergence of both phases is discussed separately in Chapter \ref{chap:convergence}.
+Note that the convergence of both phases is discussed separately in Chapter~\ref{chap:convergence}.
 
 \section{Phase 1 -- Weight coefficients set}
 \label{subsec:phase1}
@@ -156,17 +156,17 @@ The goal of the first phase is to compute a weight coefficients set $\Q$, i.e., 
 $$
     \B + \Q \subset \A + \beta \Q\,.
 $$  
-We build the sequence $\Q_0, \Q_1, \Q_2,\dots$ iteratively so that we extend $\Q_k$ to $\Q_{k+1}$ in a way to cover all elements on the left side with the set $\Q_k$ by elements on the right side with the extended set $\Q_{k+1}$, i.e.
+We build the sequence $\Q_0, \Q_1, \Q_2,\dots$ iteratively so that we extend $\Q_k$ to $\Q_{k+1}$ in a way to cover all elements of the set $\B+\Q_k$ by elements of the extended set $\Q_{k+1}$, i.e.,
 $$
 \B+ \Q_k \subset \A + \beta \Q_{k+1}\,.
 $$
-This procedure is repeated until the extended weight coefficients set $\Q_{k+1}$ is the same as the original set $\Q_{k}$. 
+This procedure is repeated until the extended weight coefficients set $\Q_{k+1}$ is the same as the original set $\Q_{k}$. We remark that the expression ``a weight coefficient $q$ covers an element $x$'' means that there is $a \in \A$ such that $x=a + \beta q$. 
 
-In other words, we start with $\Q_0=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to the weight coefficients set $\Q_0$ to obtain the set $\Q_1$. Assume now that we have the set $\Q_k$ for some $k\geq 1$. The weight coefficients in $\Q_k$ now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in the weight coefficients set $\Q_k$ to cover all sums of added coefficients and digits of the input alphabet $\B$, we extend $\Q_k$ to $\Q_{k+1}$ by the suitable coefficients using Algorithm \ref{alg:extendWeightCoefSet}. And so on until there is no need to add more elements, i.e. the extended set $\Q_{k+1}$ equals $\Q_k$. Then the weight coefficients set $\Q:=\Q_{k+1}$ satisfies Definition \ref{def:weightCoefficientsSet}. We remark that the expression ``a weight coefficient $q$ covers an element $x$'' means that there is $a \in \A$ such that $x=a + \beta q$.
+In other words, we start with $\Q_0=\{0\}$ meaning that we search all weight coefficients $q_j$ necessary for digit set conversion for the case where there is no carry from the right, i.e., $q_{j-1}=0$. We add them to the weight coefficients set $\Q_0$ to obtain the set $\Q_1$. Assume now that we have the set $\Q_k$ for some $k\geq 1$. The weight coefficients in $\Q_k$ now may appear as a carry $q_{j-1}$. If there are no suitable weight coefficients $q_j$ in the weight coefficients set~$\Q_k$ to cover all sums of added coefficients and digits of the input alphabet $\B$, we extend $\Q_k$ to $\Q_{k+1}$ by  suitable coefficients using Algorithm~\ref{alg:extendWeightCoefSet}. And so on until there is no need to add more elements, i.e., the extended set $\Q_{k+1}$ equals $\Q_k$. Then the weight coefficients set $\Q:=\Q_{k+1}$ satisfies Definition~\ref{def:weightCoefficientsSet}. 
     
-The precise description of the semi-algorithm in a pseudocode is in Algorithm \ref{alg:weightCoefSet}. For better understanding, see Figures \ref{img:phase1img1}--\ref{img:phase1img13} in Appendix \ref{app:phase1} which illustrate the construction of the weight coefficients set $\Q$ for Eisenstein numeration system with a complex alphabet (see Example \ref{ex:Eisenstein1-blockcomplex} for its description). 
+The precise description of the algorithm in a pseudocode is in Algorithm~\ref{alg:weightCoefSet}. For better understanding, see Figures~\ref{img:phase1img1}--\ref{img:phase1img13} in Appendix~\ref{app:phase1} which illustrate the construction of the weight coefficients set $\Q$ for the Eisenstein base and a complex alphabet (see Example~\ref{ex:Eisenstein1-blockcomplex} for its description). 
 
-Section \ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. whether it happens that  $\Q_{k+1}=\Q_k$ for some  $k$.
+Section~\ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. whether it happens that  $\Q_{k+1}=\Q_k$ for some  $k$.
     
 \begin{algorithm}
   \caption{Search for weight coefficients set (Phase 1)}
@@ -175,7 +175,7 @@ Section \ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. w
     \STATE $k:=0$ 
     \STATE $Q_0:=\{0\}$
     \REPEAT
-     \STATE  By Algorithm \ref{alg:extendWeightCoefSet}, extend $\Q_k$ to $\Q_{k+1}$ in a minimal possible way so that $$\B+ \Q_k \subset \A + \beta \Q_{k+1}$$
+     \STATE  By Algorithm~\ref{alg:extendWeightCoefSet}, extend $\Q_k$ to $\Q_{k+1}$ in a minimal possible way so that $$\B+ \Q_k \subset \A + \beta \Q_{k+1}$$
      \vspace{-20pt}
       \STATE  $k:=k+1$
       \UNTIL{$\Q_k = \Q_{k+1}$}      
@@ -184,7 +184,7 @@ Section \ref{sec:convergencePhase2} discusses the convergence of Phase 1, i.e. w
   \end{algorithmic}
 \end{algorithm}
 
-There may be more possible weight coefficients which cover some element of the set $\B+ \Q_k$. Let us suppose that we have the list which contains the lists of these candidates for each element of the set $\B+ \Q_k$. This list of lists is saved in the variable \verb+candidates+ in Algorithm \ref{alg:extendWeightCoefSet}. Now, for each element, we check the list of candidates which cover this element and if there is none of them contained in the set $\Q_k$, the smallest (in absolute value) weight coefficient from the list of candidates is added to the set $\Q_k$. If there are more elements with the same absolute value, we deterministically choose one of them. The extension $\Q_{k+1}$ of the set $\Q_k$ is obtained in this manner.   
+There may be more possible weight coefficients which cover some element of the set $\B+ \Q_k$. Let us suppose that we have the list which contains the lists of these candidates for each element of the set $\B+ \Q_k$. This list of lists is saved in the variable \verb+candidates+ in Algorithm~\ref{alg:extendWeightCoefSet}. Now, for each element, we check the list of candidates which cover this element and if there is none of them contained in the set $\Q_k$, the smallest (in absolute value) weight coefficient from the list of candidates is added to the set $\Q_k$. If there are more elements with the same absolute value, we deterministically choose one of them. The extension $\Q_{k+1}$ of the set $\Q_k$ is obtained in this manner.   
 
 We may slightly improve this procedure: for example we may first extend $\Q_{k}$ by all single-element lists of \verb+candidates+. These elements may be enough to cover also other elements of $\B+\Q_{k}$. It implies that the resulting $\Q$ is dependent on the way of selection from \verb+candidates+.
 
@@ -192,7 +192,7 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
   \caption{Extending intermediate weight coefficients set}
     \label{alg:extendWeightCoefSet}
   \begin{algorithmic}[1]
-    \REQUIRE{\verb+candidates+ from Algorithm \ref{alg:searchCand}, previous weight coefficients set $\Q_{k}$}
+    \REQUIRE{\verb+candidates+ from Algorithm~\ref{alg:searchCand}, previous weight coefficients set $\Q_{k}$}
     \STATE $\Q_{k+1}:=\Q_{k}$
     \FORALL{\texttt{cand\_for\_x} in \texttt{candidates}}
         \IF{no element of \texttt{cand\_for\_x} in $\Q_{k}$}
@@ -203,19 +203,19 @@ We may slightly improve this procedure: for example we may first extend $\Q_{k}$
   \end{algorithmic}
 \end{algorithm}
 
-Algorithm \ref{alg:searchCand} describes the search for the list of lists of candidates. For each element $x\in \B + \Q_{k}$ we build the list of candidates (in the variable \verb+cand_for_x+) so that we test the divisibility of $x-a$ by the base $\beta$ for all letters $a\in\A$. In the positive case, the result of division is appended to \verb+cand_for_x+ as the candidating weight coefficient. We remark that Theorem \ref{thm:divisibility} is used to check the divisibility.
+Algorithm~\ref{alg:searchCand} describes the search for the list of lists of candidates. For each element $x\in \B + \Q_{k}$ we build the list of candidates (in the variable \verb+cand_for_x+) so that we test the divisibility of $x-a$ by the base $\beta$ for all letters $a\in\A$. In the positive case, the result of division is appended to \verb+cand_for_x+ as a possible weight coefficient. We remark that Theorem~\ref{thm:divisibility} is used to check the divisibility.
 
 
 \begin{algorithm}
   \caption{Search for candidates}
     \label{alg:searchCand}
   \begin{algorithmic}[1]
-    \REQUIRE{previous weight coefficients set $\Q_{k}$, alternatively also the set $\Q_{k-1}$}
+    \REQUIRE{the previous weight coefficients set $\Q_{k}$, alternatively also the set $\Q_{k-1}$}
     \STATE \verb+candidates+:= empty list of lists
     \FORALL[Alternatively, $x \in (\B + \Q_{k})\setminus (\B + \Q_{k-1})$]{$x \in \B + \Q_{k}$} \label{line:replaceBySmaller}
       \STATE \verb+cand_for_x+:= empty list
       \FORALL{$a \in \A$}
-          \IF{$(x-a)$ is divisible by $\beta$ in $\Zomega$ (using Theorem \ref{thm:divisibility})}
+          \IF{$(x-a)$ is divisible by $\beta$ in $\Zomega$ (using Theorem~\ref{thm:divisibility})}
               \STATE Append $\frac{x-a}{\beta}$ to \verb+cand_for_x+
             \ENDIF
       \ENDFOR 
@@ -225,13 +225,13 @@ Algorithm \ref{alg:searchCand} describes the search for the list of lists of can
   \end{algorithmic}
 \end{algorithm}  
 
-We can improve the performance of Algorithm \ref{alg:searchCand} by substituting the set $\B + \Q_{k}$ by $(\B + \Q_{k})\setminus (\B + \Q_{k-1})$ on the line \ref{line:replaceBySmaller} because
+We can improve the performance of Algorithm~\ref{alg:searchCand} by substituting the set $\B + \Q_{k}$ by $(\B + \Q_{k})\setminus (\B + \Q_{k-1})$ on the line~\ref{line:replaceBySmaller} because
 $$
 \B + \Q_{k-1} \subset \A + \beta \Q_{k} \subset \A + \beta \Q_{k+1}
 $$
-for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the elements of $\B + \Q_{k-1}$ are covered by some weight coefficient on $\Q_k$ in Algorithm \ref{alg:extendWeightCoefSet}.
+for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the elements of $\B + \Q_{k-1}$ are covered by some weight coefficient from $\Q_k$ in Algorithm~\ref{alg:extendWeightCoefSet}.
 
-% An added element from each list of \verb+candidates+ is chosen as the smallest one unless there is already a covering element contained in $\Q_{k}$ (Algorithm \ref{alg:extendWeightCoefSet}).  
+% An added element from each list of \verb+candidates+ is chosen as the smallest one unless there is already a covering element contained in $\Q_{k}$ (Algorithm~\ref{alg:extendWeightCoefSet}).  
 
 
     
@@ -246,7 +246,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
 
 \section{Phase 2 -- Weight function}
 \label{subsec:phase2}
-    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. We start with the weight coefficients set $\Q$ obtained in Phase 1. The idea is to reduce necessary weight coefficients for the conversion of a given digit up to single value. This is done by enlarging the number of considered input digits (extending the length of window) -- there are less possible carries from the right if we know which digits on the right are converted. 
+    We want to find a length of the window $M$ and a weight function $q:\B^{M} \to \Q$. We start with the weight coefficients set $\Q$ obtained in Phase 1. The idea is to reduce necessary weight coefficients for the conversion of a given digit up to single value. This is done by enlarging the number of considered input digits (extending the length of window) -- there might be  less possible carries from the right if we know which digits on the right are converted. 
      
     We introduce the following notation. 
         Let $\Q$ be a weight coefficients set and $w_j\in \B$. Denote by $\Q_{[w_j]}$ any set such that
@@ -260,11 +260,13 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
         
     
   
-    Recall the scheme \eqref{eq:conversionScheme} of digit set conversion for better understanding of the notation and method:
+    Recall the scheme \eqref{eq:conversionScheme} of the digit set conversion for better understanding of the notation and method:
     \begin{align*}
         \hspace{130pt}\cdots\; &w_{j+1}&\!\! &w_j  & \!\!  &w_{j-1}&\cdots w_{j-M+1} &w_{j-M}\cdots \hspace{130pt} \\[-3pt] 
+                         & &       & & & q_{j-2} \\[-3pt]
                          & &       &q_{j-1}& -&\beta q_{j-1} \\[-3pt]
-                           &q_j&   -&\beta q_j &&\\[-15pt]      
+                           &q_j&   -&\beta q_j &&\\[-3pt]      
+                           -&\beta q_{j+1}&   &  &&\\[-15pt]      
     \intertext{\hspace{120pt}\line(1,0){250}} 
           \vspace{-15pt}
           \\[-30pt]
@@ -275,14 +277,14 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
     $$  
     
-    So we obtain a set $\Q_{[w_j]}\subset\Q$ of weight coefficients which are necessary to convert digit $w_j$ with any carry $q_{j-1}\in\Q$. Assuming that we know input digit $w_{j-1}$, the set of possible carries from the right is also reduced to $\Q_{[w_{j-1}]}$. Thus we may reduce the set $\Q_{[w_j]}$ to a set $\Q_{[w_j,w_{j-1}]}\subset \Q_{[w_j]}$ which is necessary to cover elements of $w_j + \Q_{[w_{j-1}]}$. Prolonging length of window in this manner may lead to a unique weight coefficient $q_j$ for enough given input digits.  
+    So we obtain a set $\Q_{[w_j]}\subset\Q$ of weight coefficients which are necessary to convert the digit~$w_j$ with any carry $q_{j-1}\in\Q$. Assuming that we know the input digit $w_{j-1}$, the set of possible carries from the right is also reduced to $\Q_{[w_{j-1}]}$. Thus we may reduce the set $\Q_{[w_j]}$ to a set $\Q_{[w_j,w_{j-1}]}\subset \Q_{[w_j]}$ which is necessary to cover all elements of $w_j + \Q_{[w_{j-1}]}$. Prolonging the length of window in this manner may lead to a unique weight coefficient $q_j$ for enough given input digits.  
     
     Accordingly, the weight function $q$ is found if there is $M\in\NN$ such that 
     $$
     \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
     $$
-    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. The precise description of the construction of the weight function is in  Algorithm \ref{alg:weightFunction}.  
- Figures \ref{img:phase2img1}--\ref{img:phase2img7} in Appendix \ref{app:phase2} illustrate the construction of the set $\Q_{[\omega,1,2]}$ for Eisenstein numeration system with a complex alphabet.   
+    for all $w_{j},\dots, w_{j-M+1} \in \B^M$. The precise description of the construction of the weight function is in  Algorithm~\ref{alg:weightFunction}.  
+ Figures~\ref{img:phase2img1}--\ref{img:phase2img7} in Appendix~\ref{app:phase2} illustrate the construction of the set $\Q_{[\omega,1,2]}$ for the Eisenstein numeration system.   
     
 \begin{algorithm}
   \caption{Search for weight function (Phase 2)}
@@ -291,7 +293,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     \REQUIRE{weight coefficients set $\Q$}
     \STATE $m:=1$
     \FORALL{$w_j \in \B$} 
-        \STATE By Algorithm \ref{alg:minimalSet}, find set $\Q_{[w_j]} \subset \Q$ such that
+        \STATE By Algorithm~\ref{alg:minimalSet}, find set $\Q_{[w_j]} \subset \Q$ such that
           $$
           w_j + \Q \subset \A + \beta \Q_{[w_j]}
           $$
@@ -299,7 +301,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
     \WHILE{$\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in \B^m \} > 1$}
         \STATE $m:= m +1$
         \FORALL{$(w_j,\dots, w_{j-m+1}) \in \B^{m}$}
-            \STATE By Algorithm \ref{alg:minimalSet}, find set $\Q_{[w_j,\dots, w_{j-m+1}]} \subset \Q_{[w_j,\dots, w_{j-m+2}]}$ such that
+            \STATE By Algorithm~\ref{alg:minimalSet}, find set $\Q_{[w_j,\dots, w_{j-m+1}]} \subset \Q_{[w_j,\dots, w_{j-m+2}]}$ such that
               $$
               w_j + \Q_{[w_{j-1},\dots, w_{j-m+1}]} \subset \A + \beta \Q_{[w_j,\dots, w_{j-m+1}]}\,,
               $$
@@ -313,7 +315,7 @@ for any $\Q_{k+1} \supset \Q_{k}$. Thus there is no need to check whether the el
   \end{algorithmic}
 \end{algorithm}
     
-For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elements which are the only possible to cover some value in $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Then we add to $\Q_{[w_j,\dots, w_{j-m+1}]}$ one by one elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ covering an uncovered value until each desired value equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm \ref{alg:minimalSet}. 
+For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose such elements of $\Q_{[w_j,\dots, w_{j-m+2}]}$ which are the only possible to cover some value $x \in w_0 + \Q_{[w_{j-1},\dots, w_{j-m+1}]}$. Other elements from $\Q_{[w_j,\dots, w_{j-m+2}]}$ which cover an uncovered value are added one by one to $\Q_{[w_j,\dots, w_{j-m+1}]}$ until each $x$ equals $a+\beta q_j$ for some $q_j$ in $\Q_{[w_j,\dots, w_{j-m+1}]}$ and $a\in\A$. The pseudocode is in Algorithm~\ref{alg:minimalSet}. 
 
 \begin{algorithm}
   \caption{Search for set $\Q_{[w_j,\dots, w_{j-m+1}]}$ }
@@ -341,7 +343,7 @@ For construction of the set $\Q_{[w_j,\dots, w_{j-m+1}]}$ we first choose elemen
 \end{algorithm}
 
 
-Notice that the result of Algorithm \ref{alg:minimalSet} is influenced by the way how we pick an element on line \ref{line:pickElement}. It can be done deterministically or non-deterministically. We use the following deterministic choice -- suppose that we want to choose from the elements $x_1=\sum_{i=0}^{d-1}x_{1,i}\omega^i, x_2=\sum_{i=0}^{d-1}x_{2,i}\omega^i, \dots,x_n=\sum_{i=0}^{d-1}x_{n,i}\omega^i\in\Zomega$, where $d$ is the degree of $\omega$. Let $a_0,\dots,a_{d-1}\in\ZZ$ be such that 
+Notice that the result of Algorithm~\ref{alg:minimalSet} is influenced by the way how we pick an element on line~\ref{line:pickElement}. It can be done deterministically or non-deterministically. We use the following deterministic choice -- suppose that we want to choose from elements $x_1=\sum_{i=0}^{d-1}x_{1,i}\omega^i, x_2=\sum_{i=0}^{d-1}x_{2,i}\omega^i, \dots,x_n=\sum_{i=0}^{d-1}x_{n,i}\omega^i\in\Zomega$, where $d$ is the degree of $\omega$. Let $a_0,\dots,a_{d-1}\in\ZZ$ be such that 
 $$
 \sum_{i=0}^{d-1}a_i\omega^i=\sum_{j=1}^n x_j\,.
 $$ 
@@ -349,25 +351,25 @@ Set $c:=\sum_{i=0}^{d-1}c_i\omega^i \in\Zomega$ with $c_i=[\frac{a_i}{n}]$ where
 $$
 |x_{j,0}-c_0|=\min\{|x_{k,0}-c_0|\colon k\in{1,\dots,n}\}
 $$
-for all $j\in I_0$. For all $i\in\{1,\dots,d-1\}$, let the index set $I_i$ be such that
+for all $j\in I_0$. For all $i\in\{1,\dots,d-1\}$, let the index set $I_i\subset I_{i-1}$ be such that
 $$
 |x_{j,i}-c_i|=\min\{|x_{k,i}-c_i|\colon k\in I_{i-1}\}
 $$
-for all $j\in I_i$. If there is only one element in the index set $I_{d-1}=\{j_0\}$, choose the element $x_{j_0}$. Otherwise choose $j_0\in I_{d-1}$ such that $x_{j_0,0}$ is the smallest from $x_{j,0}$ where $j\in I_{d-1}$. If there are more such elements, then choose from them according to the value $x_{j,1}$ etc. 
+for all $j\in I_i$. If there is only one element in the index set $I_{d-1}=\{j_0\}$, choose the element~$x_{j_0}$. Otherwise choose $j_0\in I_{d-1}$ such that $x_{j_0,0}$ is the smallest from all $x_{j,0}$ such that $j\in I_{d-1}$. If there are more such elements, then choose from them according to the value $x_{j,1}$ etc. 
 
-In other words, we take the elements which are ``closest'' to the rounded center of gravity $c$ of the values $x_1,\dots,x_n$ where ``closest'' is measured by absolute value of the first coordinate of $\pi(x_j)-\pi(c)$. In case of equality, according to the second coordinate etc. If there is more than one such element, we choose the element $x_{j_0}$ with the smallest first, resp. second, etc. coordinate of $\pi(x_{j_0})$.  
+In other words, we take the elements which are the ``closest'' ones to the rounded center of gravity~$c$ of the values $x_1,\dots,x_n$ where ``closest'' is measured by absolute value of the first coordinate of $\pi(x_j)-\pi(c)$. In case of equality, according to the second coordinate etc. If there is more than one such element, we choose the element $x_{j_0}$ with the smallest first, resp. second, etc. coordinate of $\pi(x_{j_0})$.  
 
-There is space to improve Phase 2 by a modification of Algorithm \ref{alg:minimalSet}. It is possible that the effort to reduce the size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
+There is space to improve Phase 2 by a modification of Algorithm~\ref{alg:minimalSet}. It is possible that the effort to reduce the size of  $\Q_{[w_j,\dots, w_{j-m+1}]}$ as much as possible is not the best for convergence of Phase~2.
 
-Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm \ref{alg:minimalSet} for some numeration systems by Algorithm \ref{alg:oneletterSets}, which is described in Section \ref{sec:convergencePhase2}.
+Unfortunately, we do not know when Phase 2 converges. But  we may reveal the nonconvergence of Phase 2 with deterministic Algorithm~\ref{alg:minimalSet} for some numeration systems by Algorithm~\ref{alg:oneletterSets}, which is described in Section~\ref{sec:convergencePhase2}.
 
 
 
-Notice that for given length of the window $M$, number of calls of Algorithm \ref{alg:minimalSet} within Algorithm \ref{alg:weightFunction} is
+Notice that for a given length of window $M$, the number of calls of Algorithm~\ref{alg:minimalSet} within Algorithm~\ref{alg:weightFunction} is
 $$
 \sum_{m=1}^M  \#\B^m = \#\B \sum_{m=0}^{M-1}  \#\B^m = \#\B \frac{\#\B^M-1}{\#\B-1}\,.
 $$    
-It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponential because we have to store at least for $m\in\{M-1,M\}$ sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $w_j,\dots, w_{j-m+1} \in \B$.
+It implies that the time complexity grows exponentially as about $\#\B^M$. The required memory is also exponential because we have to store sets $\Q_{[w_j,\dots, w_{j-m+1}]}$ at least for $m\in\{M-1,M\}$  for all $w_j,\dots, w_{j-m+1} \in \B$.
 
 We may reduce the number of the combinations of the input digits so that if for some $(w_j,\dots, w_{j-m+1})\in\B^m, m<M$ we have   $\#\Q_{[w_j,\dots, w_{j-m+1}]}=1$, we do not extend the window for these digits but we set the ouput of $q(w_j,\dots, w_{j-m+1}, w_{j-m}, \dots w_{j-M+1})$ to the single element of $\Q_{[w_j,\dots, w_{j-m+1}]}$ for all $(w_{j-m}, \dots w_{j-M+1})\in \B^{M-m}$. 
 
