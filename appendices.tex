@@ -1,6 +1,6 @@
 \section{Illustration of Phase 1}
 \label{app:phase1}   
-Figures \ref{img:phase1img1} -- \ref{img:phase1img13} illustrates the construction of the weight coefficients set $\Q$ for the Eisenstein base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{3}}{2}$ with the complex alphabet $\mathcal{A} =\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\}$. This numeration system is described in Example \ref{ex:Eisenstein1-blockcomplex}).
+Figures \ref{img:phase1img1} -- \ref{img:phase1img13} illustrates the construction of the weight coefficients set $\Q$ for the Eisenstein base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{3}}{2}$ with the complex alphabet $\mathcal{A} =\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\}$ and input alphabet $\B=\A+\A$. See also Example \ref{ex:Eisenstein1-blockcomplex}.
 
 \figurehascaptionOne{1 = The starting set $\Q_0{=}\{0\}$.}
 \figurehascaptionOne{2 = The set $\B+\Q_0$ need to be covered.}
@@ -27,18 +27,21 @@ Figures \ref{img:phase1img1} -- \ref{img:phase1img13} illustrates the constructi
     }
 
 \newpage
-\figurehascaptionTwo{1 = Phase 2 starts with the weight coefficients set $\Q$ from Phase 1.}
-\figurehascaptionTwo{2 = The set $\omega+\Q$ need to be covered.}
-\figurehascaptionTwo{3 = The elements of $\omega+\Q$ are covered by the set $\Q_{[\omega]}$.}
-\figurehascaptionTwo{4 = The set $\omega+\Q_{[1]}$ need to be covered.}
-\figurehascaptionTwo{5 = The elements of $\omega+\Q_{[1]}$ are covered by the set $\Q_{[\omega,1]}$.}
-\figurehascaptionTwo{6 = The set $\omega+\Q_{[1,2]}$ need to be covered.}
-\figurehascaptionTwo{7 = The elements of $\omega+\Q_{[1]}$ are covered by the set $\Q_{[\omega,1,2]}$ which has only one element{.} This element is the output of the weight function $q{(\omega,1,2)}$.}
 
 
 \section{Illustration of Phase 2}
-The construction of set $\Q_{[\omega,1,2]}$ for the Eisenstein base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{3}}{2}$ with the complex alphabet $\mathcal{A} =\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\}$ is illustrated on Figures \ref{img:phase2img1} -- \ref{img:phase2img7}. This numeration system is described in Example \ref{ex:Eisenstein1-blockcomplex}).
+The construction of set $\Q_{[\omega,1,2]}$ for the Eisenstein base $\beta = -\frac{3}{2} + \frac{\imath \sqrt{3}}{2}$ with the complex alphabet $\mathcal{A} =\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\}$  and input alphabet $\B=\A+\A$ is illustrated on Figures \ref{img:phase2img1} -- \ref{img:phase2img7}. See also Example \ref{ex:Eisenstein1-blockcomplex}.
 \label{app:phase2}    
+
+\figurehascaptionTwo{1 = Phase 2 starts with the weight coefficients set $\Q$ from Phase 1.}
+\figurehascaptionTwo{2 = The set $\omega+\Q$ need to be covered.}
+\figurehascaptionTwo{3 = The elements of $\omega+\Q$ are covered by the set $\Q_{[\omega]}\subset\Q$.}
+\figurehascaptionTwo{4 = The set $\omega+\Q_{[1]}$ need to be covered.}
+\figurehascaptionTwo{5 = The elements of $\omega+\Q_{[1]}$ are covered by the set $\Q_{[\omega,1]}\subset\Q_{[\omega]}$.}
+\figurehascaptionTwo{6 = The set $\omega+\Q_{[1,2]}$ need to be covered.}
+\figurehascaptionTwo{7 = The elements of $\omega+\Q_{[1]}$ are covered by the set $\Q_{[\omega,1,2]}\subset\Q_{[\omega,1]}$ which has only one element{.} This element is the output of the weight function $q{(\omega,1,2)}$.}
+
+
 
 \foreach \n in {1,...,7} {%
 \begin{SCfigure}[][htbp]
