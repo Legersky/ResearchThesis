@@ -1,0 +1,538 @@
+\documentclass[11pt]{beamer}
+% 
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage{amsmath, amsthm}
+\usepackage{mathtools, mathdots}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{pgffor}
+
+% \usepackage{appendixnumberbeamer}
+
+% \usepackage{graphicx}
+% \usepackage{wrapfig}
+% \usepackage{eurosym}
+% \usepackage{hyperref}
+
+\input{commands.tex}
+
+
+\mode<presentation>
+{
+  \usetheme{Copenhagen} %{}
+  \useinnertheme{circles}
+  \usecolortheme{crane}
+}
+
+\title{Konstrukce algoritmů pro paralelní sčítání}
+\institute{TIGR \\
+                \url{jan.legersky@gmail.com} \\
+					\rule{0cm}{0mm} \\
+					\rule{0cm}{0mm} \\
+% 					Theoretical Informatics GRoup \\
+%           	\rule{0cm}{0mm} \\
+					Obhajoba výzkumného úkolu}
+\author{Jan Legersk\'y}
+\date{10. září 2015}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{footline}{ \hfill \mbox{\insertframenumber\ /\ \inserttotalframenumber } \hspace{\rightmargin} }
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+
+\begin{frame}
+NEJAKA MOTIVACE
+\end{frame}
+
+\begin{frame}
+  \frametitle{Poziční soustava}
+  Algebraické celé číslo $\omega$ stupně $d$.
+  $$\Zomega= \left\{\sum_{j=0}^{n} a_j \omega^j\ \colon n\in\NN,  a_j \in \ZZ \right\}$$
+  \pause
+  Poziční soustava je dána:
+  \begin{itemize}
+    \item Báze $\beta \in \Zomega$, $|\beta|>1$.
+    \item Abeceda $\A \subset \Zomega , 0\in \A$. 
+  \end{itemize}
+  
+  Komplexní číslo $x$ má konečnou  $(\beta, \A)$-reprezentaci, pokud~$x=\sum_{j=-m}^n x_j \beta^j$ s koeficienty $x_j\in\A$.
+  $$
+    (x)_{\beta,\A}=x_n x_{n-1}\cdots x_1 x_0 \bullet x_{-1} x_{-2} \cdots x_{-m}
+  $$ 
+\end{frame}
+
+\section{Paralelní sčítání}
+% \subsection{Standard numeration systems}
+\begin{frame}
+  \frametitle{Sčítání}
+    \begin{align*}
+  (x)_{\beta,\A}=\;x_{n'} \;x_{{n'}-1}\cdots x_1 \;x_0 &\bullet x_{-1} \;x_{-2}\, \cdots x_{-m'} \\[-3pt]
+  (y)_{\beta,\A}=\,y_{n'} \;y_{{n'}-1}\cdots y_1 \,\;y_0 &\bullet y_{-1} \;y_{-2} \;\cdots y_{-m'} \\[-7pt]
+    \line(1,0){130} & \line(1,0){100} \\[-7pt]
+  (w)_{\beta,\A+\A}=w_{n'} w_{{n'}-1}\cdots w_1 w_0 &\bullet w_{-1} w_{-2} \cdots w_{-m'}\,,
+  \end{align*}
+  kde
+  $$
+    w_j=x_j+y_j \in \A +\A\,.
+  $$
+  \pause
+  Chceme najít $(\beta,\A)$-reprezentaci součtu
+%   $w$, tzn. číslice $$z_{n'}, z_{n'-1},\dots, z_1, z_0, z_{-1}, z_{-2}, \dots, z_{-m'}\in\A$$ takovou, že
+  $$
+    z_{n} z_{n-1}\cdots z_1 z_0 \bullet z_{-1} z_{-2} \cdots z_{-m}=(w)_{\beta,\A}\,.
+  $$ 
+\end{frame}
+
+
+
+\begin{frame}
+    $$0=1\cdot \beta^j -\beta \cdot \beta^{j-1}$$%=1 (-\!\beta) 0 \cdots 0\bullet $$ 
+    
+    $\rightarrow$ přičteme $q_j\cdot 0$ pro každé $j$:
+    
+    $$0=q_j\cdot \beta^j -\beta  q_j \cdot \beta^{j-1}$$
+    \begin{align*}
+        w_{n'} w_{n'-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{200pt}\\[-5pt]
+                   &&&&       &       & &     &   &q_{j-2} &&\iddots\\[-3pt] 
+                   &&&&       &       & &\textcolor{red}{q_{j-1}}& -&\beta q_{j-1} \\[-3pt]
+                   &&&&         &q_j&   \textcolor{red}{-}&\textcolor{red}{\beta q_j} &&\\[-8pt]
+                   &&&  \iddots      &   -&\beta q_{j+1}&   &\ &&\\[-17pt]
+    \intertext{\line(1,0){280}}
+    \vspace{-15pt}
+    \\[-30pt]
+     z_{n} \cdots z_{n'} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                            
+    \end{align*}
+    \pause
+    Jak volit váhové koeficienty $q_j$ tak aby
+    $$
+        \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta} \in \A\,?
+    $$
+        
+%     \pause
+%   Weight coefficient $q_j$ is chosen such that it returns the sum of the digit $w_j$  and the right carry $q_{j-1}$  back to the alphabet~$\A$.
+\end{frame}
+
+
+
+\begin{frame}
+    $$
+        \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta}\,
+    $$
+  Standardní sčítání:% v soustavě $(\beta, \A)$:
+%   $$
+%     \beta \in \NN\,,\beta  \geq 2\,, \A = \{0, 1, 2,\dots, \beta -1 \}
+%   $$ 
+  \begin{align*}
+    w_n w_{n-1}\cdots w_{j+1}& \textcolor{red}{w_j w_{j-1} \cdots w_1 w_0}\bullet& \,,w_i &\in \A+\A\,,    \\
+    \longrightarrow z_{n+1}\; z_{n}\; z_{n-1}\;\cdots z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots \;z_1 \; z_0\bullet& \,,z_i &\in \A\,.
+  \end{align*}
+    
+  \pause 
+   Paralelní sčítání (Avizienis, 1961):
+  \begin{align*}
+    \cdots w_{j+t+1}\only<2>{\textcolor{red}{w_{j+t} \cdots w_{j+1}}} \only<3->{w_{j+t} \cdots w_{j+1}}& \textcolor{red}{w_j w_{j-1} \cdots w_{j-r}}w_{j-r-1} \cdots &,\, w_i &\in \A + \A\,,    \\
+    \longrightarrow \cdots z_{j+t+1}\;z_{j+t} \; \cdots \; z_{j+1} &\textcolor{red}{z_j} \; z_{j-1}\; \cdots z_{j-r}\;z_{j-r-1}\; \cdots &,\, z_i &\in \A\,.
+  \end{align*}
+
+%   \pause
+%   Například:
+%   $$
+%   \beta \in \NN, \beta \geq 3, \A=\{-a, \dots, 0, \dots a\}, b/2 <a \leq b-1\,. 
+%   $$
+    
+\end{frame}
+
+\begin{frame}
+Jak najít váhové koeficienty $q_j$ takové, že 
+    $$
+        z_j=\underbrace{w_j}_{\in \A +\A} + q_{j-1} - q_j \beta \in \A 
+    $$
+    pro všechny vstupy $(w)_{\beta,\A+\A}$ a každou pozici $j$,
+    tzn. algoritmus pro paralelní sčítání?
+    
+    \rule{0cm}{0cm}
+    
+     \url{https://cloud.sagemath.com/projects}
+\end{frame}
+
+
+\section{Extending window method}
+\begin{frame}
+    \frametitle{Extending window method}
+    
+    Hledáme šířku okna $M \in \NN$ a váhovou funkci $q:(\A+\A)^{M} \rightarrow \Q \subset \Zomega$ takovou, že $q_j=q(w_j, \dots, w_{j-M+1})$.
+        
+    \pause
+    \vspace{20pt}
+    Metoda:
+    \begin{enumerate}
+        \item Najdeme množinu váhových koeficientů $\Q \subset \Zomega$.
+        \item Zvětšujeme šířku okna $M$ a pro všechny $(w_j,w_{j-1}, \dots , w_{j-M+1}) \in (\A+\A)^{M}$ zkoušíme najít váhový koeficient z množiny $\Q$ pro definování váhové funkce $q$.
+    \end{enumerate}
+\end{frame}
+
+\subsection{Fáze 1 -- množina váhových koeficientů}
+\begin{frame}
+    \frametitle{Fáze 1 -- hledání množiny váhových koeficientů}
+    Hledáme množinu váhových koeficientů $\Q \subset \Zomega$ takovou, že
+    $$
+    \underbrace{(\A+\A)}_{\uncover<2->{w_j \in}}+ \underbrace{\Q}_{\uncover<2->{q_{j-1} \in}} \subset \underbrace{\A}_{\uncover<2->{z_j \in}} + \underbrace{\beta \Q}_{\uncover<2->{\beta q_j \in}}
+    $$
+    \pause
+    Odtud, pro všechny $q_{j-1} \in \Q$ a $w_j \in \A+\A$ existuje $q_j \in \Q$ takové, že
+    $$
+    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
+    $$
+\end{frame}
+
+
+\begin{frame}
+    Konstruujeme $\Q$ iterativně:
+    \begin{block}{Fáze 1}
+     $k:=0$
+     
+    $\Q_0:=\{0\}$
+      
+      \pause
+      Repeat:
+      \begin{itemize}
+          \item rozšiř $\Q_k$ na $\textcolor{red}{\Q_{k+1}}$ tak, že
+           $$
+              (\A+\A)+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
+           $$
+           \item $k:=k+1$
+      \end{itemize}
+      \pause
+      until $\Q_k = \Q_{k+1}$.
+      
+      \pause
+      \vspace{7pt}
+      $\Q:=\Q_k$
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Příklad -- fáze 1}
+    \begin{block}{Eisensteinova báze}
+        \begin{itemize}
+            \item Báze $\beta = \omega - 1 $, kde $\omega=\exp(\frac{2 \pi i}{3}), \omega^2+\omega+1=0$.
+            \item Minimální polynom báze je $ \beta^{2} + 3\beta + 3 $.
+            \item Abeceda $ \A=\left\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\right\} \subset \Zomega$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+\foreach \n in {1,...,13} {%
+      \only<\n>{%
+%             \includegraphics[height=0.9\textheight]{img/eisenstein/phase1_image_\n} \hfill
+            \vfill
+          }  
+    }
+\end{frame}
+
+\subsection{Fáze 2 -- váhová funkce}
+\begin{frame}
+    \frametitle{Fáze 2 -- hledání váhové funkce}
+
+    Hledáme šířku okna $M$ a váhovou funkci $q:(\A+\A)^{M} \to \Q$.
+    \pause
+    
+    Předpokládejme, že šířka okna je $m$.
+    
+    Zkontrolujeme všechny přenosy zprava $q_{j-1}$ a určíme $q_j\in\Q$ takové, že 
+    $$
+    z_j=w_j + q_{j-1} - q_j \beta \in \A \,.
+    $$
+    Množinu všech možných hodnot $q_j$ označíme $\Q_{[w_{j},\dots, w_{j-m+1}]}\subset \Q$.
+        
+    \pause
+    Šířka okna $M$ a váhová funkce $q$ je nalezena když 
+    $$
+    \#\Q_{[w_{j},\dots, w_{j-M+1}]}=1
+    $$
+    pro všechny  $w_{j},\dots, w_{j-M+1} \in (\A+\A)^M$.
+\end{frame}    
+
+
+\begin{frame}
+    \begin{block}{Fáze 2}
+      $m:=1$
+      
+      Pro každé $w_j \in \A+\A$ najdi množinu $\Q_{[w_j]} \subset \Q$ takovou, že
+      $$
+      w_j + \Q \subset \A + \beta \Q_{[w_j]}
+      $$
+    \pause
+      While $(\max\{\#\Q_{[w_j,\dots, w_{j-m+1}]}:(w_j,\dots, w_{j-m+1}) \in (\A+\A)^m \} > 1)$ do:
+      \begin{itemize}
+          \pause
+          \item $m:= m +1$
+          \pause
+          \item Pro všechny $(w_j,\dots, w_{j-m+1}) \in (\A+\A)^{m}$ najdi množinu $\textcolor{red}{\Q_{[w_j,\dots, w_{j-m+1}]}} \subset \Q_{[w_j,\dots, w_{j-m+2}]}$ takovou, že
+          $$
+          w_j + \Q_{[w_{j-1},\dots, w_{j-m+1}]} \subset \A + \beta \textcolor{red}{\Q_{[w_j,\dots, w_{j-m+1}]}}\,,
+          $$
+      \end{itemize}
+      \pause
+      $M:= m$ 
+      
+      \pause
+      $q(w_j,\dots, w_{j-M+1}):=$ jediný prvek $\Q_{[w_j,\dots, w_{j-M+1}]}$
+    \end{block}
+\end{frame}
+
+\begin{frame}
+        Paralelní algoritmus konverze:
+    \begin{align*}
+    z_j&=w_j + q_{j-1} - q_j \beta = \\
+       &=w_j + q(w_{j-1},w_{j-2},\dots, w_{j-M}) - \beta q(w_j,w_{j-1},\dots, w_{j-M+1}) = \\
+       &= z_j(w_{j},w_{j-1},\dots, w_{j-M})\,.
+    \end{align*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Příklad -- fáze 2}
+    Předpokládejme vstup  $w=(\omega\, 1\, 2)$.
+\end{frame}
+
+\begin{frame}
+Input: $w=\omega\, 1\, 2$
+\foreach \n in {1,...,7} {%
+      \only<\n>{%
+%         \includegraphics[height=0.9\textheight]{img/eisenstein/phase2_image_\n} \hfill
+        \vfill
+          }  
+    }
+\end{frame}
+
+\section{Konvergence}
+\subsection{Abeceda}
+\begin{frame}
+    \frametitle{Nutná podmínka na abecedu}
+    Pro existenci algoritmu pro paralelní sčítání je nezbytné, aby abeceda $\A$ obsahovala:
+    \begin{itemize}
+        \item všechny reprezentanty  modulo $\beta$,
+        \item všechny reprezentanty  modulo $\beta-1$.
+    \end{itemize}
+\end{frame}
+
+\subsection{Fáze 1}
+\begin{frame}
+    \frametitle{Fáze 1 -- postačující podmínka konvergence}
+    Pokud je algebraické celé číslo $\omega$ stupně 1 nebo je komplexní stupně 2, fáze 1 konverguje.
+\end{frame}
+
+\subsection{Fáze 2}
+\begin{frame}
+    \frametitle{Fáze 2 -- nutná podmínka konvergence}
+    Pokud algoritmus pro paralelní sčítání existuje, fáze 2 konverguje pro vstupy $(b,\dots, b)$ pro všechny $b\in \A+\A$.
+    \rule{0cm}{0cm}
+    
+    Máme algoritmus, které určí, jestli je fáze 2 konečná pro vstupy tohoto tvaru.
+\end{frame}
+
+\section{Výsledky}
+\begin{frame}
+\fontsize{10pt}{10}\selectfont
+    \frametitle{Testované příklady}
+    \begin{tabular}{l|c cc c c} 
+      Jméno &   Abec. & Post. p. & Fáze 1 & Nut. p. & Fáze 2 \\ \hline
+      Eisenstein\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \checkmark \\
+      Eisenstein\_1-block\_integer &   yes & yes & \checkmark & \xmark & --\\
+      Eisenstein\_1-block\_small\_complex &  no & -- & -- & -- & -- \\
+      Eisenstein\_2-block &  no & -- & -- & -- & -- \\
+      Eisenstein\_2-block\_4elements &   yes & yes & \checkmark & \xmark & --\\
+      \hline
+      Penney\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \checkmark \\
+      Penney\_1-block\_small\_complex &  no & -- & -- & -- & -- \\
+      Penney\_1-block\_integer &   yes & yes & \checkmark & \xmark & --\\
+      Penney\_2-block\_integer &   yes & yes & \checkmark & \checkmark & \checkmark \\
+      \hline
+      Quadratic+1-2+2\_1-block\_complex &   yes & yes& \checkmark & \checkmark & \checkmark \\
+        Quadratic+1-2+2\_1-block\_integer &   yes & yes & \checkmark & \xmark & --\\
+      \hline
+      Quadratic+1+4+5\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \checkmark \\ 
+      \hline
+      Quadratic+1+3+5\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \xmark \\
+      \hline
+      Quadratic+1-5+3\_1-block\_integer &   yes & no & \xmark & -- & --\\
+      \hline
+      Quadratic+1-5+5\_1-block\_real &   yes & no & \checkmark & \xmark & --\\
+      \hline
+      base\_2 &   yes & yes & \checkmark & \checkmark & \checkmark \\
+        base\_4 &   yes & yes & \checkmark & \checkmark & \checkmark \\
+      \hline
+      Cubic+1+1-1+1\_complex &   yes & no & \xmark & -- & --\\
+        Cubic+1+1-5+5\_complex &   yes & no & \checkmark & \xmark & --\\
+  \end{tabular}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}    
+    \begin{itemize}
+        \item Minimality of extension $\Q_{k+1}$ or $\Q_{[w_j,\dots, w_{j-m+1}]}$ means minimality in their size and/or in modulus of their elements.
+        \pause
+        \item Selection of extension $\Q_{k+1}$ and $\Q_{[w_j,\dots, w_{j-m+1}]}$ is not unique.
+        \pause
+        \item Number of inputs grows exponentially in Phase 2.
+        \pause
+        \item Convergence is not guaranteed!
+        \pause
+        \begin{itemize}
+            \item Phase 1 -- sufficient condition is known
+            \item Phase 2 -- work in progress 
+        \end{itemize}
+        \pause
+        \item Experimental implementation in Sage gives good results for several tested cases. 
+        \rule{0cm}{0cm}
+    
+     \url{https://cloud.sagemath.com/projects}
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\section{Result examples}
+
+\begin{frame}{Result examples}
+\fontsize{10pt}{10}\selectfont
+% \begin{itemize}
+    %\pause
+%     \item 
+    \textcolor{blue}{{Successful}}: parallel addition {algorithms found by the program}
+        \begin{itemize}
+            %\pause
+            \item \textcolor{blue}{Eisenstein}: $ \beta^2 + 3\beta + 3 = 0 $ with \textcolor{blue}{$ \A \subset \ZZ[\beta]$} of size \textcolor{blue}{$\# \A = 7 $}
+            %\pause
+            \item \textcolor{blue}{Penney}:  $ \beta^2 + 2\beta + 2 = 0 $
+                %\begin{itemize}
+                %    \item
+                     with \textcolor{blue}{$ \A \subset \ZZ[\beta]$} of size \textcolor{blue}{$\# \A = 5 $}
+                     % for \textcolor{blue}{1-block} parallel addition
+                %    \item with \textcolor{blue}{$ \A \subset \ZZ$} of size \textcolor{blue}{$\# \A = 3 $} for \textcolor{blue}{2-block} parallel addition
+                %\end{itemize}
+            %\pause
+            \item \textcolor{blue}{integer}: $ \beta - b = 0, b >1 $ with $ \textcolor{blue}{ \A \subset \ZZ} $ of size $\textcolor{blue}{\# \A = b+1}$\\
+                    $\Rightarrow $ same result as Avizienis and Chow \& Robertson in 1960-70s
+            %\pause
+            \item \textcolor{blue}{quadratic complex}: $\beta^2 + 4\beta + 5 = 0$ with \textcolor{blue}{$\A \subset \ZZ[\beta]$} of \textcolor{blue}{$\# \A = 10$}
+        \end{itemize}
+
+    \smallskip
+    \pause
+%     \item 
+    \textcolor{red}{{Unsuccessful}}: %parallel addition {algorithms exist}, but the {program does not find them}! (mostly failing in Phase 2.)
+        \begin{itemize}
+            %\pause
+            \item \textcolor{red}{Eisenstein}: $ \beta^2 + 3\beta + 3 = 0 $ with \textcolor{red}{$ \A \subset \ZZ$} of size \textcolor{red}{$\# \A = 7 $}
+            %\pause
+            \item \textcolor{red}{Penney}: $ \beta^2 + 2\beta + 2 = 0 $ with \textcolor{red}{$ \A \subset \ZZ$} of size \textcolor{red}{$\# \A = 5 $}
+            %\pause
+            \item \textcolor{red}{quadratic complex}: $\beta^2 + 4\beta + 5 = 0$ with \textcolor{red}{$\A \subset \ZZ$} of \textcolor{red}{$\# \A = 10$}
+            %\pause
+%             \item \textcolor{red}{quadratic complex base}: $\beta^2 + 3\beta + 5 = 0$} with \textcolor{red}{$\A \subset \ZZ$} or \textcolor{red}{$\A \subset \ZZ[\beta]$} of size \textcolor{red}{$\# \A = 9$}
+%             \pause
+            \item \textcolor{red}{quadratic real}: $\beta^2 - 5\beta + 3 = 0$ with \textcolor{red}{$\A \subset \ZZ$} of size \textcolor{red}{$\# \A = 7$} \\
+                (
+                %here the
+                failure / non-convergence
+                %occurs
+                already in Phase 1.)
+        \end{itemize}
+% \end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+% \section{}
+% 
+% \begin{frame}{Open Issues \& Ideas}
+% 
+% %\pause
+% What are the mathematical reasons for (non)convergence of the iterative method ?
+% 
+% \medskip
+% \pause
+% How to ensure convergence of the program for construction of parallel addition algorithms ?
+% 
+% \pause
+% \medskip
+% $\Rightarrow$ Alternatives to elaborate:
+% % further
+% 
+% 
+% \pause
+% \medskip
+% \begin{itemize}
+%     \item Higher order representation of zero
+%     \begin{itemize}
+%        \item carries possibly to both right and left
+%        \item  help in {Phase 2}, especially for {integer alphabets}
+%     \end{itemize}
+%     \pause
+%     \medskip
+%     \item Use a different metric in $\CC$ than the 'classical' one to guarantee convergence of Phase 1 for a broader class of bases.
+% %     \begin{itemize}
+% % %         \item metric specific for the given base using its companion matrix
+% %         \item 
+% %     \end{itemize}
+% 
+% \end{itemize}
+% 
+% \end{frame}
+
+
+
+
+% \appendix
+% 
+% \setbeamertemplate{footline}{ }
+% 
+% \part{}
+\begin{frame}
+\fontsize{14pt}{10}\selectfont
+\begin{center}
+Thank you
+
+\end{center}
+% \vspace{40pt}
+% Thank you for your attention.
+% \vspace{110pt}
+% 
+% \textcolor{gray}{\fontsize{8pt}{10}\selectfont
+% This work was supported by the Grant Agency of the Czech Technical University in~Prague, grant No. SGS14/205/OHK4/3T/14.}
+    
+
+\end{frame}
+
+% \begin{frame}[allowframebreaks]
+% \frametitle{Zdroje}
+% 	\bibliography{../literatura}
+% 	\bibliographystyle{plain}
+% \end{frame}
+\end {document}
+
+
