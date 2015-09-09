@@ -10,7 +10,6 @@
 \usepackage{wrapfig}
 \usepackage{pgffor}
 
-% \usepackage{appendixnumberbeamer}
 
 % \usepackage{graphicx}
 % \usepackage{wrapfig}
@@ -40,7 +39,7 @@
 
 \setbeamertemplate{navigation symbols}{}
 
-\setbeamertemplate{footline}{ \hfill \mbox{\insertframenumber\ /\ \inserttotalframenumber } \hspace{\rightmargin} }
+\setbeamertemplate{footline}{ \hfill \mbox{\insertframenumber\ } \hspace{\rightmargin} }
 
 
 \begin{document}
@@ -58,13 +57,15 @@
 \begin{frame}
   \frametitle{Poziční soustava}
   Algebraické celé číslo $\omega$ stupně $d$.
-  $$\Zomega= \left\{\sum_{j=0}^{n} a_j \omega^j\ \colon n\in\NN,  a_j \in \ZZ \right\}$$
+  $$\Zomega= \left\{\sum_{j=0}^{d-1} a_j \omega^j\ \colon  a_j \in \ZZ \right\}$$
   \pause
-  Poziční soustava je dána:
+  Poziční soustava je dána
   \begin{itemize}
-    \item Báze $\beta \in \Zomega$, $|\beta|>1$.
-    \item Abeceda $\A \subset \Zomega , 0\in \A$. 
+    \item bází $\beta \in \Zomega$, $|\beta|>1$ a
+    \item abecedou $\A \subset \Zomega , 0\in \A$. 
   \end{itemize}
+  
+  \pause
   
   Komplexní číslo $x$ má konečnou  $(\beta, \A)$-reprezentaci, pokud~$x=\sum_{j=-m}^n x_j \beta^j$ s koeficienty $x_j\in\A$.
   $$
@@ -97,11 +98,9 @@
 
 
 \begin{frame}
-    $$0=1\cdot \beta^j -\beta \cdot \beta^{j-1}$$%=1 (-\!\beta) 0 \cdots 0\bullet $$ 
+    $$R(x)= x-\beta \implies 0=R(\beta)=\beta -\beta$$%=1 (-\!\beta) 0 \cdots 0\bullet $$ 
     
-    $\rightarrow$ přičteme $q_j\cdot 0$ pro každé $j$:
-    
-    $$0=q_j\cdot \beta^j -\beta  q_j \cdot \beta^{j-1}$$
+    $$\implies 0=q_j \beta^j \cdot R(\beta) =q_j\cdot \beta^{j+1} -\beta  q_j \cdot \beta^{j}$$
     \begin{align*}
         w_{n'} w_{n'-1}&&&\cdots& &w_{j+1}&\!\! &\textcolor{red}{w_j}  & \!\!  &w_{j-1} &&\cdots &&w_1 w_0\bullet \hspace{200pt}\\[-5pt]
                    &&&&       &       & &     &   &q_{j-2} &&\iddots\\[-3pt] 
@@ -114,7 +113,7 @@
      z_{n} \cdots z_{n'} z_{n-1}&&&\cdots& &z_{j+1}& &\textcolor{red}{z_j}& &z_{j-1} &&\cdots &&z_1 \; z_0\bullet                            
     \end{align*}
     \pause
-    Jak volit váhové koeficienty $q_j$ tak aby
+    Jak volit váhový koeficient $q_j$ tak, aby
     $$
         \textcolor{red}{z_j=w_j + q_{j-1} - q_j \beta} \in \A\,?
     $$
@@ -154,12 +153,11 @@
 \end{frame}
 
 \begin{frame}
-Jak najít váhové koeficienty $q_j$ takové, že 
+Najít algoritmus pro paralelní sčítání = určit váhové koeficienty $q_j$ závislé na pevném počtu vstupních cifer takové, že 
     $$
         z_j=\underbrace{w_j}_{\in \A +\A} + q_{j-1} - q_j \beta \in \A 
     $$
-    pro všechny vstupy $(w)_{\beta,\A+\A}$ a každou pozici $j$,
-    tzn. algoritmus pro paralelní sčítání?
+    pro všechny vstupy $(w)_{\beta,\A+\A}$ a každou pozici $j$.
     
     \rule{0cm}{0cm}
     
@@ -198,37 +196,13 @@ Jak najít váhové koeficienty $q_j$ takové, že
 
 
 \begin{frame}
-    Konstruujeme $\Q$ iterativně:
-    \begin{block}{Fáze 1}
-     $k:=0$
-     
-    $\Q_0:=\{0\}$
-      
-      \pause
-      Repeat:
-      \begin{itemize}
-          \item rozšiř $\Q_k$ na $\textcolor{red}{\Q_{k+1}}$ tak, že
-           $$
-              (\A+\A)+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
-           $$
-           \item $k:=k+1$
-      \end{itemize}
-      \pause
-      until $\Q_k = \Q_{k+1}$.
-      
-      \pause
-      \vspace{7pt}
-      $\Q:=\Q_k$
-    \end{block}
-\end{frame}
-
-\begin{frame}
     \frametitle{Příklad -- fáze 1}
     \begin{block}{Eisensteinova báze}
         \begin{itemize}
             \item Báze $\beta = \omega - 1 $, kde $\omega=\exp(\frac{2 \pi i}{3}), \omega^2+\omega+1=0$.
             \item Minimální polynom báze je $ \beta^{2} + 3\beta + 3 $.
             \item Abeceda $ \A=\left\{0, 1, -1, \omega, -\omega, -\omega - 1, \omega + 1\right\} \subset \Zomega$.
+            \item Označme $\B=\A+\A$.
         \end{itemize}
     \end{block}
 \end{frame}
@@ -266,6 +240,139 @@ Jak najít váhové koeficienty $q_j$ takové, že
 \end{frame}    
 
 
+
+
+% \begin{frame}
+%     \frametitle{Příklad -- fáze 2}
+%     Předpokládejme vstup  $(\omega\, 1\, 2)$.
+% \end{frame}
+
+\begin{frame}
+Vstup: $(\omega\, 1\, 2)$
+\begin{figure}[htbp]
+%     \centering
+\foreach \n in {1,...,7} {%
+      \only<\n>{%
+        \includegraphics[height=0.7\textheight]{img/eisenstein/phase2_image_\n} \hfill
+        \vfill
+          }  
+    }
+    \end{figure}
+\end{frame}
+
+\section{Konvergence}
+\subsection{Abeceda}
+\begin{frame}
+    \frametitle{Nutná podmínka na abecedu}
+    Pro existenci algoritmu pro paralelní sčítání je nezbytné, aby abeceda $\A$ obsahovala:
+    \begin{itemize}
+        \item všechny reprezentanty  modulo $\beta$,
+        \item všechny reprezentanty  modulo $\beta-1$.
+    \end{itemize}
+\end{frame}
+
+\subsection{Fáze 1}
+\begin{frame}
+    \frametitle{Fáze 1 -- postačující podmínka konvergence}
+    Pokud je algebraické celé číslo $\omega$ stupně 1 nebo je komplexní stupně 2, fáze 1 konverguje.
+\end{frame}
+
+\subsection{Fáze 2}
+\begin{frame}
+    \frametitle{Fáze 2 -- nutná podmínka konvergence}
+    Pokud algoritmus pro paralelní sčítání existuje, fáze 2 konverguje pro vstupy $(b,\dots, b)$ pro všechny $b\in \A+\A$.
+    
+    \rule{0cm}{0cm}
+    
+    Máme algoritmus, které určí, jestli je fáze 2 konečná pro vstupy tohoto tvaru.
+\end{frame}
+
+\section{Výsledky}
+\begin{frame}
+\fontsize{8pt}{10}\selectfont
+    \frametitle{Testované příklady}
+    \begin{tabular}{l|c cc c c} 
+      Jméno &   Abec. & Post. p. & Fáze 1 & Nut. p. & Fáze 2 \\ \hline
+      Eisenstein\_1-block\_complex &   ano & ano & \checkmark & \checkmark & \checkmark \\
+      Eisenstein\_1-block\_integer &   ano & ano & \checkmark & \xmark & --\\
+      Eisenstein\_1-block\_small\_complex &  ne & -- & -- & -- & -- \\
+      Eisenstein\_2-block &  ne & -- & -- & -- & -- \\
+      Eisenstein\_2-block\_4elements &   ano & ano & \checkmark & \xmark & --\\
+      \hline
+      Penney\_1-block\_complex &   ano & ano & \checkmark & \checkmark & \checkmark \\
+      Penney\_1-block\_small\_complex &  ne & -- & -- & -- & -- \\
+      Penney\_1-block\_integer &   ano & ano & \checkmark & \xmark & --\\
+      Penney\_2-block\_integer &   ano & ano & \checkmark & \checkmark & \checkmark \\
+      \hline
+      Quadratic+1-2+2\_1-block\_complex &   ano & ano& \checkmark & \checkmark & \checkmark \\
+        Quadratic+1-2+2\_1-block\_integer &   ano & ano & \checkmark & \xmark & --\\
+      \hline
+      Quadratic+1+4+5\_1-block\_complex &   ano & ano & \checkmark & \checkmark & \checkmark \\ 
+      \hline
+      Quadratic+1+3+5\_1-block\_complex &   ano & ano & \checkmark & \checkmark & \xmark \\
+      \hline
+      Quadratic+1-5+3\_1-block\_integer &   ano & ne & \xmark & -- & --\\
+      \hline
+      Quadratic+1-5+5\_1-block\_real &   ano & ne & \checkmark & \xmark & --\\
+      \hline
+      base\_2 &   ano & ano & \checkmark & \checkmark & \checkmark \\
+        base\_4 &   ano & ano & \checkmark & \checkmark & \checkmark \\
+      \hline
+      Cubic+1+1-1+1\_complex &   ano & ne & \xmark & -- & --\\
+        Cubic+1+1-5+5\_complex &   ano & ne & \checkmark & \xmark & --\\
+  \end{tabular}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Výsledky}    
+    \begin{itemize}
+        \item Implementace v SageMath: \url{https://cloud.sagemath.com/projects}
+        \item Vstupní kontrola abecedy.
+        \item Algoritmus pro kontrolu nutné podmínky konvergence fáze 2.
+        \item Zkoušení různých modifikací výběru prvků ve fázi 2.
+        \item Testování příkladů.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\fontsize{14pt}{10}\selectfont
+\begin{center}
+Děkuji
+
+\end{center}    
+
+\end{frame}
+
+
+\begin{frame}
+    Množinu $\Q$ konstruujeme iterativně:
+    \begin{block}{Fáze 1}
+     $k:=0$
+     
+    $\Q_0:=\{0\}$
+      
+      \pause
+      Repeat:
+      \begin{itemize}
+          \item rozšiř $\Q_k$ na $\textcolor{red}{\Q_{k+1}}$ tak, že
+           $$
+              (\A+\A)+ \Q_k \subset \A + \beta \textcolor{red}{\Q_{k+1}}\,,
+           $$
+           \item $k:=k+1$
+      \end{itemize}
+      \pause
+      until $\Q_k = \Q_{k+1}$.
+      
+      \pause
+      \vspace{7pt}
+      $\Q:=\Q_k$
+    \end{block}
+\end{frame}
+
+
+
 \begin{frame}
     \begin{block}{Fáze 2}
       $m:=1$
@@ -293,105 +400,6 @@ Jak najít váhové koeficienty $q_j$ takové, že
     \end{block}
 \end{frame}
 
-
-\begin{frame}
-    \frametitle{Příklad -- fáze 2}
-    Předpokládejme vstup  $(\omega\, 1\, 2)$.
-\end{frame}
-
-\begin{frame}
-% Vstup: $(\omega\, 1\, 2)$
-\foreach \n in {1,...,7} {%
-      \only<\n>{%
-        \includegraphics[height=0.8\textheight]{img/eisenstein/phase2_image_\n} \hfill
-        \vfill
-          }  
-    }
-\end{frame}
-
-\section{Konvergence}
-\subsection{Abeceda}
-\begin{frame}
-    \frametitle{Nutná podmínka na abecedu}
-    Pro existenci algoritmu pro paralelní sčítání je nezbytné, aby abeceda $\A$ obsahovala:
-    \begin{itemize}
-        \item všechny reprezentanty  modulo $\beta$,
-        \item všechny reprezentanty  modulo $\beta-1$.
-    \end{itemize}
-\end{frame}
-
-\subsection{Fáze 1}
-\begin{frame}
-    \frametitle{Fáze 1 -- postačující podmínka konvergence}
-    Pokud je algebraické celé číslo $\omega$ stupně 1 nebo je komplexní stupně 2, fáze 1 konverguje.
-\end{frame}
-
-\subsection{Fáze 2}
-\begin{frame}
-    \frametitle{Fáze 2 -- nutná podmínka konvergence}
-    Pokud algoritmus pro paralelní sčítání existuje, fáze 2 konverguje pro vstupy $(b,\dots, b)$ pro všechny $b\in \A+\A$.
-    \rule{0cm}{0cm}
-    
-    Máme algoritmus, které určí, jestli je fáze 2 konečná pro vstupy tohoto tvaru.
-\end{frame}
-
-\section{Výsledky}
-\begin{frame}
-\fontsize{8pt}{10}\selectfont
-    \frametitle{Testované příklady}
-    \begin{tabular}{l|c cc c c} 
-      Jméno &   Abec. & Post. p. & Fáze 1 & Nut. p. & Fáze 2 \\ \hline
-      Eisenstein\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \checkmark \\
-      Eisenstein\_1-block\_integer &   yes & yes & \checkmark & \xmark & --\\
-      Eisenstein\_1-block\_small\_complex &  no & -- & -- & -- & -- \\
-      Eisenstein\_2-block &  no & -- & -- & -- & -- \\
-      Eisenstein\_2-block\_4elements &   yes & yes & \checkmark & \xmark & --\\
-      \hline
-      Penney\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \checkmark \\
-      Penney\_1-block\_small\_complex &  no & -- & -- & -- & -- \\
-      Penney\_1-block\_integer &   yes & yes & \checkmark & \xmark & --\\
-      Penney\_2-block\_integer &   yes & yes & \checkmark & \checkmark & \checkmark \\
-      \hline
-      Quadratic+1-2+2\_1-block\_complex &   yes & yes& \checkmark & \checkmark & \checkmark \\
-        Quadratic+1-2+2\_1-block\_integer &   yes & yes & \checkmark & \xmark & --\\
-      \hline
-      Quadratic+1+4+5\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \checkmark \\ 
-      \hline
-      Quadratic+1+3+5\_1-block\_complex &   yes & yes & \checkmark & \checkmark & \xmark \\
-      \hline
-      Quadratic+1-5+3\_1-block\_integer &   yes & no & \xmark & -- & --\\
-      \hline
-      Quadratic+1-5+5\_1-block\_real &   yes & no & \checkmark & \xmark & --\\
-      \hline
-      base\_2 &   yes & yes & \checkmark & \checkmark & \checkmark \\
-        base\_4 &   yes & yes & \checkmark & \checkmark & \checkmark \\
-      \hline
-      Cubic+1+1-1+1\_complex &   yes & no & \xmark & -- & --\\
-        Cubic+1+1-5+5\_complex &   yes & no & \checkmark & \xmark & --\\
-  \end{tabular}
-
-\end{frame}
-
-\begin{frame}
-    \frametitle{Výsledky}    
-    \begin{itemize}
-        \item Implementace v SageMath: \url{https://cloud.sagemath.com/projects}
-        \item Vstupní kontrola abecedy.
-        \item Algoritmus pro kontrolu nutné podmínky konvergence fáze 2.
-        \item Zkoušení různých modifikací výběru prvků ve fázi 2.
-        \item Testování příkladů.
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\fontsize{14pt}{10}\selectfont
-\begin{center}
-Děkuji
-
-\end{center}    
-
-\end{frame}
 \end {document}
 
 
