@@ -54,9 +54,6 @@
 \end{frame}
 
 
-\begin{frame}
-NEJAKA MOTIVACE
-\end{frame}
 
 \begin{frame}
   \frametitle{Poziční soustava}
@@ -239,7 +236,7 @@ Jak najít váhové koeficienty $q_j$ takové, že
 \begin{frame}
 \foreach \n in {1,...,13} {%
       \only<\n>{%
-%             \includegraphics[height=0.9\textheight]{img/eisenstein/phase1_image_\n} \hfill
+            \includegraphics[height=0.8\textheight]{img/eisenstein/phase1_image_\n} \hfill
             \vfill
           }  
     }
@@ -296,25 +293,17 @@ Jak najít váhové koeficienty $q_j$ takové, že
     \end{block}
 \end{frame}
 
-\begin{frame}
-        Paralelní algoritmus konverze:
-    \begin{align*}
-    z_j&=w_j + q_{j-1} - q_j \beta = \\
-       &=w_j + q(w_{j-1},w_{j-2},\dots, w_{j-M}) - \beta q(w_j,w_{j-1},\dots, w_{j-M+1}) = \\
-       &= z_j(w_{j},w_{j-1},\dots, w_{j-M})\,.
-    \end{align*}
-\end{frame}
 
 \begin{frame}
     \frametitle{Příklad -- fáze 2}
-    Předpokládejme vstup  $w=(\omega\, 1\, 2)$.
+    Předpokládejme vstup  $(\omega\, 1\, 2)$.
 \end{frame}
 
 \begin{frame}
-Input: $w=\omega\, 1\, 2$
+% Vstup: $(\omega\, 1\, 2)$
 \foreach \n in {1,...,7} {%
       \only<\n>{%
-%         \includegraphics[height=0.9\textheight]{img/eisenstein/phase2_image_\n} \hfill
+        \includegraphics[height=0.8\textheight]{img/eisenstein/phase2_image_\n} \hfill
         \vfill
           }  
     }
@@ -348,7 +337,7 @@ Input: $w=\omega\, 1\, 2$
 
 \section{Výsledky}
 \begin{frame}
-\fontsize{10pt}{10}\selectfont
+\fontsize{8pt}{10}\selectfont
     \frametitle{Testované příklady}
     \begin{tabular}{l|c cc c c} 
       Jméno &   Abec. & Post. p. & Fáze 1 & Nut. p. & Fáze 2 \\ \hline
@@ -384,155 +373,25 @@ Input: $w=\omega\, 1\, 2$
 \end{frame}
 
 \begin{frame}
-    \frametitle{Summary}    
+    \frametitle{Výsledky}    
     \begin{itemize}
-        \item Minimality of extension $\Q_{k+1}$ or $\Q_{[w_j,\dots, w_{j-m+1}]}$ means minimality in their size and/or in modulus of their elements.
-        \pause
-        \item Selection of extension $\Q_{k+1}$ and $\Q_{[w_j,\dots, w_{j-m+1}]}$ is not unique.
-        \pause
-        \item Number of inputs grows exponentially in Phase 2.
-        \pause
-        \item Convergence is not guaranteed!
-        \pause
-        \begin{itemize}
-            \item Phase 1 -- sufficient condition is known
-            \item Phase 2 -- work in progress 
-        \end{itemize}
-        \pause
-        \item Experimental implementation in Sage gives good results for several tested cases. 
-        \rule{0cm}{0cm}
-    
-     \url{https://cloud.sagemath.com/projects}
+        \item Implementace v SageMath: \url{https://cloud.sagemath.com/projects}
+        \item Vstupní kontrola abecedy.
+        \item Algoritmus pro kontrolu nutné podmínky konvergence fáze 2.
+        \item Zkoušení různých modifikací výběru prvků ve fázi 2.
+        \item Testování příkladů.
     \end{itemize}
 \end{frame}
 
 
-
-
-
-
-\section{Result examples}
-
-\begin{frame}{Result examples}
-\fontsize{10pt}{10}\selectfont
-% \begin{itemize}
-    %\pause
-%     \item 
-    \textcolor{blue}{{Successful}}: parallel addition {algorithms found by the program}
-        \begin{itemize}
-            %\pause
-            \item \textcolor{blue}{Eisenstein}: $ \beta^2 + 3\beta + 3 = 0 $ with \textcolor{blue}{$ \A \subset \ZZ[\beta]$} of size \textcolor{blue}{$\# \A = 7 $}
-            %\pause
-            \item \textcolor{blue}{Penney}:  $ \beta^2 + 2\beta + 2 = 0 $
-                %\begin{itemize}
-                %    \item
-                     with \textcolor{blue}{$ \A \subset \ZZ[\beta]$} of size \textcolor{blue}{$\# \A = 5 $}
-                     % for \textcolor{blue}{1-block} parallel addition
-                %    \item with \textcolor{blue}{$ \A \subset \ZZ$} of size \textcolor{blue}{$\# \A = 3 $} for \textcolor{blue}{2-block} parallel addition
-                %\end{itemize}
-            %\pause
-            \item \textcolor{blue}{integer}: $ \beta - b = 0, b >1 $ with $ \textcolor{blue}{ \A \subset \ZZ} $ of size $\textcolor{blue}{\# \A = b+1}$\\
-                    $\Rightarrow $ same result as Avizienis and Chow \& Robertson in 1960-70s
-            %\pause
-            \item \textcolor{blue}{quadratic complex}: $\beta^2 + 4\beta + 5 = 0$ with \textcolor{blue}{$\A \subset \ZZ[\beta]$} of \textcolor{blue}{$\# \A = 10$}
-        \end{itemize}
-
-    \smallskip
-    \pause
-%     \item 
-    \textcolor{red}{{Unsuccessful}}: %parallel addition {algorithms exist}, but the {program does not find them}! (mostly failing in Phase 2.)
-        \begin{itemize}
-            %\pause
-            \item \textcolor{red}{Eisenstein}: $ \beta^2 + 3\beta + 3 = 0 $ with \textcolor{red}{$ \A \subset \ZZ$} of size \textcolor{red}{$\# \A = 7 $}
-            %\pause
-            \item \textcolor{red}{Penney}: $ \beta^2 + 2\beta + 2 = 0 $ with \textcolor{red}{$ \A \subset \ZZ$} of size \textcolor{red}{$\# \A = 5 $}
-            %\pause
-            \item \textcolor{red}{quadratic complex}: $\beta^2 + 4\beta + 5 = 0$ with \textcolor{red}{$\A \subset \ZZ$} of \textcolor{red}{$\# \A = 10$}
-            %\pause
-%             \item \textcolor{red}{quadratic complex base}: $\beta^2 + 3\beta + 5 = 0$} with \textcolor{red}{$\A \subset \ZZ$} or \textcolor{red}{$\A \subset \ZZ[\beta]$} of size \textcolor{red}{$\# \A = 9$}
-%             \pause
-            \item \textcolor{red}{quadratic real}: $\beta^2 - 5\beta + 3 = 0$ with \textcolor{red}{$\A \subset \ZZ$} of size \textcolor{red}{$\# \A = 7$} \\
-                (
-                %here the
-                failure / non-convergence
-                %occurs
-                already in Phase 1.)
-        \end{itemize}
-% \end{itemize}
-
-\end{frame}
-
-
-
-
-
-
-% \section{}
-% 
-% \begin{frame}{Open Issues \& Ideas}
-% 
-% %\pause
-% What are the mathematical reasons for (non)convergence of the iterative method ?
-% 
-% \medskip
-% \pause
-% How to ensure convergence of the program for construction of parallel addition algorithms ?
-% 
-% \pause
-% \medskip
-% $\Rightarrow$ Alternatives to elaborate:
-% % further
-% 
-% 
-% \pause
-% \medskip
-% \begin{itemize}
-%     \item Higher order representation of zero
-%     \begin{itemize}
-%        \item carries possibly to both right and left
-%        \item  help in {Phase 2}, especially for {integer alphabets}
-%     \end{itemize}
-%     \pause
-%     \medskip
-%     \item Use a different metric in $\CC$ than the 'classical' one to guarantee convergence of Phase 1 for a broader class of bases.
-% %     \begin{itemize}
-% % %         \item metric specific for the given base using its companion matrix
-% %         \item 
-% %     \end{itemize}
-% 
-% \end{itemize}
-% 
-% \end{frame}
-
-
-
-
-% \appendix
-% 
-% \setbeamertemplate{footline}{ }
-% 
-% \part{}
 \begin{frame}
 \fontsize{14pt}{10}\selectfont
 \begin{center}
-Thank you
+Děkuji
 
-\end{center}
-% \vspace{40pt}
-% Thank you for your attention.
-% \vspace{110pt}
-% 
-% \textcolor{gray}{\fontsize{8pt}{10}\selectfont
-% This work was supported by the Grant Agency of the Czech Technical University in~Prague, grant No. SGS14/205/OHK4/3T/14.}
-    
+\end{center}    
 
 \end{frame}
-
-% \begin{frame}[allowframebreaks]
-% \frametitle{Zdroje}
-% 	\bibliography{../literatura}
-% 	\bibliographystyle{plain}
-% \end{frame}
 \end {document}
 
 
